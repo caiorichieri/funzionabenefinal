@@ -99,7 +99,69 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ---
 
-## 🔄 FASE 2 — IN PIANIFICAZIONE
+## ✅ FASE 2 — SITO PUBBLICO COMPLETATA (Febbraio 2026)
+
+### Layout pubblico (PublicLayout)
+- [x] Header sticky con navigation (Home / Questionario / Blog / FAQ) + CTA gold
+- [x] Mobile menu responsive
+- [x] Footer con sezioni legali (Privacy, Cookie, GDPR)
+- [x] Tema dark/warm premium (Gold #D4A017 + Steel Blue #6B8FA3)
+- [x] Tipografia Cormorant Garamond (serif) + Outfit (sans)
+
+### Homepage (/)
+- [x] Hero con background texture + CTA "Inizia il Questionario"
+- [x] Trust signals (SSL/GDPR, Albo, 98% soddisfazione)
+- [x] Sezione "Come funziona" (3 step)
+- [x] Sezione Valori (Riservatezza, Specialisti verificati, Nessun giudizio)
+- [x] Therapists preview grid (caricato da /api/public/terapisti)
+- [x] CTA band finale
+
+### Questionario (/questionario)
+- [x] 5 step (età, genere, problemi multi, orari multi, preferenza terapeuta)
+- [x] Progress bar animata, auto-advance per single-select
+- [x] Animazioni framer-motion tra step
+- [x] POST /api/public/matching con scoring → salva in sessionStorage
+
+### Risultati Matching (/risultati)
+- [x] Top 3 terapeuti con badge compatibilità %
+- [x] Card premium con foto placeholder, specializzazioni, tariffa, link al profilo
+
+### Profilo pubblico terapeuta (/terapeuti/:id)
+- [x] Layout 2 colonne: sidebar (Albo, esperienza, lingue, prezzo) + bio/formazione
+- [x] Calendario slot 14 giorni (da /api/terapisti/{id}/slots, Italian days)
+- [x] Click slot → apre BookingSheet
+
+### BookingSheet (flusso prenotazione)
+- [x] Step 1 Review (riepilogo slot + prezzo)
+- [x] Step 2 Auth tabs (Registrati / Accedi)
+- [x] Step 3 OTP verification (con otp_dev mostrato in modalità dev)
+- [x] Step 4 Pagamento MOCKATO (UI carta di credito)
+- [x] Step 5 Success + redirect area paziente
+- [x] Skip auth steps se utente già loggato come paziente
+
+### Blog pubblico (/blog + /blog/:id)
+- [x] Layout editoriale (hero article + grid)
+- [x] Post singolo con reading column, autore, CTA questionario
+
+### FAQ (/faq)
+- [x] Accordion animato
+- [x] 7 FAQ di fallback se DB vuoto
+- [x] Integrazione con /api/public/faq
+
+### Backend public endpoints (no auth)
+- [x] GET /api/public/terapisti (solo autocertificati)
+- [x] GET /api/public/terapisti/{id}
+- [x] POST /api/public/matching (scoring: genere×30 + specializzazioni×20 + disponibilità×10-15 → normalizzato a 70-99%)
+- [x] GET /api/public/blog (solo pubblicati)
+- [x] GET /api/public/faq
+- [x] POST /api/public/prenota (richiede auth paziente)
+- [x] GET /api/terapisti/{id}/slots (public, con Italian day names)
+
+**Test status:** 15/15 backend tests passed, 100% frontend flows validated (iteration_3.json)
+
+---
+
+## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
 ### Integrazione Nexi XPay
 - [ ] Checkout sessioni online
@@ -112,30 +174,23 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - [ ] Tracking durata
 
 ### Email Automatiche (Resend)
+- [ ] OTP email reali
 - [ ] Conferma prenotazione
 - [ ] Reminder 1 giorno prima (con link video)
 - [ ] Reminder 1 ora prima
 - [ ] Sistema recupero pazienti (Brevo)
 
+### Chat privata paziente ↔ terapeuta
+- [x] API /api/conversazioni + /api/messaggi già presenti
+- [ ] UI chat nelle dashboard (paziente + terapeuta)
+- [ ] Real-time (WebSocket o polling)
+
 ---
 
-## 🌐 FASE 3 — SITO PUBBLICO
-
-### Homepage & Contenuti
-- [ ] Hero section (dark, premium)
-- [ ] Presentazione specialisti
-- [ ] Sezione problematiche trattate
-- [ ] FAQ section
-- [ ] Blog pubblico (articoli approvati)
-
-### Questionario di Matching
-- [ ] Form multi-step (età, genere, problematiche, orari, preferenza M/F)
-- [ ] Algoritmo matching → 3 terapisti suggeriti
-- [ ] Prenotazione sessione da risultato
-
-### Area Privata Post-Acquisto
-- [ ] Messaggistica terapeuta ↔ paziente
-- [ ] Non visibile nel sito pubblico
+## 🔧 REFACTORING BACKLOG
+- [ ] Split server.py (1043 linee) in router modulari: auth.py, public.py, terapisti.py, pazienti.py, appuntamenti.py, blog.py, faq.py, messaggi.py
+- [ ] Aggiungere endpoint dedicato GET /api/public/blog/{id} (attualmente BlogPostPage filtra client-side)
+- [ ] Test files pytest in /app/backend/tests
 
 ---
 
