@@ -1,0 +1,47 @@
+{
+  "summary": "Tested Blog UI (admin + therapist) and Slot system. All 14 backend tests pass. All frontend flows verified.",
+  "backend_issues": {
+    "critical": [],
+    "minor": [
+      {"endpoint": "GET /api/blog/{id}", "issue": "No endpoint for single article GET (returns 405). Not exposed in UI so no impact, but worth noting for future API completeness."}
+    ]
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_blog_slots.py",
+    "/app/test_reports/pytest/pytest_results_iter2.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "No GET /api/blog/{id} endpoint - admin and therapist pages use list endpoint. Consider adding for future article preview API or public blog page.",
+    "Therapist shows edit button on own articles (In Revisione) - edit allowed, good. Published articles only show delete - minor: therapist cannot edit published article even if they want to correct a typo."
+  ],
+  "updated_files": ["/app/backend/tests/test_blog_slots.py"],
+  "success_rate": {"backend": "100% (14/14)", "frontend": "100%"},
+  "seed_data_creation": "Created TEST_UI articles during testing (cleanup: TEST_UI Articolo Admin published, TEST_UI Articolo Terapeuta in revisione, TEST_Da Rifiutare published - left in DB)",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Blog UI fully tested: admin CRUD, approve/reject, filters all work. Therapist write/submit flow works with 'In Revisione' status. Approval info banner shown. Slot API returns ~52 slots for demo therapist with Italian date format. All data-testid attributes present and functional.",
+  "test_results": {
+    "admin_blog_page": "PASS - loads with all 4 filters (Tutti/In Revisione/Pubblicati/Rifiutati)",
+    "admin_create_article": "PASS - modal form works, article appears as Pubblicato",
+    "admin_approve": "PASS - approve button changes status to Pubblicato",
+    "admin_reject": "PASS - rifiuta endpoint works",
+    "admin_delete": "PASS",
+    "admin_preview": "PASS - preview icon button present",
+    "therapist_blog_page": "PASS - loads with Scrivi Articolo button",
+    "therapist_submit_article": "PASS - article appears as In Revisione with success banner",
+    "therapist_approval_banner": "PASS - info banner about review process visible",
+    "therapist_sidebar_blog": "PASS",
+    "admin_sidebar_blog": "PASS - navigates to /admin/blog",
+    "slots_api_200": "PASS",
+    "slots_count_52": "PASS - 52+ slots returned",
+    "slots_italian_format": "PASS - data_ora_fmt contains Italian day names",
+    "slots_disponibile_field": "PASS",
+    "slots_available_true": "PASS"
+  }
+}

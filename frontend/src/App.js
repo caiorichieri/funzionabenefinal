@@ -11,8 +11,10 @@ import AdminDashboard from "@/pages/admin/AdminDashboard";
 import TerapistiPage from "@/pages/admin/TerapistiPage";
 import PazientiPage from "@/pages/admin/PazientiPage";
 import AppuntamentiPage from "@/pages/admin/AppuntamentiPage";
+import BlogPage from "@/pages/admin/BlogPage";
 import TerapistaDashboard from "@/pages/therapist/TerapistaDashboard";
 import TerapistaProfile from "@/pages/therapist/TerapistaProfile";
+import TerapistaBlogPage from "@/pages/therapist/TerapistaBlogPage";
 import PazienteDashboard from "@/pages/patient/PazienteDashboard";
 import Layout from "@/components/shared/Layout";
 import "@/App.css";
@@ -50,12 +52,14 @@ export default function App() {
             <Route path="terapisti" element={<TerapistiPage />} />
             <Route path="pazienti" element={<PazientiPage />} />
             <Route path="appuntamenti" element={<AppuntamentiPage />} />
+            <Route path="blog" element={<BlogPage />} />
           </Route>
 
           {/* Therapist routes */}
           <Route path="/terapeuta" element={<ProtectedRoute roles={THERAPIST_ROLES}><Layout /></ProtectedRoute>}>
             <Route index element={<TerapistaDashboard />} />
             <Route path="profilo" element={<TerapistaProfile />} />
+            <Route path="blog" element={<TerapistaBlogPage />} />
           </Route>
 
           {/* Patient routes */}

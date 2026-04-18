@@ -181,6 +181,7 @@ class ArticoloInput(BaseModel):
     contenuto: str
     categoria: Optional[str] = None
     tags: Optional[List[str]] = []
+    immagine_url: Optional[str] = None
 
 # ─── FastAPI setup ────────────────────────────────────────────────────────────
 app = FastAPI(title="FunzionaBene API")
@@ -538,7 +539,10 @@ async def delete_appuntamento(app_id: str, user: dict = Depends(require_admin)):
 # ─── BLOG ─────────────────────────────────────────────────────────────────────
 @api_router.get("/blog")
 async def list_articoli(user: dict = Depends(require_auth)):
-    docs = await db.articoli.find({}).sort("created_at", -1).to_list(100)
+    if user["role"] == "terapeuta":
+        docs = await db.articoli.find({"autore_id": user["_id"]}).sort("created_at", -1).to_list(100)
+    else:
+        docs = await db.articoli.find({}).sort("created_at", -1).to_list(100)
     for d in docs:
         d["_id"] = str(d["_id"])
     return docs
@@ -556,6 +560,20 @@ async def create_articolo(data: ArticoloInput, user: dict = Depends(require_auth
     doc["_id"] = str(result.inserted_id)
     return doc
 
+@api_router.put("/blog/{art_id}")
+async def update_articolo(art_id: str, data: ArticoloInput, user: dict = Depends(require_auth)):
+    doc = await db.articoli.find_one({"_id": ObjectId(art_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Articolo non trovato")
+    if user["role"] != "admin" and doc.get("autore_id") != user["_id"]:
+        raise HTTPException(status_code=403, detail="Accesso negato")
+    update = data.model_dump(exclude_none=True)
+    update["updated_at"] = datetime.now(timezone.utc)
+    await db.articoli.update_one({"_id": ObjectId(art_id)}, {"$set": update})
+    doc = await db.articoli.find_one({"_id": ObjectId(art_id)})
+    doc["_id"] = str(doc["_id"])
+    return doc
+
 @api_router.patch("/blog/{art_id}/approva")
 async def approva_articolo(art_id: str, user: dict = Depends(require_admin)):
     await db.articoli.update_one(
@@ -564,10 +582,86 @@ async def approva_articolo(art_id: str, user: dict = Depends(require_admin)):
     )
     return {"message": "Articolo approvato e pubblicato"}
 
+@api_router.patch("/blog/{art_id}/rifiuta")
+async def rifiuta_articolo(art_id: str, user: dict = Depends(require_admin)):
+    await db.articoli.update_one(
+        {"_id": ObjectId(art_id)},
+        {"$set": {"stato": "rifiutato", "updated_at": datetime.now(timezone.utc)}}
+    )
+    return {"message": "Articolo rifiutato"}
+
 @api_router.delete("/blog/{art_id}")
-async def delete_articolo(art_id: str, user: dict = Depends(require_admin)):
+async def delete_articolo(art_id: str, user: dict = Depends(require_auth)):
+    doc = await db.articoli.find_one({"_id": ObjectId(art_id)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Articolo non trovato")
+    if user["role"] != "admin" and doc.get("autore_id") != user["_id"]:
+        raise HTTPException(status_code=403, detail="Accesso negato")
     await db.articoli.delete_one({"_id": ObjectId(art_id)})
     return {"message": "Articolo eliminato"}
+
+# ─── SLOT DISPONIBILITÀ ──────────────────────────────────────────────────────
+GIORNI_IT = {"Lunedì":0,"Martedì":1,"Mercoledì":2,"Giovedì":3,"Venerdì":4,"Sabato":5,"Domenica":6}
+GIORNI_IT_INV = {v: k for k, v in GIORNI_IT.items()}
+
+def fmt_slot_it(dt: datetime) -> str:
+    giorno = GIORNI_IT_INV.get(dt.weekday(), "")
+    return f"{giorno} {dt.strftime('%d/%m/%Y %H:%M')}"
+
+@api_router.get("/terapisti/{terapista_id}/slots")
+async def get_slots(terapista_id: str, data_inizio: str = None, settimane: int = 2):
+    terapista = await db.terapisti.find_one({"_id": ObjectId(terapista_id)})
+    if not terapista:
+        raise HTTPException(status_code=404, detail="Terapeuta non trovato")
+
+    disponibilita = terapista.get("disponibilita", [])
+    durata = 50  # minuti per slot
+
+    now = datetime.now(timezone.utc)
+    if data_inizio:
+        try:
+            start = datetime.fromisoformat(data_inizio).replace(tzinfo=timezone.utc, hour=0, minute=0, second=0, microsecond=0)
+        except Exception:
+            start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    else:
+        start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    end = start + timedelta(weeks=max(1, min(settimane, 8)))
+
+    # Appuntamenti esistenti (non cancellati)
+    existing = await db.appuntamenti.find({
+        "terapeuta_id": terapista_id,
+        "stato": {"$nin": ["cancellato"]},
+        "data_ora": {"$gte": start.isoformat(), "$lt": end.isoformat()}
+    }).to_list(500)
+    booked = {a["data_ora"][:16] for a in existing}  # YYYY-MM-DDTHH:MM
+
+    slots = []
+    current_day = start
+    while current_day < end:
+        wd = current_day.weekday()
+        for disp in disponibilita:
+            if GIORNI_IT.get(disp.get("giorno",""), -1) != wd:
+                continue
+            try:
+                h0, m0 = map(int, disp["ora_inizio"].split(":"))
+                h1, m1 = map(int, disp["ora_fine"].split(":"))
+            except Exception:
+                continue
+            slot_t = current_day.replace(hour=h0, minute=m0, second=0, microsecond=0)
+            end_t  = current_day.replace(hour=h1, minute=m1, second=0, microsecond=0)
+            while slot_t + timedelta(minutes=durata) <= end_t:
+                if slot_t > now:
+                    key = slot_t.isoformat()[:16]
+                    slots.append({
+                        "data_ora": slot_t.isoformat(),
+                        "data_ora_fmt": fmt_slot_it(slot_t),
+                        "disponibile": key not in booked
+                    })
+                slot_t += timedelta(minutes=durata)
+        current_day += timedelta(days=1)
+
+    return {"slots": slots, "terapeuta_id": terapista_id, "durata_minuti": durata}
 
 # ─── ADMIN USER MANAGEMENT ───────────────────────────────────────────────────
 @api_router.get("/admin/utenti")

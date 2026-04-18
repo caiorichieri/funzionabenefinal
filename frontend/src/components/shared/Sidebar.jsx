@@ -16,6 +16,7 @@ const ADMIN_MENU = [
 const THERAPIST_MENU = [
   { to: "/terapeuta", icon: LayoutDashboard, label: "Dashboard", exact: true },
   { to: "/terapeuta/profilo", icon: UserCheck, label: "Il mio Profilo" },
+  { to: "/terapeuta/blog", icon: FileText, label: "Blog" },
 ];
 
 const PATIENT_MENU = [
