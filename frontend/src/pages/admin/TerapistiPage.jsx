@@ -171,16 +171,20 @@ export default function TerapistiPage() {
 
               {/* Expanded details */}
               {expanded === t._id && (
-                <div className="px-5 pb-5 border-t border-[rgba(28,28,28,0.06)] pt-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="px-5 pb-5 border-t border-[rgba(28,28,28,0.06)] pt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                  {/* Dati Professionali */}
                   <div>
                     <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">Dati Professionali</div>
                     <div className="space-y-2 text-sm">
-                      <div><span className="text-[rgba(28,28,28,0.5)]">Albo:</span> <span className="text-[#1C1C1C]">{t.albo_numero || "—"}</span></div>
+                      <div><span className="text-[rgba(28,28,28,0.5)]">Albo:</span> <span className="text-[#1C1C1C] font-medium">{t.albo_numero || "—"}</span></div>
                       <div><span className="text-[rgba(28,28,28,0.5)]">Ordine:</span> <span className="text-[#1C1C1C]">{t.albo_ordine || "—"}</span></div>
                       <div><span className="text-[rgba(28,28,28,0.5)]">Iscrizione:</span> <span className="text-[#1C1C1C]">{t.albo_iscrizione_data || "—"}</span></div>
                       <div><span className="text-[rgba(28,28,28,0.5)]">Esperienza:</span> <span className="text-[#1C1C1C]">{t.anni_esperienza ? `${t.anni_esperienza} anni` : "—"}</span></div>
+                      <div><span className="text-[rgba(28,28,28,0.5)]">Tariffa:</span> <span className="text-[#D4A017] font-semibold">{t.prezzo_sessione ? `€${t.prezzo_sessione}` : "—"}</span></div>
                     </div>
                   </div>
+
+                  {/* Assicurazione */}
                   <div>
                     <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">Assicurazione</div>
                     <div className="space-y-2 text-sm">
@@ -199,17 +203,56 @@ export default function TerapistiPage() {
                         ) : "—"}
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">Specializzazioni</div>
-                    <div className="flex flex-wrap gap-2">
+                    {/* Specializzazioni sotto assicurazione */}
+                    <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mt-4 mb-2">Specializzazioni</div>
+                    <div className="flex flex-wrap gap-1.5">
                       {(t.specializzazioni || []).map(s => (
                         <span key={s} className="text-xs bg-[#D4A017]/10 text-[#D4A017] px-2 py-1 rounded-full">{s}</span>
                       ))}
                       {(!t.specializzazioni || t.specializzazioni.length === 0) && <span className="text-sm text-[rgba(28,28,28,0.5)]">—</span>}
                     </div>
-                    {t.bio && (
-                      <div className="mt-3 text-sm text-[rgba(28,28,28,0.7)]">{t.bio.slice(0, 150)}{t.bio.length > 150 ? "..." : ""}</div>
+                  </div>
+
+                  {/* Disponibilità */}
+                  <div>
+                    <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">
+                      Disponibilità Settimanale
+                    </div>
+                    {(t.disponibilita || []).length === 0 ? (
+                      <div className="text-sm text-[rgba(28,28,28,0.4)] italic">Nessuna disponibilità impostata</div>
+                    ) : (
+                      <div className="space-y-2">
+                        {(t.disponibilita || []).map((d, i) => (
+                          <div key={`${d.giorno}-${i}`} className="flex items-center gap-2">
+                            <span className="text-xs font-semibold w-20 text-[#1C1C1C]">{d.giorno}</span>
+                            <span className="text-xs bg-[#6B8FA3]/10 text-[#6B8FA3] px-2 py-1 rounded-full font-mono">
+                              {d.ora_inizio} → {d.ora_fine}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Bio */}
+                  <div>
+                    <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">Biografia</div>
+                    {t.bio ? (
+                      <p className="text-sm text-[rgba(28,28,28,0.7)] leading-relaxed">
+                        {t.bio.slice(0, 200)}{t.bio.length > 200 ? "..." : ""}
+                      </p>
+                    ) : (
+                      <span className="text-sm text-[rgba(28,28,28,0.4)] italic">Nessuna biografia</span>
+                    )}
+                    {(t.lingue || []).length > 0 && (
+                      <>
+                        <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mt-4 mb-2">Lingue</div>
+                        <div className="flex flex-wrap gap-1.5">
+                          {t.lingue.map(l => (
+                            <span key={l} className="text-xs bg-[rgba(28,28,28,0.06)] text-[rgba(28,28,28,0.7)] px-2 py-1 rounded-full">{l}</span>
+                          ))}
+                        </div>
+                      </>
                     )}
                   </div>
                 </div>
