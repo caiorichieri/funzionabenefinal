@@ -727,7 +727,202 @@ async def dashboard_stats(user: dict = Depends(require_auth)):
         "scadenze_assicurazione": scadenze
     }
 
-# ─── Include router ───────────────────────────────────────────────────────────
+class MatchingInput(BaseModel):
+    eta: Optional[str] = None
+    genere: Optional[str] = None
+    problemi: Optional[List[str]] = []
+    orari: Optional[List[str]] = []
+    preferenza_terapeuta: Optional[str] = None
+
+class MessaggioInput(BaseModel):
+    destinatario_id: str
+    testo: str
+
+class FAQInput(BaseModel):
+    domanda: str
+    risposta: str
+    ordine: Optional[int] = 0
+
+# ─── PUBLIC ROUTES (no auth) ──────────────────────────────────────────────────
+@api_router.get("/public/terapisti")
+async def public_list_terapisti():
+    docs = await db.terapisti.find({"autocertificazione_firmata": True}).to_list(100)
+    for d in docs:
+        d["_id"] = str(d["_id"])
+        d.pop("note_cliniche", None)
+    return docs
+
+@api_router.get("/public/terapisti/{tid}")
+async def public_get_terapista(tid: str):
+    doc = await db.terapisti.find_one({"_id": ObjectId(tid)})
+    if not doc:
+        raise HTTPException(status_code=404, detail="Terapeuta non trovato")
+    doc["_id"] = str(doc["_id"])
+    return doc
+
+@api_router.post("/public/matching")
+async def matching(data: MatchingInput):
+    docs = await db.terapisti.find({"autocertificazione_firmata": True}).to_list(100)
+    PREF_MAP = {"Preferisco una donna": "F", "Preferisco un uomo": "M"}
+    pref_genere = PREF_MAP.get(data.preferenza_terapeuta or "", None)
+    ORARIO_MAP = {"Mattina (8-12)": (8,12), "Pomeriggio (12-18)": (12,18), "Sera (18-21)": (18,21)}
+
+    results = []
+    for t in docs:
+        score = 0
+        reasons = []
+        # Genere
+        if pref_genere:
+            if t.get("genere") == pref_genere:
+                score += 30; reasons.append("Preferenza di genere")
+        else:
+            score += 15
+        # Specializzazioni
+        for prob in (data.problemi or []):
+            for spec in t.get("specializzazioni", []):
+                if any(w in spec.lower() for w in prob.lower().split()):
+                    score += 20; reasons.append(f"Specializzazione: {spec}"); break
+        # Disponibilità × orari
+        for disp in t.get("disponibilita", []):
+            is_wkend = disp.get("giorno","") in ["Sabato","Domenica"]
+            if "Weekend" in (data.orari or []) and is_wkend:
+                score += 10
+            elif "Weekend" not in (data.orari or []) and not is_wkend:
+                score += 5
+            try:
+                h = int(disp.get("ora_inizio","0:0").split(":")[0])
+                for orario in (data.orari or []):
+                    rng = ORARIO_MAP.get(orario)
+                    if rng and rng[0] <= h < rng[1]:
+                        score += 10
+            except Exception:
+                pass
+        t["_id"] = str(t["_id"])
+        t["match_score"] = score
+        t["match_reasons"] = list(set(reasons))
+        results.append(t)
+    results.sort(key=lambda x: x["match_score"], reverse=True)
+    top = results[:3]
+    # Normalize to percent
+    max_s = top[0]["match_score"] if top else 1
+    for t in top:
+        t["compatibilita"] = min(99, max(70, int(t["match_score"] / max(max_s, 1) * 99)))
+    return {"terapisti": top}
+
+@api_router.get("/public/blog")
+async def public_blog():
+    docs = await db.articoli.find({"stato": "pubblicato"}).sort("created_at", -1).to_list(50)
+    for d in docs:
+        d["_id"] = str(d["_id"])
+    return docs
+
+@api_router.get("/public/faq")
+async def public_faq():
+    docs = await db.faq.find({}).sort("ordine", 1).to_list(50)
+    for d in docs:
+        d["_id"] = str(d["_id"])
+    return docs
+
+# ─── FAQ ADMIN ────────────────────────────────────────────────────────────────
+@api_router.post("/faq")
+async def create_faq(data: FAQInput, user: dict = Depends(require_admin)):
+    doc = data.model_dump()
+    doc["created_at"] = datetime.now(timezone.utc)
+    result = await db.faq.insert_one(doc)
+    doc["_id"] = str(result.inserted_id)
+    return doc
+
+@api_router.put("/faq/{faq_id}")
+async def update_faq(faq_id: str, data: FAQInput, user: dict = Depends(require_admin)):
+    await db.faq.update_one({"_id": ObjectId(faq_id)}, {"$set": data.model_dump()})
+    doc = await db.faq.find_one({"_id": ObjectId(faq_id)})
+    doc["_id"] = str(doc["_id"])
+    return doc
+
+@api_router.delete("/faq/{faq_id}")
+async def delete_faq(faq_id: str, user: dict = Depends(require_admin)):
+    await db.faq.delete_one({"_id": ObjectId(faq_id)})
+    return {"message": "FAQ eliminata"}
+
+# ─── MESSAGGI ─────────────────────────────────────────────────────────────────
+@api_router.get("/conversazioni")
+async def list_conversazioni(user: dict = Depends(require_auth)):
+    uid = user["_id"]
+    if user["role"] == "paziente":
+        paziente = await db.pazienti.find_one({"user_id": uid})
+        if not paziente:
+            return []
+        pid = str(paziente["_id"])
+        apps = await db.appuntamenti.find({"paziente_id": pid, "stato": {"$in": ["confermato","completato"]}}).to_list(100)
+        tids = list({a["terapeuta_id"] for a in apps})
+        convs = []
+        for tid in tids:
+            t = await db.terapisti.find_one({"_id": ObjectId(tid)})
+            if t:
+                conv_id = f"{pid}_{tid}"
+                last = await db.messaggi.find_one({"conversazione_id": conv_id}, sort=[("created_at", -1)])
+                unread = await db.messaggi.count_documents({"conversazione_id": conv_id, "mittente_id": {"$ne": uid}, "letto": False})
+                convs.append({"conversazione_id": conv_id, "terapeuta_id": tid, "terapeuta_nome": f"{t.get('nome','')} {t.get('cognome','')}".strip(), "ultimo_messaggio": last["testo"] if last else None, "non_letti": unread})
+        return convs
+    else:
+        terapista = await db.terapisti.find_one({"user_id": uid})
+        if not terapista:
+            return []
+        tid = str(terapista["_id"])
+        apps = await db.appuntamenti.find({"terapeuta_id": tid, "stato": {"$in": ["confermato","completato"]}}).to_list(100)
+        pids = list({a["paziente_id"] for a in apps})
+        convs = []
+        for pid in pids:
+            p = await db.pazienti.find_one({"_id": ObjectId(pid)})
+            if p:
+                conv_id = f"{pid}_{tid}"
+                last = await db.messaggi.find_one({"conversazione_id": conv_id}, sort=[("created_at", -1)])
+                unread = await db.messaggi.count_documents({"conversazione_id": conv_id, "mittente_id": {"$ne": uid}, "letto": False})
+                convs.append({"conversazione_id": conv_id, "paziente_id": pid, "paziente_nome": f"{p.get('nome','')} {p.get('cognome','')}".strip(), "ultimo_messaggio": last["testo"] if last else None, "non_letti": unread})
+        return convs
+
+@api_router.get("/messaggi/{conv_id}")
+async def get_messaggi(conv_id: str, user: dict = Depends(require_auth)):
+    docs = await db.messaggi.find({"conversazione_id": conv_id}).sort("created_at", 1).to_list(200)
+    await db.messaggi.update_many({"conversazione_id": conv_id, "mittente_id": {"$ne": user["_id"]}}, {"$set": {"letto": True}})
+    for d in docs:
+        d["_id"] = str(d["_id"])
+    return docs
+
+@api_router.post("/messaggi")
+async def send_messaggio(data: MessaggioInput, user: dict = Depends(require_auth)):
+    uid = user["_id"]
+    if user["role"] == "paziente":
+        paziente = await db.pazienti.find_one({"user_id": uid})
+        if not paziente:
+            raise HTTPException(400, "Profilo paziente non trovato")
+        pid = str(paziente["_id"])
+        tid = data.destinatario_id
+        conv_id = f"{pid}_{tid}"
+    else:
+        terapista = await db.terapisti.find_one({"user_id": uid})
+        if not terapista:
+            raise HTTPException(400, "Profilo terapeuta non trovato")
+        tid = str(terapista["_id"])
+        pid = data.destinatario_id
+        conv_id = f"{pid}_{tid}"
+    doc = {"conversazione_id": conv_id, "mittente_id": uid, "mittente_ruolo": user["role"], "testo": data.testo, "letto": False, "created_at": datetime.now(timezone.utc)}
+    result = await db.messaggi.insert_one(doc)
+    doc["_id"] = str(result.inserted_id)
+    return doc
+
+# ─── PRENOTAZIONE PUBBLICA ────────────────────────────────────────────────────
+@api_router.post("/public/prenota")
+async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require_auth)):
+    if user["role"] != "paziente":
+        raise HTTPException(403, "Solo i pazienti possono prenotare")
+    doc = data.model_dump()
+    doc["stato"] = "prenotato"
+    doc["created_at"] = datetime.now(timezone.utc)
+    doc["paziente_user_id"] = user["_id"]
+    result = await db.appuntamenti.insert_one(doc)
+    doc["_id"] = str(result.inserted_id)
+    return doc
 app.include_router(api_router)
 
 app.add_middleware(
