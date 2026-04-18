@@ -1,115 +1,148 @@
 {
-  "theme": "hybrid_premium",
-  "archetypes": [
-    "1 (Organic & Earthy)",
-    "5 (Jewel & Luxury)"
-  ],
-  "global_design_rules": {
-    "concept": "The design mixes the warmth and trust of clinical psychology (Organic & Earthy) with the discretion and high-end feel of a private boutique clinic (Jewel & Luxury).",
-    "public_website_strategy": "High-impact dark mode for the hero and trust-building sections (premium, discreet). Content-heavy sections (FAQ, blog, booking) transition to warm cream for readability.",
-    "dashboard_strategy": "Therapist and Admin portals use the light/warm cream theme to reduce eye strain, ensure data clarity, and maintain a calm professional environment."
+  "project_name": "funzionabene.it",
+  "domain": "Psychology & Sexology Clinic Platform",
+  "theme_and_archetype": {
+    "theme": "Dark/Warm Hybrid",
+    "archetype": "Archetype 5 (Jewel & Luxury) mixed with Warmth & Trust",
+    "vibe": "Discreet, premium, warm, safe, trustworthy, expert. Not clinical, not over-cute.",
+    "rationale": "Users seeking psychological and sexological help need a space that feels intimately safe, highly professional, and emotionally warm. Deep dark backgrounds with soft gold lighting create a 'therapy room' ambiance."
   },
   "typography": {
-    "fonts": {
-      "headings": {
-        "family": "Outfit",
-        "tailwind_class": "font-sans",
-        "description": "Clean, modern, geometric but friendly. Ideal for a premium trustworthy look without feeling overly clinical."
-      },
-      "body": {
-        "family": "Figtree",
-        "tailwind_class": "font-sans",
-        "description": "Legible, clean, and warm for body text. Provides excellent readability for dense dashboards and blog posts."
-      }
-    },
-    "scale": {
-      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none",
-      "h2": "text-3xl sm:text-4xl tracking-tight",
-      "h3": "text-2xl sm:text-3xl tracking-tight",
-      "h4": "text-xl font-medium",
-      "body": "text-base leading-relaxed",
-      "small_label": "text-xs sm:text-sm uppercase tracking-[0.2em]"
+    "google_fonts_import": "@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap');",
+    "primary_heading_font": "font-serif (Cormorant Garamond)",
+    "body_ui_font": "font-sans (Outfit)",
+    "hierarchy_rules": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl font-serif tracking-tight text-cream-50 font-medium",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl font-serif tracking-tight text-cream-50",
+      "h3": "text-xl sm:text-2xl font-sans tracking-tight font-medium text-cream-100",
+      "body": "text-base leading-relaxed text-cream-200/80 font-sans",
+      "buttons_labels": "text-sm uppercase tracking-[0.1em] font-sans font-medium"
     }
   },
   "colors": {
-    "dark_mode": {
-      "background": "#0A0A0A",
-      "surface": "#111111",
-      "text_primary": "#FDFBF7",
-      "text_secondary": "rgba(253,251,247,0.7)",
-      "border": "rgba(253,251,247,0.1)"
+    "css_variables": {
+      "--background": "0 0% 7%",
+      "--foreground": "40 15% 95%",
+      "--card": "208 29% 15%",
+      "--card-foreground": "40 15% 95%",
+      "--popover": "0 0% 7%",
+      "--popover-foreground": "40 15% 95%",
+      "--primary": "43 82% 46%",
+      "--primary-foreground": "0 0% 10%",
+      "--secondary": "201 27% 53%",
+      "--secondary-foreground": "0 0% 98%",
+      "--muted": "0 0% 15%",
+      "--muted-foreground": "0 0% 65%",
+      "--accent": "43 82% 46%",
+      "--accent-foreground": "0 0% 10%",
+      "--destructive": "0 84% 60%",
+      "--destructive-foreground": "0 0% 98%",
+      "--border": "0 0% 20%",
+      "--input": "0 0% 20%",
+      "--ring": "43 82% 46%",
+      "--radius": "0.75rem"
     },
-    "light_mode": {
-      "background": "#FDFBF7",
-      "surface": "#FFFFFF",
-      "text_primary": "#1C1C1C",
-      "text_secondary": "rgba(28,28,28,0.7)",
-      "border": "rgba(28,28,28,0.1)"
+    "tailwind_palette": {
+      "gold": {
+        "DEFAULT": "#D4A017",
+        "light": "#E5B942",
+        "dark": "#B0830F"
+      },
+      "steel": {
+        "DEFAULT": "#6B8FA3",
+        "dark": "#1C2A33",
+        "light": "#94B2C2"
+      },
+      "darkbase": {
+        "DEFAULT": "#111111",
+        "surface": "#1C1C1C",
+        "elevated": "#262626"
+      },
+      "cream": {
+        "50": "#FFFFFF",
+        "100": "#F4F1ED",
+        "200": "#E6E2D8"
+      }
     },
-    "brand": {
-      "gold": "#D4A017",
-      "steel_blue": "#6B8FA3",
-      "gold_hover": "#B38612",
-      "steel_blue_hover": "#567587"
+    "usage": {
+      "backgrounds": "Use darkbase-DEFAULT (#111111) as the absolute background. Use steel-dark (#1C2A33) for primary elevated cards, and darkbase-surface (#1C1C1C) for secondary bento grids.",
+      "accents": "Gold (#D4A017) is strictly for primary conversion actions (Booking CTA, Questionnaire start). Steel Blue (#6B8FA3) for secondary actions, matching scores, and subtle borders.",
+      "text": "Never use pure white. Use cream-100 (#F4F1ED) for headings and cream-200/80 for readable body text.",
+      "gradients": "Subtle radial background glows using gold/5 or steel/10. NO massive purple/neon gradients."
     }
   },
-  "layout_and_spacing": {
-    "spacing_scale": "Use generous padding (p-8, p-12, p-16) to create breathing room. Avoid cramped sections.",
-    "bento_grid": "Use asymmetrical bento grids for marketing feature showcases. Use tight, structured grids (Mode B) for the gestionale/admin dashboards.",
-    "corners": "Use rounded-2xl for main cards/containers, rounded-full for buttons and pills to soften the interface and convey warmth.",
-    "borders": "Rely on 1px subtle borders (border-border/40) instead of heavy drop shadows."
+  "layout_and_surfaces": {
+    "spacing": "Generous. Use py-24 or py-32 for main sections. p-8 or p-12 for bento grid cards.",
+    "surfaces": {
+      "navigation": "Crystal Glass: bg-darkbase-DEFAULT/60 backdrop-blur-xl border-b border-white/5",
+      "cards": "Premium Tactile: bg-steel-dark/40 border border-white/10 rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]",
+      "inputs": "bg-darkbase-surface border-white/10 focus:border-gold focus:ring-1 focus:ring-gold text-cream-100 placeholder:text-cream-200/40"
+    },
+    "grid_system": "Use Tetris Bento Grid for Homepage highlights and Blog index. Use single column with narrow max-w-xl for Questionnaire for ultimate focus.",
+    "borders": "Soft, 1px, semi-transparent. Avoid solid thick borders. Max border-radius: 12px to 16px (rounded-xl / rounded-2xl) to keep it soft but structured."
   },
-  "components": {
-    "buttons": {
-      "primary": "bg-[#D4A017] text-white hover:bg-[#B38612] rounded-full px-6 py-3 transition-colors",
-      "secondary": "border border-[#6B8FA3] text-[#6B8FA3] hover:bg-[#6B8FA3] hover:text-white rounded-full px-6 py-3 transition-colors",
-      "ghost": "hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-2 transition-colors"
+  "component_guidelines": {
+    "buttons": "Shadcn based. Primary: bg-gold text-darkbase-DEFAULT hover:bg-gold-light transition-all duration-300 font-sans tracking-wide. Secondary: border border-steel text-steel hover:bg-steel/10.",
+    "inputs": "Shadcn based. Custom focus rings (Gold). For forms, left-align labels, add ample spacing (gap-6) between form groups.",
+    "cards": "Avoid default Shadcn card borders if they feel cheap. Apply 'Premium Tactile' surface rules. Do not overuse cards; sometimes text on the base background is more elegant.",
+    "progress_bar": "For questionnaire: Use a slim (h-1) indicator at the top using Gold."
+  },
+  "page_blueprints": {
+    "homepage": {
+      "hero": "Dark cinematic hero. Background abstract texture with a bg-black/50 overlay. Large serif H1 ('Trova lo specialista giusto per te'). Subtitle in sans. Primary CTA 'Inizia il Questionario' in Gold. Trust signals (Albo psicologi, SSL) subtle below CTA.",
+      "how_it_works": "3-column CSS grid. Icons in Steel Blue. Steps: 1. Compila il questionario, 2. Scopri i match, 3. Inizia il percorso.",
+      "therapists_preview": "Bento grid showcasing blurred/silhouette profiles or abstract safe-space imagery leading to 'Incontra i Terapeuti'.",
+      "values": "Text-heavy section with large Serif typography explaining the warm, discreet, expert approach."
     },
-    "cards": {
-      "marketing": "bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl",
-      "dashboard": "bg-white border border-black/5 p-6 rounded-2xl shadow-sm"
+    "questionnaire": {
+      "layout": "Narrow centralized layout (max-w-xl). No header/footer distractions. Slim gold progress bar.",
+      "steps": "1. Età/Genere, 2. Area di interesse (Psicologia/Sessuologia), 3. Disponibilità, 4. Preferenza terapeuta.",
+      "interactions": "Smooth fade-in/out between steps using Framer Motion. Large, easy-to-tap radio buttons/cards for selections with hover:border-gold."
     },
-    "navigation": {
-      "public": "Sticky header. Crystal Glassmorphism: backdrop-blur-xl bg-black/60 (dark mode) with a 1px border-b border-white/10.",
-      "dashboard": "Solid background bg-[#FDFBF7] with border-b border-black/10."
+    "matching_results": {
+      "header": "Celebratory but professional: 'Abbiamo trovato 3 specialisti per te'.",
+      "layout": "Grid of 3 Premium Tactile cards.",
+      "card_anatomy": "Top: Compatibility % in Gold. Image: Circular or soft-rounded portrait. Bio snippet. Specializations as subtle tags. Next available slots (small clickable pills). Primary CTA 'Visualizza Profilo'."
+    },
+    "therapist_profile": {
+      "layout": "Two columns (md:grid-cols-12). Left (col-span-4): Large portrait, credentials, Albo number, tariffa. Right (col-span-8): Full bio (Serif for quote, Sans for text), Areas of expertise, and Shadcn Calendar component for Booking.",
+      "booking_widget": "Sticky on desktop. Shows dates and 50-min slots. Selecting a slot opens the auth/booking modal."
+    },
+    "booking_flow": {
+      "mechanism": "Modal or slide-out (Shadcn Sheet).",
+      "steps": "1. Confirm Slot. 2. Login or Quick Register (OTP email flow). 3. Mock Payment (Stripe-like UI form). 4. Success confirmation ('Prenotazione Confermata')."
+    },
+    "blog": {
+      "index": "Editorial layout. Featured post takes full width (Hero style). Older posts in 2-3 column grid. Serif titles, reading time meta.",
+      "post": "Narrow reading column (max-w-2xl). Generous line height (leading-loose). Author bio block at the bottom with CTA to book."
+    },
+    "faq": {
+      "layout": "max-w-3xl centralized.",
+      "component": "Shadcn Accordion. Questions in Serif text-xl, answers in Sans text-base text-cream-200/80. Subtle bottom border for each item."
+    },
+    "auth": {
+      "layout": "Split screen. Left: Abstract serene image. Right: Login/Register form.",
+      "forms": "Minimalist inputs. 'Accedi' / 'Registrati' tabs."
     }
   },
-  "media_and_images": {
-    "hero_background": {
-      "url": "https://images.pexels.com/photos/7505924/pexels-photo-7505924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-      "description": "Dark abstract rippling texture used for the hero background, conveying depth, mystery, and premium discretion."
+  "media": {
+    "hero_abstract": {
+      "url": "https://images.unsplash.com/photo-1690192715829-db4e65d65dd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMHdhcm0lMjBnb2xkJTIwYmx1ZSUyMHRleHR1cmV8ZW58MHx8fHwxNzc2NTEyOTEwfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Warm gold and blue abstract texture for hero background."
     },
-    "therapy_session_1": {
-      "url": "https://images.unsplash.com/photo-1714976695129-f3341a34e56d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwyfHxwc3ljaG9sb2dpc3QlMjB0aGVyYXB5JTIwc2Vzc2lvbiUyMHdhcm18ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Warm therapy session setting."
+    "therapist_portrait_placeholder": {
+      "url": "https://images.unsplash.com/photo-1626201061255-51c25afa69e6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1OTV8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBpdGFsaWFuJTIwdGhlcmFwaXN0JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc2NTEyOTEwfDA&ixlib=rb-4.1.0&q=85",
+      "description": "Professional therapist portrait."
     },
-    "therapy_session_2": {
-      "url": "https://images.unsplash.com/photo-1714976694468-ff722f34d0b6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwzfHxwc3ljaG9sb2dpc3QlMjB0aGVyYXB5JTIwc2Vzc2lvbiUyMHdhcm18ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Therapist interacting with patient."
-    },
-    "therapist_portrait_1": {
-      "url": "https://images.unsplash.com/photo-1769636929388-99eff95d3bf1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGhlYWRzaG90JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
-      "description": "Professional female therapist headshot."
-    },
-    "therapist_portrait_2": {
-      "url": "https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc3NjQ5NDkwNHww&ixlib=rb-4.1.0&q=85",
-      "description": "Professional male therapist headshot."
+    "therapy_room_interior": {
+      "url": "https://images.unsplash.com/photo-1511194810566-dae328af385e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDV8MHwxfHNlYXJjaHwzfHxjYWxtJTIwZGFyayUyMHRoZXJhcHklMjByb29tfGVufDB8fHx8MTc3NjUxMjkxMHww&ixlib=rb-4.1.0&q=85",
+      "description": "Calm, discreet therapy room/couch setting."
     }
   },
-  "accessibility": {
-    "contrast": "Maintain 4.5:1 ratio minimum for standard text. When text is placed over images, apply a dark gradient overlay or text-shadow.",
-    "interactive_elements": "Include focus:ring-2 focus:ring-[#D4A017] for all form inputs and buttons to ensure keyboard accessibility.",
-    "motion": "Respect prefers-reduced-motion media query for all transitions."
-  },
-  "instructions_to_main_agent": [
-    "PRIORITY: Build the Gestionale (Admin Panel) FIRST, then move on to the Public Website.",
-    "All interface text MUST be in Italian.",
-    "Use Phosphor Icons (yarn add @phosphor-icons/react) for a premium, duotone appearance.",
-    "Fonts: Use 'Outfit' for headings and 'Figtree' for body text. Make sure to import them in the global CSS or index.html.",
-    "Dashboard / Gestionale: Implement using the 'light_mode' colors (#FDFBF7 background) for a warm, clean, readable clinical management experience.",
-    "Public Website: Use the 'dark_mode' colors (#0A0A0A background) for the Hero and main landing sections to convey premium discretion. Transition to 'light_mode' for text-heavy content (FAQ, Blog).",
-    "Therapist Matching Questionnaire: Implement as a smooth, multi-step flow using Framer Motion.",
-    "Data Test IDs: ALL interactive elements (buttons, inputs, links, tabs) MUST have a `data-testid` attribute using kebab-case role-based naming (e.g., `data-testid=\"login-submit-button\"`).",
-    "DO NOT use placeholder images. Use only the provided URLs in the media_and_images section."
-  ]
+  "technical_rules": {
+    "icons": "Use lucide-react (default) or install @phosphor-icons/react for a more premium, duotone look.",
+    "testing": "All interactive elements MUST have data-testid. Examples: data-testid='start-questionnaire-btn', data-testid='therapist-card-1', data-testid='booking-slot-btn'.",
+    "accessibility": "Ensure text contrast on dark backgrounds. Use focus rings for keyboard navigation. Include ARIA labels for modal close buttons.",
+    "animations": "Use Framer Motion. Keep transitions soft and slow (duration: 0.4s to 0.6s, ease: 'easeInOut') to match the calming aesthetic."
+  }
 }
