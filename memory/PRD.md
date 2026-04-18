@@ -84,9 +84,18 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - [x] Gestione profilo personale
 - [x] Lista prossime sessioni
 
-### Blog (struttura base)
-- [x] API per articoli (CRUD + approvazione admin)
-- [ ] UI blog admin (in sviluppo)
+### Blog
+- [x] API completa (CRUD + approva/rifiuta)
+- [x] UI Admin: lista articoli, filtri (Tutti/In Revisione/Pubblicati/Rifiutati), approva, rifiuta, anteprima, elimina, crea articolo
+- [x] UI Terapista: scrivere articoli, invio per approvazione, stato bozza/pubblicato/rifiutato
+- [x] Banner informativo flusso approvazione
+
+### Sistema Slot Disponibilità
+- [x] API slot: `GET /api/terapisti/{id}/slots?settimane=N`
+- [x] Generazione slot da disponibilità settimanale (50 min cadauno)
+- [x] Controllo conflitti con appuntamenti esistenti
+- [x] Formato date in italiano (es. "Lunedì 21/04/2026 09:00")
+- [x] Pronto per il sito pubblico (Fase 3)
 
 ---
 
