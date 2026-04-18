@@ -1,0 +1,115 @@
+{
+  "theme": "hybrid_premium",
+  "archetypes": [
+    "1 (Organic & Earthy)",
+    "5 (Jewel & Luxury)"
+  ],
+  "global_design_rules": {
+    "concept": "The design mixes the warmth and trust of clinical psychology (Organic & Earthy) with the discretion and high-end feel of a private boutique clinic (Jewel & Luxury).",
+    "public_website_strategy": "High-impact dark mode for the hero and trust-building sections (premium, discreet). Content-heavy sections (FAQ, blog, booking) transition to warm cream for readability.",
+    "dashboard_strategy": "Therapist and Admin portals use the light/warm cream theme to reduce eye strain, ensure data clarity, and maintain a calm professional environment."
+  },
+  "typography": {
+    "fonts": {
+      "headings": {
+        "family": "Outfit",
+        "tailwind_class": "font-sans",
+        "description": "Clean, modern, geometric but friendly. Ideal for a premium trustworthy look without feeling overly clinical."
+      },
+      "body": {
+        "family": "Figtree",
+        "tailwind_class": "font-sans",
+        "description": "Legible, clean, and warm for body text. Provides excellent readability for dense dashboards and blog posts."
+      }
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-none",
+      "h2": "text-3xl sm:text-4xl tracking-tight",
+      "h3": "text-2xl sm:text-3xl tracking-tight",
+      "h4": "text-xl font-medium",
+      "body": "text-base leading-relaxed",
+      "small_label": "text-xs sm:text-sm uppercase tracking-[0.2em]"
+    }
+  },
+  "colors": {
+    "dark_mode": {
+      "background": "#0A0A0A",
+      "surface": "#111111",
+      "text_primary": "#FDFBF7",
+      "text_secondary": "rgba(253,251,247,0.7)",
+      "border": "rgba(253,251,247,0.1)"
+    },
+    "light_mode": {
+      "background": "#FDFBF7",
+      "surface": "#FFFFFF",
+      "text_primary": "#1C1C1C",
+      "text_secondary": "rgba(28,28,28,0.7)",
+      "border": "rgba(28,28,28,0.1)"
+    },
+    "brand": {
+      "gold": "#D4A017",
+      "steel_blue": "#6B8FA3",
+      "gold_hover": "#B38612",
+      "steel_blue_hover": "#567587"
+    }
+  },
+  "layout_and_spacing": {
+    "spacing_scale": "Use generous padding (p-8, p-12, p-16) to create breathing room. Avoid cramped sections.",
+    "bento_grid": "Use asymmetrical bento grids for marketing feature showcases. Use tight, structured grids (Mode B) for the gestionale/admin dashboards.",
+    "corners": "Use rounded-2xl for main cards/containers, rounded-full for buttons and pills to soften the interface and convey warmth.",
+    "borders": "Rely on 1px subtle borders (border-border/40) instead of heavy drop shadows."
+  },
+  "components": {
+    "buttons": {
+      "primary": "bg-[#D4A017] text-white hover:bg-[#B38612] rounded-full px-6 py-3 transition-colors",
+      "secondary": "border border-[#6B8FA3] text-[#6B8FA3] hover:bg-[#6B8FA3] hover:text-white rounded-full px-6 py-3 transition-colors",
+      "ghost": "hover:bg-black/5 dark:hover:bg-white/10 rounded-full px-4 py-2 transition-colors"
+    },
+    "cards": {
+      "marketing": "bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl",
+      "dashboard": "bg-white border border-black/5 p-6 rounded-2xl shadow-sm"
+    },
+    "navigation": {
+      "public": "Sticky header. Crystal Glassmorphism: backdrop-blur-xl bg-black/60 (dark mode) with a 1px border-b border-white/10.",
+      "dashboard": "Solid background bg-[#FDFBF7] with border-b border-black/10."
+    }
+  },
+  "media_and_images": {
+    "hero_background": {
+      "url": "https://images.pexels.com/photos/7505924/pexels-photo-7505924.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Dark abstract rippling texture used for the hero background, conveying depth, mystery, and premium discretion."
+    },
+    "therapy_session_1": {
+      "url": "https://images.unsplash.com/photo-1714976695129-f3341a34e56d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwyfHxwc3ljaG9sb2dpc3QlMjB0aGVyYXB5JTIwc2Vzc2lvbiUyMHdhcm18ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Warm therapy session setting."
+    },
+    "therapy_session_2": {
+      "url": "https://images.unsplash.com/photo-1714976694468-ff722f34d0b6?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwzfHxwc3ljaG9sb2dpc3QlMjB0aGVyYXB5JTIwc2Vzc2lvbiUyMHdhcm18ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Therapist interacting with patient."
+    },
+    "therapist_portrait_1": {
+      "url": "https://images.unsplash.com/photo-1769636929388-99eff95d3bf1?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzF8MHwxfHNlYXJjaHwyfHxwcm9mZXNzaW9uYWwlMjB3b21hbiUyMGhlYWRzaG90JTIwcG9ydHJhaXR8ZW58MHx8fHwxNzc2NDk0OTA0fDA&ixlib=rb-4.1.0&q=85",
+      "description": "Professional female therapist headshot."
+    },
+    "therapist_portrait_2": {
+      "url": "https://images.unsplash.com/photo-1672685667592-0392f458f46f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzV8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBtYW4lMjBoZWFkc2hvdCUyMHBvcnRyYWl0fGVufDB8fHx8MTc3NjQ5NDkwNHww&ixlib=rb-4.1.0&q=85",
+      "description": "Professional male therapist headshot."
+    }
+  },
+  "accessibility": {
+    "contrast": "Maintain 4.5:1 ratio minimum for standard text. When text is placed over images, apply a dark gradient overlay or text-shadow.",
+    "interactive_elements": "Include focus:ring-2 focus:ring-[#D4A017] for all form inputs and buttons to ensure keyboard accessibility.",
+    "motion": "Respect prefers-reduced-motion media query for all transitions."
+  },
+  "instructions_to_main_agent": [
+    "PRIORITY: Build the Gestionale (Admin Panel) FIRST, then move on to the Public Website.",
+    "All interface text MUST be in Italian.",
+    "Use Phosphor Icons (yarn add @phosphor-icons/react) for a premium, duotone appearance.",
+    "Fonts: Use 'Outfit' for headings and 'Figtree' for body text. Make sure to import them in the global CSS or index.html.",
+    "Dashboard / Gestionale: Implement using the 'light_mode' colors (#FDFBF7 background) for a warm, clean, readable clinical management experience.",
+    "Public Website: Use the 'dark_mode' colors (#0A0A0A background) for the Hero and main landing sections to convey premium discretion. Transition to 'light_mode' for text-heavy content (FAQ, Blog).",
+    "Therapist Matching Questionnaire: Implement as a smooth, multi-step flow using Framer Motion.",
+    "Data Test IDs: ALL interactive elements (buttons, inputs, links, tabs) MUST have a `data-testid` attribute using kebab-case role-based naming (e.g., `data-testid=\"login-submit-button\"`).",
+    "DO NOT use placeholder images. Use only the provided URLs in the media_and_images section."
+  ]
+}
