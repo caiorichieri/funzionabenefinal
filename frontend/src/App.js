@@ -1,5 +1,9 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+
+const ADMIN_ROLES = ["admin"];
+const THERAPIST_ROLES = ["terapeuta"];
+const PATIENT_ROLES = ["paziente"];
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import OTPPage from "@/pages/OTPPage";
@@ -41,7 +45,7 @@ export default function App() {
           <Route path="/verifica-otp" element={<OTPPage />} />
 
           {/* Admin routes */}
-          <Route path="/admin" element={<ProtectedRoute roles={["admin"]}><Layout /></ProtectedRoute>}>
+          <Route path="/admin" element={<ProtectedRoute roles={ADMIN_ROLES}><Layout /></ProtectedRoute>}>
             <Route index element={<AdminDashboard />} />
             <Route path="terapisti" element={<TerapistiPage />} />
             <Route path="pazienti" element={<PazientiPage />} />
@@ -49,13 +53,13 @@ export default function App() {
           </Route>
 
           {/* Therapist routes */}
-          <Route path="/terapeuta" element={<ProtectedRoute roles={["terapeuta"]}><Layout /></ProtectedRoute>}>
+          <Route path="/terapeuta" element={<ProtectedRoute roles={THERAPIST_ROLES}><Layout /></ProtectedRoute>}>
             <Route index element={<TerapistaDashboard />} />
             <Route path="profilo" element={<TerapistaProfile />} />
           </Route>
 
           {/* Patient routes */}
-          <Route path="/paziente" element={<ProtectedRoute roles={["paziente"]}><Layout /></ProtectedRoute>}>
+          <Route path="/paziente" element={<ProtectedRoute roles={PATIENT_ROLES}><Layout /></ProtectedRoute>}>
             <Route index element={<PazienteDashboard />} />
           </Route>
 

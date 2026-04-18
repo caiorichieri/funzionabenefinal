@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,7 +24,7 @@ export default function TerapistaProfile() {
     specializzazioni:"", lingue:"", disponibilita:[]
   });
 
-  useEffect(() => {
+  const fetchProfilo = useCallback(() => {
     axios.get(`${API}/terapisti/profilo/me`, { withCredentials: true })
       .then(r => {
         const p = r.data;
@@ -45,6 +45,8 @@ export default function TerapistaProfile() {
         });
       }).catch(console.error).finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => { fetchProfilo(); }, [fetchProfilo]);
 
   const handleSave = async (e) => {
     e.preventDefault(); setSaving(true); setError("");
@@ -237,7 +239,7 @@ export default function TerapistaProfile() {
           )}
           <div className="space-y-3">
             {form.disponibilita.map((d, i) => (
-              <div key={i} className="flex items-center gap-3">
+              <div key={`${d.giorno}-${d.ora_inizio}-${i}`} className="flex items-center gap-3">
                 <select value={d.giorno} onChange={e => updateDisp(i,"giorno",e.target.value)}
                   className="flex-1 px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017] bg-white">
                   {GIORNI.map(g => <option key={g} value={g}>{g}</option>)}

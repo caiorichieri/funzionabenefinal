@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { useAuth } from "@/contexts/AuthContext";
@@ -10,7 +10,7 @@ export default function TerapistaDashboard() {
   const [appuntamenti, setAppuntamenti] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     Promise.all([
       axios.get(`${API}/terapisti/profilo/me`, { withCredentials: true }).catch(() => null),
       axios.get(`${API}/appuntamenti`, { withCredentials: true }).catch(() => ({ data: [] }))
@@ -19,6 +19,8 @@ export default function TerapistaDashboard() {
       setAppuntamenti(a.data);
     }).finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   const oggi = appuntamenti.filter(a => {
     const d = new Date(a.data_ora);

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { Plus, Search, Edit2, Trash2, X } from "lucide-react";
@@ -20,7 +20,7 @@ export default function PazientiPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true);
     Promise.all([
       axios.get(`${API}/pazienti`, { withCredentials: true }),
@@ -29,9 +29,9 @@ export default function PazientiPage() {
       setPazienti(p.data);
       setTerapisti(t.data);
     }).catch(console.error).finally(() => setLoading(false));
-  };
+  }, []);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   const openCreate = () => { setEditing(null); setForm(EMPTY); setError(""); setShowForm(true); };
   const openEdit = (p) => {

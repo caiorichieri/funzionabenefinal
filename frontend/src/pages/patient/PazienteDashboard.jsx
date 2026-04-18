@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
 import { Calendar, Clock, Video, User, Save, CheckCircle } from "lucide-react";
@@ -17,7 +17,7 @@ export default function PazienteDashboard() {
   const [saved, setSaved] = useState(false);
   const [cfError, setCfError] = useState("");
 
-  useEffect(() => {
+  const fetchData = useCallback(() => {
     Promise.all([
       axios.get(`${API}/pazienti/profilo/me`, { withCredentials: true }).catch(() => null),
       axios.get(`${API}/appuntamenti`, { withCredentials: true }).catch(() => ({ data: [] }))
@@ -34,6 +34,8 @@ export default function PazienteDashboard() {
       setAppuntamenti(a.data);
     }).finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => { fetchData(); }, [fetchData]);
 
   const validateCF = (cf) => {
     cf = cf.toUpperCase().trim();

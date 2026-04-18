@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
-import { Plus, Calendar, Clock, Video, CheckCircle, XCircle, X, ChevronDown } from "lucide-react";
+import { Plus, Calendar, Clock, Video, CheckCircle, XCircle, X } from "lucide-react";
 
 const STATI_COLORS = {
   prenotato: "bg-blue-100 text-blue-700",
@@ -22,7 +22,7 @@ export default function AppuntamentiPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true);
     Promise.all([
       axios.get(`${API}/appuntamenti`, { withCredentials: true }),
@@ -31,9 +31,9 @@ export default function AppuntamentiPage() {
     ]).then(([a, t, p]) => {
       setAppuntamenti(a.data); setTerapisti(t.data); setPazienti(p.data);
     }).catch(console.error).finally(() => setLoading(false));
-  };
+  }, []);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   const handleSave = async (e) => {
     e.preventDefault(); setSaving(true); setError("");

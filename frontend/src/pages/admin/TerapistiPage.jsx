@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { Plus, Search, Edit2, Trash2, ShieldCheck, ShieldX, ChevronDown, ChevronUp, X } from "lucide-react";
@@ -21,15 +21,15 @@ export default function TerapistiPage() {
   const [expanded, setExpanded] = useState(null);
   const [error, setError] = useState("");
 
-  const load = () => {
+  const load = useCallback(() => {
     setLoading(true);
     axios.get(`${API}/terapisti`, { withCredentials: true })
       .then(r => setTerapisti(r.data))
       .catch(console.error)
       .finally(() => setLoading(false));
-  };
+  }, []);
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, [load]);
 
   const openCreate = () => {
     setEditing(null);

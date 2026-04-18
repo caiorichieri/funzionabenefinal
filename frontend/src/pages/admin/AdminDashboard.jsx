@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { Users, UserCheck, Calendar, AlertTriangle, FileText, ShieldX } from "lucide-react";
@@ -22,12 +22,16 @@ export default function AdminDashboard() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const fetchStats = useCallback(() => {
     axios.get(`${API}/dashboard/stats`, { withCredentials: true })
       .then(r => setStats(r.data))
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
@@ -84,8 +88,8 @@ export default function AdminDashboard() {
             Scadenze Assicurazione in Arrivo
           </h3>
           <div className="space-y-3">
-            {stats.scadenze_assicurazione.map((s, i) => (
-              <div key={i} className="flex items-center justify-between py-2 border-b border-[rgba(28,28,28,0.06)] last:border-0">
+            {stats.scadenze_assicurazione.map((s) => (
+              <div key={`${s.terapeuta}-${s.scadenza}`} className="flex items-center justify-between py-2 border-b border-[rgba(28,28,28,0.06)] last:border-0">
                 <div>
                   <div className="font-medium text-[#1C1C1C] text-sm">{s.terapeuta}</div>
                   <div className="text-xs text-[rgba(28,28,28,0.5)]">Scade: {new Date(s.scadenza).toLocaleDateString("it-IT")}</div>

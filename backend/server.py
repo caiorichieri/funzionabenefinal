@@ -4,13 +4,12 @@ load_dotenv(Path(__file__).parent / '.env')
 
 import os
 import logging
-import secrets
-import random
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Annotated
 
 import bcrypt
 import jwt
+import secrets as _secrets
 from bson import ObjectId
 from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -54,7 +53,7 @@ def create_refresh_token(user_id: str) -> str:
     )
 
 def generate_otp() -> str:
-    return str(random.randint(100000, 999999))
+    return str(_secrets.randbelow(900000) + 100000)
 
 def validate_codice_fiscale(cf: str) -> bool:
     cf = cf.upper().strip()
@@ -393,6 +392,7 @@ async def update_my_terapista_profile(data: TerapistaProfileInput, user: dict = 
 # ─── PAZIENTI ─────────────────────────────────────────────────────────────────
 @api_router.get("/pazienti")
 async def list_pazienti(user: dict = Depends(require_auth)):
+    docs: list = []
     if user["role"] == "admin":
         docs = await db.pazienti.find({}).to_list(500)
     elif user["role"] == "terapeuta":
@@ -470,6 +470,7 @@ async def update_my_paziente_profile(data: PazienteProfileInput, user: dict = De
 # ─── APPUNTAMENTI ─────────────────────────────────────────────────────────────
 @api_router.get("/appuntamenti")
 async def list_appuntamenti(user: dict = Depends(require_auth)):
+    docs: list = []
     if user["role"] == "admin":
         docs = await db.appuntamenti.find({}).sort("data_ora", -1).to_list(500)
     elif user["role"] == "terapeuta":
