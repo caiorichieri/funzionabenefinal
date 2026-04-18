@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 const ADMIN_ROLES = ["admin"];
 const THERAPIST_ROLES = ["terapeuta"];
 const PATIENT_ROLES = ["paziente"];
+
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import OTPPage from "@/pages/OTPPage";
@@ -17,23 +18,25 @@ import TerapistaProfile from "@/pages/therapist/TerapistaProfile";
 import TerapistaBlogPage from "@/pages/therapist/TerapistaBlogPage";
 import PazienteDashboard from "@/pages/patient/PazienteDashboard";
 import Layout from "@/components/shared/Layout";
+
+// Public site
+import PublicLayout from "@/components/public/PublicLayout";
+import HomePage from "@/pages/public/HomePage";
+import QuestionnairePage from "@/pages/public/QuestionnairePage";
+import MatchingResultsPage from "@/pages/public/MatchingResultsPage";
+import TerapistaPublicPage from "@/pages/public/TerapistaPublicPage";
+import BlogPublicPage from "@/pages/public/BlogPublicPage";
+import BlogPostPage from "@/pages/public/BlogPostPage";
+import FAQPage from "@/pages/public/FAQPage";
+
 import "@/App.css";
 
 function ProtectedRoute({ children, roles }) {
   const { user } = useAuth();
-  if (user === null) return <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin"/></div>;
+  if (user === null) return <div className="min-h-screen bg-[#111111] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin"/></div>;
   if (user === false) return <Navigate to="/login" replace />;
   if (roles && !roles.includes(user.role)) return <Navigate to="/" replace />;
   return children;
-}
-
-function RoleRedirect() {
-  const { user } = useAuth();
-  if (user === null) return <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin"/></div>;
-  if (user === false) return <Navigate to="/login" replace />;
-  if (user.role === "admin") return <Navigate to="/admin" replace />;
-  if (user.role === "terapeuta") return <Navigate to="/terapeuta" replace />;
-  return <Navigate to="/paziente" replace />;
 }
 
 export default function App() {
@@ -41,7 +44,17 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<RoleRedirect />} />
+          {/* Public site */}
+          <Route element={<PublicLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/questionario" element={<QuestionnairePage />} />
+            <Route path="/risultati" element={<MatchingResultsPage />} />
+            <Route path="/terapeuti/:id" element={<TerapistaPublicPage />} />
+            <Route path="/blog" element={<BlogPublicPage />} />
+            <Route path="/blog/:id" element={<BlogPostPage />} />
+            <Route path="/faq" element={<FAQPage />} />
+          </Route>
+
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registrati" element={<RegisterPage />} />
           <Route path="/verifica-otp" element={<OTPPage />} />

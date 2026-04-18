@@ -1,0 +1,61 @@
+{
+  "summary": "Comprehensive testing of FunzionaBene.it Passo 2 (Public Site). All 15 backend tests passed. All frontend flows verified including questionnaire, matching, therapist profile, booking with registration/OTP, booking with login, blog, and FAQ.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_public_routes.py",
+    "/app/test_reports/pytest/pytest_results_iter3.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "BlogPostPage.jsx fetches all articles via /api/public/blog then filters by ID client-side. Consider adding GET /api/public/blog/{id} endpoint for efficiency.",
+    "server.py is now 1043 lines - consider splitting into routers (auth.py, public.py, terapisti.py, etc.) for maintainability"
+  ],
+  "updated_files": ["/app/backend/tests/test_public_routes.py"],
+  "success_rate": {"backend": "100% (15/15)", "frontend": "100%"},
+  "seed_data_creation": "Created test users during booking flow tests (test_booking_*, test_ui_*, test_otp_*, etc.) - these are TEST_ prefixed for cleanup",
+  "test_credentials": {
+    "admin": "admin@funzionabene.it / Admin#2024!",
+    "terapeuta": "demo.terapeuta@funzionabene.it / Terapeuta#2024!",
+    "paziente": "demo.paziente@funzionabene.it / Paziente#2024!",
+    "note": "OTP is MOCKED - returned in otp_dev field of /auth/register and /auth/resend-otp responses"
+  },
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Passo 2 (Public Site) fully tested. All public routes work: /api/public/terapisti (returns autocertificazione_firmata=true only), /api/public/terapisti/{id}, /api/public/matching (returns top 3 with compatibilita %), /api/public/blog (stato=pubblicato only), /api/public/faq (ordered by ordine), /api/terapisti/{id}/slots (Italian day names in data_ora_fmt). Full booking flow works: questionnaire → matching → profile → slot selection → BookingSheet (review → auth → OTP → payment → success). Login alternative skips OTP for verified users. Payment is MOCKED (Nexi XPay not integrated). OTP email is MOCKED (otp_dev returned). Video call link is MOCKED (Daily.co not integrated).",
+  "test_results": {
+    "backend_public_terapisti_list": "PASS - returns autocertificazione_firmata therapists only",
+    "backend_public_terapisti_profile": "PASS - returns full profile with albo, formazione, bio, lingue, prezzo",
+    "backend_public_matching": "PASS - returns max 3 therapists with compatibilita % sorted desc",
+    "backend_public_blog": "PASS - returns stato=pubblicato articles only",
+    "backend_public_faq": "PASS - returns ordered list (fallback FAQ if DB empty)",
+    "backend_slots": "PASS - returns slots with data_ora, data_ora_fmt (Italian), disponibile flag",
+    "backend_booking_flow": "PASS - register → OTP → profile → prenota creates appuntamento",
+    "backend_prenota_auth": "PASS - requires authentication",
+    "backend_prenota_role": "PASS - requires paziente role",
+    "backend_register_otp_dev": "PASS - returns otp_dev field",
+    "backend_resend_otp_dev": "PASS - returns otp_dev field",
+    "backend_verify_otp_cookies": "PASS - sets httpOnly cookies",
+    "frontend_homepage": "PASS - hero, how-it-works, values, therapists preview, CTA band all present",
+    "frontend_navigation": "PASS - all nav links work (Home, Questionario, Blog, FAQ, Accedi, CTA)",
+    "frontend_questionnaire": "PASS - 5-step form, single-select auto-advances, multi-select requires Continua, progress bar updates",
+    "frontend_matching_results": "PASS - shows 3 therapist cards with compatibility %, Visualizza profilo links work",
+    "frontend_therapist_profile": "PASS - shows full profile (Albo, formazione, bio, lingue, prezzo) and slot grid",
+    "frontend_booking_sheet_register": "PASS - review → auth (register default) → OTP → payment → success",
+    "frontend_booking_sheet_login": "PASS - login tab works, skips OTP for verified users",
+    "frontend_blog": "PASS - hero article + grid, links to individual posts",
+    "frontend_faq": "PASS - accordion FAQ with 7 fallback items"
+  },
+  "mocked_apis": {
+    "OTP_email": "MOCKED - otp_dev field returned in API response",
+    "Payment": "MOCKED - Nexi XPay not integrated, mock card form shown",
+    "Video_call": "MOCKED - Daily.co not integrated, appuntamenti created without link_video"
+  }
+}
