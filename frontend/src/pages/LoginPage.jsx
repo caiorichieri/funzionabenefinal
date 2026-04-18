@@ -1,0 +1,142 @@
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+
+export default function LoginPage() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    try {
+      const user = await login(form.email, form.password);
+      if (user.role === "admin") navigate("/admin");
+      else if (user.role === "terapeuta") navigate("/terapeuta");
+      else navigate("/paziente");
+    } catch (err) {
+      const detail = err.response?.data?.detail;
+      setError(typeof detail === "string" ? detail : "Credenziali non valide");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-[#FDFBF7] flex">
+      {/* Left panel */}
+      <div className="hidden lg:flex lg:w-1/2 bg-[#0A0A0A] flex-col justify-between p-12">
+        <div>
+          <div className="flex items-center gap-3 mb-16">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] flex items-center justify-center">
+              <span className="text-white font-bold text-sm font-[Outfit]">FB</span>
+            </div>
+            <span className="text-white text-xl font-semibold font-[Outfit]">FunzionaBene</span>
+          </div>
+          <div className="space-y-4">
+            <h1 className="text-4xl font-bold text-white font-[Outfit] leading-tight">
+              Benvenuto nel<br />
+              <span className="text-[#D4A017]">Gestionale</span>
+            </h1>
+            <p className="text-[rgba(253,251,247,0.7)] text-lg leading-relaxed">
+              Piattaforma integrata per la gestione della clinica di sessuologia FunzionaBene.
+            </p>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          {[
+            { label: "Terapisti", value: "12+" },
+            { label: "Pazienti", value: "340+" },
+            { label: "Sessioni/mese", value: "480+" },
+            { label: "Soddisfazione", value: "98%" }
+          ].map((stat) => (
+            <div key={stat.label} className="bg-white/5 border border-white/10 rounded-2xl p-4">
+              <div className="text-2xl font-bold text-[#D4A017] font-[Outfit]">{stat.value}</div>
+              <div className="text-[rgba(253,251,247,0.6)] text-sm mt-1">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Right panel - Login form */}
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
+        <div className="w-full max-w-md">
+          <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3]" />
+            <span className="text-[#1C1C1C] text-xl font-semibold font-[Outfit]">FunzionaBene</span>
+          </div>
+
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Accedi</h2>
+            <p className="text-[rgba(28,28,28,0.6)] mt-2">Inserisci le tue credenziali per continuare</p>
+          </div>
+
+          {error && (
+            <div data-testid="login-error" className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block text-sm font-medium text-[#1C1C1C] mb-2">Email</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)] w-5 h-5" />
+                <input
+                  data-testid="login-email"
+                  type="email"
+                  value={form.email}
+                  onChange={e => setForm({ ...form, email: e.target.value })}
+                  placeholder="nome@funzionabene.it"
+                  required
+                  className="w-full pl-10 pr-4 py-3 border border-[rgba(28,28,28,0.15)] rounded-xl bg-white text-[#1C1C1C] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#D4A017] transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-[#1C1C1C] mb-2">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)] w-5 h-5" />
+                <input
+                  data-testid="login-password"
+                  type={showPass ? "text" : "password"}
+                  value={form.password}
+                  onChange={e => setForm({ ...form, password: e.target.value })}
+                  placeholder="••••••••"
+                  required
+                  className="w-full pl-10 pr-12 py-3 border border-[rgba(28,28,28,0.15)] rounded-xl bg-white text-[#1C1C1C] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#D4A017] transition-all"
+                />
+                <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)]">
+                  {showPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              data-testid="login-submit"
+              type="submit"
+              disabled={loading}
+              className="w-full py-3 bg-[#D4A017] hover:bg-[#B38612] text-white font-semibold rounded-full transition-colors disabled:opacity-50 font-[Outfit]"
+            >
+              {loading ? "Accesso in corso..." : "Accedi"}
+            </button>
+          </form>
+
+          <p className="mt-6 text-center text-sm text-[rgba(28,28,28,0.6)]">
+            Non hai un account?{" "}
+            <Link data-testid="register-link" to="/registrati" className="text-[#D4A017] font-medium hover:text-[#B38612]">
+              Registrati
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

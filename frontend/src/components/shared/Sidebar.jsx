@@ -1,0 +1,93 @@
+import { Link, useLocation } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  LayoutDashboard, Users, UserCheck, Calendar,
+  FileText, X, Heart
+} from "lucide-react";
+
+const ADMIN_MENU = [
+  { to: "/admin", icon: LayoutDashboard, label: "Panoramica", exact: true },
+  { to: "/admin/terapisti", icon: UserCheck, label: "Terapisti" },
+  { to: "/admin/pazienti", icon: Users, label: "Pazienti" },
+  { to: "/admin/appuntamenti", icon: Calendar, label: "Appuntamenti" },
+  { to: "/admin/blog", icon: FileText, label: "Blog" },
+];
+
+const THERAPIST_MENU = [
+  { to: "/terapeuta", icon: LayoutDashboard, label: "Dashboard", exact: true },
+  { to: "/terapeuta/profilo", icon: UserCheck, label: "Il mio Profilo" },
+];
+
+const PATIENT_MENU = [
+  { to: "/paziente", icon: LayoutDashboard, label: "Dashboard", exact: true },
+];
+
+export default function Sidebar({ onClose }) {
+  const { user } = useAuth();
+  const location = useLocation();
+
+  const menu = user?.role === "admin" ? ADMIN_MENU :
+               user?.role === "terapeuta" ? THERAPIST_MENU : PATIENT_MENU;
+
+  const isActive = (item) => item.exact
+    ? location.pathname === item.to
+    : location.pathname.startsWith(item.to);
+
+  return (
+    <div className="w-64 h-full bg-[#0A0A0A] flex flex-col">
+      {/* Logo */}
+      <div className="p-6 flex items-center justify-between border-b border-white/10">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] flex items-center justify-center">
+            <Heart className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <div className="text-white font-bold font-[Outfit] leading-none">FunzionaBene</div>
+            <div className="text-[rgba(253,251,247,0.4)] text-xs mt-0.5 capitalize">{user?.role}</div>
+          </div>
+        </div>
+        <button onClick={onClose} className="lg:hidden text-[rgba(253,251,247,0.4)] hover:text-white">
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Navigation */}
+      <nav className="flex-1 p-4 space-y-1">
+        {menu.map((item) => {
+          const Icon = item.icon;
+          const active = isActive(item);
+          return (
+            <Link
+              key={item.to}
+              data-testid={`nav-${item.label.toLowerCase().replace(/\s+/g, "-")}`}
+              to={item.to}
+              className={`
+                flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
+                ${active
+                  ? "bg-[#D4A017] text-white"
+                  : "text-[rgba(253,251,247,0.6)] hover:text-white hover:bg-white/10"
+                }
+              `}
+            >
+              <Icon className="w-5 h-5 flex-shrink-0" />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Footer */}
+      <div className="p-4 border-t border-white/10">
+        <div className="flex items-center gap-3 px-2">
+          <div className="w-8 h-8 rounded-full bg-[#D4A017] flex items-center justify-center text-white text-xs font-semibold">
+            {`${user?.nome?.[0] || ""}${user?.cognome?.[0] || ""}`.toUpperCase()}
+          </div>
+          <div className="min-w-0">
+            <div className="text-[rgba(253,251,247,0.9)] text-sm font-medium truncate">{user?.nome} {user?.cognome}</div>
+            <div className="text-[rgba(253,251,247,0.4)] text-xs truncate">{user?.email}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

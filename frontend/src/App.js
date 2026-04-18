@@ -1,54 +1,67 @@
-import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import LoginPage from "@/pages/LoginPage";
+import RegisterPage from "@/pages/RegisterPage";
+import OTPPage from "@/pages/OTPPage";
+import AdminDashboard from "@/pages/admin/AdminDashboard";
+import TerapistiPage from "@/pages/admin/TerapistiPage";
+import PazientiPage from "@/pages/admin/PazientiPage";
+import AppuntamentiPage from "@/pages/admin/AppuntamentiPage";
+import TerapistaDashboard from "@/pages/therapist/TerapistaDashboard";
+import TerapistaProfile from "@/pages/therapist/TerapistaProfile";
+import PazienteDashboard from "@/pages/patient/PazienteDashboard";
+import Layout from "@/components/shared/Layout";
 import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
-
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
-
-  return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
-    </div>
-  );
-};
-
-function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+function ProtectedRoute({ children, roles }) {
+  const { user } = useAuth();
+  if (user === null) return <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin"/></div>;
+  if (user === false) return <Navigate to="/login" replace />;
+  if (roles && !roles.includes(user.role)) return <Navigate to="/" replace />;
+  return children;
 }
 
-export default App;
+function RoleRedirect() {
+  const { user } = useAuth();
+  if (user === null) return <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center"><div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin"/></div>;
+  if (user === false) return <Navigate to="/login" replace />;
+  if (user.role === "admin") return <Navigate to="/admin" replace />;
+  if (user.role === "terapeuta") return <Navigate to="/terapeuta" replace />;
+  return <Navigate to="/paziente" replace />;
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<RoleRedirect />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registrati" element={<RegisterPage />} />
+          <Route path="/verifica-otp" element={<OTPPage />} />
+
+          {/* Admin routes */}
+          <Route path="/admin" element={<ProtectedRoute roles={["admin"]}><Layout /></ProtectedRoute>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="terapisti" element={<TerapistiPage />} />
+            <Route path="pazienti" element={<PazientiPage />} />
+            <Route path="appuntamenti" element={<AppuntamentiPage />} />
+          </Route>
+
+          {/* Therapist routes */}
+          <Route path="/terapeuta" element={<ProtectedRoute roles={["terapeuta"]}><Layout /></ProtectedRoute>}>
+            <Route index element={<TerapistaDashboard />} />
+            <Route path="profilo" element={<TerapistaProfile />} />
+          </Route>
+
+          {/* Patient routes */}
+          <Route path="/paziente" element={<ProtectedRoute roles={["paziente"]}><Layout /></ProtectedRoute>}>
+            <Route index element={<PazienteDashboard />} />
+          </Route>
+
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
