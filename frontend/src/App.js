@@ -59,6 +59,7 @@ export default function App() {
             <Route index element={<PazienteDashboard />} />
           </Route>
 
+          <Route path="/register" element={<Navigate to="/registrati" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
