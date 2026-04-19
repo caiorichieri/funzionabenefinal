@@ -163,6 +163,25 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
+### Miglioramenti UX/Funzionali ✅ COMPLETATI (19/04/2026)
+- [x] **Logo personalizzata** (cuore gold+steel blue su nero) sostituisce il placeholder in tutto il sito
+- [x] **Codice Fiscale auto-calcolato** via backend `/api/utils/compute-cf` (python-codicefiscale)
+  - Supporta sia nati in Italia (comune) sia all'estero (paese ISO)
+  - Campo UI con indicatore "Calcolato automaticamente" (Sparkles icon)
+  - User può editare manualmente se il calcolo non è corretto
+- [x] **Chat privata paziente↔terapista** completa con `ChatPanel.jsx`
+  - Lista conversazioni a sinistra, messaggi a destra
+  - Polling 5s per nuovi messaggi
+  - Badge "non letti" per conversazioni con messaggi nuovi
+  - Disponibile nel PazienteDashboard e TerapistaDashboard
+  - Attiva automaticamente dopo prima prenotazione (stato="confermato")
+- [x] **Email automatici post-booking**
+  - Email conferma prenotazione (paziente + terapista) — template premium dark+gold
+  - Reminder 1 giorno prima (APScheduler)
+  - Reminder 1 ora prima (APScheduler)
+  - Template Italiano con data formattata ("Lunedì 20 aprile 2026 · 09:00")
+- [x] Stato appuntamento cambiato da `prenotato` → `confermato` on booking (attiva subito la chat)
+
 ### Dati Fiscali Paziente ✅ COMPLETATA (19/04/2026)
 - [x] Dataset italiano hardcoded (110 province + ~175 paesi esteri ISO)
 - [x] Form "Completa i tuoi dati" con: anagrafe, luogo nascita (Italia/estero toggle), CF (validazione checksum backend), telefono, indirizzo residenza (via/città/CAP/provincia)
