@@ -11,6 +11,12 @@ function formatDate(d) {
   } catch { return ""; }
 }
 
+// Content is authored by the admin / seeded from our own HTML source, so inner HTML is safe.
+// Only <p>, <strong>, <em> tags are expected.
+function hasHtmlMarkup(s) {
+  return /<(p|em|strong|br)[\s>/]/i.test(s || "");
+}
+
 export default function BlogPostPage() {
   const { id } = useParams();
   const [articolo, setArticolo] = useState(null);
@@ -38,9 +44,12 @@ export default function BlogPostPage() {
     );
   }
 
+  const contenuto = articolo.contenuto || "";
+  const isHtml = hasHtmlMarkup(contenuto);
+
   return (
     <main className="min-h-[calc(100vh-80px)] bg-[#111111] py-16 lg:py-24" data-testid="blog-post">
-      <article className="max-w-2xl mx-auto px-6 lg:px-10">
+      <article className="max-w-3xl mx-auto px-6 lg:px-10">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-[#E6E2D8]/50 hover:text-[#D4A017] mb-10">
           <ArrowLeft className="w-4 h-4" /> Torna al blog
         </Link>
@@ -57,13 +66,32 @@ export default function BlogPostPage() {
           <span className="flex items-center gap-2"><Calendar className="w-4 h-4" />{formatDate(articolo.created_at)}</span>
         </div>
 
-        <div className="mt-10 prose prose-invert max-w-none">
-          {(articolo.contenuto || "").split("\n").filter(Boolean).map((p, i) => (
-            <p key={i} className="text-lg text-[#E6E2D8]/80 leading-loose mb-6 font-serif">
-              {p}
-            </p>
-          ))}
-        </div>
+        {articolo.immagine_url && (
+          <div className="mt-10 rounded-3xl overflow-hidden border border-white/5">
+            <img
+              src={articolo.immagine_url}
+              alt=""
+              loading="eager"
+              className="w-full h-auto max-h-[520px] object-cover"
+              data-testid="blog-post-image"
+            />
+          </div>
+        )}
+
+        {isHtml ? (
+          <div
+            className="blog-prose mt-10"
+            dangerouslySetInnerHTML={{ __html: contenuto }}
+          />
+        ) : (
+          <div className="mt-10">
+            {contenuto.split("\n").filter(Boolean).map((p, i) => (
+              <p key={i} className="text-lg text-[#E6E2D8]/80 leading-loose mb-6 font-serif">
+                {p}
+              </p>
+            ))}
+          </div>
+        )}
 
         <div className="mt-16 p-8 bg-[#1C2A33]/40 border border-white/10 rounded-3xl text-center">
           <h3 className="font-serif text-2xl text-[#F4F1ED] mb-3">Hai bisogno di parlarne?</h3>

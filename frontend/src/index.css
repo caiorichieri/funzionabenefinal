@@ -131,3 +131,31 @@ code {
         border-bottom-color: inherit;
     }
 }
+
+/* Blog post prose — renders HTML seeded from sessuologia-html-v1 (trusted internal source) */
+.blog-prose {
+  color: rgba(230, 226, 216, 0.82);
+  font-family: ui-serif, Georgia, 'Cormorant Garamond', serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+.blog-prose p {
+  margin-bottom: 1.6rem;
+}
+.blog-prose p.intro {
+  font-size: 1.25rem;
+  color: #F4F1ED;
+  border-left: 2px solid #D4A017;
+  padding-left: 1.25rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+.blog-prose p.intro strong { font-weight: 400; }
+.blog-prose em {
+  font-style: italic;
+  color: #D4A017;
+}
+.blog-prose strong {
+  color: #F4F1ED;
+  font-weight: 500;
+}
