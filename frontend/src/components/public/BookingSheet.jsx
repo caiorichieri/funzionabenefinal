@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
 import { X, Check, Mail, Lock, User as UserIcon, CreditCard, ShieldCheck, ArrowRight } from "lucide-react";
+import DatiFiscaliStep from "@/components/public/DatiFiscaliStep";
 
 const GIORNI_IT = ["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"];
 
@@ -17,7 +18,7 @@ function formatSlot(iso) {
   } catch { return iso; }
 }
 
-// Steps: review → auth (login or register) → otp → payment → success
+// Steps: review → auth (login or register) → otp → dati-fiscali → payment → success
 export default function BookingSheet({ open, onClose, terapista, slot, currentUser }) {
   const { login, refreshUser } = useAuth();
   const [step, setStep] = useState("review");
@@ -26,16 +27,33 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
   const [otpDev, setOtpDev] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [pazienteProfile, setPazienteProfile] = useState(null);
+
+  // Check if current user already has dati fiscali completi (skip step if yes)
+  const gotoAfterAuth = async () => {
+    try {
+      const res = await axios.get(`${API}/pazienti/profilo/me`, { withCredentials: true });
+      setPazienteProfile(res.data);
+      if (res.data.dati_fiscali_completi) {
+        setStep("payment");
+      } else {
+        setStep("dati-fiscali");
+      }
+    } catch {
+      setStep("dati-fiscali");
+    }
+  };
 
   useEffect(() => {
     if (open) {
       setError("");
       if (currentUser && currentUser.role === "paziente") {
-        setStep("payment");
+        gotoAfterAuth();
       } else {
         setStep("review");
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, currentUser]);
 
   if (!open || !terapista || !slot) return null;
@@ -72,7 +90,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
         setError("Solo gli utenti pazienti possono prenotare");
         return;
       }
-      setStep("payment");
+      await gotoAfterAuth();
     } catch (err) {
       const d = err.response?.data?.detail;
       setError(typeof d === "string" ? d : "Credenziali non valide");
@@ -88,7 +106,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
     try {
       await axios.post(`${API}/auth/verify-otp`, { email: form.email, otp_code: form.otp }, { withCredentials: true });
       await refreshUser();
-      setStep("payment");
+      await gotoAfterAuth();
     } catch (err) {
       const d = err.response?.data?.detail;
       setError(typeof d === "string" ? d : "Codice OTP non valido");
@@ -154,10 +172,10 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
           <div className="px-6 lg:px-10 py-8">
             {/* Progress */}
             <div className="flex items-center gap-2 mb-10">
-              {["review","auth","otp","payment","success"]
+              {["review","auth","otp","dati-fiscali","payment","success"]
                 .filter((s) => s !== "otp" || mode === "register")
                 .map((s) => {
-                  const order = ["review","auth","otp","payment","success"];
+                  const order = ["review","auth","otp","dati-fiscali","payment","success"];
                   const cur = order.indexOf(step);
                   const idx = order.indexOf(s);
                   return (
@@ -354,6 +372,17 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
               </div>
             )}
 
+            {/* DATI FISCALI */}
+            {step === "dati-fiscali" && (
+              <DatiFiscaliStep
+                existingData={pazienteProfile || {}}
+                onComplete={(updatedProfile) => {
+                  setPazienteProfile(updatedProfile);
+                  setStep("payment");
+                }}
+              />
+            )}
+
             {/* PAYMENT (mocked) */}
             {step === "payment" && (
               <div data-testid="step-payment">
@@ -426,14 +455,18 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                 </motion.div>
                 <h2 className="font-serif text-4xl text-[#F4F1ED]">Prenotazione confermata</h2>
                 <p className="mt-4 text-[#E6E2D8]/60 max-w-sm mx-auto leading-relaxed">
-                  Ti abbiamo inviato un'email di conferma con tutti i dettagli. Il Dr. {terapista.cognome} ti aspetta il <strong className="text-[#F4F1ED]">{formatSlot(slot.data_ora)}</strong>.
+                  Ti abbiamo inviato un'email di conferma con tutti i dettagli.
+                  Il Dr. {terapista.cognome} ti aspetta il <strong className="text-[#F4F1ED]">{formatSlot(slot.data_ora)}</strong>.
+                </p>
+                <p className="mt-3 text-xs text-[#E6E2D8]/40">
+                  Puoi chiudere questa finestra.
                 </p>
                 <button
-                  data-testid="booking-go-dashboard"
-                  onClick={() => { onClose(); window.location.href = "/paziente"; }}
-                  className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] font-medium rounded-full"
+                  data-testid="booking-close-success"
+                  onClick={onClose}
+                  className="mt-10 inline-flex items-center gap-3 px-8 py-3 border border-white/15 text-[#E6E2D8] hover:bg-white/5 rounded-full text-sm tracking-wide"
                 >
-                  Vai alla mia area personale <ArrowRight className="w-4 h-4" />
+                  Chiudi
                 </button>
               </div>
             )}

@@ -162,11 +162,20 @@ class PazienteProfileInput(BaseModel):
     genere: Optional[str] = None
     codice_fiscale: Optional[str] = None
     telefono: Optional[str] = None
+    # Luogo di nascita (per codice fiscale)
+    nato_all_estero: Optional[bool] = False
+    luogo_nascita_provincia: Optional[str] = None
+    luogo_nascita_comune: Optional[str] = None
+    paese_nascita: Optional[str] = None
+    # Residenza
     indirizzo: Optional[str] = None
     citta: Optional[str] = None
     cap: Optional[str] = None
+    provincia_residenza: Optional[str] = None
+    # Altri
     note_cliniche: Optional[str] = None
     terapeuta_assegnato: Optional[str] = None
+    dati_fiscali_completi: Optional[bool] = None
 
 class AppuntamentoInput(BaseModel):
     terapeuta_id: str
@@ -467,6 +476,16 @@ async def get_my_paziente_profile(user: dict = Depends(require_auth)):
     doc["_id"] = str(doc["_id"])
     return doc
 
+def _compute_dati_fiscali_completi(p: dict) -> bool:
+    """Verifica se il paziente ha tutti i dati fiscali richiesti."""
+    required_always = ["nome", "cognome", "data_nascita", "genere", "codice_fiscale", "telefono",
+                       "indirizzo", "citta", "cap", "provincia_residenza"]
+    if any(not p.get(f) for f in required_always):
+        return False
+    if p.get("nato_all_estero"):
+        return bool(p.get("paese_nascita"))
+    return bool(p.get("luogo_nascita_provincia") and p.get("luogo_nascita_comune"))
+
 @api_router.put("/pazienti/profilo/me")
 async def update_my_paziente_profile(data: PazienteProfileInput, user: dict = Depends(require_auth)):
     if user["role"] != "paziente":
@@ -477,6 +496,11 @@ async def update_my_paziente_profile(data: PazienteProfileInput, user: dict = De
     update["updated_at"] = datetime.now(timezone.utc)
     await db.pazienti.update_one({"user_id": user["_id"]}, {"$set": update}, upsert=True)
     doc = await db.pazienti.find_one({"user_id": user["_id"]})
+    # Auto-compute dati_fiscali_completi flag
+    completi = _compute_dati_fiscali_completi(doc)
+    if doc.get("dati_fiscali_completi") != completi:
+        await db.pazienti.update_one({"user_id": user["_id"]}, {"$set": {"dati_fiscali_completi": completi}})
+        doc["dati_fiscali_completi"] = completi
     doc["_id"] = str(doc["_id"])
     return doc
 
@@ -1117,7 +1141,7 @@ async def seed_data():
             "cognome": "Bianchi",
             "data_nascita": "1990-05-15",
             "genere": "M",
-            "codice_fiscale": "BNCLCU90E15H501Z",
+            "codice_fiscale": "RSSMRA80A01F205X",
             "telefono": "+39 333 1234567",
             "citta": "Milano",
             "cap": "20121",

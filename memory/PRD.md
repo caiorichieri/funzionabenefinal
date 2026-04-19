@@ -163,6 +163,14 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
+### Dati Fiscali Paziente ✅ COMPLETATA (19/04/2026)
+- [x] Dataset italiano hardcoded (110 province + ~175 paesi esteri ISO)
+- [x] Form "Completa i tuoi dati" con: anagrafe, luogo nascita (Italia/estero toggle), CF (validazione checksum backend), telefono, indirizzo residenza (via/città/CAP/provincia)
+- [x] Step "dati-fiscali" nel BookingSheet **PRIMA** del pagamento
+- [x] Backend computa automaticamente flag `dati_fiscali_completi` su update
+- [x] Skip dello step se paziente già ha tutti i dati
+- [x] Step success senza pulsante dashboard (solo "Chiudi")
+
 ### Integrazione Daily.co ✅ COMPLETATA (19/04/2026)
 - [x] `daily_service.py` backend (create room + meeting token + presenze)
 - [x] Auto-creazione stanza privata al momento della prenotazione
