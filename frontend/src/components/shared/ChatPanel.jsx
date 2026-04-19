@@ -36,7 +36,9 @@ export default function ChatPanel({ role }) {
       setMessaggi(res.data || []);
       // Mark as read by reloading list
       loadConversazioni();
-    } catch {}
+    } catch (err) {
+      console.warn("[ChatPanel] loadMessaggi failed:", err);
+    }
   }, [loadConversazioni]);
 
   useEffect(() => {

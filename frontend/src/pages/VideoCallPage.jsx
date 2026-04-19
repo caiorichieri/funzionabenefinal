@@ -69,7 +69,7 @@ export default function VideoCallPage() {
         callFrameRef.current = frame;
 
         frame.on("left-meeting", () => {
-          try { frame.destroy(); } catch {}
+          try { frame.destroy(); } catch (e) { console.warn("daily destroy failed:", e); }
           navigate(-1);
         });
         frame.on("error", (e) => {
@@ -94,7 +94,7 @@ export default function VideoCallPage() {
     return () => {
       cancelled = true;
       if (callFrameRef.current) {
-        try { callFrameRef.current.destroy(); } catch {}
+        try { callFrameRef.current.destroy(); } catch (e) { console.warn("daily destroy failed:", e); }
         callFrameRef.current = null;
       }
     };
@@ -108,7 +108,7 @@ export default function VideoCallPage() {
           data-testid="video-back-btn"
           onClick={() => {
             if (callFrameRef.current) {
-              try { callFrameRef.current.destroy(); } catch {}
+              try { callFrameRef.current.destroy(); } catch (e) { console.warn("daily destroy failed:", e); }
             }
             navigate(-1);
           }}

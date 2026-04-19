@@ -238,7 +238,7 @@ class TestBookingFlow:
     def setup(self):
         """Setup test data"""
         self.test_email = f"test_booking_{int(time.time())}@example.com"
-        self.test_password = "TestPassword123!"
+        self.test_password = os.getenv("TEST_PASSWORD", "TestPassword123!")
         self.session = requests.Session()
     
     def test_full_booking_flow(self):

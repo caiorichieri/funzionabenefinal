@@ -9,7 +9,8 @@ export function getCookiePreferences() {
     const data = JSON.parse(raw);
     if (data.version !== COOKIE_VERSION) return null;
     return data.prefs;
-  } catch {
+  } catch (err) {
+    console.warn("[cookieConsent] read failed:", err);
     return null;
   }
 }
@@ -27,7 +28,9 @@ export function setCookiePreferences(prefs) {
   try {
     localStorage.setItem(COOKIE_KEY, JSON.stringify(payload));
     window.dispatchEvent(new Event("fb-cookie-consent-changed"));
-  } catch {}
+  } catch (err) {
+    console.warn("[cookieConsent] write failed:", err);
+  }
 }
 
 export function acceptAll() {
@@ -42,5 +45,7 @@ export function clearCookieConsent() {
   try {
     localStorage.removeItem(COOKIE_KEY);
     window.dispatchEvent(new Event("fb-cookie-consent-changed"));
-  } catch {}
+  } catch (err) {
+    console.warn("[cookieConsent] clear failed:", err);
+  }
 }
