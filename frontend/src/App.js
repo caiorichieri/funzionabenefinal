@@ -19,6 +19,7 @@ import TerapistaBlogPage from "@/pages/therapist/TerapistaBlogPage";
 import PazienteDashboard from "@/pages/patient/PazienteDashboard";
 import VideoCallPage from "@/pages/VideoCallPage";
 import Layout from "@/components/shared/Layout";
+import ScrollToTop from "@/components/shared/ScrollToTop";
 
 // Public site
 import PublicLayout from "@/components/public/PublicLayout";
@@ -51,6 +52,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* Public site */}
           <Route element={<PublicLayout />}>
