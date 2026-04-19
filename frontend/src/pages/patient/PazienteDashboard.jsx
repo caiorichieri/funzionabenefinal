@@ -1,10 +1,21 @@
 import { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
 import { Calendar, Clock, Video, User, Save, CheckCircle } from "lucide-react";
 
+function canJoin(dataOra, durata = 50) {
+  const now = new Date();
+  const start = new Date(dataOra);
+  const end = new Date(start.getTime() + durata * 60000);
+  const openAt = new Date(start.getTime() - 15 * 60000);
+  const closeAt = new Date(end.getTime() + 15 * 60000);
+  return now >= openAt && now <= closeAt;
+}
+
 export default function PazienteDashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [profilo, setProfilo] = useState(null);
   const [appuntamenti, setAppuntamenti] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -178,20 +189,34 @@ export default function PazienteDashboard() {
         <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4">Prossime Sessioni</h3>
           <div className="space-y-3">
-            {prossime.map(a => (
-              <div key={a._id} className="flex items-center justify-between py-3 border-b border-[rgba(28,28,28,0.06)] last:border-0">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#D4A017]/10 flex items-center justify-center">
-                    <Video className="w-4 h-4 text-[#D4A017]" />
+            {prossime.map(a => {
+              const joinable = canJoin(a.data_ora, a.durata_minuti);
+              return (
+                <div key={a._id} className="flex items-center justify-between py-3 border-b border-[rgba(28,28,28,0.06)] last:border-0 gap-3">
+                  <div className="flex items-center gap-3 flex-1 min-w-0">
+                    <div className="w-10 h-10 rounded-xl bg-[#D4A017]/10 flex items-center justify-center flex-shrink-0">
+                      <Video className="w-4 h-4 text-[#D4A017]" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-medium text-[#1C1C1C] text-sm truncate">{a.terapeuta_nome || "Terapeuta"}</div>
+                      <div className="text-xs text-[rgba(28,28,28,0.5)]">{new Date(a.data_ora).toLocaleString("it-IT")} · {a.durata_minuti} min</div>
+                    </div>
                   </div>
-                  <div>
-                    <div className="font-medium text-[#1C1C1C] text-sm">{a.terapeuta_nome || "Terapeuta"}</div>
-                    <div className="text-xs text-[rgba(28,28,28,0.5)]">{new Date(a.data_ora).toLocaleString("it-IT")} · {a.durata_minuti} min</div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">{a.stato}</span>
+                    {joinable && (
+                      <button
+                        data-testid={`join-video-${a._id}`}
+                        onClick={() => navigate(`/seduta/${a._id}`)}
+                        className="px-4 py-2 bg-[#D4A017] hover:bg-[#B38612] text-white rounded-full text-xs font-medium flex items-center gap-1.5"
+                      >
+                        <Video className="w-3 h-3" /> Entra
+                      </button>
+                    )}
                   </div>
                 </div>
-                <span className="text-xs px-2 py-1 rounded-full bg-blue-100 text-blue-700">{a.stato}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

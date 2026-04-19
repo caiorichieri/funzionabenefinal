@@ -163,15 +163,24 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
+### Integrazione Daily.co ✅ COMPLETATA (19/04/2026)
+- [x] `daily_service.py` backend (create room + meeting token + presenze)
+- [x] Auto-creazione stanza privata al momento della prenotazione
+- [x] Endpoint `/api/appuntamenti/{id}/video-token` (token con nbf/exp scoped)
+- [x] Endpoint `/api/appuntamenti/{id}/presenze` (logs Daily per prova presenza)
+- [x] Frontend `VideoCallPage` fullscreen con iframe Daily (tema premium dark+gold)
+- [x] Pulsante "Entra" in PazienteDashboard + TerapistaDashboard (visibile 15 min prima → 15 min dopo)
+- [x] Ownership: terapista = is_owner=true (può gestire partecipanti), paziente = guest
+
 ### Integrazione Nexi XPay
 - [ ] Checkout sessioni online
 - [ ] Gestione rimborsi
 - [ ] Storico pagamenti
 
-### Integrazione Daily.co
-- [ ] Generazione link videochiamate
-- [ ] Log sessioni (prova avvenimento)
-- [ ] Tracking durata
+### Integrazione Daily.co ✅ COMPLETATA
+- [x] Generazione link videochiamate
+- [x] Log sessioni (prova avvenimento)
+- [x] Tracking durata
 
 ### Email Automatiche (Resend)
 - [ ] OTP email reali

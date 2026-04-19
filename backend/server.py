@@ -17,6 +17,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, BeforeValidator, EmailStr
 
 from email_service import send_otp_email
+from daily_service import create_room_for_appointment, create_meeting_token, get_room_presenza
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 JWT_SECRET = os.environ["JWT_SECRET"]
@@ -547,6 +548,75 @@ async def delete_appuntamento(app_id: str, user: dict = Depends(require_admin)):
     await db.appuntamenti.delete_one({"_id": ObjectId(app_id)})
     return {"message": "Appuntamento eliminato"}
 
+# ─── VIDEO CALL (Daily.co) ────────────────────────────────────────────────────
+@api_router.post("/appuntamenti/{app_id}/video-token")
+async def get_video_token(app_id: str, user: dict = Depends(require_auth)):
+    """Generate a Daily.co meeting token for the current user to join this appointment's video room."""
+    app = await db.appuntamenti.find_one({"_id": ObjectId(app_id)})
+    if not app:
+        raise HTTPException(404, "Appuntamento non trovato")
+
+    # Authorization: user must be the paziente or the terapista for this appointment
+    is_owner = False
+    if user["role"] == "admin":
+        is_owner = True
+    elif user["role"] == "paziente":
+        paziente = await db.pazienti.find_one({"user_id": user["_id"]})
+        if not paziente or str(paziente["_id"]) != app.get("paziente_id"):
+            raise HTTPException(403, "Non autorizzato")
+    elif user["role"] == "terapeuta":
+        terapista = await db.terapisti.find_one({"user_id": user["_id"]})
+        if not terapista or str(terapista["_id"]) != app.get("terapeuta_id"):
+            raise HTTPException(403, "Non autorizzato")
+        is_owner = True
+    else:
+        raise HTTPException(403, "Non autorizzato")
+
+    # Ensure the room exists (create lazily if missing)
+    room_name = app.get("daily_room_name")
+    room_url = app.get("daily_room_url")
+    if not room_name:
+        room = await create_room_for_appointment(app_id, app["data_ora"], app.get("durata_minuti", 50))
+        if not room:
+            raise HTTPException(500, "Impossibile creare la stanza video")
+        room_name = room["room_name"]
+        room_url = room["room_url"]
+        await db.appuntamenti.update_one(
+            {"_id": ObjectId(app_id)},
+            {"$set": {"daily_room_url": room_url, "daily_room_name": room_name}}
+        )
+
+    user_name = f"{user.get('nome','')} {user.get('cognome','')}".strip() or user.get("email", "Utente")
+    token = await create_meeting_token(room_name, user_name, is_owner, app["data_ora"], app.get("durata_minuti", 50))
+
+    return {
+        "room_url": room_url,
+        "room_name": room_name,
+        "token": token,  # may be None if Daily disabled (mock mode)
+        "user_name": user_name,
+        "is_owner": is_owner,
+        "data_ora": app["data_ora"],
+        "durata_minuti": app.get("durata_minuti", 50),
+    }
+
+@api_router.get("/appuntamenti/{app_id}/presenze")
+async def get_presenze(app_id: str, user: dict = Depends(require_auth)):
+    """Get attendance logs for a completed appointment (admin + terapista only)."""
+    if user["role"] not in ("admin", "terapeuta"):
+        raise HTTPException(403, "Accesso negato")
+    app = await db.appuntamenti.find_one({"_id": ObjectId(app_id)})
+    if not app:
+        raise HTTPException(404, "Appuntamento non trovato")
+    if user["role"] == "terapeuta":
+        terapista = await db.terapisti.find_one({"user_id": user["_id"]})
+        if not terapista or str(terapista["_id"]) != app.get("terapeuta_id"):
+            raise HTTPException(403, "Non autorizzato")
+    room_name = app.get("daily_room_name")
+    if not room_name:
+        return {"presenze": [], "message": "Nessuna stanza video creata"}
+    presenze = await get_room_presenza(room_name)
+    return {"presenze": presenze, "room_name": room_name}
+
 # ─── BLOG ─────────────────────────────────────────────────────────────────────
 @api_router.get("/blog")
 async def list_articoli(user: dict = Depends(require_auth)):
@@ -932,7 +1002,17 @@ async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require
     doc["created_at"] = datetime.now(timezone.utc)
     doc["paziente_user_id"] = user["_id"]
     result = await db.appuntamenti.insert_one(doc)
-    doc["_id"] = str(result.inserted_id)
+    app_id = str(result.inserted_id)
+    # Create Daily.co room for video session
+    room = await create_room_for_appointment(app_id, data.data_ora, data.durata_minuti)
+    if room:
+        await db.appuntamenti.update_one(
+            {"_id": result.inserted_id},
+            {"$set": {"daily_room_url": room.get("room_url"), "daily_room_name": room.get("room_name")}}
+        )
+        doc["daily_room_url"] = room.get("room_url")
+        doc["daily_room_name"] = room.get("room_name")
+    doc["_id"] = app_id
     return doc
 app.include_router(api_router)
 

@@ -17,6 +17,7 @@ import TerapistaDashboard from "@/pages/therapist/TerapistaDashboard";
 import TerapistaProfile from "@/pages/therapist/TerapistaProfile";
 import TerapistaBlogPage from "@/pages/therapist/TerapistaBlogPage";
 import PazienteDashboard from "@/pages/patient/PazienteDashboard";
+import VideoCallPage from "@/pages/VideoCallPage";
 import Layout from "@/components/shared/Layout";
 
 // Public site
@@ -81,6 +82,14 @@ export default function App() {
           </Route>
 
           <Route path="/register" element={<Navigate to="/registrati" replace />} />
+
+          {/* Video call (fullscreen, authenticated paziente/terapeuta/admin) */}
+          <Route path="/seduta/:appuntamentoId" element={
+            <ProtectedRoute roles={["paziente","terapeuta","admin"]}>
+              <VideoCallPage />
+            </ProtectedRoute>
+          } />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </BrowserRouter>
