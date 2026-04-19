@@ -1393,6 +1393,19 @@ async def seed_data():
             "created_at": datetime.now(timezone.utc)
         })
         logging.info(f"[SEED] Admin creato: {admin_email}")
+    else:
+        # Always keep admin password in sync with env var ADMIN_PASSWORD.
+        # Ensures password reset is possible via redeploy when forgotten.
+        if not verify_password(admin_pwd, existing.get("password_hash", "")):
+            await db.users.update_one(
+                {"_id": existing["_id"]},
+                {"$set": {
+                    "password_hash": hash_password(admin_pwd),
+                    "is_verified": True,
+                    "is_active": True,
+                }},
+            )
+            logging.info(f"[SEED] Admin password resynced from env var for: {admin_email}")
 
     # Seed demo therapist
     demo_email = "demo.terapeuta@funzionabene.it"
