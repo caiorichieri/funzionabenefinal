@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
-import { Calendar, Clock, Video, User, Save, CheckCircle } from "lucide-react";
+import { Calendar, Clock, Video, User, Save, CheckCircle, MessageCircle } from "lucide-react";
+import ChatPanel from "@/components/shared/ChatPanel";
 
 function canJoin(dataOra, durata = 50) {
   const now = new Date();
@@ -220,6 +221,14 @@ export default function PazienteDashboard() {
           </div>
         </div>
       )}
+
+      {/* Messaggi privati */}
+      <div className="mt-6 bg-white rounded-2xl border border-[rgba(28,28,28,0.08)] p-5">
+        <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4 flex items-center gap-2">
+          <MessageCircle className="w-4 h-4 text-[#D4A017]" /> Messaggi con il tuo terapeuta
+        </h3>
+        <ChatPanel role="paziente" />
+      </div>
     </div>
   );
 }

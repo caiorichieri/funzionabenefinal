@@ -60,8 +60,7 @@ def _otp_template(otp_code: str, nome: str = "") -> str:
 
 
 async def send_otp_email(email: str, otp_code: str, nome: str = "") -> bool:
-    """Send OTP verification email. Returns True on success, False on failure.
-    Does not raise — caller should continue even if email fails (dev mode fallback)."""
+    """Send OTP verification email. Returns True on success, False on failure."""
     if not SEND_EMAILS:
         logger.info(f"[EMAIL DISABLED] OTP for {email}: {otp_code}")
         return False
@@ -82,3 +81,149 @@ async def send_otp_email(email: str, otp_code: str, nome: str = "") -> bool:
     except Exception as e:
         logger.error(f"[EMAIL ERROR] Failed to send OTP to {email}: {e}")
         return False
+
+
+def _format_data_ora_it(iso: str) -> str:
+    from datetime import datetime as _dt
+    GIORNI = ["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"]
+    MESI = ["gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre"]
+    try:
+        d = _dt.fromisoformat(iso.replace("Z", "+00:00"))
+        g = GIORNI[d.weekday()]
+        return f"{g} {d.day} {MESI[d.month-1]} {d.year} · {d.hour:02d}:{d.minute:02d}"
+    except Exception:
+        return iso
+
+
+def _booking_template(ctx: dict, recipient: str) -> str:
+    """recipient = 'paziente' or 'terapista'."""
+    dt_fmt = _format_data_ora_it(ctx["data_ora"])
+    saluto = f"Ciao {ctx['paziente_nome']}" if recipient == "paziente" else f"Gentile Dr. {ctx['terapista_cognome']}"
+    descrizione = (
+        f"La tua seduta con <strong>Dr. {ctx['terapista_nome']} {ctx['terapista_cognome']}</strong> è stata confermata."
+        if recipient == "paziente"
+        else f"Una nuova prenotazione da <strong>{ctx['paziente_nome']} {ctx['paziente_cognome']}</strong>."
+    )
+    return f"""<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0A0A0A;font-family:'Helvetica Neue',Arial,sans-serif;color:#F4F1ED;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#0A0A0A;padding:40px 20px;">
+<tr><td align="center">
+<table width="560" cellspacing="0" cellpadding="0" border="0" style="max-width:560px;background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;">
+<tr><td style="padding:40px 40px 20px;text-align:center;">
+  <div style="font-family:Georgia,serif;font-size:26px;color:#F4F1ED;">funzionabene</div>
+  <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6B8FA3;margin-top:4px;">clinica psicologica</div>
+</td></tr>
+<tr><td style="padding:10px 40px 0;">
+  <h1 style="font-family:Georgia,serif;font-size:28px;font-weight:500;margin:0 0 16px;color:#F4F1ED;">Prenotazione confermata</h1>
+  <p style="color:rgba(230,226,216,0.75);font-size:15px;line-height:1.6;margin:0 0 24px;">{saluto},<br>{descrizione}</p>
+</td></tr>
+<tr><td style="padding:0 40px;">
+  <table width="100%" style="background:rgba(212,160,23,0.06);border:1px solid rgba(212,160,23,0.25);border-radius:14px;padding:20px;">
+    <tr><td style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6B8FA3;padding-bottom:8px;">Quando</td></tr>
+    <tr><td style="font-family:Georgia,serif;font-size:20px;color:#D4A017;padding-bottom:14px;">{dt_fmt}</td></tr>
+    <tr><td style="font-size:13px;color:rgba(230,226,216,0.6);border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+      Durata: {ctx['durata_minuti']} minuti · Modalità: Online<br>
+      Totale: €{ctx.get('prezzo', 90)}
+    </td></tr>
+  </table>
+</td></tr>
+<tr><td style="padding:28px 40px 20px;">
+  <p style="font-size:13px;color:rgba(230,226,216,0.6);line-height:1.6;margin:0 0 16px;">
+    Il link per entrare nella stanza video sarà disponibile 15 minuti prima della seduta nella tua area personale.
+    Riceverai un promemoria 1 giorno prima e 1 ora prima.
+  </p>
+  <p style="font-size:12px;color:rgba(230,226,216,0.4);line-height:1.6;margin:0;">
+    Puoi cancellare o riprogrammare fino a 24 ore prima.
+  </p>
+</td></tr>
+<tr><td style="padding:20px 40px 40px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;">
+  <p style="color:rgba(230,226,216,0.4);font-size:11px;line-height:1.6;margin:0;">© FunzionaBene — Clinica di Psicologia e Sessuologia<br>Trattamento dati ai sensi del GDPR</p>
+</td></tr>
+</table></td></tr></table></body></html>"""
+
+
+def _reminder_template(ctx: dict, when: str) -> str:
+    """when = '1-giorno' or '1-ora'."""
+    dt_fmt = _format_data_ora_it(ctx["data_ora"])
+    titolo = "La tua seduta è domani" if when == "1-giorno" else "La tua seduta inizia tra un'ora"
+    sottotitolo = (
+        "Ricorda: puoi entrare nella stanza video 15 minuti prima dell'orario."
+        if when == "1-ora"
+        else "Ti aspettiamo. Controlla i dettagli qui sotto."
+    )
+    return f"""<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"></head>
+<body style="margin:0;padding:0;background:#0A0A0A;font-family:'Helvetica Neue',Arial,sans-serif;color:#F4F1ED;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#0A0A0A;padding:40px 20px;">
+<tr><td align="center">
+<table width="560" cellspacing="0" cellpadding="0" border="0" style="max-width:560px;background:#111;border:1px solid rgba(255,255,255,0.08);border-radius:20px;overflow:hidden;">
+<tr><td style="padding:40px 40px 20px;text-align:center;">
+  <div style="font-family:Georgia,serif;font-size:26px;color:#F4F1ED;">funzionabene</div>
+  <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#6B8FA3;margin-top:4px;">promemoria seduta</div>
+</td></tr>
+<tr><td style="padding:10px 40px 0;">
+  <h1 style="font-family:Georgia,serif;font-size:30px;font-weight:500;margin:0 0 10px;color:#D4A017;">{titolo}</h1>
+  <p style="color:rgba(230,226,216,0.75);font-size:14px;line-height:1.6;margin:0 0 24px;">{sottotitolo}</p>
+</td></tr>
+<tr><td style="padding:0 40px;">
+  <table width="100%" style="background:rgba(212,160,23,0.06);border:1px solid rgba(212,160,23,0.25);border-radius:14px;padding:20px;">
+    <tr><td style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#6B8FA3;padding-bottom:8px;">Appuntamento</td></tr>
+    <tr><td style="font-family:Georgia,serif;font-size:18px;color:#D4A017;padding-bottom:10px;">{dt_fmt}</td></tr>
+    <tr><td style="font-size:13px;color:rgba(230,226,216,0.7);padding-bottom:8px;">
+      Con Dr. {ctx['terapista_nome']} {ctx['terapista_cognome']}
+    </td></tr>
+  </table>
+</td></tr>
+<tr><td style="padding:28px 40px 40px;border-top:1px solid rgba(255,255,255,0.08);text-align:center;margin-top:20px;">
+  <p style="color:rgba(230,226,216,0.4);font-size:11px;margin:0;">© FunzionaBene · Clinica di Psicologia e Sessuologia</p>
+</td></tr>
+</table></td></tr></table></body></html>"""
+
+
+async def _send_raw(params: dict) -> bool:
+    if not SEND_EMAILS or not RESEND_API_KEY or RESEND_API_KEY == "placeholder_resend_key":
+        logger.info(f"[EMAIL DISABLED] {params.get('subject')} to {params.get('to')}")
+        return False
+    try:
+        result = await asyncio.to_thread(resend.Emails.send, params)
+        logger.info(f"[EMAIL SENT] {params.get('subject')} to {params.get('to')} (id={result.get('id') if isinstance(result, dict) else result})")
+        return True
+    except Exception as e:
+        logger.error(f"[EMAIL ERROR] {params.get('subject')} to {params.get('to')}: {e}")
+        return False
+
+
+async def send_booking_confirmation_email(ctx: dict) -> bool:
+    """Send booking confirmation to both paziente and terapista."""
+    results = []
+    # Paziente
+    if ctx.get("paziente_email"):
+        results.append(await _send_raw({
+            "from": f"FunzionaBene <{SENDER_EMAIL}>",
+            "to": [ctx["paziente_email"]],
+            "subject": "Prenotazione confermata - FunzionaBene",
+            "html": _booking_template(ctx, "paziente"),
+        }))
+    # Terapista
+    if ctx.get("terapista_email"):
+        results.append(await _send_raw({
+            "from": f"FunzionaBene <{SENDER_EMAIL}>",
+            "to": [ctx["terapista_email"]],
+            "subject": f"Nuova prenotazione: {ctx.get('paziente_nome')} {ctx.get('paziente_cognome')}",
+            "html": _booking_template(ctx, "terapista"),
+        }))
+    return any(results)
+
+
+async def send_reminder_email(ctx: dict, when: str) -> bool:
+    """Send reminder email to paziente. when = '1-giorno' | '1-ora'."""
+    if not ctx.get("paziente_email"):
+        return False
+    subject = "Promemoria: la tua seduta è domani" if when == "1-giorno" else "La tua seduta inizia tra un'ora"
+    return await _send_raw({
+        "from": f"FunzionaBene <{SENDER_EMAIL}>",
+        "to": [ctx["paziente_email"]],
+        "subject": subject,
+        "html": _reminder_template(ctx, when),
+    })

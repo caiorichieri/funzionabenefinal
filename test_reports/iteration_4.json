@@ -1,0 +1,65 @@
+{
+  "summary": "Iteration 4 testing complete. All 15 backend tests passed. Frontend features verified: Logo in header/footer, ChatPanel in paziente/terapeuta dashboards, booking flow with stato='confermato', Daily.co room creation, email sending via Resend.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_iteration4.py",
+    "/app/test_reports/pytest/pytest_results_iter4.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "DatiFiscaliStep auto-compute CF works correctly - debounced 500ms, shows 'Calcolato automaticamente' indicator",
+    "ChatPanel polling every 5s - consider WebSocket for real-time messaging in future",
+    "APScheduler reminders are in-memory (not persistent) - acceptable for MVP but consider persistent job store for production"
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_iteration4.py",
+    "/app/memory/test_credentials.md"
+  ],
+  "success_rate": {
+    "backend": "100% (15/15)",
+    "frontend": "100%"
+  },
+  "test_credentials": {
+    "admin": "admin@funzionabene.it / Admin#2024!",
+    "terapeuta": "demo.terapeuta@funzionabene.it / Terapeuta#2024!",
+    "paziente": "caiorichieri@gmail.com / Paziente#2024! (Resend verified email)"
+  },
+  "seed_data_creation": "Test messages created with TEST_ prefix during chat testing",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 4 features fully tested: (1) /api/utils/compute-cf works for Italian (Milano) and estero (Brasile), returns error for Altro/Preferisco non specificare genders. (2) /api/conversazioni returns therapists for paziente and patients for terapeuta based on confermato/completato appointments. (3) /api/messaggi GET/POST work for both roles. (4) /api/public/prenota creates appointment with stato='confermato', creates Daily.co room, sends confirmation emails via Resend, schedules reminders via APScheduler. (5) Logo (/assets/logo.png) appears in PublicLayout header and footer. (6) ChatPanel integrated in PazienteDashboard and TerapistaDashboard with conversation list, message display, and send functionality. (7) DatiFiscaliStep auto-computes CF when nome+cognome+data_nascita+genere+luogo_nascita are filled (debounced 500ms).",
+  "test_results": {
+    "backend_compute_cf_italian": "PASS - returns valid 16-char CF for Milano",
+    "backend_compute_cf_estero": "PASS - returns valid CF for Brasile",
+    "backend_compute_cf_invalid_gender": "PASS - returns error for Altro/Preferisco",
+    "backend_compute_cf_auth": "PASS - requires authentication",
+    "backend_conversazioni_paziente": "PASS - returns therapists with confermato/completato appointments",
+    "backend_conversazioni_terapeuta": "PASS - returns patients with confermato/completato appointments",
+    "backend_conversazioni_auth": "PASS - requires authentication",
+    "backend_messaggi_get": "PASS - returns messages, marks as read",
+    "backend_messaggi_send_paziente": "PASS - paziente can send to terapeuta",
+    "backend_messaggi_send_terapeuta": "PASS - terapeuta can send to paziente",
+    "backend_prenota_confermato": "PASS - creates appointment with stato='confermato'",
+    "backend_prenota_daily_room": "PASS - creates Daily.co room",
+    "backend_prenota_role": "PASS - requires paziente role",
+    "backend_email_sending": "PASS - logs show EMAIL SENT entries",
+    "frontend_logo_header": "PASS - /assets/logo.png in header",
+    "frontend_logo_footer": "PASS - /assets/logo.png in footer",
+    "frontend_chat_paziente": "PASS - ChatPanel visible with conversations",
+    "frontend_chat_terapeuta": "PASS - ChatPanel visible with conversations",
+    "frontend_chat_send": "PASS - messages sent and received",
+    "frontend_booking_flow": "PASS - review → auth → payment steps work"
+  },
+  "mocked_apis": {
+    "Payment": "MOCKED - Nexi XPay not integrated, mock card form shown",
+    "Note": "Email sending is REAL via Resend (only to verified emails in free tier)"
+  }
+}

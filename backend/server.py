@@ -16,8 +16,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, BeforeValidator, EmailStr
 
-from email_service import send_otp_email
+from email_service import send_otp_email, send_booking_confirmation_email, send_reminder_email
 from daily_service import create_room_for_appointment, create_meeting_token, get_room_presenza
+from codicefiscale import codicefiscale
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 JWT_SECRET = os.environ["JWT_SECRET"]
@@ -1022,7 +1023,7 @@ async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require
     if user["role"] != "paziente":
         raise HTTPException(403, "Solo i pazienti possono prenotare")
     doc = data.model_dump()
-    doc["stato"] = "prenotato"
+    doc["stato"] = "confermato"
     doc["created_at"] = datetime.now(timezone.utc)
     doc["paziente_user_id"] = user["_id"]
     result = await db.appuntamenti.insert_one(doc)
@@ -1037,7 +1038,56 @@ async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require
         doc["daily_room_url"] = room.get("room_url")
         doc["daily_room_name"] = room.get("room_name")
     doc["_id"] = app_id
+    # Send confirmation emails (paziente + terapista) + schedule reminders
+    try:
+        terapista = await db.terapisti.find_one({"_id": ObjectId(data.terapeuta_id)})
+        paziente = await db.pazienti.find_one({"_id": ObjectId(data.paziente_id)})
+        if terapista and paziente:
+            t_user = await db.users.find_one({"_id": terapista.get("user_id")})
+            ctx = {
+                "paziente_nome": paziente.get("nome", ""),
+                "paziente_cognome": paziente.get("cognome", ""),
+                "paziente_email": user.get("email"),
+                "terapista_nome": terapista.get("nome", ""),
+                "terapista_cognome": terapista.get("cognome", ""),
+                "terapista_email": t_user.get("email") if t_user else None,
+                "data_ora": data.data_ora,
+                "durata_minuti": data.durata_minuti,
+                "prezzo": terapista.get("prezzo_sessione", 90),
+                "room_url": doc.get("daily_room_url"),
+                "app_id": app_id,
+            }
+            await send_booking_confirmation_email(ctx)
+            schedule_reminders(app_id, ctx)
+    except Exception as e:
+        logging.error(f"[BOOKING EMAIL] failed: {e}")
     return doc
+
+@api_router.post("/utils/compute-cf")
+async def compute_cf(data: dict, user: dict = Depends(require_auth)):
+    """Compute Italian Codice Fiscale from anagrafic data. Returns {cf: str} or {error: str}."""
+    try:
+        lastname = (data.get("cognome") or "").strip()
+        firstname = (data.get("nome") or "").strip()
+        gender = (data.get("genere") or "").strip()
+        birthdate = (data.get("data_nascita") or "").strip()
+        if gender in ("M", "Maschio"):
+            g = "M"
+        elif gender in ("F", "Femmina"):
+            g = "F"
+        else:
+            return {"error": "Genere deve essere M o F"}
+        # Birthplace: comune italiano or paese estero
+        if data.get("nato_all_estero"):
+            birthplace = (data.get("paese_nascita") or "").strip()
+        else:
+            birthplace = (data.get("luogo_nascita_comune") or "").strip()
+        if not all([lastname, firstname, birthdate, birthplace]):
+            return {"error": "Dati incompleti"}
+        cf = codicefiscale.encode(lastname=lastname, firstname=firstname, gender=g, birthdate=birthdate, birthplace=birthplace)
+        return {"cf": cf}
+    except Exception as e:
+        return {"error": str(e)}
 app.include_router(api_router)
 
 app.add_middleware(
@@ -1049,11 +1099,36 @@ app.add_middleware(
 )
 
 # ─── Startup ──────────────────────────────────────────────────────────────────
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+
+# Scheduler for email reminders
+scheduler = AsyncIOScheduler()
+
+def schedule_reminders(app_id: str, ctx: dict):
+    """Schedule 1-day-before and 1-hour-before reminder emails for a booking."""
+    try:
+        from datetime import datetime as _dt
+        start = _dt.fromisoformat(ctx["data_ora"].replace("Z", "+00:00"))
+        if start.tzinfo is None:
+            start = start.replace(tzinfo=timezone.utc)
+        one_day = start - timedelta(days=1)
+        one_hour = start - timedelta(hours=1)
+        now = datetime.now(timezone.utc)
+        if one_day > now:
+            scheduler.add_job(send_reminder_email, "date", run_date=one_day, args=[ctx, "1-giorno"], id=f"rem1d-{app_id}", replace_existing=True)
+        if one_hour > now:
+            scheduler.add_job(send_reminder_email, "date", run_date=one_hour, args=[ctx, "1-ora"], id=f"rem1h-{app_id}", replace_existing=True)
+    except Exception as e:
+        logging.error(f"[SCHEDULER] failed to schedule reminders: {e}")
+
 @app.on_event("startup")
 async def startup():
     await db.users.create_index("email", unique=True)
     await db.login_attempts.create_index("identifier")
     await seed_data()
+    if not scheduler.running:
+        scheduler.start()
+        logging.info("[SCHEDULER] started")
 
 async def seed_data():
     admin_email = os.environ.get("ADMIN_EMAIL", "admin@funzionabene.it")
@@ -1151,6 +1226,8 @@ async def seed_data():
 
 @app.on_event("shutdown")
 async def shutdown():
+    if scheduler.running:
+        scheduler.shutdown()
     client.close()
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

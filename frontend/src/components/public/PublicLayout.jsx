@@ -24,9 +24,7 @@ function Header() {
     <header data-testid="public-header" className="sticky top-0 z-40 bg-[#111111]/70 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         <Link to="/" data-testid="public-logo" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] flex items-center justify-center">
-            <span className="text-[#111111] font-bold text-sm">FB</span>
-          </div>
+          <img src="/assets/logo.png" alt="FunzionaBene" className="w-11 h-11 object-contain" />
           <div className="flex flex-col leading-none">
             <span className="font-serif text-xl text-[#F4F1ED] tracking-tight">funzionabene</span>
             <span className="text-[10px] tracking-[0.25em] uppercase text-[#6B8FA3]">clinica psicologica</span>
@@ -146,7 +144,7 @@ function Footer() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3]" />
+            <img src="/assets/logo.png" alt="FunzionaBene" className="w-11 h-11 object-contain" />
             <span className="font-serif text-2xl text-[#F4F1ED]">funzionabene</span>
           </div>
           <p className="text-[#E6E2D8]/60 text-sm max-w-md leading-relaxed">

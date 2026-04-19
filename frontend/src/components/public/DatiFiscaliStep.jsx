@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { PROVINCE_IT, PAESI_ESTERI } from "@/data/italianData";
-import { FileCheck, ArrowRight } from "lucide-react";
+import { FileCheck, ArrowRight, Sparkles } from "lucide-react";
 
 const GENERI = ["M", "F", "Altro", "Preferisco non specificare"];
 
@@ -35,6 +35,36 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
   });
 
   const set = (k, v) => setForm((f) => ({ ...f, [k]: v }));
+
+  // Auto-compute CF (debounced) when anagrafic fields change
+  const cfTimerRef = useRef(null);
+  const [cfAutoComputed, setCfAutoComputed] = useState(false);
+  useEffect(() => {
+    if (cfTimerRef.current) clearTimeout(cfTimerRef.current);
+    cfTimerRef.current = setTimeout(async () => {
+      const needed = form.nome && form.cognome && form.data_nascita && form.genere;
+      const place = form.nato_all_estero ? form.paese_nascita : form.luogo_nascita_comune;
+      if (!needed || !place) return;
+      if (!["M", "F"].includes(form.genere)) return;
+      try {
+        const res = await axios.post(`${API}/utils/compute-cf`, {
+          nome: form.nome,
+          cognome: form.cognome,
+          genere: form.genere,
+          data_nascita: form.data_nascita,
+          nato_all_estero: !!form.nato_all_estero,
+          luogo_nascita_comune: form.luogo_nascita_comune,
+          paese_nascita: form.paese_nascita,
+        }, { withCredentials: true });
+        if (res.data && res.data.cf) {
+          setForm((f) => ({ ...f, codice_fiscale: res.data.cf }));
+          setCfAutoComputed(true);
+        }
+      } catch { /* ignore */ }
+    }, 500);
+    return () => cfTimerRef.current && clearTimeout(cfTimerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.nome, form.cognome, form.data_nascita, form.genere, form.nato_all_estero, form.paese_nascita, form.luogo_nascita_comune]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -171,15 +201,25 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
         </div>
 
         <div>
-          <label className={labelCls}>Codice Fiscale *</label>
+          <div className="flex items-center justify-between mb-2">
+            <label className={labelCls + " mb-0"}>Codice Fiscale *</label>
+            {cfAutoComputed && (
+              <span className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#D4A017]">
+                <Sparkles className="w-3 h-3" /> Calcolato automaticamente
+              </span>
+            )}
+          </div>
           <input
             data-testid="df-cf"
             required maxLength={16}
             className={`${inputCls} font-mono tracking-wider uppercase`}
             value={form.codice_fiscale}
-            onChange={(e) => set("codice_fiscale", e.target.value.toUpperCase())}
+            onChange={(e) => { set("codice_fiscale", e.target.value.toUpperCase()); setCfAutoComputed(false); }}
             placeholder="RSSMRA90E15H501Z"
           />
+          <p className="mt-2 text-xs text-[#E6E2D8]/40">
+            Compila nome, cognome, data di nascita, genere e luogo di nascita — calcoleremo il tuo CF automaticamente.
+          </p>
         </div>
 
         <div>
