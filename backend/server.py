@@ -13,6 +13,7 @@ import secrets as _secrets
 from bson import ObjectId
 from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, BeforeValidator, EmailStr
 
@@ -199,6 +200,18 @@ class ArticoloInput(BaseModel):
 # ─── FastAPI setup ────────────────────────────────────────────────────────────
 app = FastAPI(title="FunzionaBene API")
 api_router = APIRouter(prefix="/api")
+
+UPLOADS_DIR = Path(__file__).parent / "uploads"
+
+@api_router.get("/media/therapists/{filename}")
+async def get_therapist_photo(filename: str):
+    """Serve therapist photos. Whitelist-only for safety."""
+    if "/" in filename or ".." in filename:
+        raise HTTPException(400, "Invalid filename")
+    path = UPLOADS_DIR / "therapists" / filename
+    if not path.exists():
+        raise HTTPException(404, "Photo not found")
+    return FileResponse(path, media_type="image/png", headers={"Cache-Control": "public, max-age=86400"})
 
 # ─── AUTH ROUTES ─────────────────────────────────────────────────────────────
 @api_router.post("/auth/register")
@@ -1195,6 +1208,118 @@ async def seed_data():
             "created_at": datetime.now(timezone.utc)
         })
         logging.info("[SEED] Demo terapeuta creato")
+
+    # Seed 4 additional fake therapists with generated portrait photos
+    ADDITIONAL = [
+        {
+            "email": "alessandro.conti@funzionabene.it",
+            "nome": "Alessandro", "cognome": "Conti", "genere": "M",
+            "foto": "alessandro_conti.png", "prezzo": 79.0, "anni": 28,
+            "bio": "Psicoterapeuta e sessuologo, 28 anni di pratica clinica. Specializzato in disfunzioni sessuali legate all'ansia da prestazione e nei percorsi di coppia di lunga durata.",
+            "specializzazioni": ["Ansia da prestazione", "Disfunzione erettile", "Terapia di coppia"],
+            "approccio": "Integrato: cognitivo-comportamentale e psicodinamico breve",
+            "formazione": [
+                {"titolo": "Laurea in Medicina e Chirurgia", "istituto": "Università di Bologna", "anno": 1992},
+                {"titolo": "Specializzazione in Psichiatria", "istituto": "Università di Bologna", "anno": 1998},
+                {"titolo": "Master in Sessuologia Clinica", "istituto": "IISS, Milano", "anno": 2002},
+            ],
+            "albo_num": "7823", "albo_ord": "Ordine degli Psicologi dell'Emilia-Romagna",
+            "disp": [
+                {"giorno": "Martedì", "ora_inizio": "14:00", "ora_fine": "20:00"},
+                {"giorno": "Giovedì", "ora_inizio": "14:00", "ora_fine": "20:00"},
+            ],
+        },
+        {
+            "email": "giulia.marchetti@funzionabene.it",
+            "nome": "Giulia", "cognome": "Marchetti", "genere": "F",
+            "foto": "giulia_marchetti.png", "prezzo": 65.0, "anni": 9,
+            "bio": "Psicologa e sessuologa, approccio femminile e caloroso. Mi dedico con particolare attenzione al benessere sessuale femminile, all'anorgasmia e al vaginismo.",
+            "specializzazioni": ["Anorgasmia", "Vaginismo", "Dispareunia", "Mindfulness sessuale"],
+            "approccio": "Mindfulness-based e psicocorporeo",
+            "formazione": [
+                {"titolo": "Laurea in Psicologia Clinica", "istituto": "Università di Padova", "anno": 2013},
+                {"titolo": "Specializzazione in Psicoterapia sistemico-relazionale", "istituto": "Scuola Mara Selvini, Milano", "anno": 2017},
+                {"titolo": "Formazione in Mindful Sex", "istituto": "Lori Brotto Method", "anno": 2020},
+            ],
+            "albo_num": "18456", "albo_ord": "Ordine degli Psicologi del Veneto",
+            "disp": [
+                {"giorno": "Lunedì", "ora_inizio": "09:00", "ora_fine": "13:00"},
+                {"giorno": "Mercoledì", "ora_inizio": "09:00", "ora_fine": "13:00"},
+                {"giorno": "Sabato", "ora_inizio": "09:00", "ora_fine": "13:00"},
+            ],
+        },
+        {
+            "email": "marco.fontana@funzionabene.it",
+            "nome": "Marco", "cognome": "Fontana", "genere": "M",
+            "foto": "marco_fontana.png", "prezzo": 55.0, "anni": 5,
+            "bio": "Sessuologo specializzato in tematiche LGBTQIA+, identità di genere, coming out e relazioni non tradizionali. Uno spazio davvero libero da giudizi.",
+            "specializzazioni": ["LGBTQIA+", "Identità di genere", "Orientamento sessuale", "Poliamore"],
+            "approccio": "Affirmative Therapy, approccio non normativo",
+            "formazione": [
+                {"titolo": "Laurea in Psicologia", "istituto": "Università La Sapienza, Roma", "anno": 2018},
+                {"titolo": "Corso di Perfezionamento in Sessuologia", "istituto": "FISS, Roma", "anno": 2020},
+                {"titolo": "Formazione in Gender Affirmative Care", "istituto": "WPATH Standard of Care", "anno": 2022},
+            ],
+            "albo_num": "21890", "albo_ord": "Ordine degli Psicologi del Lazio",
+            "disp": [
+                {"giorno": "Martedì", "ora_inizio": "16:00", "ora_fine": "21:00"},
+                {"giorno": "Giovedì", "ora_inizio": "16:00", "ora_fine": "21:00"},
+                {"giorno": "Venerdì", "ora_inizio": "10:00", "ora_fine": "18:00"},
+            ],
+        },
+        {
+            "email": "chiara.esposito@funzionabene.it",
+            "nome": "Chiara", "cognome": "Esposito", "genere": "F",
+            "foto": "chiara_esposito.png", "prezzo": 85.0, "anni": 18,
+            "bio": "Psicoterapeuta e sessuologa con focus su traumi sessuali, abusi e disturbi post-traumatici. Certificata EMDR. Approccio rispettoso dei tuoi tempi.",
+            "specializzazioni": ["Traumi sessuali", "Abusi", "EMDR", "Sessualità in menopausa"],
+            "approccio": "EMDR, trauma-focused CBT",
+            "formazione": [
+                {"titolo": "Laurea in Psicologia Clinica", "istituto": "Università Federico II, Napoli", "anno": 2003},
+                {"titolo": "Specializzazione in Psicoterapia Cognitivo-Comportamentale", "istituto": "APC, Roma", "anno": 2008},
+                {"titolo": "Certificazione EMDR livello II", "istituto": "EMDR Italia", "anno": 2011},
+                {"titolo": "Master in Sessuologia Clinica", "istituto": "IISS, Milano", "anno": 2015},
+            ],
+            "albo_num": "9245", "albo_ord": "Ordine degli Psicologi della Campania",
+            "disp": [
+                {"giorno": "Lunedì", "ora_inizio": "14:00", "ora_fine": "19:00"},
+                {"giorno": "Mercoledì", "ora_inizio": "14:00", "ora_fine": "19:00"},
+                {"giorno": "Venerdì", "ora_inizio": "09:00", "ora_fine": "13:00"},
+            ],
+        },
+    ]
+    for t in ADDITIONAL:
+        if await db.users.find_one({"email": t["email"]}):
+            continue
+        uid = (await db.users.insert_one({
+            "email": t["email"], "password_hash": hash_password("Terapeuta#2024!"),
+            "nome": t["nome"], "cognome": t["cognome"], "role": "terapeuta",
+            "is_verified": True, "is_active": True, "approval_status": "approvato",
+            "created_at": datetime.now(timezone.utc),
+        })).inserted_id
+        await db.terapisti.insert_one({
+            "user_id": str(uid),
+            "nome": t["nome"], "cognome": t["cognome"], "email": t["email"],
+            "telefono": "+39 02 0000000",
+            "bio": t["bio"], "anni_esperienza": t["anni"],
+            "specializzazioni": t["specializzazioni"],
+            "formazione": t["formazione"],
+            "approccio_terapeutico": t["approccio"],
+            "genere": t["genere"],
+            "albo_numero": t["albo_num"], "albo_ordine": t["albo_ord"],
+            "albo_iscrizione_data": "2010-01-01",
+            "assicurazione_compagnia": "Generali",
+            "assicurazione_numero_polizza": f"POL-{t['albo_num']}",
+            "assicurazione_scadenza": "2026-12-31",
+            "prezzo_sessione": t["prezzo"],
+            "lingue": ["Italiano"],
+            "autocertificazione_firmata": True,
+            "autocertificazione_data": datetime.now(timezone.utc),
+            "foto_url": f"/api/media/therapists/{t['foto']}",
+            "disponibilita": t["disp"],
+            "created_at": datetime.now(timezone.utc),
+        })
+        logging.info(f"[SEED] Terapeuta creato: {t['nome']} {t['cognome']}")
 
     # Seed demo patient
     demo_paz_email = "demo.paziente@funzionabene.it"

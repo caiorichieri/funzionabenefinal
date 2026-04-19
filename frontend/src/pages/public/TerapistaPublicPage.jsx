@@ -76,11 +76,15 @@ export default function TerapistaPublicPage() {
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="aspect-square rounded-3xl bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center"
+                className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center"
               >
-                <span className="font-serif text-8xl text-[#D4A017]">
-                  {(terapista.nome || "?")[0]}{(terapista.cognome || "?")[0]}
-                </span>
+                {terapista.foto_url ? (
+                  <img src={terapista.foto_url} alt={`${terapista.nome} ${terapista.cognome}`} className="w-full h-full object-cover" />
+                ) : (
+                  <span className="font-serif text-8xl text-[#D4A017]">
+                    {(terapista.nome || "?")[0]}{(terapista.cognome || "?")[0]}
+                  </span>
+                )}
               </motion.div>
 
               <div className="mt-6 space-y-3 p-6 bg-[#1C2A33]/40 border border-white/10 rounded-3xl">

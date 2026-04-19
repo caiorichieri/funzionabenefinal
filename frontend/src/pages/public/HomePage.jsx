@@ -446,11 +446,15 @@ export default function HomePage() {
                 data-testid={`therapist-preview-${i}`}
                 className="p-8 bg-[#1C2A33]/40 border border-white/10 rounded-3xl"
               >
-                <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center mb-6">
-                  <span className="font-serif text-3xl text-[#D4A017]">
-                    {(t.nome || "?")[0]}{(t.cognome || "?")[0]}
-                  </span>
-                </div>
+                {t.foto_url ? (
+                  <img src={t.foto_url} alt={`${t.nome} ${t.cognome}`} className="w-20 h-20 rounded-full object-cover border border-white/10 mb-6" />
+                ) : (
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center mb-6">
+                    <span className="font-serif text-3xl text-[#D4A017]">
+                      {(t.nome || "?")[0]}{(t.cognome || "?")[0]}
+                    </span>
+                  </div>
+                )}
                 <h3 className="font-serif text-2xl text-[#F4F1ED]">Dr. {t.nome} {t.cognome}</h3>
                 <p className="text-xs tracking-[0.15em] uppercase text-[#6B8FA3] mt-1">
                   {t.anni_esperienza ? `${t.anni_esperienza} anni di esperienza` : "Specialista"}

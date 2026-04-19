@@ -75,11 +75,15 @@ export default function MatchingResultsPage() {
               </div>
 
               <div className="flex items-start gap-4 mb-5">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center flex-shrink-0">
-                  <span className="font-serif text-2xl text-[#D4A017]">
-                    {(t.nome || "?")[0]}{(t.cognome || "?")[0]}
-                  </span>
-                </div>
+                {t.foto_url ? (
+                  <img src={t.foto_url} alt={`${t.nome} ${t.cognome}`} className="w-16 h-16 rounded-2xl object-cover border border-white/10 flex-shrink-0" />
+                ) : (
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center flex-shrink-0">
+                    <span className="font-serif text-2xl text-[#D4A017]">
+                      {(t.nome || "?")[0]}{(t.cognome || "?")[0]}
+                    </span>
+                  </div>
+                )}
                 <div>
                   <h3 className="font-serif text-xl text-[#F4F1ED] leading-tight">
                     Dr. {t.nome} {t.cognome}

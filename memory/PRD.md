@@ -163,7 +163,36 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
-### UI/UX + Compliance ✅ COMPLETATI (19/04/2026 - session 2)
+### Fase 2 — Sito Pubblico Premium ✅ COMPLETATA (19/04/2026)
+
+**Homepage redesign completa:**
+- [x] Hero: "Parla di tutto. Anche di quello." con badge "Prima clinica italiana di sessuologia immersiva"
+- [x] Sezione Sedute immersive (mai uso delle sigle VR/AR — sempre "immersiva")
+- [x] Aree di intervento: 12 cards in homepage + pagina dedicata con 20 temi in 9 categorie
+- [x] Perché FunzionaBene: 5 cards differenzianti (Iper-specialisti, Sedute immersive, Parla senza filtri, Riservatezza, Verificati)
+- [x] Testimonianze: 6 anonimizzate con disclaimer GDPR
+- [x] A cosa serve / Non serve (stile Serenis, onestà radicale)
+- [x] CTA band finale
+
+**Nuove pagine:**
+- [x] `/sedute-immersive` — landing dedicata con stats, step-by-step, use cases, FAQ e riferimenti scientifici (Riva, Freeman, Diemer, Wiederhold, Optale)
+- [x] `/aree-intervento` — tutte le 20 aree organizzate in 9 categorie colorate
+- [x] `/emergenze` — 8 numeri d'emergenza con warning (112, TP, 1522, Gay Help Line, Samaritans 800.861.061, 114, 1500, 800.915.150)
+- [x] `/chi-siamo` — storia, missione, valori, team philosophy, "perché solo sessuologia"
+
+**Terapisti arricchiti:**
+- [x] 4 terapisti demo aggiuntivi con diversità reale:
+  - Alessandro Conti (M, 55y, 28 anni esperienza, ansia prestazione/disfunzione erettile, €79)
+  - Giulia Marchetti (F, 38y, 9 anni, anorgasmia/vaginismo/mindfulness, €65)
+  - Marco Fontana (M, 32y, 5 anni, LGBTQIA+/identità/poliamore, €55)
+  - Chiara Esposito (F, 45y, 18 anni, traumi/EMDR/menopausa, €85)
+- [x] Foto profissionali generate via OpenAI gpt-image-1 (Emergent LLM key)
+- [x] Endpoint `/api/media/therapists/{filename}` per servire immagini
+- [x] Foto integrate in: HomePage preview, MatchingResultsPage card, TerapistaPublicPage hero
+
+**Navigation aggiornata:**
+- Home · Immersive · Aree · **Chi siamo** · Blog · FAQ
+- Footer con "Numeri d'emergenza" in rosso allerta
 - [x] **Cabeçalho aggiornato**: rimosso subtitle "clinica psicologica", font del logo aumentato (text-3xl sm:text-4xl)
 - [x] **FAQ prezzi corretti**: da 70-120€ a **49-90€** per seduta
 - [x] **Pagine legali** complete in italiano conforme GDPR:

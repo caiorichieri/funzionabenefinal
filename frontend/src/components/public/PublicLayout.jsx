@@ -8,6 +8,7 @@ const NAV = [
   { to: "/", label: "Home" },
   { to: "/sedute-immersive", label: "Immersive" },
   { to: "/aree-intervento", label: "Aree" },
+  { to: "/chi-siamo", label: "Chi siamo" },
   { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
 ];
@@ -157,6 +158,7 @@ function Footer() {
             <li><Link to="/questionario" className="hover:text-[#D4A017]">Questionario</Link></li>
             <li><Link to="/sedute-immersive" className="hover:text-[#D4A017]">Sedute immersive</Link></li>
             <li><Link to="/aree-intervento" className="hover:text-[#D4A017]">Aree di intervento</Link></li>
+            <li><Link to="/chi-siamo" className="hover:text-[#D4A017]">Chi siamo</Link></li>
             <li><Link to="/blog" className="hover:text-[#D4A017]">Blog</Link></li>
             <li><Link to="/faq" className="hover:text-[#D4A017]">FAQ</Link></li>
             <li><Link to="/emergenze" className="hover:text-[#C77474]">Numeri d'emergenza</Link></li>
