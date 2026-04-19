@@ -541,15 +541,15 @@ async def list_appuntamenti(user: dict = Depends(require_auth)):
                 t = await db.terapisti.find_one({"_id": ObjectId(d["terapeuta_id"])})
                 if t:
                     d["terapeuta_nome"] = f"{t.get('nome','')} {t.get('cognome','')}".strip()
-            except:
-                pass
+            except Exception as e:
+                logging.warning(f"[APPUNTAMENTI] enrich terapeuta failed for {d.get('_id')}: {e}")
         if d.get("paziente_id"):
             try:
                 p = await db.pazienti.find_one({"_id": ObjectId(d["paziente_id"])})
                 if p:
                     d["paziente_nome"] = f"{p.get('nome','')} {p.get('cognome','')}".strip()
-            except:
-                pass
+            except Exception as e:
+                logging.warning(f"[APPUNTAMENTI] enrich paziente failed for {d.get('_id')}: {e}")
     return docs
 
 @api_router.post("/appuntamenti")
@@ -833,8 +833,8 @@ async def dashboard_stats(user: dict = Depends(require_auth)):
                         "scadenza": scad,
                         "giorni_rimanenti": giorni
                     })
-            except:
-                pass
+            except Exception as e:
+                logging.warning(f"[DASHBOARD] bad scadenza for terapeuta {t.get('_id')}: {e}")
 
     return {
         "terapisti": n_terapisti,

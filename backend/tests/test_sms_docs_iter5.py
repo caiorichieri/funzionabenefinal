@@ -20,14 +20,14 @@ import time
 
 BASE_URL = os.environ.get("REACT_APP_BACKEND_URL", "").rstrip("/")
 
-# Test credentials
-ADMIN_EMAIL = "admin@funzionabene.it"
-ADMIN_PASSWORD = "Admin#2024!"
-TERAPEUTA_EMAIL = "demo.terapeuta@funzionabene.it"
-TERAPEUTA_PASSWORD = "Terapeuta#2024!"
-PAZIENTE_EMAIL = "caiorichieri@gmail.com"
-PAZIENTE_PASSWORD = "Paziente#2024!"
-TEST_PHONE = "+393518230667"
+# Test credentials — sourced from env (fallback to defaults for local dev)
+ADMIN_EMAIL = os.environ.get("TEST_ADMIN_EMAIL", "admin@funzionabene.it")
+ADMIN_PASSWORD = os.environ.get("TEST_ADMIN_PASSWORD", "Admin#2024!")
+TERAPEUTA_EMAIL = os.environ.get("TEST_TERAPEUTA_EMAIL", "demo.terapeuta@funzionabene.it")
+TERAPEUTA_PASSWORD = os.environ.get("TEST_TERAPEUTA_PASSWORD", "Terapeuta#2024!")
+PAZIENTE_EMAIL = os.environ.get("TEST_PAZIENTE_EMAIL", "caiorichieri@gmail.com")
+PAZIENTE_PASSWORD = os.environ.get("TEST_PAZIENTE_PASSWORD", "Paziente#2024!")
+TEST_PHONE = os.environ.get("TEST_PHONE", "+393518230667")
 
 
 @pytest.fixture(scope="module")

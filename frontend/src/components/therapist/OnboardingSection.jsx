@@ -34,7 +34,9 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
       const r = await axios.get(`${API}/terapisti/me/documenti`, { withCredentials: true });
       setDocs(r.data?.documenti || {});
     } catch (e) {
-      /* noop */
+      if (process.env.NODE_ENV !== "production") {
+        console.error("[OnboardingSection] fetchDocs failed:", e);
+      }
     } finally {
       setLoadingDocs(false);
     }

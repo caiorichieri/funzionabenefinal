@@ -1,6 +1,9 @@
 // Cookie consent storage helper
+// NOTE: localStorage is the industry-standard mechanism for storing GDPR/cookie
+// consent preferences. Only non-sensitive booleans are persisted here.
 const COOKIE_KEY = "fb_cookie_consent";
 const COOKIE_VERSION = "1";
+const IS_DEV = process.env.NODE_ENV !== "production";
 
 export function getCookiePreferences() {
   try {
@@ -10,7 +13,7 @@ export function getCookiePreferences() {
     if (data.version !== COOKIE_VERSION) return null;
     return data.prefs;
   } catch (err) {
-    console.warn("[cookieConsent] read failed:", err);
+    if (IS_DEV) console.warn("[cookieConsent] read failed:", err);
     return null;
   }
 }
@@ -29,7 +32,7 @@ export function setCookiePreferences(prefs) {
     localStorage.setItem(COOKIE_KEY, JSON.stringify(payload));
     window.dispatchEvent(new Event("fb-cookie-consent-changed"));
   } catch (err) {
-    console.warn("[cookieConsent] write failed:", err);
+    if (IS_DEV) console.warn("[cookieConsent] write failed:", err);
   }
 }
 
@@ -46,6 +49,6 @@ export function clearCookieConsent() {
     localStorage.removeItem(COOKIE_KEY);
     window.dispatchEvent(new Event("fb-cookie-consent-changed"));
   } catch (err) {
-    console.warn("[cookieConsent] clear failed:", err);
+    if (IS_DEV) console.warn("[cookieConsent] clear failed:", err);
   }
 }
