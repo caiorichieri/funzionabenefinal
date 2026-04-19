@@ -54,6 +54,18 @@ export default function SeduteImmersive() {
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#111111]" />
+        {/* Atmospheric hero image — low opacity for depth, no distraction from copy */}
+        <img
+          src="/sedute-immersive-hero.jpg"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
+          data-testid="immersive-hero-bg"
+        />
+        {/* Readability gradient: darken left side where text lives */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111111]" />
         <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#D4A017]/10 blur-3xl" />
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">
