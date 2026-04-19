@@ -6,18 +6,22 @@ const BENEFITS = [
   {
     titolo: "Esposizione graduale",
     descrizione: "Per chi soffre di fobie, ansia da prestazione o blocchi sessuali: il terapeuta ti guida in scenari immersivi progressivi, rispettando i tuoi tempi.",
+    img: "/benefit-esposizione.jpg",
   },
   {
     titolo: "Desensibilizzazione",
     descrizione: "Trattamento evidence-based per traumi sessuali. L'ambiente controllato rende il percorso più sicuro e meno invasivo rispetto ai metodi tradizionali.",
+    img: "/benefit-desensibilizzazione.jpg",
   },
   {
     titolo: "Consapevolezza corporea",
     descrizione: "Mindfulness sessuale guidata da esperienze sensoriali immersive. Particolarmente efficace per anorgasmia, vaginismo e disconnessione dal piacere.",
+    img: "/benefit-consapevolezza.jpg",
   },
   {
     titolo: "Coppia",
     descrizione: "Esercizi immersivi condivisi per coppie in terapia — per ricostruire intimità, comunicazione e linguaggi sensoriali comuni.",
+    img: "/benefit-coppia.jpg",
   },
 ];
 
@@ -159,10 +163,25 @@ export default function SeduteImmersive() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="p-7 bg-[#1C2A33]/30 border border-white/10 rounded-2xl"
+                className="group overflow-hidden bg-[#1C2A33]/30 border border-white/10 hover:border-[#D4A017]/30 rounded-2xl transition-colors"
               >
-                <h3 className="font-serif text-2xl text-[#F4F1ED] mb-3">{b.titolo}</h3>
-                <p className="text-[#E6E2D8]/65 text-sm leading-relaxed">{b.descrizione}</p>
+                {b.img && (
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <img
+                      src={b.img}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      data-testid={`benefit-img-${i}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C2A33]/80 via-[#1C2A33]/20 to-transparent" />
+                  </div>
+                )}
+                <div className="p-7">
+                  <h3 className="font-serif text-2xl text-[#F4F1ED] mb-3">{b.titolo}</h3>
+                  <p className="text-[#E6E2D8]/65 text-sm leading-relaxed">{b.descrizione}</p>
+                </div>
               </motion.div>
             ))}
           </div>
