@@ -163,6 +163,20 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 
 ## 🔄 FASE 3 — INTEGRAZIONI REALI (NEXT)
 
+### UI/UX + Compliance ✅ COMPLETATI (19/04/2026 - session 2)
+- [x] **Cabeçalho aggiornato**: rimosso subtitle "clinica psicologica", font del logo aumentato (text-3xl sm:text-4xl)
+- [x] **FAQ prezzi corretti**: da 70-120€ a **49-90€** per seduta
+- [x] **Pagine legali** complete in italiano conforme GDPR:
+  - `/privacy` — Privacy Policy (trattamento dati sanitari, categoria speciale art.9, diritti art.15-22)
+  - `/cookie` — Cookie Policy con toggle interattivi per salvare preferenze
+  - `/termini` — Termini e Condizioni (con policy disdette 24h, diritto recesso, responsabilità)
+- [x] **Cookie Consent Banner** GDPR-compliant:
+  - Appare alla prima visita (localStorage `fb_cookie_consent`)
+  - 3 opzioni: "Personalizza" (toggle granulari) / "Solo essenziali" / "Accetta tutti"
+  - Solo cookie essenziali funzionano di default finché l'utente non acconsente
+  - Utility `cookieConsent.js` per leggere/scrivere preferenze
+- [x] Footer aggiornato con link alle 3 pagine legali
+
 ### Miglioramenti UX/Funzionali ✅ COMPLETATI (19/04/2026)
 - [x] **Logo personalizzata** (cuore gold+steel blue su nero) sostituisce il placeholder in tutto il sito
 - [x] **Codice Fiscale auto-calcolato** via backend `/api/utils/compute-cf` (python-codicefiscale)

@@ -29,6 +29,9 @@ import TerapistaPublicPage from "@/pages/public/TerapistaPublicPage";
 import BlogPublicPage from "@/pages/public/BlogPublicPage";
 import BlogPostPage from "@/pages/public/BlogPostPage";
 import FAQPage from "@/pages/public/FAQPage";
+import PrivacyPage from "@/pages/public/PrivacyPage";
+import CookiePage from "@/pages/public/CookiePage";
+import TerminiPage from "@/pages/public/TerminiPage";
 
 import "@/App.css";
 
@@ -54,6 +57,9 @@ export default function App() {
             <Route path="/blog" element={<BlogPublicPage />} />
             <Route path="/blog/:id" element={<BlogPostPage />} />
             <Route path="/faq" element={<FAQPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/cookie" element={<CookiePage />} />
+            <Route path="/termini" element={<TerminiPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />

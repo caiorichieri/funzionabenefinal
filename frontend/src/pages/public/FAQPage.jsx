@@ -15,7 +15,7 @@ const FALLBACK_FAQ = [
   },
   {
     domanda: "Quanto costa una seduta?",
-    risposta: "Le tariffe variano a seconda dello specialista, in media tra 70€ e 120€ per seduta da 50 minuti. Il prezzo è sempre indicato chiaramente sul profilo del terapeuta.",
+    risposta: "Le tariffe variano dai 49€ ai 90€ per seduta da 50 minuti, a seconda dello specialista. Il prezzo è sempre indicato chiaramente sul profilo del terapeuta prima di confermare la prenotazione.",
   },
   {
     domanda: "I miei dati sono protetti?",

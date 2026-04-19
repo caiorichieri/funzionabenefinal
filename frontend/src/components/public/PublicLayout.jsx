@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
+import CookieConsentBanner from "@/components/public/CookieConsentBanner";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -24,11 +25,8 @@ function Header() {
     <header data-testid="public-header" className="sticky top-0 z-40 bg-[#111111]/70 backdrop-blur-xl border-b border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         <Link to="/" data-testid="public-logo" className="flex items-center gap-3">
-          <img src="/assets/logo.png" alt="FunzionaBene" className="w-11 h-11 object-contain" />
-          <div className="flex flex-col leading-none">
-            <span className="font-serif text-xl text-[#F4F1ED] tracking-tight">funzionabene</span>
-            <span className="text-[10px] tracking-[0.25em] uppercase text-[#6B8FA3]">clinica psicologica</span>
-          </div>
+          <img src="/assets/logo.png" alt="FunzionaBene" className="w-12 h-12 object-contain" />
+          <span className="font-serif text-3xl sm:text-4xl text-[#F4F1ED] tracking-tight leading-none">funzionabene</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-10">
@@ -164,10 +162,9 @@ function Footer() {
         <div>
           <h4 className="text-[#F4F1ED] text-sm tracking-[0.15em] uppercase mb-4">Legale</h4>
           <ul className="space-y-2 text-sm text-[#E6E2D8]/60">
-            <li><span className="cursor-pointer hover:text-[#D4A017]">Privacy Policy</span></li>
-            <li><span className="cursor-pointer hover:text-[#D4A017]">Cookie Policy</span></li>
-            <li><span className="cursor-pointer hover:text-[#D4A017]">GDPR</span></li>
-            <li><span className="cursor-pointer hover:text-[#D4A017]">Termini</span></li>
+            <li><Link to="/privacy" className="hover:text-[#D4A017]">Privacy Policy</Link></li>
+            <li><Link to="/cookie" className="hover:text-[#D4A017]">Cookie Policy</Link></li>
+            <li><Link to="/termini" className="hover:text-[#D4A017]">Termini e Condizioni</Link></li>
           </ul>
         </div>
       </div>
@@ -187,6 +184,7 @@ export default function PublicLayout() {
       <Header />
       <Outlet />
       <Footer />
+      <CookieConsentBanner />
     </div>
   );
 }
