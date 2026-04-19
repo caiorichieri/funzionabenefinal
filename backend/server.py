@@ -19,6 +19,7 @@ from pydantic import BaseModel, Field, BeforeValidator, EmailStr
 
 from email_service import send_otp_email, send_booking_confirmation_email, send_reminder_email
 from daily_service import create_room_for_appointment, create_meeting_token, get_room_presenza
+from sms_service import send_sms_otp
 from codicefiscale import codicefiscale
 
 # ─── Config ───────────────────────────────────────────────────────────────────
