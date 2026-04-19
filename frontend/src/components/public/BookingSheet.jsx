@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
-import { X, Check, Mail, Lock, User as UserIcon, CreditCard, ShieldCheck, ArrowRight } from "lucide-react";
+import { X, Check, Mail, Lock, User as UserIcon, CreditCard, ShieldCheck, ArrowRight, Smartphone } from "lucide-react";
 import DatiFiscaliStep from "@/components/public/DatiFiscaliStep";
 
 const GIORNI_IT = ["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"];
@@ -18,7 +18,7 @@ function formatSlot(iso) {
   } catch { return iso; }
 }
 
-// Steps: review → auth (login or register) → otp → dati-fiscali → payment → success
+// Steps: review → auth (login or register) → otp → dati-fiscali → payment → sms-otp → success
 export default function BookingSheet({ open, onClose, terapista, slot, currentUser }) {
   const { login, refreshUser } = useAuth();
   const [step, setStep] = useState("review");
@@ -28,6 +28,12 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [pazienteProfile, setPazienteProfile] = useState(null);
+  // SMS OTP state (phone verification after payment)
+  const [smsPhone, setSmsPhone] = useState("");
+  const [smsOtp, setSmsOtp] = useState("");
+  const [smsOtpDev, setSmsOtpDev] = useState("");
+  const [smsPrivacy, setSmsPrivacy] = useState(false);
+  const [smsPhoneLocked, setSmsPhoneLocked] = useState(false);
 
   // Check if current user already has dati fiscali completi (skip step if yes)
   const gotoAfterAuth = async () => {
@@ -120,10 +126,53 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
     setError("");
     setLoading(true);
     try {
-      // MOCKED PAYMENT — simulate success
+      // MOCKED PAYMENT — simulate success, then trigger SMS OTP before final confirmation
+      const pazienteRes = await axios.get(`${API}/pazienti/profilo/me`, { withCredentials: true });
+      const telefono = pazienteRes.data.telefono || "";
+      if (!telefono) {
+        setError("Numero di telefono mancante. Torna ai dati fiscali per aggiungerlo.");
+        return;
+      }
+      setSmsPhone(telefono);
+      setSmsPhoneLocked(true);
+      // Send OTP via SMS
+      const r = await axios.post(`${API}/sms/send-otp`, { phone: telefono, context: "prenotazione" }, { withCredentials: true });
+      setSmsOtpDev(r.data?.otp_dev || "");
+      setSmsOtp("");
+      setSmsPrivacy(false);
+      setStep("sms-otp");
+    } catch (err) {
+      const d = err.response?.data?.detail;
+      setError(typeof d === "string" ? d : "Errore nell'invio del codice SMS");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendSms = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      const r = await axios.post(`${API}/sms/send-otp`, { phone: smsPhone, context: "prenotazione" }, { withCredentials: true });
+      setSmsOtpDev(r.data?.otp_dev || "");
+    } catch (err) {
+      const d = err.response?.data?.detail;
+      setError(typeof d === "string" ? d : "Errore reinvio SMS");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSmsVerifyAndBook = async (e) => {
+    e.preventDefault();
+    setError("");
+    if (!smsPrivacy) { setError("Devi accettare il trattamento dei dati per procedere"); return; }
+    if (!smsOtp || smsOtp.length < 4) { setError("Inserisci il codice OTP ricevuto via SMS"); return; }
+    setLoading(true);
+    try {
+      await axios.post(`${API}/sms/verify-otp`, { phone: smsPhone, otp_code: smsOtp }, { withCredentials: true });
       const pazienteRes = await axios.get(`${API}/pazienti/profilo/me`, { withCredentials: true });
       const paziente_id = pazienteRes.data._id;
-
       await axios.post(`${API}/public/prenota`, {
         terapeuta_id: terapista._id,
         paziente_id,
@@ -135,7 +184,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
       setStep("success");
     } catch (err) {
       const d = err.response?.data?.detail;
-      setError(typeof d === "string" ? d : "Errore nella prenotazione");
+      setError(typeof d === "string" ? d : "Errore nella verifica SMS");
     } finally {
       setLoading(false);
     }
@@ -172,10 +221,10 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
           <div className="px-6 lg:px-10 py-8">
             {/* Progress */}
             <div className="flex items-center gap-2 mb-10">
-              {["review","auth","otp","dati-fiscali","payment","success"]
+              {["review","auth","otp","dati-fiscali","payment","sms-otp","success"]
                 .filter((s) => s !== "otp" || mode === "register")
                 .map((s) => {
-                  const order = ["review","auth","otp","dati-fiscali","payment","success"];
+                  const order = ["review","auth","otp","dati-fiscali","payment","sms-otp","success"];
                   const cur = order.indexOf(step);
                   const idx = order.indexOf(s);
                   return (
@@ -436,7 +485,73 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                     type="submit" disabled={loading}
                     className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#D4A017] hover:bg-[#E5B942] disabled:opacity-40 text-[#111111] font-medium rounded-full"
                   >
-                    {loading ? "Elaborazione..." : `Paga €${terapista.prezzo_sessione || 90}`}
+                    {loading ? "Elaborazione..." : `Paga €${terapista.prezzo_sessione || 90} e verifica SMS`}
+                  </button>
+                </form>
+              </div>
+            )}
+
+            {/* SMS OTP (post-payment, pre-confirmation) */}
+            {step === "sms-otp" && (
+              <div data-testid="step-sms-otp">
+                <h2 className="font-serif text-3xl text-[#F4F1ED] leading-tight">Verifica il tuo numero</h2>
+                <p className="mt-2 text-sm text-[#E6E2D8]/60">
+                  Abbiamo inviato un codice SMS a <strong className="text-[#F4F1ED]">{smsPhone}</strong>.
+                  Serve a confermare la tua identità prima di finalizzare la prenotazione.
+                </p>
+
+                {smsOtpDev && (
+                  <div className="mt-4 p-3 bg-amber-500/5 border border-amber-500/20 rounded-xl text-amber-300/80 text-xs">
+                    <strong>Modalità dev:</strong> codice SMS fallback: <code className="font-mono text-amber-200">{smsOtpDev}</code>
+                  </div>
+                )}
+
+                <form onSubmit={handleSmsVerifyAndBook} className="mt-6 space-y-4">
+                  <div>
+                    <label className="block text-xs tracking-[0.15em] uppercase text-[#E6E2D8]/50 mb-2">Codice SMS</label>
+                    <div className="relative">
+                      <Smartphone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#E6E2D8]/40" />
+                      <input
+                        data-testid="sms-otp-input"
+                        required inputMode="numeric" autoComplete="one-time-code" maxLength={6}
+                        value={smsOtp}
+                        onChange={(e) => setSmsOtp(e.target.value.replace(/\D/g, ""))}
+                        placeholder="123456"
+                        className="w-full pl-10 pr-4 py-3 bg-[#1C2A33]/30 border border-white/10 rounded-xl text-[#F4F1ED] text-center text-xl tracking-[0.5em] focus:outline-none focus:border-[#D4A017]"
+                      />
+                    </div>
+                  </div>
+
+                  <label className="flex items-start gap-3 text-xs text-[#E6E2D8]/70 leading-relaxed cursor-pointer">
+                    <input
+                      data-testid="sms-privacy-check"
+                      type="checkbox" checked={smsPrivacy}
+                      onChange={(e) => setSmsPrivacy(e.target.checked)}
+                      className="mt-0.5 accent-[#D4A017]"
+                    />
+                    <span>
+                      Acconsento al trattamento dei miei dati personali (inclusi dati sanitari — categoria speciale, art. 9 GDPR)
+                      per la finalità di erogazione della prestazione psicologica e dichiaro di aver letto la
+                      <a href="/privacy" target="_blank" rel="noreferrer" className="text-[#D4A017] hover:underline"> Privacy Policy</a>.
+                    </span>
+                  </label>
+
+                  <button
+                    data-testid="sms-verify-submit"
+                    type="submit" disabled={loading}
+                    className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#D4A017] hover:bg-[#E5B942] disabled:opacity-40 text-[#111111] font-medium rounded-full"
+                  >
+                    {loading ? "Verifica in corso..." : "Verifica e conferma prenotazione"}
+                  </button>
+
+                  <button
+                    type="button"
+                    data-testid="sms-resend"
+                    onClick={handleResendSms}
+                    disabled={loading}
+                    className="w-full text-center text-xs text-[#E6E2D8]/50 hover:text-[#D4A017] py-2"
+                  >
+                    Non hai ricevuto il codice? Invialo di nuovo
                   </button>
                 </form>
               </div>

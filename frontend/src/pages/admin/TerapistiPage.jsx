@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
-import { Plus, Search, Edit2, Trash2, ShieldCheck, ShieldX, ChevronDown, ChevronUp, X } from "lucide-react";
+import { Plus, Search, Edit2, Trash2, ShieldCheck, ShieldX, ChevronDown, ChevronUp, X, CheckCircle, XCircle, Download } from "lucide-react";
 
 const EMPTY_FORM = {
   nome: "", cognome: "", telefono: "", bio: "", anni_esperienza: "",
@@ -95,6 +95,20 @@ export default function TerapistiPage() {
     load();
   };
 
+  const handleToggleVerifica = async (t) => {
+    const nextVal = !t.documenti_verificati;
+    const msg = nextVal
+      ? "Confermi di aver verificato i documenti e rendi il terapeuta visibile nel sito pubblico?"
+      : "Rimuovi la verifica: il terapeuta non sarà più visibile nel sito pubblico. Procedere?";
+    if (!window.confirm(msg)) return;
+    await axios.patch(`${API}/admin/terapisti/${t._id}/verifica`, { verificato: nextVal }, { withCredentials: true });
+    load();
+  };
+
+  const downloadDoc = (id, tipo) => {
+    window.open(`${API}/admin/terapisti/${id}/documenti/${tipo}/download`, "_blank", "noopener");
+  };
+
   const filtered = terapisti.filter(t =>
     `${t.nome} ${t.cognome} ${t.albo_numero || ""}`.toLowerCase().includes(search.toLowerCase())
   );
@@ -144,17 +158,22 @@ export default function TerapistiPage() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  {t.autocertificazione_firmata
-                    ? <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full"><ShieldCheck className="w-3 h-3" /> Certificato</span>
-                    : <span className="flex items-center gap-1 text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full"><ShieldX className="w-3 h-3" /> Non Certificato</span>
+                  {t.documenti_verificati
+                    ? <span data-testid={`badge-verificato-${t._id}`} className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full"><ShieldCheck className="w-3 h-3" /> Pubblico</span>
+                    : <span data-testid={`badge-non-verificato-${t._id}`} className="flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full"><ShieldX className="w-3 h-3" /> Non pubblico</span>
                   }
+                  <button data-testid={`toggle-verifica-${t._id}`} onClick={() => handleToggleVerifica(t)}
+                    className={`p-2 rounded-xl ${t.documenti_verificati ? "hover:bg-red-50 text-red-600" : "hover:bg-green-50 text-green-600"}`}
+                    title={t.documenti_verificati ? "Rimuovi verifica" : "Verifica documenti"}>
+                    {t.documenti_verificati ? <XCircle className="w-4 h-4" /> : <CheckCircle className="w-4 h-4" />}
+                  </button>
                   <button data-testid={`edit-terapista-${t._id}`} onClick={() => openEdit(t)}
                     className="p-2 rounded-xl hover:bg-[rgba(28,28,28,0.05)] text-[rgba(28,28,28,0.5)]">
                     <Edit2 className="w-4 h-4" />
                   </button>
                   {!t.autocertificazione_firmata && (
                     <button data-testid={`autocert-${t._id}`} onClick={() => handleAutocert(t._id)}
-                      className="p-2 rounded-xl hover:bg-green-50 text-green-600" title="Firma autocertificazione">
+                      className="p-2 rounded-xl hover:bg-green-50 text-green-600" title="Firma autocertificazione manuale">
                       <ShieldCheck className="w-4 h-4" />
                     </button>
                   )}
@@ -254,6 +273,47 @@ export default function TerapistiPage() {
                         </div>
                       </>
                     )}
+                  </div>
+
+                  {/* Documenti & Verifica */}
+                  <div className="md:col-span-2 xl:col-span-4 border-t border-[rgba(28,28,28,0.06)] pt-4">
+                    <div className="text-xs font-semibold text-[rgba(28,28,28,0.5)] uppercase tracking-wider mb-3">
+                      Documenti & Verifica (DPR 445/2000)
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {["cv","assicurazione","laurea"].map((tipo) => {
+                        const meta = (t.documenti || {})[tipo];
+                        const labels = { cv: "Curriculum Vitae", assicurazione: "Assicurazione", laurea: "Laurea / Abilitazione" };
+                        return (
+                          <div key={tipo} className={`p-3 rounded-xl border ${meta ? "border-green-200 bg-green-50/30" : "border-[rgba(28,28,28,0.08)] bg-[rgba(28,28,28,0.02)]"}`}>
+                            <div className="text-xs font-semibold text-[#1C1C1C]">{labels[tipo]}</div>
+                            {meta ? (
+                              <>
+                                <div className="text-xs text-[rgba(28,28,28,0.55)] mt-1 truncate">{meta.filename} · {(meta.size/1024).toFixed(1)} KB</div>
+                                <button
+                                  data-testid={`admin-download-${tipo}-${t._id}`}
+                                  type="button"
+                                  onClick={() => downloadDoc(t._id, tipo)}
+                                  className="mt-2 inline-flex items-center gap-1 text-xs text-[#D4A017] hover:underline"
+                                >
+                                  <Download className="w-3 h-3" /> Scarica
+                                </button>
+                              </>
+                            ) : (
+                              <div className="text-xs text-[rgba(28,28,28,0.4)] italic mt-1">Non caricato</div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="mt-3 text-xs text-[rgba(28,28,28,0.6)] flex flex-wrap gap-x-5 gap-y-1">
+                      <span>Autocertificazione DPR 445: <strong className={t.autocertificazione_dpr445 || t.autocertificazione_firmata ? "text-green-700" : "text-amber-700"}>
+                        {t.autocertificazione_dpr445 || t.autocertificazione_firmata ? "Firmata" : "Non firmata"}
+                      </strong></span>
+                      {t.autocertificazione_data && <span>Data: <strong className="text-[#1C1C1C]">{new Date(t.autocertificazione_data).toLocaleDateString("it-IT")}</strong></span>}
+                      {t.autocertificazione_ip && <span>IP: <span className="font-mono">{t.autocertificazione_ip}</span></span>}
+                      <span>Visibile pubblicamente: <strong className={t.documenti_verificati ? "text-green-700" : "text-red-600"}>{t.documenti_verificati ? "Sì" : "No"}</strong></span>
+                    </div>
                   </div>
                 </div>
               )}

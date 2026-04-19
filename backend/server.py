@@ -11,7 +11,7 @@ import bcrypt
 import jwt
 import secrets as _secrets
 from bson import ObjectId
-from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends
+from fastapi import FastAPI, APIRouter, HTTPException, Request, Response, Depends, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from motor.motor_asyncio import AsyncIOMotorClient
@@ -866,10 +866,11 @@ class FAQInput(BaseModel):
 # ─── PUBLIC ROUTES (no auth) ──────────────────────────────────────────────────
 @api_router.get("/public/terapisti")
 async def public_list_terapisti():
-    docs = await db.terapisti.find({"autocertificazione_firmata": True}).to_list(100)
+    docs = await db.terapisti.find({"documenti_verificati": True}).to_list(100)
     for d in docs:
         d["_id"] = str(d["_id"])
         d.pop("note_cliniche", None)
+        d.pop("documenti", None)
     return docs
 
 @api_router.get("/public/terapisti/{tid}")
@@ -878,11 +879,13 @@ async def public_get_terapista(tid: str):
     if not doc:
         raise HTTPException(status_code=404, detail="Terapeuta non trovato")
     doc["_id"] = str(doc["_id"])
+    doc.pop("documenti", None)
+    doc.pop("note_cliniche", None)
     return doc
 
 @api_router.post("/public/matching")
 async def matching(data: MatchingInput):
-    docs = await db.terapisti.find({"autocertificazione_firmata": True}).to_list(100)
+    docs = await db.terapisti.find({"documenti_verificati": True}).to_list(100)
     PREF_MAP = {"Preferisco una donna": "F", "Preferisco un uomo": "M"}
     pref_genere = PREF_MAP.get(data.preferenza_terapeuta or "", None)
     ORARIO_MAP = {"Mattina (8-12)": (8,12), "Pomeriggio (12-18)": (12,18), "Sera (18-21)": (18,21)}
@@ -1036,6 +1039,18 @@ async def send_messaggio(data: MessaggioInput, user: dict = Depends(require_auth
 async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require_auth)):
     if user["role"] != "paziente":
         raise HTTPException(403, "Solo i pazienti possono prenotare")
+    # Require recent SMS phone verification (last 60 min) before confirming booking
+    u_doc = await db.users.find_one({"_id": ObjectId(user["_id"])})
+    tv_at = (u_doc or {}).get("telefono_verificato_at")
+    if isinstance(tv_at, str):
+        try:
+            tv_at = datetime.fromisoformat(tv_at)
+        except Exception:
+            tv_at = None
+    if tv_at and tv_at.tzinfo is None:
+        tv_at = tv_at.replace(tzinfo=timezone.utc)
+    if not (u_doc and u_doc.get("telefono_verificato") and tv_at and (datetime.now(timezone.utc) - tv_at) <= timedelta(minutes=60)):
+        raise HTTPException(403, "Verifica il numero di telefono via SMS prima di confermare la prenotazione")
     doc = data.model_dump()
     doc["stato"] = "confermato"
     doc["created_at"] = datetime.now(timezone.utc)
@@ -1076,6 +1091,219 @@ async def prenota_pubblico(data: AppuntamentoInput, user: dict = Depends(require
     except Exception as e:
         logging.error(f"[BOOKING EMAIL] failed: {e}")
     return doc
+
+# ─── SMS OTP (Skebby) ─────────────────────────────────────────────────────────
+def _sms_generate_otp() -> str:
+    return f"{_secrets.randbelow(900000) + 100000}"
+
+
+@api_router.post("/sms/send-otp")
+async def sms_send_otp(body: dict, user: dict = Depends(require_auth)):
+    """Send an SMS OTP to a phone number. Stored in db.sms_otp keyed by (user_id, phone).
+    Returns {message} on success. In dev/fallback returns otp_dev when Skebby is disabled or fails."""
+    phone = (body.get("phone") or "").strip()
+    context = (body.get("context") or "verifica").strip()[:40]
+    if not phone:
+        raise HTTPException(400, "Numero di telefono mancante")
+    otp = _sms_generate_otp()
+    expires = datetime.now(timezone.utc) + timedelta(minutes=10)
+    await db.sms_otp.update_one(
+        {"user_id": user["_id"], "phone": phone},
+        {"$set": {
+            "user_id": user["_id"],
+            "phone": phone,
+            "otp_code": otp,
+            "expires_at": expires,
+            "verified": False,
+            "created_at": datetime.now(timezone.utc),
+        }},
+        upsert=True,
+    )
+    sent = await send_sms_otp(phone, otp, context)
+    logging.info(f"[SMS OTP] to {phone} (sent={sent}) for user {user['email']}")
+    resp = {"message": "OTP inviato via SMS"}
+    if not sent:
+        # Dev fallback: expose OTP in response when Skebby is disabled/failing
+        resp["otp_dev"] = otp
+    return resp
+
+
+@api_router.post("/sms/verify-otp")
+async def sms_verify_otp(body: dict, user: dict = Depends(require_auth)):
+    """Verify the SMS OTP. On success marks user telefono_verificato=True and saves phone."""
+    phone = (body.get("phone") or "").strip()
+    code = (body.get("otp_code") or "").strip()
+    if not phone or not code:
+        raise HTTPException(400, "Dati incompleti")
+    rec = await db.sms_otp.find_one({"user_id": user["_id"], "phone": phone})
+    if not rec:
+        raise HTTPException(400, "Nessun OTP richiesto per questo numero")
+    exp = rec.get("expires_at")
+    if isinstance(exp, str):
+        exp = datetime.fromisoformat(exp)
+    if exp and exp.tzinfo is None:
+        exp = exp.replace(tzinfo=timezone.utc)
+    if not exp or datetime.now(timezone.utc) > exp:
+        raise HTTPException(400, "Codice OTP scaduto")
+    if rec.get("otp_code") != code:
+        raise HTTPException(400, "Codice OTP non valido")
+    now = datetime.now(timezone.utc)
+    await db.sms_otp.update_one({"_id": rec["_id"]}, {"$set": {"verified": True, "verified_at": now}})
+    await db.users.update_one(
+        {"_id": ObjectId(user["_id"])},
+        {"$set": {"telefono": phone, "telefono_verificato": True, "telefono_verificato_at": now}},
+    )
+    return {"verified": True}
+
+
+# ─── THERAPIST DOCUMENTS UPLOAD (CV / Assicurazione / Laurea) ─────────────────
+TERAPISTI_DOCS_DIR = UPLOADS_DIR / "terapisti_docs"
+TERAPISTI_DOCS_DIR.mkdir(parents=True, exist_ok=True)
+ALLOWED_DOC_TYPES = {"cv", "assicurazione", "laurea"}
+ALLOWED_EXTS = {".pdf", ".png", ".jpg", ".jpeg"}
+MAX_DOC_SIZE = 10 * 1024 * 1024  # 10MB
+
+
+@api_router.post("/terapisti/me/documenti/{tipo}")
+async def upload_my_terapista_doc(tipo: str, file: UploadFile = File(...), user: dict = Depends(require_auth)):
+    if user["role"] != "terapeuta":
+        raise HTTPException(403, "Solo i terapeuti possono caricare documenti")
+    tipo = tipo.lower().strip()
+    if tipo not in ALLOWED_DOC_TYPES:
+        raise HTTPException(400, f"Tipo documento non valido. Ammessi: {sorted(ALLOWED_DOC_TYPES)}")
+    ext = Path(file.filename or "").suffix.lower()
+    if ext not in ALLOWED_EXTS:
+        raise HTTPException(400, "Formato non supportato. Ammessi: PDF, PNG, JPG")
+    content = await file.read()
+    if len(content) > MAX_DOC_SIZE:
+        raise HTTPException(400, "File troppo grande (max 10MB)")
+    if len(content) == 0:
+        raise HTTPException(400, "File vuoto")
+    user_dir = TERAPISTI_DOCS_DIR / user["_id"]
+    user_dir.mkdir(parents=True, exist_ok=True)
+    # Remove older file for same tipo (any extension)
+    for old in user_dir.glob(f"{tipo}.*"):
+        try:
+            old.unlink()
+        except Exception:
+            pass
+    dest = user_dir / f"{tipo}{ext}"
+    dest.write_bytes(content)
+    now = datetime.now(timezone.utc)
+    await db.terapisti.update_one(
+        {"user_id": user["_id"]},
+        {"$set": {
+            f"documenti.{tipo}": {
+                "filename": file.filename,
+                "ext": ext,
+                "size": len(content),
+                "uploaded_at": now,
+            }
+        }},
+    )
+    return {"message": "Documento caricato", "tipo": tipo, "size": len(content)}
+
+
+@api_router.get("/terapisti/me/documenti")
+async def list_my_terapista_docs(user: dict = Depends(require_auth)):
+    if user["role"] != "terapeuta":
+        raise HTTPException(403, "Accesso negato")
+    doc = await db.terapisti.find_one({"user_id": user["_id"]}, {"documenti": 1, "autocertificazione_dpr445": 1, "documenti_verificati": 1})
+    if not doc:
+        return {"documenti": {}, "autocertificazione_dpr445": False, "documenti_verificati": False}
+    return {
+        "documenti": doc.get("documenti", {}),
+        "autocertificazione_dpr445": doc.get("autocertificazione_dpr445", False),
+        "documenti_verificati": doc.get("documenti_verificati", False),
+    }
+
+
+@api_router.post("/terapisti/me/autocertificazione-dpr445")
+async def firma_autocert_dpr445(request: Request, user: dict = Depends(require_auth)):
+    """Therapist signs the DPR 445/2000 self-certification after uploading docs and verifying phone."""
+    if user["role"] != "terapeuta":
+        raise HTTPException(403, "Accesso negato")
+    u = await db.users.find_one({"_id": ObjectId(user["_id"])})
+    if not u or not u.get("telefono_verificato"):
+        raise HTTPException(400, "Verifica prima il numero di telefono via SMS")
+    t = await db.terapisti.find_one({"user_id": user["_id"]})
+    if not t:
+        raise HTTPException(404, "Profilo terapeuta non trovato")
+    docs = t.get("documenti", {}) or {}
+    missing = [k for k in ALLOWED_DOC_TYPES if k not in docs]
+    if missing:
+        raise HTTPException(400, f"Carica prima tutti i documenti. Mancano: {', '.join(missing)}")
+    client_ip = request.client.host if request.client else "unknown"
+    now = datetime.now(timezone.utc)
+    await db.terapisti.update_one(
+        {"user_id": user["_id"]},
+        {"$set": {
+            "autocertificazione_dpr445": True,
+            "autocertificazione_firmata": True,
+            "autocertificazione_data": now,
+            "autocertificazione_ip": client_ip,
+        }},
+    )
+    return {"message": "Autocertificazione DPR 445/2000 firmata", "data": now.isoformat()}
+
+
+# ─── ADMIN: therapist documents review & verification ────────────────────────
+@api_router.get("/admin/terapisti/{terapista_id}/documenti")
+async def admin_list_terapista_docs(terapista_id: str, user: dict = Depends(require_admin)):
+    t = await db.terapisti.find_one({"_id": ObjectId(terapista_id)})
+    if not t:
+        raise HTTPException(404, "Terapeuta non trovato")
+    u = await db.users.find_one({"_id": ObjectId(t.get("user_id"))}) if t.get("user_id") else None
+    return {
+        "terapista_id": terapista_id,
+        "user_id": t.get("user_id"),
+        "nome": t.get("nome"),
+        "cognome": t.get("cognome"),
+        "email": u.get("email") if u else None,
+        "telefono": u.get("telefono") if u else None,
+        "telefono_verificato": bool(u.get("telefono_verificato")) if u else False,
+        "autocertificazione_dpr445": bool(t.get("autocertificazione_dpr445")),
+        "autocertificazione_data": t.get("autocertificazione_data").isoformat() if isinstance(t.get("autocertificazione_data"), datetime) else t.get("autocertificazione_data"),
+        "documenti_verificati": bool(t.get("documenti_verificati")),
+        "documenti": t.get("documenti", {}),
+    }
+
+
+@api_router.get("/admin/terapisti/{terapista_id}/documenti/{tipo}/download")
+async def admin_download_terapista_doc(terapista_id: str, tipo: str, user: dict = Depends(require_admin)):
+    tipo = tipo.lower().strip()
+    if tipo not in ALLOWED_DOC_TYPES:
+        raise HTTPException(400, "Tipo non valido")
+    t = await db.terapisti.find_one({"_id": ObjectId(terapista_id)})
+    if not t or not t.get("user_id"):
+        raise HTTPException(404, "Terapeuta non trovato")
+    user_dir = TERAPISTI_DOCS_DIR / t["user_id"]
+    matches = list(user_dir.glob(f"{tipo}.*"))
+    if not matches:
+        raise HTTPException(404, "Documento non trovato")
+    p = matches[0]
+    media = "application/pdf" if p.suffix.lower() == ".pdf" else f"image/{p.suffix.lower().lstrip('.')}"
+    return FileResponse(p, media_type=media, filename=p.name)
+
+
+@api_router.patch("/admin/terapisti/{terapista_id}/verifica")
+async def admin_verifica_terapista(terapista_id: str, body: dict, user: dict = Depends(require_admin)):
+    """Admin toggles documenti_verificati. When True, therapist becomes publicly visible."""
+    verificato = bool(body.get("verificato", True))
+    t = await db.terapisti.find_one({"_id": ObjectId(terapista_id)})
+    if not t:
+        raise HTTPException(404, "Terapeuta non trovato")
+    now = datetime.now(timezone.utc)
+    await db.terapisti.update_one(
+        {"_id": ObjectId(terapista_id)},
+        {"$set": {
+            "documenti_verificati": verificato,
+            "documenti_verificati_at": now if verificato else None,
+            "documenti_verificati_by": user["_id"] if verificato else None,
+        }},
+    )
+    return {"message": "Aggiornato", "documenti_verificati": verificato}
+
 
 @api_router.post("/utils/compute-cf")
 async def compute_cf(data: dict, user: dict = Depends(require_auth)):
@@ -1140,6 +1368,11 @@ async def startup():
     await db.users.create_index("email", unique=True)
     await db.login_attempts.create_index("identifier")
     await seed_data()
+    # Backfill: make existing self-certified therapists publicly visible under the new gate
+    await db.terapisti.update_many(
+        {"autocertificazione_firmata": True, "documenti_verificati": {"$exists": False}},
+        {"$set": {"documenti_verificati": True}},
+    )
     if not scheduler.running:
         scheduler.start()
         logging.info("[SCHEDULER] started")

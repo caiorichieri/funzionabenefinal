@@ -2,18 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { useAuth } from "@/contexts/AuthContext";
-import { Save, ShieldCheck, Plus, Trash2, CheckCircle } from "lucide-react";
+import { Save, Plus, Trash2, CheckCircle } from "lucide-react";
+import OnboardingSection from "@/components/therapist/OnboardingSection";
 
 const GIORNI = ["Lunedì","Martedì","Mercoledì","Giovedì","Venerdì","Sabato","Domenica"];
 const GENERI_T = [{ v:"M",l:"Uomo" },{ v:"F",l:"Donna" },{ v:"Altro",l:"Non binario/Altro" }];
 
 export default function TerapistaProfile() {
-  const { user } = useAuth();
+  const { user, refreshUser } = useAuth();
   const [profilo, setProfilo] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
-  const [signing, setSigning] = useState(false);
   const [error, setError] = useState("");
 
   const [form, setForm] = useState({
@@ -66,18 +66,6 @@ export default function TerapistaProfile() {
     } finally { setSaving(false); }
   };
 
-  const handleAutocert = async () => {
-    if (!profilo?._id) return;
-    if (!window.confirm("Confermo che tutti i dati inseriti sono veritieri e mi assumo la responsabilità delle informazioni fornite. Firmare l'autocertificazione?")) return;
-    setSigning(true);
-    try {
-      await axios.post(`${API}/terapisti/${profilo._id}/autocertificazione`, {}, { withCredentials: true });
-      setProfilo(p => ({ ...p, autocertificazione_firmata: true, autocertificazione_data: new Date().toISOString() }));
-    } catch (err) {
-      setError(err.response?.data?.detail || "Errore nella firma");
-    } finally { setSigning(false); }
-  };
-
   const addDisponibilita = () => setForm(f => ({ ...f, disponibilita: [...f.disponibilita, { giorno:"Lunedì", ora_inizio:"09:00", ora_fine:"18:00" }] }));
   const removeDisponibilita = (i) => setForm(f => ({ ...f, disponibilita: f.disponibilita.filter((_,idx)=>idx!==i) }));
   const updateDisp = (i, k, v) => setForm(f => ({ ...f, disponibilita: f.disponibilita.map((d,idx)=>idx===i?{...d,[k]:v}:d) }));
@@ -91,26 +79,12 @@ export default function TerapistaProfile() {
         <p className="text-[rgba(28,28,28,0.6)] mt-1">Gestisci le tue informazioni professionali</p>
       </div>
 
-      {/* Autocertificazione status */}
-      <div className={`rounded-2xl p-5 flex items-start gap-4 ${profilo?.autocertificazione_firmata ? "bg-green-50 border border-green-200" : "bg-amber-50 border border-amber-200"}`}>
-        <ShieldCheck className={`w-6 h-6 flex-shrink-0 mt-0.5 ${profilo?.autocertificazione_firmata ? "text-green-600" : "text-amber-600"}`} />
-        <div className="flex-1">
-          <div className={`font-semibold ${profilo?.autocertificazione_firmata ? "text-green-800" : "text-amber-800"}`}>
-            {profilo?.autocertificazione_firmata ? "Autocertificazione firmata" : "Autocertificazione non firmata"}
-          </div>
-          <div className={`text-sm mt-1 ${profilo?.autocertificazione_firmata ? "text-green-600" : "text-amber-600"}`}>
-            {profilo?.autocertificazione_firmata
-              ? `Firmata il ${new Date(profilo.autocertificazione_data).toLocaleDateString("it-IT")}`
-              : "Completa il profilo e firma l'autocertificazione per essere visibile ai pazienti"}
-          </div>
-          {!profilo?.autocertificazione_firmata && (
-            <button data-testid="firma-autocert-btn" onClick={handleAutocert} disabled={signing}
-              className="mt-3 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-full text-sm font-medium transition-colors disabled:opacity-50">
-              {signing ? "Firma in corso..." : "Firma Autocertificazione"}
-            </button>
-          )}
-        </div>
-      </div>
+      {/* Onboarding: documenti + SMS OTP + DPR 445 */}
+      <OnboardingSection
+        profilo={profilo}
+        currentUser={user}
+        onRefresh={async () => { await refreshUser(); fetchProfilo(); }}
+      />
 
       {error && <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">{error}</div>}
       {saved && <div data-testid="profile-saved" className="p-3 bg-green-50 border border-green-200 rounded-xl text-green-700 text-sm flex items-center gap-2"><CheckCircle className="w-4 h-4" /> Profilo salvato con successo!</div>}
