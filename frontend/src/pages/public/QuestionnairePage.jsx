@@ -64,7 +64,10 @@ export default function QuestionnairePage() {
   const selectSingle = (opt) => {
     const next = { ...answers, [current.key]: opt };
     setAnswers(next);
-    setTimeout(() => goNext(next), 250);
+    // Auto-advance only on intermediate single-select steps; last step requires explicit confirmation
+    if (step < STEPS.length - 1) {
+      setTimeout(() => goNext(next), 250);
+    }
   };
 
   const toggleMulti = (opt) => {
@@ -170,7 +173,7 @@ export default function QuestionnairePage() {
               })}
             </div>
 
-            {current.type === "multi" && (
+            {(current.type === "multi" || step === STEPS.length - 1) && (
               <button
                 data-testid="questionnaire-next"
                 onClick={() => goNext()}
