@@ -232,19 +232,23 @@ export default function HomePage() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-[#D4A017]/20 via-[#6B8FA3]/10 to-[#111111]">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-32 h-32 rounded-full bg-[#D4A017]/20 flex items-center justify-center backdrop-blur-xl">
-                  <Sparkles className="w-16 h-16 text-[#D4A017]" strokeWidth={1} />
-                </div>
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#0A0A0A] to-transparent">
-                <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-2">Anteprima</div>
-                <div className="font-serif text-2xl text-[#F4F1ED] leading-tight">
-                  Disponibile con o senza visori. Direttamente a casa tua.
-                </div>
-              </div>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]"
+            >
+              <img
+                src="/hero-immersive.jpg"
+                alt="Seduta immersiva FunzionaBene — paziente con visore VR nel comfort di casa"
+                loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover"
+                data-testid="immersive-hero-img"
+              />
+              {/* Subtle gold glow on hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#D4A017]/0 via-transparent to-[#D4A017]/10 pointer-events-none" />
+            </motion.div>
           </div>
         </div>
       </section>
