@@ -16,6 +16,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field, BeforeValidator, EmailStr
 
+from email_service import send_otp_email
+
 # ─── Config ───────────────────────────────────────────────────────────────────
 JWT_SECRET = os.environ["JWT_SECRET"]
 JWT_ALGORITHM = "HS256"
@@ -235,7 +237,12 @@ async def register(data: RegisterInput, response: Response):
         })
 
     logging.info(f"[OTP] {email}: {otp_code}")
-    return {"message": "Registrazione completata. Controlla la tua email per il codice OTP.", "otp_dev": otp_code}
+    email_sent = await send_otp_email(email, otp_code, data.nome)
+    # Only return otp_dev if real email failed (fallback for dev)
+    response_body = {"message": "Registrazione completata. Controlla la tua email per il codice OTP."}
+    if not email_sent:
+        response_body["otp_dev"] = otp_code
+    return response_body
 
 @api_router.post("/auth/verify-otp")
 async def verify_otp(data: OTPInput, response: Response):
@@ -274,7 +281,11 @@ async def resend_otp(body: dict):
     otp_expires = datetime.now(timezone.utc) + timedelta(minutes=10)
     await db.users.update_one({"_id": user["_id"]}, {"$set": {"otp_code": otp_code, "otp_expires": otp_expires}})
     logging.info(f"[OTP Resend] {email}: {otp_code}")
-    return {"message": "Nuovo codice OTP inviato", "otp_dev": otp_code}
+    email_sent = await send_otp_email(email, otp_code, user.get("nome", ""))
+    response_body = {"message": "Nuovo codice OTP inviato"}
+    if not email_sent:
+        response_body["otp_dev"] = otp_code
+    return response_body
 
 @api_router.post("/auth/login")
 async def login(data: LoginInput, response: Response):
