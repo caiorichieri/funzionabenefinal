@@ -260,8 +260,8 @@ async def verify_otp(data: OTPInput, response: Response):
     user_id = str(user["_id"])
     access_token = create_access_token(user_id, email, user["role"])
     refresh_token = create_refresh_token(user_id)
-    response.set_cookie("access_token", access_token, httponly=True, samesite="lax", max_age=28800, path="/")
-    response.set_cookie("refresh_token", refresh_token, httponly=True, samesite="lax", max_age=604800, path="/")
+    response.set_cookie("access_token", access_token, httponly=True, samesite="none", secure=True, max_age=28800, path="/")
+    response.set_cookie("refresh_token", refresh_token, httponly=True, samesite="none", secure=True, max_age=604800, path="/")
     return {"message": "Account verificato con successo", "role": user["role"], "nome": user["nome"]}
 
 @api_router.post("/auth/resend-otp")
@@ -290,8 +290,8 @@ async def login(data: LoginInput, response: Response):
     user_id = str(user["_id"])
     access_token = create_access_token(user_id, email, user["role"])
     refresh_token = create_refresh_token(user_id)
-    response.set_cookie("access_token", access_token, httponly=True, samesite="lax", max_age=28800, path="/")
-    response.set_cookie("refresh_token", refresh_token, httponly=True, samesite="lax", max_age=604800, path="/")
+    response.set_cookie("access_token", access_token, httponly=True, samesite="none", secure=True, max_age=28800, path="/")
+    response.set_cookie("refresh_token", refresh_token, httponly=True, samesite="none", secure=True, max_age=604800, path="/")
     return {"_id": user_id, "email": email, "nome": user["nome"], "cognome": user["cognome"], "role": user["role"]}
 
 @api_router.post("/auth/logout")
