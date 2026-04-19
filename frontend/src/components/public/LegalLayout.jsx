@@ -28,8 +28,7 @@ export default function LegalLayout({ title, lastUpdate, children, testId }) {
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/10 text-xs text-[#E6E2D8]/40">
-          <p>FunzionaBene — Clinica di Psicologia e Sessuologia · P.IVA 00000000000</p>
-          <p className="mt-2">
+          <p>
             Per domande su questa informativa: <a href="mailto:privacy@funzionabene.it" className="text-[#D4A017] hover:text-[#E5B942]">privacy@funzionabene.it</a>
           </p>
         </div>

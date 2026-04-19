@@ -25,7 +25,7 @@ const BENEFITS = [
   },
   {
     titolo: "Sedute immersive",
-    descrizione: "Prima clinica italiana a offrire sedute terapeutiche immersive per disfunzioni, fobie e blocchi. Sempre guidate dal tuo terapeuta.",
+    descrizione: "Prima piattaforma italiana a offrire sedute terapeutiche immersive per disfunzioni, fobie e blocchi. Sempre guidate dal tuo terapeuta.",
     icon: Sparkles,
     highlight: true,
   },
@@ -91,7 +91,7 @@ export default function HomePage() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" />
-              Prima clinica italiana di sessuologia immersiva
+              Sessuologia online · Riservata · Senza giudizio
             </div>
 
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight">
@@ -100,9 +100,8 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-8 text-lg lg:text-xl text-[#E6E2D8]/75 leading-relaxed max-w-2xl">
-              Sessuologia clinica online con specialisti dedicati. Percorsi tradizionali oppure
-              <strong className="text-[#F4F1ED]"> sedute immersive</strong> — se e quando il tuo terapeuta lo propone.
-              Tu nel tuo spazio sicuro, sempre.
+              Sessuologia online con specialisti dedicati. Percorsi tradizionali, guidati dal tuo terapeuta,
+              nel <strong className="text-[#F4F1ED]">tuo spazio sicuro</strong>. Sempre.
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
@@ -182,7 +181,7 @@ export default function HomePage() {
               Sedute immersive.<br /><em className="text-[#D4A017] not-italic">La terapia, reimmaginata.</em>
             </h2>
             <p className="mt-8 text-lg text-[#E6E2D8]/75 leading-relaxed max-w-2xl">
-              La prima clinica italiana a integrare <strong className="text-[#F4F1ED]">ambienti immersivi terapeutici</strong>
+              La prima piattaforma italiana a integrare <strong className="text-[#F4F1ED]">ambienti immersivi terapeutici</strong>
               nei percorsi di sessuologia. Il tuo terapeuta può guidarti attraverso esperienze di esposizione
               graduale, desensibilizzazione e consapevolezza corporea, <strong className="text-[#F4F1ED]">sempre nello
               spazio sicuro della tua casa</strong>.

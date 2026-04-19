@@ -45,7 +45,7 @@ export default function LoginPage() {
               <span className="text-[#D4A017]">Gestionale</span>
             </h1>
             <p className="text-[rgba(253,251,247,0.7)] text-lg leading-relaxed">
-              Piattaforma integrata per la gestione della clinica di sessuologia FunzionaBene.
+              Piattaforma integrata di sessuologia online FunzionaBene.
             </p>
           </div>
         </div>

@@ -31,7 +31,7 @@ export default function BlogPublicPage() {
         <div className="mb-16 max-w-2xl">
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Rivista</span>
           <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#F4F1ED] leading-tight">
-            Pensieri e ricerche<br />dalla clinica.
+            Pensieri e ricerche<br />dai nostri specialisti.
           </h1>
           <p className="mt-6 text-[#E6E2D8]/60 text-lg">
             Articoli scritti dai nostri specialisti per aiutarti a comprendere meglio te stesso.

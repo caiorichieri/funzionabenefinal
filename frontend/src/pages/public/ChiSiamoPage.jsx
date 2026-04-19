@@ -11,7 +11,7 @@ const VALUES = [
   {
     icon: Sparkles,
     titolo: "Innovazione clinica",
-    desc: "Siamo la prima clinica italiana a integrare <strong>sedute immersive</strong> nei percorsi di sessuologia. Non per moda tecnologica, ma perché la ricerca lo dimostra: funziona.",
+    desc: "Siamo la prima piattaforma italiana a integrare <strong>sedute immersive</strong> nei percorsi di sessuologia. Non per moda tecnologica, ma perché la ricerca lo dimostra: funziona.",
   },
   {
     icon: Heart,
@@ -39,7 +39,7 @@ const STATS = [
   { n: "100%", desc: "Specialisti in sessuologia" },
   { n: "10+", desc: "Terapeuti selezionati con cura" },
   { n: "50 min", desc: "Durata di ogni seduta" },
-  { n: "1ª", desc: "Clinica italiana con sedute immersive" },
+  { n: "1ª", desc: "Piattaforma italiana con sedute immersive" },
 ];
 
 export default function ChiSiamoPage() {
@@ -62,10 +62,10 @@ export default function ChiSiamoPage() {
           >
             <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Chi siamo</span>
             <h1 className="mt-4 font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight">
-              Una clinica, non<br /><em className="text-[#D4A017] not-italic">un marketplace.</em>
+              Una piattaforma curata,<br /><em className="text-[#D4A017] not-italic">non un marketplace.</em>
             </h1>
             <p className="mt-8 text-lg lg:text-xl text-[#E6E2D8]/75 leading-relaxed max-w-3xl">
-              FunzionaBene nasce nel 2026 da un'idea semplice: portare la sessuologia clinica italiana al livello
+              FunzionaBene nasce nel 2026 da un'idea semplice: portare la sessuologia italiana al livello
               che merita. Con professionisti scelti uno a uno, tecnologia al servizio della cura e un linguaggio
               che non ha paura di chiamare le cose con il loro nome.
             </p>
@@ -91,7 +91,7 @@ export default function ChiSiamoPage() {
             <p>
               FunzionaBene esiste per rompere quel silenzio. In modo <strong className="text-[#F4F1ED]">professionale,
               discreto e umano</strong>. Non siamo un'app di auto-aiuto. Non siamo un marketplace dove un algoritmo
-              ti accoppia al primo disponibile. Siamo una clinica online dove ogni professionista è scelto personalmente,
+              ti accoppia al primo disponibile. Siamo una piattaforma curata dove ogni professionista è scelto personalmente,
               ogni percorso è costruito su misura, e la tua esperienza conta quanto la tua diagnosi.
             </p>
           </div>

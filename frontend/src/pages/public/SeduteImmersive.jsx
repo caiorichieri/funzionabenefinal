@@ -87,7 +87,7 @@ export default function SeduteImmersive() {
             </h1>
 
             <p className="mt-8 text-lg lg:text-xl text-[#E6E2D8]/75 leading-relaxed max-w-3xl">
-              FunzionaBene è la <strong className="text-[#F4F1ED]">prima clinica italiana di sessuologia</strong> a integrare
+              FunzionaBene è la <strong className="text-[#F4F1ED]">prima piattaforma italiana di sessuologia</strong> a integrare
               ambienti immersivi guidati direttamente nei percorsi terapeutici. Non è uno strumento, non è un gioco:
               è <strong className="text-[#F4F1ED]">terapia clinica evidence-based</strong>, amplificata da un'esperienza
               sensoriale che i libri di ricerca confermano da anni.
@@ -114,7 +114,7 @@ export default function SeduteImmersive() {
           <div className="p-8 bg-[#1C2A33]/40 border border-[#D4A017]/20 rounded-3xl">
             <div className="font-serif text-5xl lg:text-6xl text-[#D4A017]">1ª</div>
             <p className="mt-4 text-sm text-[#E6E2D8]/70 leading-relaxed">
-              clinica italiana di sessuologia ad adottare questo approccio in modo strutturale.
+              piattaforma italiana di sessuologia ad adottare questo approccio in modo strutturale.
             </p>
           </div>
         </div>
