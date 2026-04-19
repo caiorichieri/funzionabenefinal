@@ -247,6 +247,21 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - [ ] Gestione rimborsi
 - [ ] Storico pagamenti
 
+### Integrazione Skebby SMS OTP + Document Upload ✅ COMPLETATA (19/04/2026)
+- [x] `sms_service.py` con Skebby REST API (login session + token alphanumeric sender)
+- [x] POST `/api/sms/send-otp` (stored in `db.sms_otp`, fallback `otp_dev` se Skebby fallisce)
+- [x] POST `/api/sms/verify-otp` → setta `telefono`, `telefono_verificato`, `telefono_verificato_at` sull'utente
+- [x] **Paziente flow**: SMS OTP step aggiunto nel BookingSheet tra "payment" e "success", con checkbox privacy art. 9 GDPR
+- [x] `/api/public/prenota` richiede `telefono_verificato_at` entro 60 min
+- [x] **Terapeuta flow**: `OnboardingSection.jsx` con 3 step (upload CV/Assicurazione/Laurea → SMS OTP → autocertificazione DPR 445/2000)
+- [x] POST `/api/terapisti/me/documenti/{tipo}` multipart, tipi: cv/assicurazione/laurea, max 10MB, estensioni PDF/PNG/JPG
+- [x] POST `/api/terapisti/me/autocertificazione-dpr445` richiede tutti docs + telefono verificato
+- [x] **Admin vetting**: GET `/api/admin/terapisti/{id}/documenti` + `/download`, PATCH `/verifica` toggla `documenti_verificati`
+- [x] Filtro public (`/public/terapisti`, matching) ora usa `documenti_verificati=true` come gate di visibilità pubblica
+- [x] Admin TerapistiPage: badge Pubblico/Non pubblico, toggle verifica, pannello documenti espandibile con download
+- [x] **Testing iteration_5.json: 23/23 backend + 9/9 frontend PASS**
+- [ ] **NOTA**: Skebby credenziali attuali restituiscono 404 — utente deve verificare API credentials in dashboard Skebby (potrebbero differire dalle credenziali di login web)
+
 ### Integrazione Daily.co ✅ COMPLETATA
 - [x] Generazione link videochiamate
 - [x] Log sessioni (prova avvenimento)
