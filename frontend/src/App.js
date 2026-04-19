@@ -32,6 +32,9 @@ import FAQPage from "@/pages/public/FAQPage";
 import PrivacyPage from "@/pages/public/PrivacyPage";
 import CookiePage from "@/pages/public/CookiePage";
 import TerminiPage from "@/pages/public/TerminiPage";
+import SeduteImmersive from "@/pages/public/SeduteImmersive";
+import AreeInterventoPage from "@/pages/public/AreeInterventoPage";
+import EmergenzePage from "@/pages/public/EmergenzePage";
 
 import "@/App.css";
 
@@ -60,6 +63,9 @@ export default function App() {
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/cookie" element={<CookiePage />} />
             <Route path="/termini" element={<TerminiPage />} />
+            <Route path="/sedute-immersive" element={<SeduteImmersive />} />
+            <Route path="/aree-intervento" element={<AreeInterventoPage />} />
+            <Route path="/emergenze" element={<EmergenzePage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />
