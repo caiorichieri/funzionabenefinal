@@ -1409,11 +1409,12 @@ async def seed_data():
 
     # Seed demo therapist
     demo_email = "demo.terapeuta@funzionabene.it"
+    demo_pwd = "Terapeuta#2024!"
     demo_user = await db.users.find_one({"email": demo_email})
     if not demo_user:
         result = await db.users.insert_one({
             "email": demo_email,
-            "password_hash": hash_password("Terapeuta#2024!"),
+            "password_hash": hash_password(demo_pwd),
             "nome": "Maria",
             "cognome": "Rossi",
             "role": "terapeuta",
@@ -1455,6 +1456,14 @@ async def seed_data():
             "created_at": datetime.now(timezone.utc)
         })
         logging.info("[SEED] Demo terapeuta creato")
+    else:
+        # Resync demo therapist password on each boot for redeploy recovery
+        if not verify_password(demo_pwd, demo_user.get("password_hash", "")):
+            await db.users.update_one(
+                {"_id": demo_user["_id"]},
+                {"$set": {"password_hash": hash_password(demo_pwd), "is_verified": True, "is_active": True}},
+            )
+            logging.info(f"[SEED] Demo terapeuta password resynced: {demo_email}")
 
     # Seed 4 additional fake therapists with generated portrait photos
     ADDITIONAL = [
@@ -1570,11 +1579,12 @@ async def seed_data():
 
     # Seed demo patient
     demo_paz_email = "demo.paziente@funzionabene.it"
+    demo_paz_pwd = "Paziente#2024!"
     demo_paz = await db.users.find_one({"email": demo_paz_email})
     if not demo_paz:
         result2 = await db.users.insert_one({
             "email": demo_paz_email,
-            "password_hash": hash_password("Paziente#2024!"),
+            "password_hash": hash_password(demo_paz_pwd),
             "nome": "Luca",
             "cognome": "Bianchi",
             "role": "paziente",
@@ -1595,6 +1605,13 @@ async def seed_data():
             "created_at": datetime.now(timezone.utc)
         })
         logging.info("[SEED] Demo paziente creato")
+    else:
+        if not verify_password(demo_paz_pwd, demo_paz.get("password_hash", "")):
+            await db.users.update_one(
+                {"_id": demo_paz["_id"]},
+                {"$set": {"password_hash": hash_password(demo_paz_pwd), "is_verified": True, "is_active": True}},
+            )
+            logging.info(f"[SEED] Demo paziente password resynced: {demo_paz_email}")
 
 @app.on_event("shutdown")
 async def shutdown():
