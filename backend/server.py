@@ -1334,9 +1334,22 @@ async def compute_cf(data: dict, user: dict = Depends(require_auth)):
         return {"error": str(e)}
 app.include_router(api_router)
 
+# CORS — supports multiple frontend origins (preview, production, custom domains) via ALLOWED_ORIGINS env var
+_extra_origins = [o.strip() for o in os.environ.get("ALLOWED_ORIGINS", "").split(",") if o.strip()]
+_cors_origins = list({
+    FRONTEND_URL,
+    "http://localhost:3000",
+    "https://funzionabene.friulion.it",
+    "https://www.funzionabene.friulion.it",
+    "https://portugues-writer-2.preview.emergentagent.com",
+    "https://portugues-writer-2.emergent.host",
+    *_extra_origins,
+})
+logging.info(f"[CORS] Allowed origins: {_cors_origins}")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[FRONTEND_URL, "http://localhost:3000"],
+    allow_origins=_cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
