@@ -1379,7 +1379,7 @@ async def startup():
 
 async def seed_data():
     admin_email = os.environ.get("ADMIN_EMAIL", "admin@funzionabene.it")
-    admin_pwd = os.environ.get("ADMIN_PASSWORD", "Admin#2024!")
+    admin_pwd = os.environ.get("ADMIN_PASSWORD", "admin2026")
     existing = await db.users.find_one({"email": admin_email})
     if not existing:
         await db.users.insert_one({
@@ -1409,7 +1409,7 @@ async def seed_data():
 
     # Seed demo therapist
     demo_email = "demo.terapeuta@funzionabene.it"
-    demo_pwd = "Terapeuta#2024!"
+    demo_pwd = "terapeuta2026"
     demo_user = await db.users.find_one({"email": demo_email})
     if not demo_user:
         result = await db.users.insert_one({
@@ -1579,7 +1579,7 @@ async def seed_data():
 
     # Seed demo patient
     demo_paz_email = "demo.paziente@funzionabene.it"
-    demo_paz_pwd = "Paziente#2024!"
+    demo_paz_pwd = "paziente2026"
     demo_paz = await db.users.find_one({"email": demo_paz_email})
     if not demo_paz:
         result2 = await db.users.insert_one({
