@@ -263,9 +263,10 @@ async def register(data: RegisterInput, response: Response):
 
     logging.info(f"[OTP] {email}: {otp_code}")
     email_sent = await send_otp_email(email, otp_code, data.nome)
-    # Only return otp_dev if real email failed (fallback for dev)
     response_body = {"message": "Registrazione completata. Controlla la tua email per il codice OTP."}
-    if not email_sent:
+    # Always expose otp_dev when EXPOSE_OTP_DEV=true (useful for testing when email delivery is unreliable)
+    expose_dev = os.environ.get("EXPOSE_OTP_DEV", "false").lower() == "true"
+    if not email_sent or expose_dev:
         response_body["otp_dev"] = otp_code
     return response_body
 
@@ -308,7 +309,8 @@ async def resend_otp(body: dict):
     logging.info(f"[OTP Resend] {email}: {otp_code}")
     email_sent = await send_otp_email(email, otp_code, user.get("nome", ""))
     response_body = {"message": "Nuovo codice OTP inviato"}
-    if not email_sent:
+    expose_dev = os.environ.get("EXPOSE_OTP_DEV", "false").lower() == "true"
+    if not email_sent or expose_dev:
         response_body["otp_dev"] = otp_code
     return response_body
 
