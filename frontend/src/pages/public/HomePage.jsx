@@ -185,8 +185,20 @@ export default function HomePage() {
       </section>
 
       {/* ────────── SEDUTE IMMERSIVE (DIFFERENZIATORE) ────────── */}
-      <section className="relative overflow-hidden" data-testid="immersive-section">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#1C2A33]/80 to-[#111111]" />
+      <section className="relative overflow-hidden border-y border-white/5" data-testid="immersive-section">
+        {/* Atmospheric backdrop — cozy Italian home interior, low opacity for depth */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#0A0A0A]" />
+        <img
+          src="/home-interior-immersive.jpg"
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
+          data-testid="immersive-bg-img"
+        />
+        {/* Readability gradient: darken the text side */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111111]" />
         <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#D4A017]/10 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-36 grid lg:grid-cols-12 gap-12 items-center">
@@ -247,23 +259,20 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="lg:col-span-5">
+          {/* Right side: VR mascot centerpiece — replaces the photo */}
+          <div className="lg:col-span-5 flex items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.92 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)]"
+              transition={{ duration: 0.9, ease: "easeOut" }}
+              className="relative flex items-center justify-center w-full"
+              data-testid="immersive-vr-stage"
             >
-              <img
-                src="/hero-immersive.jpg"
-                alt="Seduta immersiva FunzionaBene — paziente con visore VR nel comfort di casa"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover"
-                data-testid="immersive-hero-img"
-              />
-              {/* Subtle gold glow on hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#D4A017]/0 via-transparent to-[#D4A017]/10 pointer-events-none" />
+              {/* Soft gold halo behind the mascot */}
+              <div className="absolute w-[420px] h-[420px] rounded-full bg-[#D4A017]/15 blur-3xl" />
+              <div className="absolute w-[260px] h-[260px] rounded-full bg-[#D4A017]/20 blur-2xl" />
+              <Mascotte name="vr" theme="gold" size={360} animation="breathe" />
             </motion.div>
           </div>
         </div>

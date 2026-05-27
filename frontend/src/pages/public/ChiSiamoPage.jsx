@@ -48,7 +48,16 @@ export default function ChiSiamoPage() {
     <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="chi-siamo-page">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#111111]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#0A0A0A]" />
+        <img
+          src="/home-cozy-reading.jpg"
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
+          data-testid="chisiamo-hero-bg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
         <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D4A017]/10 blur-3xl" />
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">

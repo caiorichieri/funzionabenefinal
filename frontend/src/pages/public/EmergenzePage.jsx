@@ -61,8 +61,19 @@ const NUMBERS = [
 
 export default function EmergenzePage() {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111] py-16 lg:py-24" data-testid="emergenze-page">
-      <div className="max-w-4xl mx-auto px-6 lg:px-10">
+    <main className="min-h-[calc(100vh-80px)] bg-[#111111] relative overflow-hidden" data-testid="emergenze-page">
+      <div className="absolute inset-x-0 top-0 h-[500px] pointer-events-none">
+        <img
+          src="/home-cozy-reading.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          data-testid="emergenze-hero-bg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#111111]/80 to-[#111111]" />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto px-6 lg:px-10 py-16 lg:py-24">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-[#E6E2D8]/50 hover:text-[#D4A017] mb-10 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Torna alla home
         </Link>

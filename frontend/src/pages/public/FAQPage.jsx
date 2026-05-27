@@ -47,8 +47,20 @@ export default function FAQPage() {
   }, []);
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111] py-16 lg:py-24" data-testid="faq-page">
-      <div className="max-w-3xl mx-auto px-6 lg:px-10">
+    <main className="min-h-[calc(100vh-80px)] bg-[#111111] relative overflow-hidden" data-testid="faq-page">
+      {/* Atmospheric background — top fades, helps emotional grounding */}
+      <div className="absolute inset-x-0 top-0 h-[600px] pointer-events-none">
+        <img
+          src="/home-warm-living.jpg"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          data-testid="faq-hero-bg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#111111]/80 to-[#111111]" />
+      </div>
+
+      <div className="relative max-w-3xl mx-auto px-6 lg:px-10 py-16 lg:py-24">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-2">
             <Mascotte name="curioso" theme="gold" size={120} animation="wiggle" />
