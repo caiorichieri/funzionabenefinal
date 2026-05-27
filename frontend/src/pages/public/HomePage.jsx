@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { AREE_INTERVENTO, AREE_CATEGORIE, TESTIMONIANZE } from "@/data/areeIntervento";
+import Mascotte from "@/components/shared/Mascotte";
 
 const HERO_BG = "https://images.unsplash.com/photo-1690192715829-db4e65d65dd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMHdhcm0lMjBnb2xkJTIwYmx1ZSUyMHRleHR1cmV8ZW58MHx8fHwxNzc2NTEyOTEwfDA&ixlib=rb-4.1.0&q=85";
 
 const STEPS = [
-  { n: "01", title: "Compila il questionario", desc: "5 domande riservate, in 2 minuti. Nessun giudizio, nessun imbarazzo.", icon: Sparkles },
-  { n: "02", title: "Ricevi 3 abbinamenti", desc: "Ti presentiamo i 3 sessuologi più affini al tuo profilo e ai tuoi obiettivi.", icon: Heart },
-  { n: "03", title: "Inizia il percorso", desc: "Online, nello spazio che ti fa sentire più al sicuro. Oppure immersivo, se il terapeuta lo propone.", icon: MessageCircle },
+  { n: "01", title: "Compila il questionario", desc: "5 domande riservate, in 2 minuti. Nessun giudizio, nessun imbarazzo.", mascot: "embrulhado", anim: "float" },
+  { n: "02", title: "Ricevi 3 abbinamenti", desc: "Ti presentiamo i 3 sessuologi più affini al tuo profilo e ai tuoi obiettivi.", mascot: "pensativo", anim: "breathe" },
+  { n: "03", title: "Inizia il percorso", desc: "Online, nello spazio che ti fa sentire più al sicuro. Oppure immersivo, se il terapeuta lo propone.", mascot: "saltitante", anim: "wiggle" },
 ];
 
 const BENEFITS = [
@@ -83,11 +84,19 @@ export default function HomePage() {
         <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#6B8FA3]/10 blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-32 pb-28 lg:pb-40">
+          {/* Hero mascots — floating decoratively on the side */}
+          <div className="hidden lg:block absolute right-10 top-32 opacity-90 pointer-events-none">
+            <Mascotte name="abbraccio" theme="dark" size={180} animation="breathe" />
+          </div>
+          <div className="hidden xl:block absolute right-56 top-72 opacity-70 pointer-events-none">
+            <Mascotte name="saltitante" theme="dark" size={110} animation="float" />
+          </div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="max-w-4xl"
+            className="max-w-4xl relative z-10"
           >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" />
@@ -122,10 +131,19 @@ export default function HomePage() {
               </Link>
             </div>
 
-            <div className="mt-16 flex flex-wrap items-center gap-8 text-xs text-[#E6E2D8]/50">
-              <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-[#6B8FA3]" /> SSL &amp; GDPR</span>
-              <span className="flex items-center gap-2"><Award className="w-3.5 h-3.5 text-[#6B8FA3]" /> Iscritti Albo Psicologi</span>
-              <span className="flex items-center gap-2"><Heart className="w-3.5 h-3.5 text-[#6B8FA3]" /> 100% specialisti in sessuologia</span>
+            <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 text-xs text-[#E6E2D8]/60">
+              <span className="flex items-center gap-3">
+                <Mascotte name="abbraccio" theme="blue" size={36} animation="breathe" />
+                Riservato e cifrato
+              </span>
+              <span className="flex items-center gap-3">
+                <Mascotte name="pensativo" theme="blue" size={36} animation="float" />
+                Specialisti iscritti all'Albo
+              </span>
+              <span className="flex items-center gap-3">
+                <Mascotte name="peludo" theme="blue" size={36} animation="wiggle" />
+                100% sessuologia
+              </span>
             </div>
           </motion.div>
         </div>
@@ -142,25 +160,24 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {STEPS.map((s, i) => {
-            const Icon = s.icon;
             return (
               <motion.div
                 key={s.n}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: i * 0.15 }}
                 data-testid={`step-${s.n}`}
-                className="relative p-8 lg:p-10 bg-[#1C2A33]/40 border border-white/10 rounded-3xl hover:border-[#D4A017]/40 transition-all group"
+                className="relative p-8 lg:p-10 bg-[#1C2A33]/40 border border-white/10 rounded-3xl hover:border-[#D4A017]/40 transition-all group overflow-hidden"
               >
-                <div className="flex items-start justify-between mb-8">
-                  <span className="font-serif text-5xl text-[#D4A017]/30 group-hover:text-[#D4A017]/60 transition-colors">{s.n}</span>
-                  <div className="w-12 h-12 rounded-full bg-[#6B8FA3]/10 flex items-center justify-center">
-                    <Icon className="w-5 h-5 text-[#6B8FA3]" />
-                  </div>
+                {/* Glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#D4A017]/0 to-[#D4A017]/0 group-hover:from-[#D4A017]/5 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
+                <div className="relative flex items-start justify-between mb-6">
+                  <span className="font-serif text-5xl text-[#D4A017]/30 group-hover:text-[#D4A017]/70 transition-colors">{s.n}</span>
+                  <Mascotte name={s.mascot} theme="gold" size={70} animation={s.anim} />
                 </div>
-                <h3 className="font-serif text-2xl text-[#F4F1ED] mb-3">{s.title}</h3>
-                <p className="text-[#E6E2D8]/60 text-sm leading-relaxed">{s.desc}</p>
+                <h3 className="font-serif text-2xl text-[#F4F1ED] mb-3 relative">{s.title}</h3>
+                <p className="text-[#E6E2D8]/60 text-sm leading-relaxed relative">{s.desc}</p>
               </motion.div>
             );
           })}
@@ -481,6 +498,9 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32" data-testid="cta-band">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#1C2A33] via-[#1C2A33] to-[#0A0A0A] border border-white/10 p-12 lg:p-20">
           <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+          <div className="hidden md:block absolute right-12 bottom-12 lg:right-20 lg:bottom-20 opacity-80">
+            <Mascotte name="abbraccio" theme="dark" size={160} animation="breathe" />
+          </div>
           <div className="relative max-w-2xl">
             <h2 className="font-serif text-4xl lg:text-5xl text-[#F4F1ED] leading-tight">
               Un primo passo.<br />Il più difficile, il più importante.

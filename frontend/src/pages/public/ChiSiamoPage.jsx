@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Sparkles, Heart, ShieldCheck, Award, Users, Target } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 const VALUES = [
   {
@@ -59,9 +60,14 @@ export default function ChiSiamoPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
+            className="relative"
           >
+            {/* Peeking mascot on the right side */}
+            <div className="hidden md:block absolute right-0 top-0 -mr-6 -mt-4 opacity-90">
+              <Mascotte name="coppia" theme="gold" size={180} animation="breathe" />
+            </div>
             <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Chi siamo</span>
-            <h1 className="mt-4 font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight">
+            <h1 className="mt-4 font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight max-w-3xl">
               Una piattaforma curata,<br /><em className="text-[#D4A017] not-italic">non un marketplace.</em>
             </h1>
             <p className="mt-8 text-lg lg:text-xl text-[#E6E2D8]/75 leading-relaxed max-w-3xl">

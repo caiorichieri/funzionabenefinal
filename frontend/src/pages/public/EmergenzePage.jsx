@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { AlertTriangle, Phone, Heart, Shield, ExternalLink, ArrowLeft } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 const NUMBERS = [
   {
@@ -82,10 +83,13 @@ export default function EmergenzePage() {
           </div>
         </motion.div>
 
-        <div className="mb-12">
+        <div className="mb-12 relative">
+          <div className="hidden md:block absolute right-0 -top-4 opacity-90">
+            <Mascotte name="abbraccio" theme="gold" size={130} animation="breathe" />
+          </div>
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Numeri utili</span>
-          <h1 className="mt-4 font-serif text-4xl lg:text-5xl text-[#F4F1ED] leading-tight">Non sei solo. Non sei sola.</h1>
-          <p className="mt-4 text-[#E6E2D8]/60 text-lg leading-relaxed">
+          <h1 className="mt-4 font-serif text-4xl lg:text-5xl text-[#F4F1ED] leading-tight max-w-2xl">Non sei solo. Non sei sola.</h1>
+          <p className="mt-4 text-[#E6E2D8]/60 text-lg leading-relaxed max-w-2xl">
             Qui trovi numeri di ascolto, emergenza e supporto. Tutti gratuiti, molti attivi 24 ore su 24.
           </p>
         </div>

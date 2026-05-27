@@ -3,6 +3,7 @@ import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Mascotte from "@/components/shared/Mascotte";
 
 const FALLBACK_FAQ = [
   {
@@ -49,6 +50,9 @@ export default function FAQPage() {
     <main className="min-h-[calc(100vh-80px)] bg-[#111111] py-16 lg:py-24" data-testid="faq-page">
       <div className="max-w-3xl mx-auto px-6 lg:px-10">
         <div className="text-center mb-16">
+          <div className="flex justify-center mb-2">
+            <Mascotte name="curioso" theme="gold" size={120} animation="wiggle" />
+          </div>
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
           <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#F4F1ED] leading-tight">
             Cosa c'è da sapere.

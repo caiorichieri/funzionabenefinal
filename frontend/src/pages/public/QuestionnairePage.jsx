@@ -4,6 +4,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
+
+// One mascot per step — gentle visual narrative
+const STEP_MASCOTS = ["embrulhado", "ovo", "pensativo", "curioso", "saltitante"];
 
 const STEPS = [
   {
@@ -140,10 +144,18 @@ export default function QuestionnairePage() {
             transition={{ duration: 0.4 }}
             data-testid={`step-${current.key}`}
           >
-            <h1 className="font-serif text-3xl lg:text-4xl text-[#F4F1ED] leading-tight">
+            <div className="mb-6 flex justify-center">
+              <Mascotte
+                name={STEP_MASCOTS[step % STEP_MASCOTS.length]}
+                theme="dark"
+                size={90}
+                animation={step === STEPS.length - 1 ? "wiggle" : "float"}
+              />
+            </div>
+            <h1 className="font-serif text-3xl lg:text-4xl text-[#F4F1ED] leading-tight text-center">
               {current.label}
             </h1>
-            <p className="mt-3 text-[#E6E2D8]/60">{current.helper}</p>
+            <p className="mt-3 text-[#E6E2D8]/60 text-center">{current.helper}</p>
 
             <div className="mt-10 space-y-3">
               {current.options.map((opt) => {

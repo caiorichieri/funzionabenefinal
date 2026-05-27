@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AREE_INTERVENTO, AREE_CATEGORIE } from "@/data/areeIntervento";
+import Mascotte from "@/components/shared/Mascotte";
 
 export default function AreeInterventoPage() {
   // Group by category
@@ -18,7 +19,10 @@ export default function AreeInterventoPage() {
           <ArrowLeft className="w-4 h-4" /> Torna alla home
         </Link>
 
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-16 relative">
+          <div className="hidden md:block absolute -right-4 -top-8 opacity-90">
+            <Mascotte name="pensativo" theme="gold" size={140} animation="breathe" />
+          </div>
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Aree di intervento</span>
           <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#F4F1ED] leading-[1.05]">
             Tutto quello di cui ci occupiamo.

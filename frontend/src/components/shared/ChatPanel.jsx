@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { Send, MessageCircle, ArrowLeft } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 /**
  * ChatPanel — private 1:1 chat between paziente and terapista.
@@ -77,10 +78,10 @@ export default function ChatPanel({ role }) {
 
   if (conversazioni.length === 0) {
     return (
-      <div className="p-12 text-center" data-testid="chat-empty">
-        <MessageCircle className="w-10 h-10 text-[#6B8FA3] mx-auto mb-4 opacity-50" />
-        <h3 className="font-serif text-xl text-[#1C1C1C] mb-2">Nessuna conversazione</h3>
-        <p className="text-sm text-[rgba(28,28,28,0.5)] max-w-sm mx-auto">
+      <div className="p-12 text-center flex flex-col items-center" data-testid="chat-empty">
+        <Mascotte name="ovo" size={110} animation="float" />
+        <h3 className="font-serif text-xl text-[#1C1C1C] mt-4 mb-2">Nessuna conversazione</h3>
+        <p className="text-sm text-[rgba(28,28,28,0.5)] max-w-sm">
           {role === "paziente"
             ? "Le conversazioni con il tuo terapeuta saranno disponibili dopo la prima prenotazione confermata."
             : "Le conversazioni con i tuoi pazienti appariranno qui dopo la prima seduta."}

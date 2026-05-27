@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Check, Home, Shield, Award, Headphones } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 const BENEFITS = [
   {
@@ -77,12 +78,17 @@ export default function SeduteImmersive() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
+            className="relative"
           >
+            {/* Floating mascot peeking from the side */}
+            <div className="hidden lg:block absolute -right-4 top-8 opacity-90">
+              <Mascotte name="sereno" theme="gold" size={170} animation="float" />
+            </div>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" /> Il nostro differenziale
             </div>
 
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight">
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#F4F1ED] tracking-tight max-w-3xl">
               La terapia<br /><em className="text-[#D4A017] not-italic">come non l'hai mai vissuta.</em>
             </h1>
 

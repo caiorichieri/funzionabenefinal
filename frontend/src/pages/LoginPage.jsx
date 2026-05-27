@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Eye, EyeOff, Lock, Mail } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -72,9 +73,12 @@ export default function LoginPage() {
             <span className="text-[#1C1C1C] text-xl font-semibold font-[Outfit]">FunzionaBene</span>
           </div>
 
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Accedi</h2>
-            <p className="text-[rgba(28,28,28,0.6)] mt-2">Inserisci le tue credenziali per continuare</p>
+          <div className="mb-8 flex items-center gap-4">
+            <Mascotte name="abbraccio" theme="gold" size={64} animation="breathe" />
+            <div>
+              <h2 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Bentornato</h2>
+              <p className="text-[rgba(28,28,28,0.6)] mt-1">Bello rivederti.</p>
+            </div>
           </div>
 
           {error && (

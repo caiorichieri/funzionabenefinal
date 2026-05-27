@@ -37,6 +37,7 @@ import SeduteImmersive from "@/pages/public/SeduteImmersive";
 import AreeInterventoPage from "@/pages/public/AreeInterventoPage";
 import EmergenzePage from "@/pages/public/EmergenzePage";
 import ChiSiamoPage from "@/pages/public/ChiSiamoPage";
+import NotFoundPage from "@/pages/public/NotFoundPage";
 
 import "@/App.css";
 
@@ -106,7 +107,9 @@ export default function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<PublicLayout />}>
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AuthProvider>

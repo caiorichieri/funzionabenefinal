@@ -4,6 +4,7 @@ import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, User } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 function formatDate(d) {
   if (!d) return "";
@@ -48,8 +49,9 @@ export default function BlogPublicPage() {
         )}
 
         {!loading && articoli.length === 0 && (
-          <div className="py-20 text-center border border-dashed border-white/10 rounded-3xl" data-testid="blog-empty">
-            <p className="text-[#E6E2D8]/50">Nessun articolo pubblicato al momento. Torna presto.</p>
+          <div className="py-20 text-center border border-dashed border-white/10 rounded-3xl flex flex-col items-center gap-6" data-testid="blog-empty">
+            <Mascotte name="ovo" theme="dark" size={140} animation="float" />
+            <p className="text-[#E6E2D8]/50 max-w-md">Nessun articolo pubblicato al momento. Torna presto — i nostri specialisti stanno scrivendo per te.</p>
           </div>
         )}
 

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { Eye, EyeOff, User, Mail, Lock, UserCheck } from "lucide-react";
+import Mascotte from "@/components/shared/Mascotte";
 
 const ROLES = [
   { id: "paziente", label: "Sono un Paziente", desc: "Cerco supporto psicologico/sessuologico" },
@@ -45,9 +46,11 @@ export default function RegisterPage() {
     <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-6">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] mx-auto mb-4" />
+          <div className="flex justify-center mb-4">
+            <Mascotte name="saltitante" theme="gold" size={90} animation="wiggle" />
+          </div>
           <h1 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Crea il tuo account</h1>
-          <p className="text-[rgba(28,28,28,0.6)] mt-2">FunzionaBene — Piattaforma di Sessuologia</p>
+          <p className="text-[rgba(28,28,28,0.6)] mt-2">Il primo passo è già qui.</p>
         </div>
 
         {step === 1 && (

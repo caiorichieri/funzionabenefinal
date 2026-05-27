@@ -4,6 +4,7 @@ import axios from "axios";
 import { API, useAuth } from "@/contexts/AuthContext";
 import { Calendar, Clock, Video, User, Save, CheckCircle, MessageCircle } from "lucide-react";
 import ChatPanel from "@/components/shared/ChatPanel";
+import Mascotte from "@/components/shared/Mascotte";
 
 function canJoin(dataOra, durata = 50) {
   const now = new Date();
@@ -186,7 +187,7 @@ export default function PazienteDashboard() {
       </div>
 
       {/* Prossime sessioni */}
-      {prossime.length > 0 && (
+      {prossime.length > 0 ? (
         <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4">Prossime Sessioni</h3>
           <div className="space-y-3">
@@ -218,6 +219,19 @@ export default function PazienteDashboard() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      ) : (
+        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-10 shadow-sm flex flex-col sm:flex-row items-center gap-8" data-testid="paziente-empty-sessions">
+          <Mascotte name="embrulhado" size={120} animation="breathe" />
+          <div className="flex-1 text-center sm:text-left">
+            <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] text-lg mb-2">Ancora nessuna sessione</h3>
+            <p className="text-sm text-[rgba(28,28,28,0.6)] mb-5 max-w-md">
+              Quando inizi un percorso, le tue prossime sedute compariranno qui. Non c'è fretta — fai un passo alla volta.
+            </p>
+            <a href="/questionario" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D4A017] hover:bg-[#B38612] text-white rounded-full text-sm font-medium transition-colors">
+              Trova il tuo specialista →
+            </a>
           </div>
         </div>
       )}
