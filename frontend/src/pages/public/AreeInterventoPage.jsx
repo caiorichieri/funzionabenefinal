@@ -14,15 +14,14 @@ export default function AreeInterventoPage() {
 
   return (
     <main className="min-h-[calc(100vh-80px)] bg-[#111111] relative overflow-hidden" data-testid="aree-intervento-page">
-      <div className="absolute inset-x-0 top-0 h-[500px] pointer-events-none">
-        <img
-          src="/home-warm-living.jpg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-          data-testid="aree-hero-bg"
+      {/* Continuous atmospheric backdrop */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.10] bg-fixed"
+          style={{ backgroundImage: "url(/home-warm-living.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#111111]/80 to-[#111111]" />
+        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
       </div>
 
       <div className="relative max-w-6xl mx-auto px-6 lg:px-10 py-16 lg:py-24">

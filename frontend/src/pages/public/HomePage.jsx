@@ -10,7 +10,7 @@ import { API } from "@/contexts/AuthContext";
 import { AREE_INTERVENTO, AREE_CATEGORIE, TESTIMONIANZE } from "@/data/areeIntervento";
 import Mascotte from "@/components/shared/Mascotte";
 
-const HERO_BG = "https://images.unsplash.com/photo-1690192715829-db4e65d65dd7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHwzfHxhYnN0cmFjdCUyMHdhcm0lMjBnb2xkJTIwYmx1ZSUyMHRleHR1cmV8ZW58MHx8fHwxNzc2NTEyOTEwfDA&ixlib=rb-4.1.0&q=85";
+const HERO_BG = "/home-daily.jpg";
 
 const STEPS = [
   { n: "01", title: "Compila il questionario", desc: "5 domande riservate, in 2 minuti. Nessun giudizio, nessun imbarazzo.", mascot: "embrulhado", anim: "float" },
@@ -72,16 +72,32 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main data-testid="homepage">
-      {/* ────────── HERO ────────── */}
-      <section className="relative overflow-hidden">
+    <main data-testid="homepage" className="relative bg-[#111111] overflow-hidden">
+      {/* ────────── UNIFIED ATMOSPHERIC BACKDROP — covers entire homepage ────────── */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Base warm-home image, very low opacity for whole-page texture */}
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-[0.08] bg-fixed"
           style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111111]/40 via-[#111111]/80 to-[#111111]" />
-        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D4A017]/10 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#6B8FA3]/10 blur-3xl" />
+        {/* Soft amber bloom top-left */}
+        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+        {/* Steel-blue bloom bottom-right */}
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/8 blur-3xl" />
+        {/* Mid amber bloom */}
+        <div className="absolute top-[40%] left-[35%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/5 blur-3xl" />
+      </div>
+
+      {/* ────────── HERO ────────── */}
+      <section className="relative">
+        {/* Hero-only stronger image */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div
+            className="absolute inset-0 opacity-30"
+            style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-[#111111]/70 to-[#111111]" />
+        </div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-32 pb-28 lg:pb-40">
           {/* Hero mascots — floating decoratively on the side */}
@@ -185,21 +201,10 @@ export default function HomePage() {
       </section>
 
       {/* ────────── SEDUTE IMMERSIVE (DIFFERENZIATORE) ────────── */}
-      <section className="relative overflow-hidden border-y border-white/5" data-testid="immersive-section">
-        {/* Atmospheric backdrop — cozy Italian home interior, low opacity for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#0A0A0A]" />
-        <img
-          src="/home-interior-immersive.jpg"
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none"
-          data-testid="immersive-bg-img"
-        />
-        {/* Readability gradient: darken the text side */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111111]" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+      <section className="relative" data-testid="immersive-section">
+        {/* Subtle darker overlay for emphasis */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33]/40 via-transparent to-[#0A0A0A]/30 pointer-events-none" />
+        <div className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full bg-[#D4A017]/10 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-36 grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
@@ -334,7 +339,7 @@ export default function HomePage() {
       </section>
 
       {/* ────────── PERCHÉ FUNZIONABENE ────────── */}
-      <section className="bg-[#0A0A0A] border-y border-white/5" data-testid="perche-section">
+      <section className="relative" data-testid="perche-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
           <div className="max-w-2xl mb-16">
             <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Perché FunzionaBene</span>
@@ -411,7 +416,7 @@ export default function HomePage() {
       </section>
 
       {/* ────────── A COSA SERVE / NON SERVE ────────── */}
-      <section className="bg-[#0A0A0A] border-y border-white/5" data-testid="serve-section">
+      <section className="relative" data-testid="serve-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32 grid lg:grid-cols-2 gap-10">
           <div className="p-10 bg-[#1C2A33]/40 border border-[#D4A017]/20 rounded-3xl">
             <div className="inline-flex items-center gap-2 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-5">

@@ -55,23 +55,30 @@ const FAQ = [
 
 export default function SeduteImmersive() {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="immersive-page">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#111111]" />
-        {/* Atmospheric hero image — low opacity for depth, no distraction from copy */}
-        <img
-          src="/sedute-immersive-hero.jpg"
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none"
-          data-testid="immersive-hero-bg"
+    <main className="min-h-[calc(100vh-80px)] relative bg-[#111111] overflow-hidden" data-testid="immersive-page">
+      {/* Continuous atmospheric backdrop */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.10] bg-fixed"
+          style={{ backgroundImage: "url(/sedute-immersive-hero.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        {/* Readability gradient: darken left side where text lives */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/85 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#111111]" />
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
+      </div>
+
+      {/* Hero */}
+      <section className="relative">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="/sedute-immersive-hero.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover opacity-40"
+            data-testid="immersive-hero-bg"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-[#111111]/70 to-[#111111]" />
+        </div>
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">
           <motion.div
@@ -152,7 +159,7 @@ export default function SeduteImmersive() {
       </section>
 
       {/* Use cases */}
-      <section className="bg-[#0A0A0A] border-y border-white/5 py-20 lg:py-28" data-testid="immersive-usecases">
+      <section className="relative py-20 lg:py-28" data-testid="immersive-usecases">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="max-w-2xl mb-14">
             <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Applicazioni cliniche</span>

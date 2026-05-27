@@ -45,20 +45,29 @@ const STATS = [
 
 export default function ChiSiamoPage() {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="chi-siamo-page">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33] via-[#111111] to-[#0A0A0A]" />
-        <img
-          src="/home-cozy-reading.jpg"
-          alt=""
-          aria-hidden="true"
-          loading="eager"
-          className="absolute inset-0 w-full h-full object-cover opacity-25 pointer-events-none"
-          data-testid="chisiamo-hero-bg"
+    <main className="min-h-[calc(100vh-80px)] relative bg-[#111111] overflow-hidden" data-testid="chisiamo-page">
+      {/* Continuous atmospheric backdrop */}
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute inset-0 opacity-[0.10] bg-fixed"
+          style={{ backgroundImage: "url(/home-cozy-reading.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
-        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
+      </div>
+
+      {/* Hero */}
+      <section className="relative">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            src="/home-cozy-reading.jpg"
+            alt=""
+            aria-hidden="true"
+            loading="eager"
+            className="absolute inset-0 w-full h-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-[#111111]/70 to-[#111111]" />
+        </div>
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">
           <Link to="/" className="inline-flex items-center gap-2 text-sm text-[#E6E2D8]/50 hover:text-[#D4A017] mb-10 transition-colors">
@@ -114,7 +123,7 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* Stats */}
-      <section className="bg-[#0A0A0A] border-y border-white/5 py-16" data-testid="stats-section">
+      <section className="relative py-16" data-testid="stats-section">
         <div className="max-w-6xl mx-auto px-6 lg:px-10 grid md:grid-cols-4 gap-8">
           {STATS.map((s, i) => (
             <motion.div
@@ -166,7 +175,7 @@ export default function ChiSiamoPage() {
       </section>
 
       {/* Team philosophy */}
-      <section className="bg-[#0A0A0A] border-y border-white/5" data-testid="team-section">
+      <section className="relative" data-testid="team-section">
         <div className="max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-5">
