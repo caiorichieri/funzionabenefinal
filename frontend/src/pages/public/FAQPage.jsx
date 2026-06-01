@@ -47,7 +47,7 @@ export default function FAQPage() {
   }, []);
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111] relative overflow-hidden" data-testid="faq-page">
+    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] relative overflow-hidden" data-testid="faq-page">
       {/* Continuous atmospheric backdrop */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div
@@ -64,15 +64,15 @@ export default function FAQPage() {
             <Mascotte name="curioso" theme="gold" size={120} animation="wiggle" />
           </div>
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
-          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#F4F1ED] leading-tight">
+          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#1C1C1C] leading-tight">
             Cosa c'è da sapere.
           </h1>
-          <p className="mt-6 text-[#E6E2D8]/60">
+          <p className="mt-6 text-[rgba(28,28,28,0.6)]">
             Risposte chiare alle domande più comuni. Se non trovi quella che cerchi, scrivici.
           </p>
         </div>
 
-        <div className="divide-y divide-white/10 border-t border-b border-white/10">
+        <div className="divide-y divide-white/10 border-t border-b border-[rgba(28,28,28,0.08)]">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -81,7 +81,7 @@ export default function FAQPage() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full py-6 flex items-start justify-between gap-6 text-left group"
                 >
-                  <span className="font-serif text-xl text-[#F4F1ED] group-hover:text-[#D4A017] transition-colors">
+                  <span className="font-serif text-xl text-[#1C1C1C] group-hover:text-[#D4A017] transition-colors">
                     {f.domanda}
                   </span>
                   <ChevronDown
@@ -97,7 +97,7 @@ export default function FAQPage() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-[#E6E2D8]/70 leading-relaxed">{f.risposta}</p>
+                      <p className="pb-6 text-[rgba(28,28,28,0.7)] leading-relaxed">{f.risposta}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

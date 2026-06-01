@@ -159,3 +159,37 @@ code {
   color: #F4F1ED;
   font-weight: 500;
 }
+
+/* ──────── LIGHT THEME — public-facing pages ──────── */
+:root {
+  --fb-bg: #FBF8F2;          /* warm cream base */
+  --fb-bg-soft: #F4EFE5;     /* slight darker cream for sections */
+  --fb-ink: #1C1C1C;         /* deep ink, primary text */
+  --fb-ink-soft: rgba(28,28,28,0.65);
+  --fb-ink-muted: rgba(28,28,28,0.5);
+  --fb-border: rgba(28,28,28,0.08);
+  --fb-gold: #D4A017;
+  --fb-gold-soft: #E5B942;
+  --fb-blue: #6B8FA3;
+  --fb-card: #FFFFFF;
+}
+
+/* Light-theme blog prose overrides */
+.blog-prose-light {
+  color: rgba(28,28,28,0.82);
+  font-family: ui-serif, Georgia, 'Cormorant Garamond', serif;
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+.blog-prose-light p { margin-bottom: 1.6rem; }
+.blog-prose-light p.intro {
+  font-size: 1.25rem;
+  color: #1C1C1C;
+  border-left: 2px solid #D4A017;
+  padding-left: 1.25rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+.blog-prose-light p.intro strong { font-weight: 400; }
+.blog-prose-light em { font-style: italic; color: #D4A017; }
+.blog-prose-light strong { color: #1C1C1C; font-weight: 600; }

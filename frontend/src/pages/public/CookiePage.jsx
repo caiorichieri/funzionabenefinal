@@ -22,10 +22,10 @@ export default function CookiePage() {
   };
 
   const Toggle = ({ name, label, desc, disabled }) => (
-    <div className="flex items-start justify-between gap-6 py-5 border-b border-white/10">
+    <div className="flex items-start justify-between gap-6 py-5 border-b border-[rgba(28,28,28,0.08)]">
       <div>
-        <div className="text-[#F4F1ED] font-medium mb-1">{label}</div>
-        <div className="text-sm text-[#E6E2D8]/60 leading-relaxed">{desc}</div>
+        <div className="text-[#1C1C1C] font-medium mb-1">{label}</div>
+        <div className="text-sm text-[rgba(28,28,28,0.6)] leading-relaxed">{desc}</div>
       </div>
       <label className="relative inline-block w-11 h-6 flex-shrink-0 mt-1 cursor-pointer">
         <input
@@ -104,7 +104,7 @@ export default function CookiePage() {
         <button
           data-testid="cookie-revoke-btn"
           onClick={revoke}
-          className="px-6 py-3 border border-white/15 text-[#E6E2D8] hover:bg-white/5 rounded-full text-sm tracking-wide transition-all"
+          className="px-6 py-3 border border-[rgba(28,28,28,0.12)] text-[#E6E2D8] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
         >
           Revoca tutto il consenso
         </button>

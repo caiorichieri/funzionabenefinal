@@ -110,7 +110,7 @@ export default function QuestionnairePage() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="questionnaire">
+    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2]" data-testid="questionnaire">
       <div className="sticky top-20 z-30 h-1 bg-white/5">
         <motion.div
           data-testid="progress-bar"
@@ -122,7 +122,7 @@ export default function QuestionnairePage() {
       </div>
 
       <div className="max-w-xl mx-auto px-6 py-16 lg:py-24">
-        <div className="mb-8 flex items-center justify-between text-xs tracking-[0.2em] uppercase text-[#E6E2D8]/40">
+        <div className="mb-8 flex items-center justify-between text-xs tracking-[0.2em] uppercase text-[rgba(28,28,28,0.4)]">
           <span>Passo {step + 1} di {STEPS.length}</span>
           {step > 0 && (
             <button
@@ -147,15 +147,15 @@ export default function QuestionnairePage() {
             <div className="mb-6 flex justify-center">
               <Mascotte
                 name={STEP_MASCOTS[step % STEP_MASCOTS.length]}
-                theme="dark"
+                theme="gold"
                 size={90}
                 animation={step === STEPS.length - 1 ? "wiggle" : "float"}
               />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-[#F4F1ED] leading-tight text-center">
+            <h1 className="font-serif text-3xl lg:text-4xl text-[#1C1C1C] leading-tight text-center">
               {current.label}
             </h1>
-            <p className="mt-3 text-[#E6E2D8]/60 text-center">{current.helper}</p>
+            <p className="mt-3 text-[rgba(28,28,28,0.6)] text-center">{current.helper}</p>
 
             <div className="mt-10 space-y-3">
               {current.options.map((opt) => {
@@ -170,8 +170,8 @@ export default function QuestionnairePage() {
                     onClick={() => current.type === "single" ? selectSingle(opt) : toggleMulti(opt)}
                     className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl border transition-all text-left ${
                       isSelected
-                        ? "border-[#D4A017] bg-[#D4A017]/10 text-[#F4F1ED]"
-                        : "border-white/10 bg-[#1C2A33]/30 text-[#E6E2D8]/80 hover:border-[#6B8FA3]/60 hover:bg-[#1C2A33]/60"
+                        ? "border-[#D4A017] bg-[#D4A017]/10 text-[#1C1C1C]"
+                        : "border-[rgba(28,28,28,0.08)] bg-white/30 text-[rgba(28,28,28,0.7)] hover:border-[#6B8FA3]/60 hover:bg-white/60"
                     }`}
                   >
                     <span className="text-base">{opt}</span>
