@@ -61,15 +61,10 @@ const NUMBERS = [
 
 export default function EmergenzePage() {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] relative overflow-hidden" data-testid="emergenze-page">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] relative overflow-hidden" data-testid="emergenze-page">
       {/* Continuous atmospheric backdrop */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute inset-0 opacity-[0.10] bg-fixed"
-          style={{ backgroundImage: "url(/home-cozy-reading.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
-        />
-        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"><div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/25 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/30 blur-3xl" />
       </div>
 
       <div className="relative max-w-4xl mx-auto px-6 lg:px-10 py-16 lg:py-24">

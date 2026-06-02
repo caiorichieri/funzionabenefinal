@@ -110,7 +110,7 @@ export default function QuestionnairePage() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2]" data-testid="questionnaire">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5]" data-testid="questionnaire">
       <div className="sticky top-20 z-30 h-1 bg-white/5">
         <motion.div
           data-testid="progress-bar"

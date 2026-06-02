@@ -30,12 +30,12 @@ export default function BlogPostPage() {
   }, [id]);
 
   if (loading) {
-    return <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] flex items-center justify-center text-[rgba(28,28,28,0.4)]">Caricamento...</main>;
+    return <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] flex items-center justify-center text-[rgba(28,28,28,0.4)]">Caricamento...</main>;
   }
 
   if (!articolo) {
     return (
-      <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] flex items-center justify-center px-6" data-testid="blog-not-found">
+      <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] flex items-center justify-center px-6" data-testid="blog-not-found">
         <div className="text-center">
           <h1 className="font-serif text-3xl text-[#1C1C1C] mb-4">Articolo non trovato</h1>
           <Link to="/blog" className="text-[#D4A017] hover:text-[#E5B942]">← Torna al blog</Link>
@@ -48,7 +48,7 @@ export default function BlogPostPage() {
   const isHtml = hasHtmlMarkup(contenuto);
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] py-16 lg:py-24" data-testid="blog-post">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] py-16 lg:py-24" data-testid="blog-post">
       <article className="max-w-3xl mx-auto px-6 lg:px-10">
         <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-[rgba(28,28,28,0.5)] hover:text-[#D4A017] mb-10">
           <ArrowLeft className="w-4 h-4" /> Torna al blog

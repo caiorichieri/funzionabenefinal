@@ -24,7 +24,7 @@ function Header() {
     user && user.role === "paziente" ? "/paziente" : null;
 
   return (
-    <header data-testid="public-header" className="sticky top-0 z-40 bg-[#FBF8F2]/70 backdrop-blur-xl border-b border-[rgba(28,28,28,0.05)]">
+    <header data-testid="public-header" className="sticky top-0 z-40 bg-[#E5D9C5]/70 backdrop-blur-xl border-b border-[rgba(28,28,28,0.05)]">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
         <Link to="/" data-testid="public-logo" className="flex items-center gap-3">
           <img src="/assets/logo.png" alt="FunzionaBene" className="w-12 h-12 object-contain" />
@@ -92,7 +92,7 @@ function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-[rgba(28,28,28,0.05)] bg-[#FBF8F2]/95 backdrop-blur-xl">
+        <div className="lg:hidden border-t border-[rgba(28,28,28,0.05)] bg-[#E5D9C5]/95 backdrop-blur-xl">
           <div className="px-6 py-4 space-y-3">
             {NAV.map((n) => (
               <NavLink
@@ -140,7 +140,7 @@ function Header() {
 
 function Footer() {
   return (
-    <footer data-testid="public-footer" className="bg-[#F4EFE5] border-t border-[rgba(28,28,28,0.05)] mt-24">
+    <footer data-testid="public-footer" className="bg-[#D9CBB3] border-t border-[rgba(28,28,28,0.05)] mt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 py-16 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-3 mb-4">
@@ -185,7 +185,7 @@ function Footer() {
 
 export default function PublicLayout() {
   return (
-    <div className="min-h-screen bg-[#FBF8F2] text-[#1C1C1C] font-sans antialiased">
+    <div className="min-h-screen bg-[#E5D9C5] text-[#1C1C1C] font-sans antialiased">
       <Header />
       <Outlet />
       <Footer />

@@ -32,7 +32,7 @@ export default function BlogPublicPage() {
   const [hero, ...rest] = articoli;
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#FBF8F2] py-16 lg:py-24" data-testid="blog-page">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] py-16 lg:py-24" data-testid="blog-page">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-2xl">
           <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Rivista</span>

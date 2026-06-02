@@ -55,29 +55,18 @@ const FAQ = [
 
 export default function SeduteImmersive() {
   return (
-    <main className="min-h-[calc(100vh-80px)] relative bg-[#FBF8F2] overflow-hidden" data-testid="immersive-page">
-      {/* Continuous atmospheric backdrop */}
+    <main className="min-h-[calc(100vh-80px)] relative bg-[#E5D9C5] overflow-hidden" data-testid="immersive-page">
+      {/* Continuous atmospheric backdrop — gold ↔ blue blooms only */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute inset-0 opacity-[0.10] bg-fixed"
-          style={{ backgroundImage: "url(/sedute-immersive-hero.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
-        />
-        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#D4A017]/30 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/35 blur-3xl" />
+        <div className="absolute top-[50%] right-[20%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/15 blur-3xl" />
       </div>
 
       {/* Hero */}
       <section className="relative">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="/sedute-immersive-hero.jpg"
-            alt=""
-            aria-hidden="true"
-            loading="eager"
-            className="absolute inset-0 w-full h-full object-cover opacity-40"
-            data-testid="immersive-hero-bg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(28,28,28,0.04)] via-[rgba(251,248,242,0.4)] to-[#FBF8F2]" />
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#E5D9C5]" />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">

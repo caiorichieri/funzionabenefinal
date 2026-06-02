@@ -72,34 +72,23 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main data-testid="homepage" className="relative bg-[#FBF8F2] overflow-hidden">
-      {/* ────────── UNIFIED ATMOSPHERIC BACKDROP — covers entire homepage ────────── */}
+    <main data-testid="homepage" className="relative bg-[#E5D9C5] overflow-hidden">
+      {/* ────────── ATMOSPHERIC BACKDROP — gold ↔ steel-blue blooms only ────────── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Base warm-home image, very low opacity for whole-page texture */}
-        <div
-          className="absolute inset-0 opacity-[0.05] bg-fixed"
-          style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
-        />
         {/* Vibrant gold bloom top-left */}
-        <div className="absolute -top-32 -left-32 w-[800px] h-[800px] rounded-full bg-[#D4A017]/25 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#D4A017]/30 blur-3xl" />
         {/* Steel-blue bloom bottom-right */}
-        <div className="absolute -bottom-32 -right-32 w-[900px] h-[900px] rounded-full bg-[#6B8FA3]/22 blur-3xl" />
-        {/* Mid amber bloom */}
-        <div className="absolute top-[35%] right-[25%] w-[600px] h-[600px] rounded-full bg-[#D4A017]/12 blur-3xl" />
-        {/* Mid blue bloom */}
-        <div className="absolute top-[60%] left-[20%] w-[500px] h-[500px] rounded-full bg-[#6B8FA3]/15 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/35 blur-3xl" />
+        {/* Mid gold accent */}
+        <div className="absolute top-[20%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/18 blur-3xl" />
+        {/* Mid blue accent */}
+        <div className="absolute top-[55%] left-[15%] w-[600px] h-[600px] rounded-full bg-[#6B8FA3]/28 blur-3xl" />
+        {/* Lower gold warmth */}
+        <div className="absolute bottom-[20%] left-[40%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/15 blur-3xl" />
       </div>
 
       {/* ────────── HERO ────────── */}
       <section className="relative">
-        {/* Hero-only photo overlay with gentle warmth */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-20"
-            style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: "cover", backgroundPosition: "center" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#FBF8F2]/30 via-[#FBF8F2]/60 to-[#FBF8F2]" />
-        </div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-32 pb-28 lg:pb-40">
           {/* Hero mascots — floating decoratively on the side */}
@@ -512,7 +501,7 @@ export default function HomePage() {
 
       {/* ────────── CTA BAND ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32" data-testid="cta-band">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-[#FBF8F2] to-[#F4EFE5] border border-[rgba(28,28,28,0.08)] p-12 lg:p-20">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-[#F4EFE5] to-[#D9CBB3] border border-[rgba(28,28,28,0.1)] p-12 lg:p-20">
           <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-[#D4A017]/10 blur-3xl" />
           <div className="hidden md:block absolute right-12 bottom-12 lg:right-20 lg:bottom-20 opacity-80">
             <Mascotte name="abbraccio" theme="gold" size={160} animation="breathe" />

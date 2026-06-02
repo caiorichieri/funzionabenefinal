@@ -45,28 +45,15 @@ const STATS = [
 
 export default function ChiSiamoPage() {
   return (
-    <main className="min-h-[calc(100vh-80px)] relative bg-[#FBF8F2] overflow-hidden" data-testid="chisiamo-page">
+    <main className="min-h-[calc(100vh-80px)] relative bg-[#E5D9C5] overflow-hidden" data-testid="chisiamo-page">
       {/* Continuous atmospheric backdrop */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute inset-0 opacity-[0.10] bg-fixed"
-          style={{ backgroundImage: "url(/home-cozy-reading.jpg)", backgroundSize: "cover", backgroundPosition: "center" }}
-        />
-        <div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/8 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/6 blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"><div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/25 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/30 blur-3xl" />
       </div>
 
       {/* Hero */}
       <section className="relative">
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src="/home-cozy-reading.jpg"
-            alt=""
-            aria-hidden="true"
-            loading="eager"
-            className="absolute inset-0 w-full h-full object-cover opacity-25"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[rgba(28,28,28,0.04)] via-[rgba(251,248,242,0.4)] to-[#FBF8F2]" />
+        <div className="absolute inset-0 overflow-hidden"><div className="absolute inset-0 bg-gradient-to-b from-[rgba(28,28,28,0.04)] via-[rgba(251,248,242,0.4)] to-[#FBF8F2]" />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">
