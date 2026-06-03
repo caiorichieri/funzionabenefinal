@@ -64,7 +64,7 @@ export default function CookieConsentBanner() {
           className="fixed bottom-0 left-0 right-0 z-40 p-4 sm:p-6"
           data-testid="cookie-banner"
         >
-          <div className="max-w-5xl mx-auto bg-[#111111]/98 backdrop-blur-xl border border-[#0A0A0A]/20 rounded-3xl shadow-2xl shadow-black/50 p-6 lg:p-8">
+          <div className="max-w-5xl mx-auto bg-white/98 backdrop-blur-xl border border-[#0A0A0A]/20 rounded-3xl shadow-2xl shadow-black/50 p-6 lg:p-8">
             {!customize ? (
               <div className="grid lg:grid-cols-[auto_1fr_auto] gap-6 items-center">
                 <div className="w-12 h-12 rounded-full bg-white/30 flex items-center justify-center flex-shrink-0">
@@ -123,7 +123,7 @@ export default function CookieConsentBanner() {
                   <button
                     data-testid="banner-save-custom-btn"
                     onClick={handleSaveCustom}
-                    className="px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-[#0A0A0A] text-sm font-medium rounded-full tracking-wide"
+                    className="px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white text-sm font-medium rounded-md tracking-wide"
                   >
                     Salva preferenze
                   </button>

@@ -177,7 +177,7 @@ export default function QuestionnairePage() {
                     <span className="text-base">{opt}</span>
                     {isSelected && (
                       <div className="w-6 h-6 rounded-full bg-[#0A0A0A] flex items-center justify-center">
-                        <Check className="w-3.5 h-3.5 text-[#0A0A0A]" strokeWidth={3} />
+                        <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
                       </div>
                     )}
                   </button>
@@ -190,7 +190,7 @@ export default function QuestionnairePage() {
                 data-testid="questionnaire-next"
                 onClick={() => goNext()}
                 disabled={!canProceed() || loading}
-                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] disabled:opacity-40 disabled:cursor-not-allowed text-[#0A0A0A] font-medium rounded-full tracking-wide transition-all"
+                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] disabled:opacity-40 disabled:cursor-not-allowed text-white font-medium rounded-md tracking-wide transition-all"
               >
                 {loading ? "Analisi in corso..." : step === STEPS.length - 1 ? "Trova i miei match" : "Continua"}
                 {!loading && <ArrowRight className="w-4 h-4" />}

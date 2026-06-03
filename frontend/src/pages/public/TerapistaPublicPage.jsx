@@ -48,12 +48,12 @@ export default function TerapistaPublicPage() {
   };
 
   if (loading) {
-    return <main className="min-h-[calc(100vh-80px)] bg-[#111111] flex items-center justify-center text-[#0A0A0A]/40">Caricamento profilo...</main>;
+    return <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] flex items-center justify-center text-[#0A0A0A]/40">Caricamento profilo...</main>;
   }
 
   if (!terapista) {
     return (
-      <main className="min-h-[calc(100vh-80px)] bg-[#111111] flex items-center justify-center px-6">
+      <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] flex items-center justify-center px-6">
         <div className="text-center">
           <h1 className="font-serif text-3xl text-[#0A0A0A] mb-4">Terapeuta non trovato</h1>
           <Link to="/questionario" className="text-[#0A0A0A] hover:text-[#0A0A0A]/70">← Trova un terapeuta</Link>
@@ -66,7 +66,7 @@ export default function TerapistaPublicPage() {
   const genderLabel = terapista.genere === "F" ? "Psicologa" : "Psicologo";
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="therapist-public">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628]" data-testid="therapist-public">
       {/* Hero */}
       <section className="relative border-b border-white/5">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/10 via-[#111111] to-[#111111]" />
@@ -208,7 +208,7 @@ export default function TerapistaPublicPage() {
                         disabled={!s.disponibile}
                         className={`w-full py-2.5 rounded-xl text-sm font-medium transition-all ${
                           s.disponibile
-                            ? "bg-white/30 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-[#0A0A0A] border border-[#0A0A0A]/30"
+                            ? "bg-white/30 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white border border-[#0A0A0A]/30"
                             : "bg-white/5 text-[#0A0A0A]/30 cursor-not-allowed line-through"
                         }`}
                       >

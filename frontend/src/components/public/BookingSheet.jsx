@@ -205,10 +205,10 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
           animate={{ x: 0 }}
           exit={{ x: "100%" }}
           transition={{ type: "tween", duration: 0.4, ease: "easeOut" }}
-          className="w-full max-w-xl bg-[#111111] border-l border-[#0A0A0A]/15 overflow-y-auto"
+          className="w-full max-w-xl bg-white border-l border-[#0A0A0A]/15 overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="sticky top-0 bg-[#111111]/80 backdrop-blur-xl border-b border-white/5 px-6 lg:px-10 py-5 flex items-center justify-between">
+          <div className="sticky top-0 bg-white/85 backdrop-blur-xl border-b border-[#0A0A0A]/10 px-6 lg:px-10 py-5 flex items-center justify-between">
             <div>
               <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A]">Prenotazione</div>
               <div className="text-sm text-[#0A0A0A] mt-1">Dr. {terapista.nome} {terapista.cognome}</div>
