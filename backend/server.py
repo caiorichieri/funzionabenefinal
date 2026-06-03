@@ -423,7 +423,7 @@ async def update_my_terapista_profile(data: TerapistaProfileInput, user: dict = 
         raise HTTPException(status_code=403, detail="Accesso negato")
     update = {k: v for k, v in data.model_dump().items() if v is not None}
     update["updated_at"] = datetime.now(timezone.utc)
-    result = await db.terapisti.update_one({"user_id": user["_id"]}, {"$set": update}, upsert=True)
+    await db.terapisti.update_one({"user_id": user["_id"]}, {"$set": update}, upsert=True)
     doc = await db.terapisti.find_one({"user_id": user["_id"]})
     doc["_id"] = str(doc["_id"])
     return doc
@@ -899,14 +899,17 @@ async def matching(data: MatchingInput):
         # Genere
         if pref_genere:
             if t.get("genere") == pref_genere:
-                score += 30; reasons.append("Preferenza di genere")
+                score += 30
+                reasons.append("Preferenza di genere")
         else:
             score += 15
         # Specializzazioni
         for prob in (data.problemi or []):
             for spec in t.get("specializzazioni", []):
                 if any(w in spec.lower() for w in prob.lower().split()):
-                    score += 20; reasons.append(f"Specializzazione: {spec}"); break
+                    score += 20
+                    reasons.append(f"Specializzazione: {spec}")
+                    break
         # Disponibilità × orari
         for disp in t.get("disponibilita", []):
             is_wkend = disp.get("giorno","") in ["Sabato","Domenica"]
