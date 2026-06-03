@@ -5,15 +5,15 @@ import { Users, UserCheck, Calendar, AlertTriangle, FileText, ShieldX } from "lu
 
 function StatCard({ icon: Icon, label, value, color, sub }) {
   return (
-    <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
+    <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
       <div className="flex items-center justify-between mb-3">
-        <span className="text-[rgba(28,28,28,0.5)] text-sm font-medium">{label}</span>
+        <span className="text-[#0A0A0A]/55 text-sm font-medium">{label}</span>
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${color}`}>
           <Icon className="w-5 h-5" />
         </div>
       </div>
-      <div className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">{value ?? "—"}</div>
-      {sub && <div className="text-xs text-[rgba(28,28,28,0.5)] mt-1">{sub}</div>}
+      <div className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">{value ?? "—"}</div>
+      {sub && <div className="text-xs text-[#0A0A0A]/55 mt-1">{sub}</div>}
     </div>
   );
 }
@@ -35,21 +35,21 @@ export default function AdminDashboard() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Panoramica</h1>
-        <p className="text-[rgba(28,28,28,0.6)] mt-1">Gestionale FunzionaBene — Riepilogo attività</p>
+        <h1 className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">Panoramica</h1>
+        <p className="text-[#0A0A0A]/65 mt-1">Gestionale FunzionaBene — Riepilogo attività</p>
       </div>
 
       {/* Stats grid */}
       <div data-testid="stats-grid" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard icon={UserCheck} label="Terapisti Attivi" value={stats?.terapisti}
-          color="bg-[#D4A017]/10 text-[#D4A017]" sub="Professionisti iscritti" />
+          color="bg-white/30 text-[#0A0A0A]" sub="Professionisti iscritti" />
         <StatCard icon={Users} label="Pazienti" value={stats?.pazienti}
           color="bg-[#6B8FA3]/10 text-[#6B8FA3]" sub="Pazienti registrati" />
         <StatCard icon={Calendar} label="Sessioni Oggi" value={stats?.appuntamenti_oggi}
@@ -82,8 +82,8 @@ export default function AdminDashboard() {
 
       {/* Insurance expiry alerts */}
       {stats?.scadenze_assicurazione?.length > 0 && (
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
-          <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4 flex items-center gap-2">
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
+          <h3 className="font-semibold text-[#0A0A0A] font-[Outfit] mb-4 flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-orange-500" />
             Scadenze Assicurazione in Arrivo
           </h3>
@@ -91,8 +91,8 @@ export default function AdminDashboard() {
             {stats.scadenze_assicurazione.map((s) => (
               <div key={`${s.terapeuta}-${s.scadenza}`} className="flex items-center justify-between py-2 border-b border-[rgba(28,28,28,0.06)] last:border-0">
                 <div>
-                  <div className="font-medium text-[#1C1C1C] text-sm">{s.terapeuta}</div>
-                  <div className="text-xs text-[rgba(28,28,28,0.5)]">Scade: {new Date(s.scadenza).toLocaleDateString("it-IT")}</div>
+                  <div className="font-medium text-[#0A0A0A] text-sm">{s.terapeuta}</div>
+                  <div className="text-xs text-[#0A0A0A]/55">Scade: {new Date(s.scadenza).toLocaleDateString("it-IT")}</div>
                 </div>
                 <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
                   s.giorni_rimanenti < 0 ? "bg-red-100 text-red-700" :
@@ -108,11 +108,11 @@ export default function AdminDashboard() {
       )}
 
       {/* Quick actions */}
-      <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
-        <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4">Azioni Rapide</h3>
+      <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
+        <h3 className="font-semibold text-[#0A0A0A] font-[Outfit] mb-4">Azioni Rapide</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {[
-            { label: "Aggiungi Terapista", href: "/admin/terapisti", color: "bg-[#D4A017]/10 text-[#D4A017]" },
+            { label: "Aggiungi Terapista", href: "/admin/terapisti", color: "bg-white/30 text-[#0A0A0A]" },
             { label: "Aggiungi Paziente", href: "/admin/pazienti", color: "bg-[#6B8FA3]/10 text-[#6B8FA3]" },
             { label: "Nuovo Appuntamento", href: "/admin/appuntamenti", color: "bg-green-100 text-green-700" },
             { label: "Rivedi Blog", href: "/admin/blog", color: "bg-purple-100 text-purple-700" },

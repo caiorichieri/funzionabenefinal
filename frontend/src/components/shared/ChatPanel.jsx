@@ -70,7 +70,7 @@ export default function ChatPanel({ role }) {
 
   if (loading) {
     return (
-      <div className="p-8 text-center text-[rgba(28,28,28,0.5)] text-sm" data-testid="chat-loading">
+      <div className="p-8 text-center text-[#0A0A0A]/55 text-sm" data-testid="chat-loading">
         Caricamento messaggi...
       </div>
     );
@@ -80,8 +80,8 @@ export default function ChatPanel({ role }) {
     return (
       <div className="p-12 text-center flex flex-col items-center" data-testid="chat-empty">
         <Mascotte name="ovo" size={110} animation="float" />
-        <h3 className="font-serif text-xl text-[#1C1C1C] mt-4 mb-2">Nessuna conversazione</h3>
-        <p className="text-sm text-[rgba(28,28,28,0.5)] max-w-sm">
+        <h3 className="font-serif text-xl text-[#0A0A0A] mt-4 mb-2">Nessuna conversazione</h3>
+        <p className="text-sm text-[#0A0A0A]/55 max-w-sm">
           {role === "paziente"
             ? "Le conversazioni con il tuo terapeuta saranno disponibili dopo la prima prenotazione confermata."
             : "Le conversazioni con i tuoi pazienti appariranno qui dopo la prima seduta."}
@@ -91,10 +91,10 @@ export default function ChatPanel({ role }) {
   }
 
   return (
-    <div className="grid md:grid-cols-[280px_1fr] h-[540px] border border-[rgba(28,28,28,0.08)] rounded-2xl overflow-hidden bg-white" data-testid="chat-panel">
+    <div className="grid md:grid-cols-[280px_1fr] h-[540px] border border-[#0A0A0A]/10 rounded-2xl overflow-hidden bg-white" data-testid="chat-panel">
       {/* Conversations list */}
-      <div className={`border-r border-[rgba(28,28,28,0.08)] bg-[#FAF8F3]/60 overflow-y-auto ${activeConv ? "hidden md:block" : ""}`}>
-        <div className="px-4 py-3 border-b border-[rgba(28,28,28,0.08)] text-xs tracking-[0.2em] uppercase text-[rgba(28,28,28,0.5)]">
+      <div className={`border-r border-[#0A0A0A]/10 bg-[#FAF8F3]/60 overflow-y-auto ${activeConv ? "hidden md:block" : ""}`}>
+        <div className="px-4 py-3 border-b border-[#0A0A0A]/10 text-xs tracking-[0.2em] uppercase text-[#0A0A0A]/55">
           Conversazioni
         </div>
         {conversazioni.map((c) => {
@@ -105,15 +105,15 @@ export default function ChatPanel({ role }) {
               key={c.conversazione_id}
               data-testid={`conv-${c.conversazione_id}`}
               onClick={() => setActiveConv(c)}
-              className={`w-full text-left px-4 py-3 border-b border-[rgba(28,28,28,0.05)] hover:bg-[#D4A017]/5 transition-colors ${isActive ? "bg-[#D4A017]/10 border-l-2 border-l-[#D4A017]" : ""}`}
+              className={`w-full text-left px-4 py-3 border-b border-[#0A0A0A]/8 hover:bg-white/20 transition-colors ${isActive ? "bg-white/30 border-l-2 border-l-[#0A0A0A]" : ""}`}
             >
               <div className="flex items-center justify-between gap-2 mb-1">
-                <span className="font-medium text-[#1C1C1C] text-sm truncate">{nome}</span>
+                <span className="font-medium text-[#0A0A0A] text-sm truncate">{nome}</span>
                 {c.non_letti > 0 && (
-                  <span className="bg-[#D4A017] text-white text-[10px] font-bold min-w-[20px] h-5 px-1.5 rounded-full flex items-center justify-center">{c.non_letti}</span>
+                  <span className="bg-[#0A0A0A] text-white text-[10px] font-bold min-w-[20px] h-5 px-1.5 rounded-full flex items-center justify-center">{c.non_letti}</span>
                 )}
               </div>
-              <div className="text-xs text-[rgba(28,28,28,0.5)] truncate">
+              <div className="text-xs text-[#0A0A0A]/55 truncate">
                 {c.ultimo_messaggio || "Nessun messaggio"}
               </div>
             </button>
@@ -124,14 +124,14 @@ export default function ChatPanel({ role }) {
       {/* Messages */}
       <div className={`flex flex-col ${!activeConv ? "hidden md:flex" : "flex"}`}>
         {!activeConv ? (
-          <div className="flex-1 flex items-center justify-center text-sm text-[rgba(28,28,28,0.4)]">
+          <div className="flex-1 flex items-center justify-center text-sm text-[#0A0A0A]/50">
             Seleziona una conversazione
           </div>
         ) : (
           <>
-            <div className="px-5 py-3 border-b border-[rgba(28,28,28,0.08)] flex items-center gap-3">
+            <div className="px-5 py-3 border-b border-[#0A0A0A]/10 flex items-center gap-3">
               <button
-                className="md:hidden p-1 text-[rgba(28,28,28,0.5)] hover:text-[#1C1C1C]"
+                className="md:hidden p-1 text-[#0A0A0A]/55 hover:text-[#0A0A0A]"
                 onClick={() => setActiveConv(null)}
                 data-testid="chat-back"
               >
@@ -143,16 +143,16 @@ export default function ChatPanel({ role }) {
                 </span>
               </div>
               <div>
-                <div className="text-sm font-medium text-[#1C1C1C]">
+                <div className="text-sm font-medium text-[#0A0A0A]">
                   {role === "paziente" ? `Dr. ${activeConv.terapeuta_nome}` : activeConv.paziente_nome}
                 </div>
-                <div className="text-xs text-[rgba(28,28,28,0.4)]">Conversazione privata</div>
+                <div className="text-xs text-[#0A0A0A]/50">Conversazione privata</div>
               </div>
             </div>
 
             <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3 bg-[#FAF8F3]/30">
               {messaggi.length === 0 ? (
-                <div className="text-center text-xs text-[rgba(28,28,28,0.4)] py-8">
+                <div className="text-center text-xs text-[#0A0A0A]/50 py-8">
                   Nessun messaggio. Inizia la conversazione.
                 </div>
               ) : (
@@ -162,11 +162,11 @@ export default function ChatPanel({ role }) {
                     <div key={m._id || i} className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
                       <div className={`max-w-[75%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
                         isMe
-                          ? "bg-[#D4A017] text-white rounded-br-sm"
-                          : "bg-white border border-[rgba(28,28,28,0.08)] text-[#1C1C1C] rounded-bl-sm"
+                          ? "bg-[#0A0A0A] text-white rounded-br-sm"
+                          : "bg-white border border-[#0A0A0A]/10 text-[#0A0A0A] rounded-bl-sm"
                       }`}>
                         {m.testo}
-                        <div className={`text-[10px] mt-1 ${isMe ? "text-white/70" : "text-[rgba(28,28,28,0.4)]"}`}>
+                        <div className={`text-[10px] mt-1 ${isMe ? "text-white/70" : "text-[#0A0A0A]/50"}`}>
                           {new Date(m.created_at).toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}
                         </div>
                       </div>
@@ -177,19 +177,19 @@ export default function ChatPanel({ role }) {
               <div ref={bottomRef} />
             </div>
 
-            <form onSubmit={sendMessage} className="p-3 border-t border-[rgba(28,28,28,0.08)] bg-white flex gap-2">
+            <form onSubmit={sendMessage} className="p-3 border-t border-[#0A0A0A]/10 bg-white flex gap-2">
               <input
                 data-testid="chat-input"
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Scrivi un messaggio..."
-                className="flex-1 px-4 py-2.5 bg-[#FAF8F3] border border-[rgba(28,28,28,0.08)] rounded-full text-sm text-[#1C1C1C] focus:outline-none focus:border-[#D4A017]"
+                className="flex-1 px-4 py-2.5 bg-[#FAF8F3] border border-[#0A0A0A]/10 rounded-full text-sm text-[#0A0A0A] focus:outline-none focus:border-[#0A0A0A]"
               />
               <button
                 data-testid="chat-send"
                 type="submit" disabled={sending || !input.trim()}
-                className="px-4 py-2.5 bg-[#D4A017] hover:bg-[#B38612] disabled:opacity-40 text-white rounded-full flex items-center gap-2 text-sm font-medium"
+                className="px-4 py-2.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] disabled:opacity-40 text-white rounded-full flex items-center gap-2 text-sm font-medium"
               >
                 <Send className="w-4 h-4" /> Invia
               </button>

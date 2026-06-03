@@ -53,7 +53,7 @@ export default function VideoCallPage() {
           },
           theme: {
             colors: {
-              accent: "#D4A017",
+              accent: "#0A0A0A",
               accentText: "#111111",
               background: "#0A0A0A",
               backgroundAccent: "#1C2A33",
@@ -116,7 +116,7 @@ export default function VideoCallPage() {
         >
           <ArrowLeft className="w-4 h-4" /> Esci dalla seduta
         </button>
-        <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] hidden sm:block">
+        <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] hidden sm:block">
           funzionabene · seduta online
         </div>
         <div className="text-xs text-[#E6E2D8]/50 hidden sm:block">
@@ -130,7 +130,7 @@ export default function VideoCallPage() {
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center z-20 bg-[#0A0A0A]">
             <div className="text-center">
-              <div className="w-10 h-10 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+              <div className="w-10 h-10 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
               <p className="text-[#E6E2D8]/60 text-sm">Apertura della stanza video...</p>
             </div>
           </div>
@@ -149,7 +149,7 @@ export default function VideoCallPage() {
               </p>
               <button
                 onClick={() => navigate(-1)}
-                className="mt-6 px-6 py-3 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] rounded-full text-sm font-medium"
+                className="mt-6 px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-[#111111] rounded-full text-sm font-medium"
               >
                 Torna indietro
               </button>

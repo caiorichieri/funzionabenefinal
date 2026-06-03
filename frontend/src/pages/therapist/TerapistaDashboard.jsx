@@ -43,17 +43,17 @@ export default function TerapistaDashboard() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin" />
+      <div className="w-8 h-8 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
     </div>
   );
 
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">
+        <h1 className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">
           Benvenuta, {user?.nome}!
         </h1>
-        <p className="text-[rgba(28,28,28,0.6)] mt-1">Ecco il riepilogo della tua attività</p>
+        <p className="text-[#0A0A0A]/65 mt-1">Ecco il riepilogo della tua attività</p>
       </div>
 
       {/* Autocertificazione alert */}
@@ -75,35 +75,35 @@ export default function TerapistaDashboard() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
-            <Calendar className="w-5 h-5 text-[#D4A017]" />
-            <span className="text-sm text-[rgba(28,28,28,0.5)]">Sessioni oggi</span>
+            <Calendar className="w-5 h-5 text-[#0A0A0A]" />
+            <span className="text-sm text-[#0A0A0A]/55">Sessioni oggi</span>
           </div>
-          <div className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">{oggi.length}</div>
+          <div className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">{oggi.length}</div>
         </div>
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
             <Clock className="w-5 h-5 text-[#6B8FA3]" />
-            <span className="text-sm text-[rgba(28,28,28,0.5)]">Prossime sessioni</span>
+            <span className="text-sm text-[#0A0A0A]/55">Prossime sessioni</span>
           </div>
-          <div className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">{prossime.length}</div>
+          <div className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">{prossime.length}</div>
         </div>
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center gap-3 mb-2">
             <Users className="w-5 h-5 text-green-600" />
-            <span className="text-sm text-[rgba(28,28,28,0.5)]">Totale sessioni</span>
+            <span className="text-sm text-[#0A0A0A]/55">Totale sessioni</span>
           </div>
-          <div className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">{appuntamenti.length}</div>
+          <div className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">{appuntamenti.length}</div>
         </div>
       </div>
 
       {/* Profile completion */}
       {profilo && (
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-[#1C1C1C] font-[Outfit]">Completamento Profilo</h3>
-            <a href="/terapeuta/profilo" className="text-sm text-[#D4A017] hover:text-[#B38612]">Modifica</a>
+            <h3 className="font-semibold text-[#0A0A0A] font-[Outfit]">Completamento Profilo</h3>
+            <a href="/terapeuta/profilo" className="text-sm text-[#0A0A0A] hover:text-[#0A0A0A]/70">Modifica</a>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
@@ -117,7 +117,7 @@ export default function TerapistaDashboard() {
               { label: "Foto Profilo", done: false }
             ].map(item => (
               <div key={item.label} className={`flex items-center gap-2 p-3 rounded-xl text-sm
-                ${item.done ? "bg-green-50 text-green-700" : "bg-[rgba(28,28,28,0.04)] text-[rgba(28,28,28,0.5)]"}`}>
+                ${item.done ? "bg-green-50 text-green-700" : "bg-[rgba(28,28,28,0.04)] text-[#0A0A0A]/55"}`}>
                 <div className={`w-2 h-2 rounded-full flex-shrink-0 ${item.done ? "bg-green-500" : "bg-[rgba(28,28,28,0.2)]"}`} />
                 {item.label}
               </div>
@@ -128,8 +128,8 @@ export default function TerapistaDashboard() {
 
       {/* Prossime sessioni */}
       {prossime.length > 0 && (
-        <div className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-6 shadow-sm">
-          <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4">Prossime Sessioni</h3>
+        <div className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-6 shadow-sm">
+          <h3 className="font-semibold text-[#0A0A0A] font-[Outfit] mb-4">Prossime Sessioni</h3>
           <div className="space-y-3">
             {prossime.map(a => {
               const joinable = canJoin(a.data_ora, a.durata_minuti);
@@ -140,8 +140,8 @@ export default function TerapistaDashboard() {
                       <Video className="w-4 h-4 text-[#6B8FA3]" />
                     </div>
                     <div className="min-w-0">
-                      <div className="font-medium text-[#1C1C1C] text-sm truncate">{a.paziente_nome || "Paziente"}</div>
-                      <div className="text-xs text-[rgba(28,28,28,0.5)]">
+                      <div className="font-medium text-[#0A0A0A] text-sm truncate">{a.paziente_nome || "Paziente"}</div>
+                      <div className="text-xs text-[#0A0A0A]/55">
                         {new Date(a.data_ora).toLocaleString("it-IT")} · {a.durata_minuti} min
                       </div>
                     </div>
@@ -154,7 +154,7 @@ export default function TerapistaDashboard() {
                       <button
                         data-testid={`join-video-${a._id}`}
                         onClick={() => navigate(`/seduta/${a._id}`)}
-                        className="px-4 py-2 bg-[#D4A017] hover:bg-[#B38612] text-white rounded-full text-xs font-medium flex items-center gap-1.5"
+                        className="px-4 py-2 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white rounded-full text-xs font-medium flex items-center gap-1.5"
                       >
                         <Video className="w-3 h-3" /> Entra
                       </button>
@@ -168,9 +168,9 @@ export default function TerapistaDashboard() {
       )}
 
       {/* Messaggi privati con i pazienti */}
-      <div className="mt-6 bg-white rounded-2xl border border-[rgba(28,28,28,0.08)] p-5">
-        <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] mb-4 flex items-center gap-2">
-          <MessageCircle className="w-4 h-4 text-[#D4A017]" /> Messaggi con i pazienti
+      <div className="mt-6 bg-white rounded-2xl border border-[#0A0A0A]/10 p-5">
+        <h3 className="font-semibold text-[#0A0A0A] font-[Outfit] mb-4 flex items-center gap-2">
+          <MessageCircle className="w-4 h-4 text-[#0A0A0A]" /> Messaggi con i pazienti
         </h3>
         <ChatPanel role="terapeuta" />
       </div>

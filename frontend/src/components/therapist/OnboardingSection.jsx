@@ -120,14 +120,14 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
 
   return (
     <div className="space-y-5" data-testid="therapist-onboarding">
-      <div className="rounded-2xl border border-[rgba(28,28,28,0.08)] bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-[#0A0A0A]/10 bg-white p-6 shadow-sm">
         <div className="flex items-start gap-4">
-          <ShieldCheck className={`w-7 h-7 flex-shrink-0 mt-0.5 ${alreadySigned ? "text-green-600" : "text-[#D4A017]"}`} />
+          <ShieldCheck className={`w-7 h-7 flex-shrink-0 mt-0.5 ${alreadySigned ? "text-green-600" : "text-[#0A0A0A]"}`} />
           <div className="flex-1">
-            <h3 className="font-semibold text-[#1C1C1C] font-[Outfit] text-lg">
+            <h3 className="font-semibold text-[#0A0A0A] font-[Outfit] text-lg">
               {alreadySigned ? "Profilo verificato" : "Verifica profilo professionista"}
             </h3>
-            <p className="text-sm text-[rgba(28,28,28,0.6)] mt-1">
+            <p className="text-sm text-[#0A0A0A]/65 mt-1">
               {alreadySigned
                 ? "Hai completato tutti i passi richiesti. In attesa di verifica documenti da parte dell'amministratore per diventare pubblicamente visibile."
                 : "Per essere visibile ai pazienti, carica i documenti, verifica il numero e firma l'autocertificazione (DPR 445/2000)."}
@@ -148,26 +148,26 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
       )}
 
       {/* Step 1: Documenti */}
-      <div className="rounded-2xl border border-[rgba(28,28,28,0.08)] bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-[#0A0A0A]/10 bg-white p-6 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${allDocsUploaded ? "bg-green-100 text-green-700" : "bg-[#D4A017]/10 text-[#D4A017]"}`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${allDocsUploaded ? "bg-green-100 text-green-700" : "bg-white/30 text-[#0A0A0A]"}`}>
             {allDocsUploaded ? <Check className="w-4 h-4" /> : "1"}
           </div>
-          <h3 className="font-semibold text-[#1C1C1C] font-[Outfit]">Carica i tuoi documenti</h3>
+          <h3 className="font-semibold text-[#0A0A0A] font-[Outfit]">Carica i tuoi documenti</h3>
         </div>
 
         {loadingDocs ? (
-          <div className="text-sm text-[rgba(28,28,28,0.5)]">Caricamento...</div>
+          <div className="text-sm text-[#0A0A0A]/55">Caricamento...</div>
         ) : (
           <div className="space-y-3">
             {DOC_TYPES.map((d) => {
               const meta = docs[d.key];
               const isUp = uploading[d.key];
               return (
-                <div key={d.key} className="flex items-center gap-3 p-3 rounded-xl border border-[rgba(28,28,28,0.08)] bg-[#FDFBF7]">
+                <div key={d.key} className="flex items-center gap-3 p-3 rounded-xl border border-[#0A0A0A]/10 bg-[#E9D628]">
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 text-sm font-medium text-[#1C1C1C]">
-                      {meta ? <FileCheck2 className="w-4 h-4 text-green-600" /> : <Upload className="w-4 h-4 text-[rgba(28,28,28,0.4)]" />}
+                    <div className="flex items-center gap-2 text-sm font-medium text-[#0A0A0A]">
+                      {meta ? <FileCheck2 className="w-4 h-4 text-green-600" /> : <Upload className="w-4 h-4 text-[#0A0A0A]/50" />}
                       {d.label}
                     </div>
                     <div className="text-xs text-[rgba(28,28,28,0.55)] mt-0.5 truncate">
@@ -185,7 +185,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
                     type="button" disabled={isUp}
                     data-testid={`doc-upload-${d.key}`}
                     onClick={() => fileRefs.current[d.key]?.click()}
-                    className="px-3 py-1.5 text-xs font-medium rounded-full border border-[#D4A017] text-[#D4A017] hover:bg-[#D4A017] hover:text-white transition-colors disabled:opacity-50"
+                    className="px-3 py-1.5 text-xs font-medium rounded-full border border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white transition-colors disabled:opacity-50"
                   >
                     {isUp ? "Carico..." : meta ? "Sostituisci" : "Carica"}
                   </button>
@@ -197,18 +197,18 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
       </div>
 
       {/* Step 2: SMS OTP */}
-      <div className="rounded-2xl border border-[rgba(28,28,28,0.08)] bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-[#0A0A0A]/10 bg-white p-6 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${phoneVerified ? "bg-green-100 text-green-700" : "bg-[#D4A017]/10 text-[#D4A017]"}`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${phoneVerified ? "bg-green-100 text-green-700" : "bg-white/30 text-[#0A0A0A]"}`}>
             {phoneVerified ? <Check className="w-4 h-4" /> : "2"}
           </div>
-          <h3 className="font-semibold text-[#1C1C1C] font-[Outfit]">Verifica il tuo numero di telefono</h3>
+          <h3 className="font-semibold text-[#0A0A0A] font-[Outfit]">Verifica il tuo numero di telefono</h3>
         </div>
 
         {phoneVerified ? (
-          <div className="text-sm text-[rgba(28,28,28,0.7)] flex items-center gap-2">
+          <div className="text-sm text-[#0A0A0A]/75 flex items-center gap-2">
             <Smartphone className="w-4 h-4 text-green-600" />
-            Numero verificato: <strong className="text-[#1C1C1C]">{currentUser?.telefono || smsPhone}</strong>
+            Numero verificato: <strong className="text-[#0A0A0A]">{currentUser?.telefono || smsPhone}</strong>
           </div>
         ) : smsStep === "phone" ? (
           <div className="flex flex-col sm:flex-row gap-3">
@@ -217,21 +217,21 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
               type="tel" value={smsPhone}
               onChange={(e) => setSmsPhone(e.target.value)}
               placeholder="+39 351 1234567"
-              className="flex-1 px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017]"
+              className="flex-1 px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]"
             />
             <button
               data-testid="onb-sms-send"
               type="button" disabled={smsSending}
               onClick={handleSmsSend}
-              className="px-5 py-2.5 text-sm font-medium rounded-full bg-[#D4A017] hover:bg-[#B38612] text-white transition-colors disabled:opacity-50"
+              className="px-5 py-2.5 text-sm font-medium rounded-full bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white transition-colors disabled:opacity-50"
             >
               {smsSending ? "Invio..." : "Invia codice SMS"}
             </button>
           </div>
         ) : (
           <div className="space-y-3">
-            <div className="text-sm text-[rgba(28,28,28,0.7)]">
-              Codice inviato a <strong className="text-[#1C1C1C]">{smsPhone}</strong>.
+            <div className="text-sm text-[#0A0A0A]/75">
+              Codice inviato a <strong className="text-[#0A0A0A]">{smsPhone}</strong>.
               {smsOtpDev && (
                 <span className="block mt-1 text-amber-700 text-xs bg-amber-50 border border-amber-200 rounded-lg px-2 py-1 inline-block">
                   Dev fallback: <code className="font-mono">{smsOtpDev}</code>
@@ -244,20 +244,20 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
                 inputMode="numeric" maxLength={6} value={smsOtp}
                 onChange={(e) => setSmsOtp(e.target.value.replace(/\D/g, ""))}
                 placeholder="123456"
-                className="flex-1 px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm text-center tracking-[0.4em] focus:outline-none focus:ring-2 focus:ring-[#D4A017]"
+                className="flex-1 px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm text-center tracking-[0.4em] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]"
               />
               <button
                 data-testid="onb-sms-verify"
                 type="button" disabled={smsSending}
                 onClick={handleSmsVerify}
-                className="px-5 py-2.5 text-sm font-medium rounded-full bg-[#D4A017] hover:bg-[#B38612] text-white transition-colors disabled:opacity-50"
+                className="px-5 py-2.5 text-sm font-medium rounded-full bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white transition-colors disabled:opacity-50"
               >
                 {smsSending ? "Verifica..." : "Verifica"}
               </button>
               <button
                 type="button"
                 onClick={() => { setSmsStep("phone"); setSmsOtp(""); }}
-                className="px-3 py-2.5 text-xs text-[rgba(28,28,28,0.5)] hover:text-[#D4A017]"
+                className="px-3 py-2.5 text-xs text-[#0A0A0A]/55 hover:text-[#0A0A0A]"
               >
                 Cambia numero
               </button>
@@ -267,18 +267,18 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
       </div>
 
       {/* Step 3: Autocertificazione DPR 445/2000 */}
-      <div className="rounded-2xl border border-[rgba(28,28,28,0.08)] bg-white p-6 shadow-sm">
+      <div className="rounded-2xl border border-[#0A0A0A]/10 bg-white p-6 shadow-sm">
         <div className="flex items-center gap-3 mb-4">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${alreadySigned ? "bg-green-100 text-green-700" : "bg-[#D4A017]/10 text-[#D4A017]"}`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${alreadySigned ? "bg-green-100 text-green-700" : "bg-white/30 text-[#0A0A0A]"}`}>
             {alreadySigned ? <Check className="w-4 h-4" /> : "3"}
           </div>
-          <h3 className="font-semibold text-[#1C1C1C] font-[Outfit]">Autocertificazione (DPR 445/2000)</h3>
+          <h3 className="font-semibold text-[#0A0A0A] font-[Outfit]">Autocertificazione (DPR 445/2000)</h3>
         </div>
 
         {alreadySigned ? (
-          <div className="text-sm text-[rgba(28,28,28,0.7)]">
+          <div className="text-sm text-[#0A0A0A]/75">
             Hai firmato l'autocertificazione il{" "}
-            <strong className="text-[#1C1C1C]">
+            <strong className="text-[#0A0A0A]">
               {profilo?.autocertificazione_data ? new Date(profilo.autocertificazione_data).toLocaleDateString("it-IT") : "—"}
             </strong>.
           </div>
@@ -290,7 +290,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
                 type="checkbox" checked={dprChecked}
                 onChange={(e) => setDprChecked(e.target.checked)}
                 disabled={!allDocsUploaded || !phoneVerified}
-                className="mt-0.5 accent-[#D4A017]"
+                className="mt-0.5 accent-[#0A0A0A]"
               />
               <span>
                 Il sottoscritto, consapevole delle sanzioni penali previste dall'<strong>art. 76 del DPR 28 dicembre 2000, n. 445</strong>,
@@ -301,7 +301,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
             </label>
 
             {(!allDocsUploaded || !phoneVerified) && (
-              <div className="mt-3 text-xs text-[rgba(28,28,28,0.5)]">
+              <div className="mt-3 text-xs text-[#0A0A0A]/55">
                 {!allDocsUploaded && <div>• Prima carica tutti i documenti richiesti</div>}
                 {!phoneVerified && <div>• Prima verifica il tuo numero di telefono via SMS</div>}
               </div>
@@ -311,7 +311,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
               data-testid="dpr445-sign"
               type="button" disabled={!canSignDpr || dprSigning}
               onClick={handleSignDpr}
-              className="mt-4 px-5 py-2.5 text-sm font-medium rounded-full bg-[#D4A017] hover:bg-[#B38612] text-white transition-colors disabled:opacity-50"
+              className="mt-4 px-5 py-2.5 text-sm font-medium rounded-full bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white transition-colors disabled:opacity-50"
             >
               {dprSigning ? "Firma in corso..." : "Firma autocertificazione"}
             </button>

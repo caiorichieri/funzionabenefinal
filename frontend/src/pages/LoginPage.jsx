@@ -30,20 +30,20 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] flex">
+    <div className="min-h-screen bg-[#E9D628] flex">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#0A0A0A] flex-col justify-between p-12">
         <div>
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] flex items-center justify-center">
-              <span className="text-white font-bold text-sm font-[Outfit]">FB</span>
+            <div className="w-10 h-10 rounded-full bg-[#E9D628] flex items-center justify-center">
+              <span className="text-[#0A0A0A] font-bold text-sm font-[Outfit]">FB</span>
             </div>
             <span className="text-white text-xl font-semibold font-[Outfit]">FunzionaBene</span>
           </div>
           <div className="space-y-4">
             <h1 className="text-4xl font-bold text-white font-[Outfit] leading-tight">
               Benvenuto nel<br />
-              <span className="text-[#D4A017]">Gestionale</span>
+              <span className="text-[#E9D628]">Gestionale</span>
             </h1>
             <p className="text-[rgba(253,251,247,0.7)] text-lg leading-relaxed">
               Piattaforma integrata di sessuologia online FunzionaBene.
@@ -58,7 +58,7 @@ export default function LoginPage() {
             { label: "Soddisfazione", value: "98%" }
           ].map((stat) => (
             <div key={stat.label} className="bg-white/5 border border-white/10 rounded-2xl p-4">
-              <div className="text-2xl font-bold text-[#D4A017] font-[Outfit]">{stat.value}</div>
+              <div className="text-2xl font-bold text-[#E9D628] font-[Outfit]">{stat.value}</div>
               <div className="text-[rgba(253,251,247,0.6)] text-sm mt-1">{stat.label}</div>
             </div>
           ))}
@@ -69,15 +69,15 @@ export default function LoginPage() {
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
           <div className="lg:hidden flex items-center gap-3 mb-8 justify-center">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3]" />
-            <span className="text-[#1C1C1C] text-xl font-semibold font-[Outfit]">FunzionaBene</span>
+            <div className="w-10 h-10 rounded-full bg-[#0A0A0A]" />
+            <span className="text-[#0A0A0A] text-xl font-semibold font-[Outfit]">FunzionaBene</span>
           </div>
 
           <div className="mb-8 flex items-center gap-4">
-            <Mascotte name="abbraccio" theme="gold" size={64} animation="breathe" />
+            <Mascotte name="abbraccio" theme="light" size={64} animation="breathe" />
             <div>
-              <h2 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Bentornato</h2>
-              <p className="text-[rgba(28,28,28,0.6)] mt-1">Bello rivederti.</p>
+              <h2 className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">Bentornato</h2>
+              <p className="text-[#0A0A0A]/65 mt-1">Bello rivederti.</p>
             </div>
           </div>
 
@@ -89,9 +89,9 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-medium text-[#1C1C1C] mb-2">Email</label>
+              <label className="block text-sm font-medium text-[#0A0A0A] mb-2">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)] w-5 h-5" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0A0A0A]/50 w-5 h-5" />
                 <input
                   data-testid="login-email"
                   type="email"
@@ -99,15 +99,15 @@ export default function LoginPage() {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="nome@funzionabene.it"
                   required
-                  className="w-full pl-10 pr-4 py-3 border border-[rgba(28,28,28,0.15)] rounded-xl bg-white text-[#1C1C1C] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#D4A017] transition-all"
+                  className="w-full pl-10 pr-4 py-3 border border-[#0A0A0A]/15 rounded-xl bg-white text-[#0A0A0A] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] transition-all"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-[#1C1C1C] mb-2">Password</label>
+              <label className="block text-sm font-medium text-[#0A0A0A] mb-2">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)] w-5 h-5" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-[#0A0A0A]/50 w-5 h-5" />
                 <input
                   data-testid="login-password"
                   type={showPass ? "text" : "password"}
@@ -115,9 +115,9 @@ export default function LoginPage() {
                   onChange={e => setForm({ ...form, password: e.target.value })}
                   placeholder="••••••••"
                   required
-                  className="w-full pl-10 pr-12 py-3 border border-[rgba(28,28,28,0.15)] rounded-xl bg-white text-[#1C1C1C] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#D4A017] transition-all"
+                  className="w-full pl-10 pr-12 py-3 border border-[#0A0A0A]/15 rounded-xl bg-white text-[#0A0A0A] placeholder-[rgba(28,28,28,0.4)] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] transition-all"
                 />
-                <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-[rgba(28,28,28,0.4)]">
+                <button type="button" onClick={() => setShowPass(!showPass)} className="absolute right-3 top-1/2 -translate-y-1/2 text-[#0A0A0A]/50">
                   {showPass ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                 </button>
               </div>
@@ -127,15 +127,15 @@ export default function LoginPage() {
               data-testid="login-submit"
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-[#D4A017] hover:bg-[#B38612] text-white font-semibold rounded-full transition-colors disabled:opacity-50 font-[Outfit]"
+              className="w-full py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-semibold rounded-md transition-colors disabled:opacity-50 font-[Outfit]"
             >
               {loading ? "Accesso in corso..." : "Accedi"}
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-[rgba(28,28,28,0.6)]">
+          <p className="mt-6 text-center text-sm text-[#0A0A0A]/65">
             Non hai un account?{" "}
-            <Link data-testid="register-link" to="/registrati" className="text-[#D4A017] font-medium hover:text-[#B38612]">
+            <Link data-testid="register-link" to="/registrati" className="text-[#0A0A0A] font-medium hover:text-[#0A0A0A]/70">
               Registrati
             </Link>
           </p>

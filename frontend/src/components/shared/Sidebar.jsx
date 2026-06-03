@@ -39,7 +39,7 @@ export default function Sidebar({ onClose }) {
       {/* Logo */}
       <div className="p-6 flex items-center justify-between border-b border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4A017] to-[#6B8FA3] flex items-center justify-center">
+          <div className="w-9 h-9 rounded-full bg-[#E9D628] flex items-center justify-center">
             <Heart className="w-4 h-4 text-white" />
           </div>
           <div>
@@ -65,7 +65,7 @@ export default function Sidebar({ onClose }) {
               className={`
                 flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all
                 ${active
-                  ? "bg-[#D4A017] text-white"
+                  ? "bg-[#E9D628] text-[#0A0A0A]"
                   : "text-[rgba(253,251,247,0.6)] hover:text-white hover:bg-white/10"
                 }
               `}
@@ -80,7 +80,7 @@ export default function Sidebar({ onClose }) {
       {/* Footer */}
       <div className="p-4 border-t border-white/10">
         <div className="flex items-center gap-3 px-2">
-          <div className="w-8 h-8 rounded-full bg-[#D4A017] flex items-center justify-center text-white text-xs font-semibold">
+          <div className="w-8 h-8 rounded-full bg-[#E9D628] flex items-center justify-center text-[#0A0A0A] text-xs font-semibold">
             {`${user?.nome?.[0] || ""}${user?.cognome?.[0] || ""}`.toUpperCase()}
           </div>
           <div className="min-w-0">

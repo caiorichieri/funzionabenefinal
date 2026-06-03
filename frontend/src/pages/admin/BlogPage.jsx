@@ -74,11 +74,11 @@ export default function AdminBlogPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit]">Blog</h1>
-          <p className="text-[rgba(28,28,28,0.6)] mt-1">Gestisci e approva gli articoli dei terapisti</p>
+          <h1 className="text-3xl font-bold text-[#0A0A0A] font-[Outfit]">Blog</h1>
+          <p className="text-[#0A0A0A]/65 mt-1">Gestisci e approva gli articoli dei terapisti</p>
         </div>
         <button data-testid="new-article-btn" onClick={openCreate}
-          className="flex items-center gap-2 px-5 py-2.5 bg-[#D4A017] hover:bg-[#B38612] text-white font-medium rounded-full transition-colors">
+          className="flex items-center gap-2 px-5 py-2.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-full transition-colors">
           <Plus className="w-4 h-4" /> Nuovo Articolo
         </button>
       </div>
@@ -93,7 +93,7 @@ export default function AdminBlogPage() {
         ].map(f => (
           <button key={f.k} data-testid={`filtro-${f.k}`} onClick={() => setFiltro(f.k)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2
-              ${filtro === f.k ? "bg-[#D4A017] text-white" : "bg-white border border-[rgba(28,28,28,0.12)] text-[rgba(28,28,28,0.7)] hover:border-[#D4A017]"}`}>
+              ${filtro === f.k ? "bg-[#0A0A0A] text-white" : "bg-white border border-[rgba(28,28,28,0.12)] text-[#0A0A0A]/75 hover:border-[#0A0A0A]"}`}>
             {f.label}
             <span className={`text-xs px-1.5 py-0.5 rounded-full ${filtro === f.k ? "bg-white/20" : "bg-[rgba(28,28,28,0.08)]"}`}>
               {contatori[f.k]}
@@ -115,10 +115,10 @@ export default function AdminBlogPage() {
       {/* Lista articoli */}
       {loading ? (
         <div className="flex justify-center py-12">
-          <div className="w-8 h-8 border-2 border-[#D4A017] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-16 text-[rgba(28,28,28,0.4)]">
+        <div className="text-center py-16 text-[#0A0A0A]/50">
           <div className="text-4xl mb-3">📝</div>
           <div>Nessun articolo trovato</div>
         </div>
@@ -126,7 +126,7 @@ export default function AdminBlogPage() {
         <div className="space-y-3">
           {filtered.map(a => (
             <div key={a._id} data-testid={`articolo-${a._id}`}
-              className="bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl p-5 shadow-sm">
+              className="bg-white border border-[#0A0A0A]/10 rounded-2xl p-5 shadow-sm">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 flex-wrap mb-2">
@@ -137,17 +137,17 @@ export default function AdminBlogPage() {
                       <span className="text-xs bg-[#6B8FA3]/10 text-[#6B8FA3] px-2.5 py-1 rounded-full">{a.categoria}</span>
                     )}
                   </div>
-                  <h3 className="font-semibold text-[#1C1C1C] text-lg leading-snug">{a.titolo}</h3>
-                  <div className="text-sm text-[rgba(28,28,28,0.5)] mt-1 flex items-center gap-3">
+                  <h3 className="font-semibold text-[#0A0A0A] text-lg leading-snug">{a.titolo}</h3>
+                  <div className="text-sm text-[#0A0A0A]/55 mt-1 flex items-center gap-3">
                     <span>di <strong>{a.autore_nome}</strong></span>
                     <span>·</span>
                     <span>{new Date(a.created_at).toLocaleDateString("it-IT")}</span>
                   </div>
-                  <p className="text-sm text-[rgba(28,28,28,0.6)] mt-2 line-clamp-2">{a.contenuto}</p>
+                  <p className="text-sm text-[#0A0A0A]/65 mt-2 line-clamp-2">{a.contenuto}</p>
                   {(a.tags||[]).length > 0 && (
                     <div className="flex gap-2 mt-2 flex-wrap">
                       {a.tags.map(t => (
-                        <span key={t} className="text-xs bg-[rgba(28,28,28,0.06)] text-[rgba(28,28,28,0.6)] px-2 py-0.5 rounded-full">{t}</span>
+                        <span key={t} className="text-xs bg-[rgba(28,28,28,0.06)] text-[#0A0A0A]/65 px-2 py-0.5 rounded-full">{t}</span>
                       ))}
                     </div>
                   )}
@@ -156,11 +156,11 @@ export default function AdminBlogPage() {
                 {/* Azioni */}
                 <div className="flex items-center gap-1 flex-shrink-0">
                   <button data-testid={`preview-${a._id}`} onClick={() => setPreview(a)}
-                    className="p-2 rounded-xl hover:bg-[rgba(28,28,28,0.05)] text-[rgba(28,28,28,0.4)]" title="Anteprima">
+                    className="p-2 rounded-xl hover:bg-[#0A0A0A]/5 text-[#0A0A0A]/50" title="Anteprima">
                     <Eye className="w-4 h-4" />
                   </button>
                   <button data-testid={`edit-art-${a._id}`} onClick={() => openEdit(a)}
-                    className="p-2 rounded-xl hover:bg-[rgba(28,28,28,0.05)] text-[rgba(28,28,28,0.4)]" title="Modifica">
+                    className="p-2 rounded-xl hover:bg-[#0A0A0A]/5 text-[#0A0A0A]/50" title="Modifica">
                     <Edit2 className="w-4 h-4" />
                   </button>
                   {a.stato === "bozza" && (
@@ -176,7 +176,7 @@ export default function AdminBlogPage() {
                     </>
                   )}
                   <button data-testid={`elimina-${a._id}`} onClick={() => elimina(a._id)}
-                    className="p-2 rounded-xl hover:bg-red-50 text-[rgba(28,28,28,0.4)] hover:text-red-600" title="Elimina">
+                    className="p-2 rounded-xl hover:bg-red-50 text-[#0A0A0A]/50 hover:text-red-600" title="Elimina">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
@@ -190,53 +190,53 @@ export default function AdminBlogPage() {
       {showForm && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl my-8">
-            <div className="flex items-center justify-between p-6 border-b border-[rgba(28,28,28,0.08)]">
-              <h2 className="text-xl font-bold text-[#1C1C1C] font-[Outfit]">
+            <div className="flex items-center justify-between p-6 border-b border-[#0A0A0A]/10">
+              <h2 className="text-xl font-bold text-[#0A0A0A] font-[Outfit]">
                 {editing ? "Modifica Articolo" : "Nuovo Articolo"}
               </h2>
-              <button onClick={() => setShowForm(false)} className="p-2 rounded-xl hover:bg-[rgba(28,28,28,0.05)]">
+              <button onClick={() => setShowForm(false)} className="p-2 rounded-xl hover:bg-[#0A0A0A]/5">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <form onSubmit={handleSave} className="p-6 space-y-4">
               {error && <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">{error}</div>}
               <div>
-                <label className="block text-sm font-medium text-[#1C1C1C] mb-1">Titolo*</label>
+                <label className="block text-sm font-medium text-[#0A0A0A] mb-1">Titolo*</label>
                 <input data-testid="form-titolo" type="text" value={form.titolo} required
                   onChange={e => setForm({...form, titolo:e.target.value})}
                   placeholder="Titolo dell'articolo"
-                  className="w-full px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017]" />
+                  className="w-full px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]" />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#1C1C1C] mb-1">Categoria</label>
+                  <label className="block text-sm font-medium text-[#0A0A0A] mb-1">Categoria</label>
                   <select value={form.categoria} onChange={e => setForm({...form, categoria:e.target.value})}
-                    className="w-full px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017] bg-white">
+                    className="w-full px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] bg-white">
                     <option value="">Seleziona categoria</option>
                     {CATEGORIE.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-[#1C1C1C] mb-1">Tag (virgola)</label>
+                  <label className="block text-sm font-medium text-[#0A0A0A] mb-1">Tag (virgola)</label>
                   <input type="text" value={form.tags} onChange={e => setForm({...form, tags:e.target.value})}
                     placeholder="sessuologia, coppia, ..."
-                    className="w-full px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017]" />
+                    className="w-full px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A]" />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-medium text-[#1C1C1C] mb-1">Contenuto*</label>
+                <label className="block text-sm font-medium text-[#0A0A0A] mb-1">Contenuto*</label>
                 <textarea data-testid="form-contenuto" value={form.contenuto} required
                   onChange={e => setForm({...form, contenuto:e.target.value})} rows={10}
                   placeholder="Scrivi il contenuto dell'articolo..."
-                  className="w-full px-3 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#D4A017] resize-none" />
+                  className="w-full px-3 py-2.5 border border-[#0A0A0A]/15 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] resize-none" />
               </div>
               <div className="flex justify-end gap-3">
                 <button type="button" onClick={() => setShowForm(false)}
-                  className="px-5 py-2.5 border border-[rgba(28,28,28,0.15)] rounded-full text-[#1C1C1C] hover:bg-[rgba(28,28,28,0.05)]">
+                  className="px-5 py-2.5 border border-[#0A0A0A]/15 rounded-full text-[#0A0A0A] hover:bg-[#0A0A0A]/5">
                   Annulla
                 </button>
                 <button data-testid="save-article-btn" type="submit" disabled={saving}
-                  className="px-5 py-2.5 bg-[#D4A017] hover:bg-[#B38612] text-white rounded-full font-medium disabled:opacity-50">
+                  className="px-5 py-2.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white rounded-full font-medium disabled:opacity-50">
                   {saving ? "Salvataggio..." : editing ? "Aggiorna" : "Pubblica"}
                 </button>
               </div>
@@ -249,25 +249,25 @@ export default function AdminBlogPage() {
       {preview && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-start justify-center p-4 overflow-y-auto">
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl my-8">
-            <div className="flex items-center justify-between p-6 border-b border-[rgba(28,28,28,0.08)]">
+            <div className="flex items-center justify-between p-6 border-b border-[#0A0A0A]/10">
               <div>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATO_BADGE[preview.stato]}`}>
                   {preview.stato}
                 </span>
               </div>
-              <button onClick={() => setPreview(null)} className="p-2 rounded-xl hover:bg-[rgba(28,28,28,0.05)]">
+              <button onClick={() => setPreview(null)} className="p-2 rounded-xl hover:bg-[#0A0A0A]/5">
                 <X className="w-5 h-5" />
               </button>
             </div>
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-[#1C1C1C] font-[Outfit] mb-2">{preview.titolo}</h2>
-              <div className="text-sm text-[rgba(28,28,28,0.5)] mb-4">
+              <h2 className="text-2xl font-bold text-[#0A0A0A] font-[Outfit] mb-2">{preview.titolo}</h2>
+              <div className="text-sm text-[#0A0A0A]/55 mb-4">
                 di <strong>{preview.autore_nome}</strong> · {new Date(preview.created_at).toLocaleDateString("it-IT")}
               </div>
-              <div className="prose text-[#1C1C1C] text-sm leading-relaxed whitespace-pre-wrap">{preview.contenuto}</div>
+              <div className="prose text-[#0A0A0A] text-sm leading-relaxed whitespace-pre-wrap">{preview.contenuto}</div>
             </div>
             {preview.stato === "bozza" && (
-              <div className="flex justify-end gap-3 p-6 border-t border-[rgba(28,28,28,0.08)]">
+              <div className="flex justify-end gap-3 p-6 border-t border-[#0A0A0A]/10">
                 <button onClick={() => { rifiuta(preview._id); setPreview(null); }}
                   className="px-5 py-2.5 border border-red-200 text-red-600 rounded-full hover:bg-red-50 flex items-center gap-2">
                   <XCircle className="w-4 h-4" /> Rifiuta

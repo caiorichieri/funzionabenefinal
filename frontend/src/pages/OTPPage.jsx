@@ -58,15 +58,15 @@ export default function OTPPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-[#E9D628] flex items-center justify-center p-6">
       <div className="w-full max-w-md text-center">
-        <div className="w-16 h-16 rounded-full bg-[#D4A017]/10 flex items-center justify-center mx-auto mb-6">
-          <ShieldCheck className="w-8 h-8 text-[#D4A017]" />
+        <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-6">
+          <ShieldCheck className="w-8 h-8 text-[#0A0A0A]" />
         </div>
 
-        <h1 className="text-3xl font-bold text-[#1C1C1C] font-[Outfit] mb-2">Verifica Email</h1>
-        <p className="text-[rgba(28,28,28,0.6)] mb-2">
-          Abbiamo inviato un codice OTP a <strong className="text-[#1C1C1C]">{email}</strong>
+        <h1 className="text-3xl font-bold text-[#0A0A0A] font-[Outfit] mb-2">Verifica Email</h1>
+        <p className="text-[#0A0A0A]/65 mb-2">
+          Abbiamo inviato un codice OTP a <strong className="text-[#0A0A0A]">{email}</strong>
         </p>
 
         {otpDev && (
@@ -89,21 +89,21 @@ export default function OTPPage() {
 
         <form onSubmit={handleVerify} className="space-y-5">
           <div>
-            <label className="block text-sm font-medium text-[#1C1C1C] mb-2 text-left">Codice OTP (6 cifre)</label>
+            <label className="block text-sm font-medium text-[#0A0A0A] mb-2 text-left">Codice OTP (6 cifre)</label>
             <input
               data-testid="otp-input"
               type="text" value={otp}
               onChange={e => setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))}
               placeholder="000000"
               maxLength={6}
-              className="w-full text-center text-3xl font-mono tracking-widest px-4 py-4 border-2 border-[rgba(28,28,28,0.15)] rounded-xl bg-white text-[#1C1C1C] focus:outline-none focus:ring-2 focus:ring-[#D4A017] focus:border-transparent"
+              className="w-full text-center text-3xl font-mono tracking-widest px-4 py-4 border-2 border-[#0A0A0A]/15 rounded-xl bg-white text-[#0A0A0A] focus:outline-none focus:ring-2 focus:ring-[#0A0A0A] focus:border-transparent"
             />
           </div>
 
           <button
             data-testid="otp-verify-btn"
             type="submit" disabled={loading || otp.length !== 6}
-            className="w-full py-3 bg-[#D4A017] hover:bg-[#B38612] text-white font-semibold rounded-full transition-colors disabled:opacity-50 font-[Outfit]"
+            className="w-full py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-semibold rounded-md transition-colors disabled:opacity-50 font-[Outfit]"
           >
             {loading ? "Verifica in corso..." : "Verifica Account"}
           </button>
@@ -114,7 +114,7 @@ export default function OTPPage() {
             data-testid="otp-resend-btn"
             onClick={handleResend}
             disabled={resending || countdown > 0}
-            className="flex items-center gap-2 text-sm text-[rgba(28,28,28,0.6)] hover:text-[#D4A017] mx-auto disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 text-sm text-[#0A0A0A]/65 hover:text-[#0A0A0A] mx-auto disabled:opacity-50 transition-colors"
           >
             <RotateCcw className="w-4 h-4" />
             {countdown > 0 ? `Reinvia tra ${countdown}s` : "Reinvia codice"}
