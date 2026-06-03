@@ -116,16 +116,16 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
     }
   };
 
-  const inputCls = "w-full px-4 py-3 bg-[#1C2A33]/30 border border-white/10 rounded-xl text-[#F4F1ED] focus:outline-none focus:border-[#D4A017] text-sm";
-  const labelCls = "block text-xs tracking-[0.15em] uppercase text-[#E6E2D8]/50 mb-2";
+  const inputCls = "w-full px-4 py-3 bg-white border border-[#0A0A0A]/15 rounded-xl text-[#0A0A0A] focus:outline-none focus:border-[#0A0A0A] text-sm";
+  const labelCls = "block text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/60 mb-2";
 
   return (
     <div data-testid="step-dati-fiscali">
-      <div className="w-12 h-12 rounded-full bg-[#D4A017]/10 flex items-center justify-center mb-5">
-        <FileCheck className="w-5 h-5 text-[#D4A017]" />
+      <div className="w-12 h-12 rounded-full bg-white/30 flex items-center justify-center mb-5">
+        <FileCheck className="w-5 h-5 text-[#0A0A0A]" />
       </div>
-      <h2 className="font-serif text-3xl text-[#F4F1ED] leading-tight">Completa i tuoi dati</h2>
-      <p className="mt-2 text-sm text-[#E6E2D8]/60">
+      <h2 className="font-serif text-3xl text-[#0A0A0A] leading-tight">Completa i tuoi dati</h2>
+      <p className="mt-2 text-sm text-[#0A0A0A]/70">
         Dati necessari per la fatturazione e il rispetto delle normative italiane.
       </p>
 
@@ -137,7 +137,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
 
       <form onSubmit={submit} className="mt-6 space-y-5">
         <div>
-          <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-3">Dati anagrafici</div>
+          <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">Dati anagrafici</div>
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className={labelCls}>Nome *</label>
@@ -162,15 +162,15 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
         </div>
 
         <div>
-          <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-3">Luogo di nascita</div>
+          <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">Luogo di nascita</div>
 
-          <label className="flex items-center gap-3 mb-4 text-sm text-[#E6E2D8]/80 cursor-pointer">
+          <label className="flex items-center gap-3 mb-4 text-sm text-[#0A0A0A]/85 cursor-pointer">
             <input
               data-testid="df-estero-checkbox"
               type="checkbox"
               checked={form.nato_all_estero}
               onChange={(e) => set("nato_all_estero", e.target.checked)}
-              className="accent-[#D4A017] w-4 h-4"
+              className="accent-[#0A0A0A] w-4 h-4"
             />
             <span>Sono nato/a all'estero</span>
           </label>
@@ -204,7 +204,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
           <div className="flex items-center justify-between mb-2">
             <label className={labelCls + " mb-0"}>Codice Fiscale *</label>
             {cfAutoComputed && (
-              <span className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#D4A017]">
+              <span className="flex items-center gap-1.5 text-[10px] tracking-[0.15em] uppercase text-[#0A0A0A]">
                 <Sparkles className="w-3 h-3" /> Calcolato automaticamente
               </span>
             )}
@@ -217,7 +217,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
             onChange={(e) => { set("codice_fiscale", e.target.value.toUpperCase()); setCfAutoComputed(false); }}
             placeholder="RSSMRA90E15H501Z"
           />
-          <p className="mt-2 text-xs text-[#E6E2D8]/40">
+          <p className="mt-2 text-xs text-[#0A0A0A]/40">
             Compila nome, cognome, data di nascita, genere e luogo di nascita — calcoleremo il tuo CF automaticamente.
           </p>
         </div>
@@ -228,7 +228,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
         </div>
 
         <div>
-          <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-3">Indirizzo di residenza</div>
+          <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-3">Indirizzo di residenza</div>
           <div className="space-y-3">
             <div>
               <label className={labelCls}>Indirizzo *</label>
@@ -254,7 +254,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
           </div>
         </div>
 
-        <div className="pt-3 text-xs text-[#E6E2D8]/40 leading-relaxed">
+        <div className="pt-3 text-xs text-[#0A0A0A]/40 leading-relaxed">
           I tuoi dati saranno trattati ai sensi del GDPR (Reg. UE 2016/679) e utilizzati esclusivamente
           per la fatturazione e la gestione della seduta.
         </div>
@@ -262,7 +262,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
         <button
           data-testid="df-submit"
           type="submit" disabled={loading}
-          className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#D4A017] hover:bg-[#E5B942] disabled:opacity-40 text-[#111111] font-medium rounded-full transition-all"
+          className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] disabled:opacity-40 text-white font-medium rounded-md transition-all"
         >
           {loading ? "Salvataggio..." : "Continua al pagamento"}
           {!loading && <ArrowRight className="w-4 h-4" />}

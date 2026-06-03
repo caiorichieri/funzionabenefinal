@@ -22,10 +22,10 @@ export default function CookiePage() {
   };
 
   const Toggle = ({ name, label, desc, disabled }) => (
-    <div className="flex items-start justify-between gap-6 py-5 border-b border-[rgba(28,28,28,0.08)]">
+    <div className="flex items-start justify-between gap-6 py-5 border-b border-[#0A0A0A]/10">
       <div>
-        <div className="text-[#1C1C1C] font-medium mb-1">{label}</div>
-        <div className="text-sm text-[rgba(28,28,28,0.6)] leading-relaxed">{desc}</div>
+        <div className="text-[#0A0A0A] font-medium mb-1">{label}</div>
+        <div className="text-sm text-[#0A0A0A]/65 leading-relaxed">{desc}</div>
       </div>
       <label className="relative inline-block w-11 h-6 flex-shrink-0 mt-1 cursor-pointer">
         <input
@@ -35,7 +35,7 @@ export default function CookiePage() {
           onChange={(e) => setPrefs({ ...prefs, [name]: e.target.checked })}
           className="sr-only peer"
         />
-        <span className={`block w-11 h-6 rounded-full transition-colors ${prefs[name] ? "bg-[#D4A017]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
+        <span className={`block w-11 h-6 rounded-full transition-colors ${prefs[name] ? "bg-[#0A0A0A]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
         <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${prefs[name] ? "translate-x-5" : ""}`}></span>
       </label>
     </div>
@@ -97,14 +97,14 @@ export default function CookiePage() {
         <button
           data-testid="cookie-save-btn"
           onClick={save}
-          className="px-6 py-3 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] rounded-full text-sm font-medium tracking-wide transition-all"
+          className="px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md text-sm font-medium tracking-wide transition-all"
         >
           Salva preferenze
         </button>
         <button
           data-testid="cookie-revoke-btn"
           onClick={revoke}
-          className="px-6 py-3 border border-[rgba(28,28,28,0.12)] text-[#E6E2D8] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
+          className="px-6 py-3 border border-[rgba(28,28,28,0.12)] text-[#0A0A0A] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
         >
           Revoca tutto il consenso
         </button>

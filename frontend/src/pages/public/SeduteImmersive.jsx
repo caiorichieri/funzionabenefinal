@@ -55,18 +55,18 @@ const FAQ = [
 
 export default function SeduteImmersive() {
   return (
-    <main className="min-h-[calc(100vh-80px)] relative bg-[#E5D9C5] overflow-hidden" data-testid="immersive-page">
+    <main className="min-h-[calc(100vh-80px)] relative bg-[#E9D628] overflow-hidden" data-testid="immersive-page">
       {/* Continuous atmospheric backdrop — gold ↔ blue blooms only */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#D4A017]/30 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/35 blur-3xl" />
-        <div className="absolute top-[50%] right-[20%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/15 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#0A0A0A]/8 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/18 blur-3xl" />
+        <div className="absolute top-[50%] right-[20%] w-[500px] h-[500px] rounded-full bg-white/22 blur-3xl" />
       </div>
 
       {/* Hero */}
       <section className="relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#E5D9C5]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#E9D628]" />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-6 lg:px-10 py-20 lg:py-32">
@@ -78,20 +78,20 @@ export default function SeduteImmersive() {
           >
             {/* Floating mascot peeking from the side */}
             <div className="hidden lg:block absolute -right-4 top-8 opacity-90">
-              <Mascotte name="sereno" theme="gold" size={170} animation="float" />
+              <Mascotte name="sereno" theme="light" size={170} animation="float" />
             </div>
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0A0A0A]/15 text-[#0A0A0A] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" /> Il nostro differenziale
             </div>
 
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#1C1C1C] tracking-tight max-w-3xl">
-              La terapia<br /><em className="text-[#D4A017] not-italic">come non l'hai mai vissuta.</em>
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0A0A0A] tracking-tight max-w-3xl">
+              La terapia<br /><em className="text-[#0A0A0A] not-italic">come non l'hai mai vissuta.</em>
             </h1>
 
-            <p className="mt-8 text-lg lg:text-xl text-[rgba(28,28,28,0.7)] leading-relaxed max-w-3xl">
-              FunzionaBene è la <strong className="text-[#1C1C1C]">prima piattaforma italiana di sessuologia</strong> a integrare
+            <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/75 leading-relaxed max-w-3xl">
+              FunzionaBene è la <strong className="text-[#0A0A0A]">prima piattaforma italiana di sessuologia</strong> a integrare
               ambienti immersivi guidati direttamente nei percorsi terapeutici. Non è uno strumento, non è un gioco:
-              è <strong className="text-[#1C1C1C]">terapia clinica evidence-based</strong>, amplificata da un'esperienza
+              è <strong className="text-[#0A0A0A]">terapia clinica evidence-based</strong>, amplificata da un'esperienza
               sensoriale che i libri di ricerca confermano da anni.
             </p>
           </motion.div>
@@ -101,21 +101,21 @@ export default function SeduteImmersive() {
       {/* Stats */}
       <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20" data-testid="immersive-stats">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-8 bg-white/40 border border-[#D4A017]/20 rounded-3xl">
-            <div className="font-serif text-5xl lg:text-6xl text-[#D4A017]">−35%</div>
-            <p className="mt-4 text-sm text-[rgba(28,28,28,0.7)] leading-relaxed">
+          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
+            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">−35%</div>
+            <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
               di tempo medio di trattamento per fobie e disfunzioni ansiose (fonte: Riva et al. 2016).
             </p>
           </div>
-          <div className="p-8 bg-white/40 border border-[#D4A017]/20 rounded-3xl">
-            <div className="font-serif text-5xl lg:text-6xl text-[#D4A017]">72%</div>
-            <p className="mt-4 text-sm text-[rgba(28,28,28,0.7)] leading-relaxed">
+          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
+            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">72%</div>
+            <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
               dei pazienti riporta comfort maggiore rispetto all'esposizione tradizionale.
             </p>
           </div>
-          <div className="p-8 bg-white/40 border border-[#D4A017]/20 rounded-3xl">
-            <div className="font-serif text-5xl lg:text-6xl text-[#D4A017]">1ª</div>
-            <p className="mt-4 text-sm text-[rgba(28,28,28,0.7)] leading-relaxed">
+          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
+            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">1ª</div>
+            <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
               piattaforma italiana di sessuologia ad adottare questo approccio in modo strutturale.
             </p>
           </div>
@@ -124,12 +124,12 @@ export default function SeduteImmersive() {
 
       {/* How it works */}
       <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20" data-testid="immersive-how">
-        <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Come funziona</span>
-        <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight mb-14">
+        <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Come funziona</span>
+        <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight mb-14">
           Il terapeuta decide.<br />Tu vivi l'esperienza.
         </h2>
 
-        <ol className="space-y-10 border-l border-[rgba(28,28,28,0.08)] pl-10">
+        <ol className="space-y-10 border-l border-[#0A0A0A]/10 pl-10">
           {[
             { t: "Il terapeuta valuta se è adatta al tuo percorso", d: "Non tutte le persone o tutti i casi beneficiano della modalità immersiva. La valutazione clinica è sempre il primo passo." },
             { t: "Scegli la modalità che preferisci", d: "Dal tuo schermo (smartphone, tablet, computer) con effetto immersivo guidato, oppure con un visore se preferisci un coinvolgimento più profondo." },
@@ -137,11 +137,11 @@ export default function SeduteImmersive() {
             { t: "Rielaborazione terapeutica", d: "Dopo l'esperienza, si torna al dialogo con il terapeuta per dare senso a quanto hai vissuto. È qui che avviene il cambiamento." },
           ].map((s, i) => (
             <li key={i} className="relative" data-testid={`immersive-step-${i}`}>
-              <div className="absolute -left-[53px] top-0 w-10 h-10 rounded-full bg-[#D4A017] text-[#111111] font-medium flex items-center justify-center font-serif text-lg">
+              <div className="absolute -left-[53px] top-0 w-10 h-10 rounded-full bg-[#0A0A0A] text-white font-medium flex items-center justify-center font-serif text-lg">
                 {i + 1}
               </div>
-              <h3 className="font-serif text-2xl text-[#1C1C1C] mb-2">{s.t}</h3>
-              <p className="text-[rgba(28,28,28,0.6)] leading-relaxed">{s.d}</p>
+              <h3 className="font-serif text-2xl text-[#0A0A0A] mb-2">{s.t}</h3>
+              <p className="text-[#0A0A0A]/65 leading-relaxed">{s.d}</p>
             </li>
           ))}
         </ol>
@@ -151,8 +151,8 @@ export default function SeduteImmersive() {
       <section className="relative py-20 lg:py-28" data-testid="immersive-usecases">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="max-w-2xl mb-14">
-            <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Applicazioni cliniche</span>
-            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+            <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Applicazioni cliniche</span>
+            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
               Quando l'immersivo fa la differenza.
             </h2>
           </div>
@@ -165,7 +165,7 @@ export default function SeduteImmersive() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group overflow-hidden bg-white/30 border border-[rgba(28,28,28,0.08)] hover:border-[#D4A017]/30 rounded-2xl transition-colors"
+                className="group overflow-hidden bg-white/30 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/30 rounded-2xl transition-colors"
               >
                 {b.img && (
                   <div className="relative aspect-[16/9] overflow-hidden">
@@ -177,12 +177,12 @@ export default function SeduteImmersive() {
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       data-testid={`benefit-img-${i}`}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C2A33]/80 via-[#1C2A33]/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/12 via-white/50 to-transparent" />
                   </div>
                 )}
                 <div className="p-7">
-                  <h3 className="font-serif text-2xl text-[#1C1C1C] mb-3">{b.titolo}</h3>
-                  <p className="text-[rgba(28,28,28,0.6)] text-sm leading-relaxed">{b.descrizione}</p>
+                  <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3">{b.titolo}</h3>
+                  <p className="text-[#0A0A0A]/65 text-sm leading-relaxed">{b.descrizione}</p>
                 </div>
               </motion.div>
             ))}
@@ -203,10 +203,10 @@ export default function SeduteImmersive() {
           ].map((p, i) => {
             const Icon = p.icon;
             return (
-              <div key={i} className="p-5 bg-white/20 border border-[rgba(28,28,28,0.08)] rounded-2xl">
-                <Icon className="w-5 h-5 text-[#D4A017] mb-3" />
-                <div className="font-serif text-lg text-[#1C1C1C] mb-1">{p.titolo}</div>
-                <div className="text-xs text-[rgba(28,28,28,0.5)] leading-relaxed">{p.desc}</div>
+              <div key={i} className="p-5 bg-white/20 border border-[#0A0A0A]/10 rounded-2xl">
+                <Icon className="w-5 h-5 text-[#0A0A0A] mb-3" />
+                <div className="font-serif text-lg text-[#0A0A0A] mb-1">{p.titolo}</div>
+                <div className="text-xs text-[#0A0A0A]/60 leading-relaxed">{p.desc}</div>
               </div>
             );
           })}
@@ -215,17 +215,17 @@ export default function SeduteImmersive() {
 
       {/* FAQ */}
       <section className="max-w-3xl mx-auto px-6 lg:px-10 py-20 lg:py-24" data-testid="immersive-faq">
-        <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
-        <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight mb-10">Dubbi? È normale.</h2>
+        <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
+        <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight mb-10">Dubbi? È normale.</h2>
 
-        <div className="divide-y divide-white/10 border-t border-b border-[rgba(28,28,28,0.08)]">
+        <div className="divide-y divide-white/10 border-t border-b border-[#0A0A0A]/10">
           {FAQ.map((f, i) => (
             <details key={i} className="group py-6" data-testid={`immersive-faq-${i}`}>
               <summary className="cursor-pointer list-none flex items-start justify-between gap-4">
-                <span className="font-serif text-xl text-[#1C1C1C] group-hover:text-[#D4A017] transition-colors">{f.q}</span>
+                <span className="font-serif text-xl text-[#0A0A0A] group-hover:text-[#0A0A0A] transition-colors">{f.q}</span>
                 <span className="text-[#6B8FA3] text-2xl font-light mt-[-6px] group-open:rotate-45 transition-transform">+</span>
               </summary>
-              <p className="mt-4 text-[rgba(28,28,28,0.7)] leading-relaxed">{f.a}</p>
+              <p className="mt-4 text-[#0A0A0A]/75 leading-relaxed">{f.a}</p>
             </details>
           ))}
         </div>
@@ -233,8 +233,8 @@ export default function SeduteImmersive() {
 
       {/* References */}
       <section className="max-w-4xl mx-auto px-6 lg:px-10 py-12 mb-12" data-testid="immersive-references">
-        <h3 className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-4">Riferimenti scientifici</h3>
-        <ul className="space-y-2 text-xs text-[rgba(28,28,28,0.4)] leading-relaxed">
+        <h3 className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-4">Riferimenti scientifici</h3>
+        <ul className="space-y-2 text-xs text-[#0A0A0A]/50 leading-relaxed">
           <li>• Riva G., Baños R.M., Botella C., Mantovani F., Gaggioli A. (2016). <em>Transforming experience: the potential of augmented reality and virtual reality for enhancing personal and clinical change.</em> Frontiers in Psychiatry.</li>
           <li>• Freeman D. et al. (2017). <em>Virtual reality in the assessment, understanding, and treatment of mental health disorders.</em> Psychological Medicine.</li>
           <li>• Diemer J., Alpers G.W., Peperkorn H.M., Shiban Y., Mühlberger A. (2015). <em>The impact of perception and presence on emotional reactions.</em> Frontiers in Psychology.</li>
@@ -245,17 +245,17 @@ export default function SeduteImmersive() {
 
       {/* CTA */}
       <section className="max-w-5xl mx-auto px-6 lg:px-10 pb-24">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#D4A017]/10 via-[#1C2A33]/60 to-[#FBF8F2] border border-[#D4A017]/30 p-10 lg:p-16 text-center">
-          <h2 className="font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight max-w-2xl mx-auto">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#0A0A0A]/10 via-[#0A0A0A]/10 to-white border border-[#0A0A0A]/25 p-10 lg:p-16 text-center">
+          <h2 className="font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight max-w-2xl mx-auto">
             Pronto a provare una terapia diversa?
           </h2>
-          <p className="mt-5 text-[rgba(28,28,28,0.6)] max-w-xl mx-auto">
+          <p className="mt-5 text-[#0A0A0A]/65 max-w-xl mx-auto">
             Il tuo percorso inizia da un questionario di 2 minuti. Il terapeuta giusto deciderà con te se integrare sedute immersive.
           </p>
           <Link
             to="/questionario"
             data-testid="immersive-cta-btn"
-            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] font-medium rounded-full tracking-wide transition-all"
+            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md tracking-wide transition-all"
           >
             Inizia il Questionario <ArrowRight className="w-4 h-4" />
           </Link>

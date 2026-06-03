@@ -110,11 +110,11 @@ export default function QuestionnairePage() {
   };
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5]" data-testid="questionnaire">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628]" data-testid="questionnaire">
       <div className="sticky top-20 z-30 h-1 bg-white/5">
         <motion.div
           data-testid="progress-bar"
-          className="h-full bg-[#D4A017]"
+          className="h-full bg-[#0A0A0A]"
           initial={{ width: 0 }}
           animate={{ width: `${progress}%` }}
           transition={{ duration: 0.4, ease: "easeOut" }}
@@ -122,13 +122,13 @@ export default function QuestionnairePage() {
       </div>
 
       <div className="max-w-xl mx-auto px-6 py-16 lg:py-24">
-        <div className="mb-8 flex items-center justify-between text-xs tracking-[0.2em] uppercase text-[rgba(28,28,28,0.4)]">
+        <div className="mb-8 flex items-center justify-between text-xs tracking-[0.2em] uppercase text-[#0A0A0A]/50">
           <span>Passo {step + 1} di {STEPS.length}</span>
           {step > 0 && (
             <button
               data-testid="questionnaire-back"
               onClick={() => setStep(step - 1)}
-              className="flex items-center gap-1 hover:text-[#D4A017] transition-colors"
+              className="flex items-center gap-1 hover:text-[#0A0A0A] transition-colors"
             >
               <ArrowLeft className="w-3 h-3" /> Indietro
             </button>
@@ -147,15 +147,15 @@ export default function QuestionnairePage() {
             <div className="mb-6 flex justify-center">
               <Mascotte
                 name={STEP_MASCOTS[step % STEP_MASCOTS.length]}
-                theme="gold"
+                theme="light"
                 size={90}
                 animation={step === STEPS.length - 1 ? "wiggle" : "float"}
               />
             </div>
-            <h1 className="font-serif text-3xl lg:text-4xl text-[#1C1C1C] leading-tight text-center">
+            <h1 className="font-serif text-3xl lg:text-4xl text-[#0A0A0A] leading-tight text-center">
               {current.label}
             </h1>
-            <p className="mt-3 text-[rgba(28,28,28,0.6)] text-center">{current.helper}</p>
+            <p className="mt-3 text-[#0A0A0A]/65 text-center">{current.helper}</p>
 
             <div className="mt-10 space-y-3">
               {current.options.map((opt) => {
@@ -170,14 +170,14 @@ export default function QuestionnairePage() {
                     onClick={() => current.type === "single" ? selectSingle(opt) : toggleMulti(opt)}
                     className={`w-full flex items-center justify-between px-6 py-4 rounded-2xl border transition-all text-left ${
                       isSelected
-                        ? "border-[#D4A017] bg-[#D4A017]/10 text-[#1C1C1C]"
-                        : "border-[rgba(28,28,28,0.08)] bg-white/30 text-[rgba(28,28,28,0.7)] hover:border-[#6B8FA3]/60 hover:bg-white/60"
+                        ? "border-[#0A0A0A] bg-white/30 text-[#0A0A0A]"
+                        : "border-[#0A0A0A]/10 bg-white/30 text-[#0A0A0A]/75 hover:border-[#6B8FA3]/60 hover:bg-white/60"
                     }`}
                   >
                     <span className="text-base">{opt}</span>
                     {isSelected && (
-                      <div className="w-6 h-6 rounded-full bg-[#D4A017] flex items-center justify-center">
-                        <Check className="w-3.5 h-3.5 text-[#111111]" strokeWidth={3} />
+                      <div className="w-6 h-6 rounded-full bg-[#0A0A0A] flex items-center justify-center">
+                        <Check className="w-3.5 h-3.5 text-[#0A0A0A]" strokeWidth={3} />
                       </div>
                     )}
                   </button>
@@ -190,7 +190,7 @@ export default function QuestionnairePage() {
                 data-testid="questionnaire-next"
                 onClick={() => goNext()}
                 disabled={!canProceed() || loading}
-                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#D4A017] hover:bg-[#E5B942] disabled:opacity-40 disabled:cursor-not-allowed text-[#111111] font-medium rounded-full tracking-wide transition-all"
+                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] disabled:opacity-40 disabled:cursor-not-allowed text-[#0A0A0A] font-medium rounded-full tracking-wide transition-all"
               >
                 {loading ? "Analisi in corso..." : step === STEPS.length - 1 ? "Trova i miei match" : "Continua"}
                 {!loading && <ArrowRight className="w-4 h-4" />}

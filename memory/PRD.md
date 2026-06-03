@@ -16,8 +16,9 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - **Email (placeholder):** Resend (transazionale) + Brevo (marketing)
 - **Pagamenti (Fase 2):** Nexi XPay
 - **Video (Fase 2):** Daily.co
-- **Design:** Oro #D4A017 + Blu acciaio #6B8FA3, sfondo crema #FDFBF7 (dashboard), scuro #0A0A0A (hero sito)
+- **Design (Feb 2026):** Sfondo mustarda **#E9D628**, cards bianche pure, testo nero **#0A0A0A**, accento blu acciaio #6B8FA3. Bottoni "Architetto" (rettangoli neri, testo bianco, rounded-md). Mascotte line-art con linee nere.
 - **Font:** Outfit (titoli) + Figtree (body)
+- **CHANGELOG Feb 2026:** Pivot completo del tema da crema/oro per mustarda/nero/Architetto su tutto il sito pubblico (HomePage, ChiSiamo, SeduteImmersive, FAQ, AreeIntervento, Emergenze, Questionario, Blog, NotFound, Privacy/Cookie/Termini, BookingSheet, MatchingResults, TerapistaPublic, PublicLayout/LegalLayout).
 
 ---
 

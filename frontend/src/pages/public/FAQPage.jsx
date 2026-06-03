@@ -47,27 +47,27 @@ export default function FAQPage() {
   }, []);
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] relative overflow-hidden" data-testid="faq-page">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] relative overflow-hidden" data-testid="faq-page">
       {/* Continuous atmospheric backdrop */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"><div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#D4A017]/25 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/30 blur-3xl" />
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true"><div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#0A0A0A]/6 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/22 blur-3xl" />
       </div>
 
       <div className="relative max-w-3xl mx-auto px-6 lg:px-10 py-16 lg:py-24">
         <div className="text-center mb-16">
           <div className="flex justify-center mb-2">
-            <Mascotte name="curioso" theme="gold" size={120} animation="wiggle" />
+            <Mascotte name="curioso" theme="light" size={120} animation="wiggle" />
           </div>
-          <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
-          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#1C1C1C] leading-tight">
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
+          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#0A0A0A] leading-tight">
             Cosa c'è da sapere.
           </h1>
-          <p className="mt-6 text-[rgba(28,28,28,0.6)]">
+          <p className="mt-6 text-[#0A0A0A]/65">
             Risposte chiare alle domande più comuni. Se non trovi quella che cerchi, scrivici.
           </p>
         </div>
 
-        <div className="divide-y divide-white/10 border-t border-b border-[rgba(28,28,28,0.08)]">
+        <div className="divide-y divide-white/10 border-t border-b border-[#0A0A0A]/10">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -76,11 +76,11 @@ export default function FAQPage() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="w-full py-6 flex items-start justify-between gap-6 text-left group"
                 >
-                  <span className="font-serif text-xl text-[#1C1C1C] group-hover:text-[#D4A017] transition-colors">
+                  <span className="font-serif text-xl text-[#0A0A0A] group-hover:text-[#0A0A0A] transition-colors">
                     {f.domanda}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#6B8FA3] flex-shrink-0 mt-1 transition-transform ${isOpen ? "rotate-180 text-[#D4A017]" : ""}`}
+                    className={`w-5 h-5 text-[#6B8FA3] flex-shrink-0 mt-1 transition-transform ${isOpen ? "rotate-180 text-[#0A0A0A]" : ""}`}
                   />
                 </button>
                 <AnimatePresence initial={false}>
@@ -92,7 +92,7 @@ export default function FAQPage() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
-                      <p className="pb-6 text-[rgba(28,28,28,0.7)] leading-relaxed">{f.risposta}</p>
+                      <p className="pb-6 text-[#0A0A0A]/75 leading-relaxed">{f.risposta}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>

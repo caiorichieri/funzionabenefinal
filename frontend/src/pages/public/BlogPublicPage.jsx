@@ -32,26 +32,26 @@ export default function BlogPublicPage() {
   const [hero, ...rest] = articoli;
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E5D9C5] py-16 lg:py-24" data-testid="blog-page">
+    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] py-16 lg:py-24" data-testid="blog-page">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="mb-16 max-w-2xl">
-          <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Rivista</span>
-          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#1C1C1C] leading-tight">
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Rivista</span>
+          <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#0A0A0A] leading-tight">
             Pensieri e ricerche<br />dai nostri specialisti.
           </h1>
-          <p className="mt-6 text-[rgba(28,28,28,0.6)] text-lg">
+          <p className="mt-6 text-[#0A0A0A]/65 text-lg">
             Articoli scritti dai nostri specialisti per aiutarti a comprendere meglio te stesso.
           </p>
         </div>
 
         {loading && (
-          <div className="text-center py-20 text-[rgba(28,28,28,0.4)]">Caricamento...</div>
+          <div className="text-center py-20 text-[#0A0A0A]/50">Caricamento...</div>
         )}
 
         {!loading && articoli.length === 0 && (
-          <div className="py-20 text-center border border-dashed border-[rgba(28,28,28,0.08)] rounded-3xl flex flex-col items-center gap-6" data-testid="blog-empty">
-            <Mascotte name="ovo" theme="gold" size={140} animation="float" />
-            <p className="text-[rgba(28,28,28,0.5)] max-w-md">Nessun articolo pubblicato al momento. Torna presto — i nostri specialisti stanno scrivendo per te.</p>
+          <div className="py-20 text-center border border-dashed border-[#0A0A0A]/10 rounded-3xl flex flex-col items-center gap-6" data-testid="blog-empty">
+            <Mascotte name="ovo" theme="light" size={140} animation="float" />
+            <p className="text-[#0A0A0A]/60 max-w-md">Nessun articolo pubblicato al momento. Torna presto — i nostri specialisti stanno scrivendo per te.</p>
           </div>
         )}
 
@@ -61,7 +61,7 @@ export default function BlogPublicPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             data-testid="blog-hero"
-            className="mb-16 grid md:grid-cols-[1.1fr_1fr] gap-0 bg-gradient-to-br from-[#1C2A33] via-[#1C2A33]/80 to-[#FBF8F2] border border-[rgba(28,28,28,0.08)] rounded-3xl overflow-hidden"
+            className="mb-16 grid md:grid-cols-[1.1fr_1fr] gap-0 bg-gradient-to-br from-[#0A0A0A] via-[#0A0A0A]/12 to-white border border-[#0A0A0A]/10 rounded-3xl overflow-hidden"
           >
             {hero.immagine_url && (
               <Link to={`/blog/${hero._id}`} className="relative aspect-[4/3] md:aspect-auto overflow-hidden block group">
@@ -71,29 +71,29 @@ export default function BlogPublicPage() {
                   loading="eager"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[#1C2A33]/60 md:to-[#1C2A33]/90" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-white/80 md:to-white" />
               </Link>
             )}
             <div className="relative p-10 lg:p-14 flex flex-col justify-center">
-              <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-[#D4A017]/5 blur-3xl" />
+              <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-white/12 blur-3xl" />
               <div className="relative">
                 {hero.categoria && (
-                  <span className="text-xs tracking-[0.25em] uppercase text-[#D4A017]">{hero.categoria}</span>
+                  <span className="text-xs tracking-[0.25em] uppercase text-[#0A0A0A]">{hero.categoria}</span>
                 )}
-                <h2 className="mt-4 font-serif text-3xl lg:text-4xl xl:text-5xl text-[#1C1C1C] leading-tight">
+                <h2 className="mt-4 font-serif text-3xl lg:text-4xl xl:text-5xl text-[#0A0A0A] leading-tight">
                   {hero.titolo}
                 </h2>
-                <p className="mt-6 text-[rgba(28,28,28,0.7)] text-base lg:text-lg leading-relaxed line-clamp-3">
+                <p className="mt-6 text-[#0A0A0A]/75 text-base lg:text-lg leading-relaxed line-clamp-3">
                   {stripHtml(hero.contenuto).slice(0, 240)}…
                 </p>
-                <div className="mt-8 flex items-center gap-6 text-xs text-[rgba(28,28,28,0.5)]">
+                <div className="mt-8 flex items-center gap-6 text-xs text-[#0A0A0A]/60">
                   <span className="flex items-center gap-2"><User className="w-3.5 h-3.5" />{hero.autore_nome}</span>
                   <span className="flex items-center gap-2"><Calendar className="w-3.5 h-3.5" />{formatDate(hero.created_at)}</span>
                 </div>
                 <Link
                   to={`/blog/${hero._id}`}
                   data-testid="blog-hero-link"
-                  className="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] rounded-full text-sm font-medium tracking-wide transition-all"
+                  className="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md text-sm font-medium tracking-wide transition-all"
                 >
                   Leggi l'articolo <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -112,7 +112,7 @@ export default function BlogPublicPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.3) }}
                 data-testid={`blog-card-${i}`}
-                className="group bg-white/40 border border-[rgba(28,28,28,0.08)] rounded-3xl hover:border-[#D4A017]/40 transition-all flex flex-col overflow-hidden"
+                className="group bg-white/40 border border-[#0A0A0A]/10 rounded-3xl hover:border-[#0A0A0A]/40 transition-all flex flex-col overflow-hidden"
               >
                 {a.immagine_url && (
                   <Link to={`/blog/${a._id}`} className="relative aspect-[16/10] overflow-hidden block">
@@ -122,25 +122,25 @@ export default function BlogPublicPage() {
                       loading="lazy"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1C2A33]/60 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/10 to-transparent" />
                   </Link>
                 )}
                 <div className="p-7 flex flex-col flex-1">
                   {a.categoria && (
                     <span className="text-xs tracking-[0.25em] uppercase text-[#6B8FA3] mb-3">{a.categoria}</span>
                   )}
-                  <h3 className="font-serif text-xl lg:text-2xl text-[#1C1C1C] leading-tight mb-4">
+                  <h3 className="font-serif text-xl lg:text-2xl text-[#0A0A0A] leading-tight mb-4">
                     {a.titolo}
                   </h3>
-                  <p className="text-sm text-[rgba(28,28,28,0.6)] line-clamp-3 mb-6 flex-1">
+                  <p className="text-sm text-[#0A0A0A]/65 line-clamp-3 mb-6 flex-1">
                     {stripHtml(a.contenuto).slice(0, 160)}…
                   </p>
-                  <div className="flex items-center justify-between pt-4 border-t border-[rgba(28,28,28,0.05)]">
-                    <span className="text-xs text-[rgba(28,28,28,0.4)]">{formatDate(a.created_at)}</span>
+                  <div className="flex items-center justify-between pt-4 border-t border-[#0A0A0A]/10">
+                    <span className="text-xs text-[#0A0A0A]/50">{formatDate(a.created_at)}</span>
                     <Link
                       to={`/blog/${a._id}`}
                       data-testid={`blog-card-link-${i}`}
-                      className="text-xs tracking-[0.15em] uppercase text-[#D4A017] hover:text-[#E5B942]"
+                      className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A] hover:text-[#0A0A0A]/70"
                     >
                       Leggi →
                     </Link>

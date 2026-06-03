@@ -48,15 +48,15 @@ export default function TerapistaPublicPage() {
   };
 
   if (loading) {
-    return <main className="min-h-[calc(100vh-80px)] bg-[#111111] flex items-center justify-center text-[#E6E2D8]/40">Caricamento profilo...</main>;
+    return <main className="min-h-[calc(100vh-80px)] bg-[#111111] flex items-center justify-center text-[#0A0A0A]/40">Caricamento profilo...</main>;
   }
 
   if (!terapista) {
     return (
       <main className="min-h-[calc(100vh-80px)] bg-[#111111] flex items-center justify-center px-6">
         <div className="text-center">
-          <h1 className="font-serif text-3xl text-[#F4F1ED] mb-4">Terapeuta non trovato</h1>
-          <Link to="/questionario" className="text-[#D4A017] hover:text-[#E5B942]">← Trova un terapeuta</Link>
+          <h1 className="font-serif text-3xl text-[#0A0A0A] mb-4">Terapeuta non trovato</h1>
+          <Link to="/questionario" className="text-[#0A0A0A] hover:text-[#0A0A0A]/70">← Trova un terapeuta</Link>
         </div>
       </main>
     );
@@ -69,56 +69,56 @@ export default function TerapistaPublicPage() {
     <main className="min-h-[calc(100vh-80px)] bg-[#111111]" data-testid="therapist-public">
       {/* Hero */}
       <section className="relative border-b border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1C2A33]/60 via-[#111111] to-[#111111]" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/10 via-[#111111] to-[#111111]" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24">
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-4">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-white/10 flex items-center justify-center"
+                className="aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-[#0A0A0A]/20 to-[#6B8FA3]/20 border border-[#0A0A0A]/15 flex items-center justify-center"
               >
                 {terapista.foto_url ? (
                   <img src={terapista.foto_url} alt={`${terapista.nome} ${terapista.cognome}`} className="w-full h-full object-cover" />
                 ) : (
-                  <span className="font-serif text-8xl text-[#D4A017]">
+                  <span className="font-serif text-8xl text-[#0A0A0A]">
                     {(terapista.nome || "?")[0]}{(terapista.cognome || "?")[0]}
                   </span>
                 )}
               </motion.div>
 
-              <div className="mt-6 space-y-3 p-6 bg-[#1C2A33]/40 border border-white/10 rounded-3xl">
+              <div className="mt-6 space-y-3 p-6 bg-white border border-[#0A0A0A]/15 rounded-3xl">
                 {terapista.albo_numero && (
                   <div className="flex items-center gap-3 text-sm">
                     <Award className="w-4 h-4 text-[#6B8FA3] flex-shrink-0" />
                     <div>
-                      <div className="text-[#F4F1ED]">Albo n. {terapista.albo_numero}</div>
-                      <div className="text-xs text-[#E6E2D8]/50">{terapista.albo_ordine}</div>
+                      <div className="text-[#0A0A0A]">Albo n. {terapista.albo_numero}</div>
+                      <div className="text-xs text-[#0A0A0A]/50">{terapista.albo_ordine}</div>
                     </div>
                   </div>
                 )}
                 {terapista.anni_esperienza && (
                   <div className="flex items-center gap-3 text-sm">
                     <Clock className="w-4 h-4 text-[#6B8FA3] flex-shrink-0" />
-                    <span className="text-[#F4F1ED]">{terapista.anni_esperienza} anni di esperienza</span>
+                    <span className="text-[#0A0A0A]">{terapista.anni_esperienza} anni di esperienza</span>
                   </div>
                 )}
                 {Array.isArray(terapista.lingue) && terapista.lingue.length > 0 && (
                   <div className="flex items-center gap-3 text-sm">
                     <Globe className="w-4 h-4 text-[#6B8FA3] flex-shrink-0" />
-                    <span className="text-[#F4F1ED]">{terapista.lingue.join(", ")}</span>
+                    <span className="text-[#0A0A0A]">{terapista.lingue.join(", ")}</span>
                   </div>
                 )}
-                <div className="flex items-center gap-3 text-sm pt-3 border-t border-white/10">
-                  <span className="font-serif text-3xl text-[#D4A017]">€{terapista.prezzo_sessione || 90}</span>
-                  <span className="text-xs text-[#E6E2D8]/50">per seduta di 50 min</span>
+                <div className="flex items-center gap-3 text-sm pt-3 border-t border-[#0A0A0A]/15">
+                  <span className="font-serif text-3xl text-[#0A0A0A]">€{terapista.prezzo_sessione || 90}</span>
+                  <span className="text-xs text-[#0A0A0A]/50">per seduta di 50 min</span>
                 </div>
               </div>
             </div>
 
             <div className="lg:col-span-8">
-              <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">{genderLabel}</span>
-              <h1 className="mt-3 font-serif text-5xl lg:text-6xl text-[#F4F1ED] leading-tight">
+              <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">{genderLabel}</span>
+              <h1 className="mt-3 font-serif text-5xl lg:text-6xl text-[#0A0A0A] leading-tight">
                 Dr. {terapista.nome} {terapista.cognome}
               </h1>
 
@@ -133,30 +133,30 @@ export default function TerapistaPublicPage() {
               )}
 
               {terapista.bio && (
-                <blockquote className="mt-10 font-serif text-2xl lg:text-3xl text-[#F4F1ED]/90 leading-relaxed italic border-l-2 border-[#D4A017] pl-6">
+                <blockquote className="mt-10 font-serif text-2xl lg:text-3xl text-[#0A0A0A] leading-relaxed italic border-l-2 border-[#0A0A0A] pl-6">
                   "{terapista.bio}"
                 </blockquote>
               )}
 
               {terapista.approccio_terapeutico && (
                 <div className="mt-8">
-                  <h3 className="text-xs tracking-[0.25em] uppercase text-[#D4A017] mb-3">Approccio terapeutico</h3>
-                  <p className="text-[#E6E2D8]/70 leading-relaxed">{terapista.approccio_terapeutico}</p>
+                  <h3 className="text-xs tracking-[0.25em] uppercase text-[#0A0A0A] mb-3">Approccio terapeutico</h3>
+                  <p className="text-[#0A0A0A]/70 leading-relaxed">{terapista.approccio_terapeutico}</p>
                 </div>
               )}
 
               {Array.isArray(terapista.formazione) && terapista.formazione.length > 0 && (
                 <div className="mt-10">
-                  <h3 className="text-xs tracking-[0.25em] uppercase text-[#D4A017] mb-4 flex items-center gap-2">
+                  <h3 className="text-xs tracking-[0.25em] uppercase text-[#0A0A0A] mb-4 flex items-center gap-2">
                     <GraduationCap className="w-4 h-4" /> Formazione
                   </h3>
                   <ul className="space-y-3">
                     {terapista.formazione.map((f, i) => (
                       <li key={i} className="flex items-start gap-4 text-sm">
-                        <span className="font-serif text-[#D4A017]">{f.anno || "—"}</span>
+                        <span className="font-serif text-[#0A0A0A]">{f.anno || "—"}</span>
                         <div>
-                          <div className="text-[#F4F1ED]">{f.titolo}</div>
-                          <div className="text-[#E6E2D8]/50 text-xs">{f.istituto}</div>
+                          <div className="text-[#0A0A0A]">{f.titolo}</div>
+                          <div className="text-[#0A0A0A]/50 text-xs">{f.istituto}</div>
                         </div>
                       </li>
                     ))}
@@ -171,20 +171,20 @@ export default function TerapistaPublicPage() {
       {/* Booking section */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-24" data-testid="booking-section">
         <div className="max-w-2xl mb-12">
-          <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Disponibilità</span>
-          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#F4F1ED] leading-tight">
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Disponibilità</span>
+          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
             Scegli il tuo primo incontro.
           </h2>
-          <p className="mt-4 text-[#E6E2D8]/60">
+          <p className="mt-4 text-[#0A0A0A]/60">
             Sedute da 50 minuti online. Puoi annullare fino a 24h prima.
           </p>
         </div>
 
         {grouped.length === 0 ? (
-          <div className="py-16 text-center border border-dashed border-white/10 rounded-3xl">
+          <div className="py-16 text-center border border-dashed border-[#0A0A0A]/15 rounded-3xl">
             <Calendar className="w-10 h-10 text-[#6B8FA3] mx-auto mb-4" />
-            <p className="text-[#E6E2D8]/60">Nessun slot disponibile nelle prossime 2 settimane.</p>
-            <p className="text-sm text-[#E6E2D8]/40 mt-2">Riprova più tardi o contatta il nostro supporto.</p>
+            <p className="text-[#0A0A0A]/60">Nessun slot disponibile nelle prossime 2 settimane.</p>
+            <p className="text-sm text-[#0A0A0A]/40 mt-2">Riprova più tardi o contatta il nostro supporto.</p>
           </div>
         ) : (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -192,9 +192,9 @@ export default function TerapistaPublicPage() {
               <div
                 key={d.date}
                 data-testid={`slot-day-${d.date}`}
-                className="p-5 bg-[#1C2A33]/40 border border-white/10 rounded-2xl"
+                className="p-5 bg-white border border-[#0A0A0A]/15 rounded-2xl"
               >
-                <div className="text-xs tracking-[0.2em] uppercase text-[#D4A017] mb-4">
+                <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-4">
                   {formatDayHeader(d.date)}
                 </div>
                 <div className="space-y-2">
@@ -208,8 +208,8 @@ export default function TerapistaPublicPage() {
                         disabled={!s.disponibile}
                         className={`w-full py-2.5 rounded-xl text-sm font-medium transition-all ${
                           s.disponibile
-                            ? "bg-[#D4A017]/10 text-[#D4A017] hover:bg-[#D4A017] hover:text-[#111111] border border-[#D4A017]/30"
-                            : "bg-white/5 text-[#E6E2D8]/30 cursor-not-allowed line-through"
+                            ? "bg-white/30 text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-[#0A0A0A] border border-[#0A0A0A]/30"
+                            : "bg-white/5 text-[#0A0A0A]/30 cursor-not-allowed line-through"
                         }`}
                       >
                         {time}

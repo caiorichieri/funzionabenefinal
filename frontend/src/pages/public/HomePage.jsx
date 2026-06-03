@@ -72,19 +72,19 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main data-testid="homepage" className="relative bg-[#E5D9C5] overflow-hidden">
+    <main data-testid="homepage" className="relative bg-[#E9D628] overflow-hidden">
       {/* ────────── ATMOSPHERIC BACKDROP — gold ↔ steel-blue blooms only ────────── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Vibrant gold bloom top-left */}
-        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#D4A017]/30 blur-3xl" />
+        <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#0A0A0A]/8 blur-3xl" />
         {/* Steel-blue bloom bottom-right */}
-        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/35 blur-3xl" />
+        <div className="absolute -bottom-32 -right-32 w-[1000px] h-[1000px] rounded-full bg-[#6B8FA3]/18 blur-3xl" />
         {/* Mid gold accent */}
-        <div className="absolute top-[20%] right-[15%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/18 blur-3xl" />
+        <div className="absolute top-[20%] right-[15%] w-[500px] h-[500px] rounded-full bg-white/25 blur-3xl" />
         {/* Mid blue accent */}
-        <div className="absolute top-[55%] left-[15%] w-[600px] h-[600px] rounded-full bg-[#6B8FA3]/28 blur-3xl" />
+        <div className="absolute top-[55%] left-[15%] w-[600px] h-[600px] rounded-full bg-[#6B8FA3]/20 blur-3xl" />
         {/* Lower gold warmth */}
-        <div className="absolute bottom-[20%] left-[40%] w-[500px] h-[500px] rounded-full bg-[#D4A017]/15 blur-3xl" />
+        <div className="absolute bottom-[20%] left-[40%] w-[500px] h-[500px] rounded-full bg-white/22 blur-3xl" />
       </div>
 
       {/* ────────── HERO ────────── */}
@@ -93,10 +93,10 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 lg:pt-32 pb-28 lg:pb-40">
           {/* Hero mascots — floating decoratively on the side */}
           <div className="hidden lg:block absolute right-10 top-32 opacity-90 pointer-events-none">
-            <Mascotte name="abbraccio" theme="gold" size={180} animation="breathe" />
+            <Mascotte name="abbraccio" theme="light" size={180} animation="breathe" />
           </div>
           <div className="hidden xl:block absolute right-56 top-72 opacity-70 pointer-events-none">
-            <Mascotte name="saltitante" theme="gold" size={110} animation="float" />
+            <Mascotte name="saltitante" theme="light" size={110} animation="float" />
           </div>
 
           <motion.div
@@ -105,26 +105,26 @@ export default function HomePage() {
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="max-w-4xl relative z-10"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0A0A0A]/15 text-[#0A0A0A] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" />
               Sessuologia online · Riservata · Senza giudizio
             </div>
 
-            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#1C1C1C] tracking-tight">
+            <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0A0A0A] tracking-tight">
               Parla di tutto.
-              <br /><em className="text-[#D4A017] not-italic">Anche di quello.</em>
+              <br /><em className="text-[#0A0A0A] not-italic">Anche di quello.</em>
             </h1>
 
-            <p className="mt-8 text-lg lg:text-xl text-[rgba(28,28,28,0.65)] leading-relaxed max-w-2xl">
+            <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/65 leading-relaxed max-w-2xl">
               Sessuologia online con specialisti dedicati. Percorsi tradizionali, guidati dal tuo terapeuta,
-              nel <strong className="text-[#1C1C1C]">tuo spazio sicuro</strong>. Sempre.
+              nel <strong className="text-[#0A0A0A]">tuo spazio sicuro</strong>. Sempre.
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
               <Link
                 to="/questionario"
                 data-testid="hero-start-btn"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] font-medium rounded-full tracking-wide transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md tracking-wide transition-all"
               >
                 Inizia il Questionario
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -132,23 +132,23 @@ export default function HomePage() {
               <Link
                 to="/sedute-immersive"
                 data-testid="hero-immersive-btn"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border border-[#6B8FA3]/40 text-[#E6E2D8] hover:bg-[#6B8FA3]/10 rounded-full tracking-wide transition-all"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-md tracking-wide transition-all"
               >
-                <Sparkles className="w-4 h-4 text-[#D4A017]" /> Scopri le sedute immersive
+                <Sparkles className="w-4 h-4 text-[#0A0A0A]" /> Scopri le sedute immersive
               </Link>
             </div>
 
-            <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 text-xs text-[rgba(28,28,28,0.55)]">
+            <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 text-xs text-[#0A0A0A]/65">
               <span className="flex items-center gap-3">
-                <Mascotte name="abbraccio" theme="blue" size={36} animation="breathe" />
+                <Mascotte name="abbraccio" theme="light" size={36} animation="breathe" />
                 Riservato e cifrato
               </span>
               <span className="flex items-center gap-3">
-                <Mascotte name="pensativo" theme="blue" size={36} animation="float" />
+                <Mascotte name="pensativo" theme="light" size={36} animation="float" />
                 Specialisti iscritti all'Albo
               </span>
               <span className="flex items-center gap-3">
-                <Mascotte name="peludo" theme="blue" size={36} animation="wiggle" />
+                <Mascotte name="peludo" theme="light" size={36} animation="wiggle" />
                 100% sessuologia
               </span>
             </div>
@@ -159,8 +159,8 @@ export default function HomePage() {
       {/* ────────── HOW IT WORKS ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="how-it-works">
         <div className="max-w-2xl mb-16">
-          <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Come funziona</span>
-          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Come funziona</span>
+          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
             Tre passi.<br />Nessuna attesa infinita.
           </h2>
         </div>
@@ -175,16 +175,16 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 data-testid={`step-${s.n}`}
-                className="relative p-8 lg:p-10 bg-white border border-[rgba(28,28,28,0.08)] rounded-3xl hover:border-[#D4A017]/40 transition-all group overflow-hidden"
+                className="relative p-8 lg:p-10 bg-white border border-[#0A0A0A]/10 rounded-3xl hover:border-[#0A0A0A]/40 transition-all group overflow-hidden"
               >
                 {/* Glow on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[#D4A017]/0 to-[#D4A017]/0 group-hover:from-[#D4A017]/5 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/0 to-[#0A0A0A]/0 group-hover:from-[#0A0A0A]/4 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
                 <div className="relative flex items-start justify-between mb-6">
-                  <span className="font-serif text-5xl text-[#D4A017]/30 group-hover:text-[#D4A017]/70 transition-colors">{s.n}</span>
-                  <Mascotte name={s.mascot} theme="gold" size={70} animation={s.anim} />
+                  <span className="font-serif text-5xl text-[#0A0A0A]/30 group-hover:text-[#0A0A0A]/70 transition-colors">{s.n}</span>
+                  <Mascotte name={s.mascot} theme="light" size={70} animation={s.anim} />
                 </div>
-                <h3 className="font-serif text-2xl text-[#1C1C1C] mb-3 relative">{s.title}</h3>
-                <p className="text-[rgba(28,28,28,0.55)] text-sm leading-relaxed relative">{s.desc}</p>
+                <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3 relative">{s.title}</h3>
+                <p className="text-[#0A0A0A]/65 text-sm leading-relaxed relative">{s.desc}</p>
               </motion.div>
             );
           })}
@@ -194,40 +194,40 @@ export default function HomePage() {
       {/* ────────── SEDUTE IMMERSIVE (DIFFERENZIATORE) ────────── */}
       <section className="relative" data-testid="immersive-section">
         {/* Subtle darker overlay for emphasis */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(212,160,23,0.04)] via-transparent to-[rgba(107,143,163,0.04)] pointer-events-none" />
-        <div className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full bg-[#D4A017]/10 blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 " />
+        <div className="absolute -top-20 -right-40 w-[500px] h-[500px] rounded-full bg-white/20 blur-3xl pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-36 grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#D4A017]/10 border border-[#D4A017]/30 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-[#0A0A0A]/15 text-[#0A0A0A] text-xs tracking-[0.2em] uppercase mb-8">
               <Sparkles className="w-3.5 h-3.5" /> Il nostro differenziale
             </div>
-            <h2 className="font-serif text-4xl lg:text-6xl text-[#1C1C1C] leading-[1.05]">
-              Sedute immersive.<br /><em className="text-[#D4A017] not-italic">La terapia, reimmaginata.</em>
+            <h2 className="font-serif text-4xl lg:text-6xl text-[#0A0A0A] leading-[1.05]">
+              Sedute immersive.<br /><em className="text-[#0A0A0A] not-italic">La terapia, reimmaginata.</em>
             </h2>
-            <p className="mt-8 text-lg text-[rgba(28,28,28,0.65)] leading-relaxed max-w-2xl">
-              La prima piattaforma italiana a integrare <strong className="text-[#1C1C1C]">ambienti immersivi terapeutici</strong>
+            <p className="mt-8 text-lg text-[#0A0A0A]/65 leading-relaxed max-w-2xl">
+              La prima piattaforma italiana a integrare <strong className="text-[#0A0A0A]">ambienti immersivi terapeutici</strong>
               nei percorsi di sessuologia. Il tuo terapeuta può guidarti attraverso esperienze di esposizione
-              graduale, desensibilizzazione e consapevolezza corporea, <strong className="text-[#1C1C1C]">sempre nello
+              graduale, desensibilizzazione e consapevolezza corporea, <strong className="text-[#0A0A0A]">sempre nello
               spazio sicuro della tua casa</strong>.
             </p>
 
             <div className="mt-10 grid sm:grid-cols-3 gap-6">
               <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#D4A017]">−35%</div>
-                <div className="text-xs tracking-[0.15em] uppercase text-[rgba(28,28,28,0.45)] mt-2">
+                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">−35%</div>
+                <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
                   tempo di trattamento medio per fobie e disfunzioni ansiose<sup>*</sup>
                 </div>
               </div>
               <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#D4A017]">72%</div>
-                <div className="text-xs tracking-[0.15em] uppercase text-[rgba(28,28,28,0.45)] mt-2">
+                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">72%</div>
+                <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
                   dei pazienti riporta maggiore comfort rispetto all'esposizione tradizionale<sup>*</sup>
                 </div>
               </div>
               <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#D4A017]">0€</div>
-                <div className="text-xs tracking-[0.15em] uppercase text-[rgba(28,28,28,0.45)] mt-2">
+                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">0€</div>
+                <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
                   costo extra: le sedute immersive sono incluse nel percorso
                 </div>
               </div>
@@ -237,19 +237,19 @@ export default function HomePage() {
               <Link
                 to="/sedute-immersive"
                 data-testid="immersive-deep-link"
-                className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] font-medium rounded-full text-sm tracking-wide transition-all"
+                className="inline-flex items-center gap-3 px-7 py-3.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md text-sm tracking-wide transition-all"
               >
                 Scopri come funziona <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/questionario"
-                className="inline-flex items-center gap-2 px-7 py-3.5 border border-[rgba(28,28,28,0.12)] text-[#E6E2D8] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
+                className="inline-flex items-center gap-2 px-7 py-3.5 border border-[rgba(28,28,28,0.12)] text-[#0A0A0A] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
               >
                 Inizia un percorso
               </Link>
             </div>
 
-            <p className="mt-6 text-xs text-[rgba(28,28,28,0.35)] leading-relaxed">
+            <p className="mt-6 text-xs text-[#0A0A0A]/65 leading-relaxed">
               <sup>*</sup> Riva G. et al. (2016) — <em>Transforming experience: the potential of augmented and virtual reality for enhancing personal and clinical change</em>, Frontiers in Psychology.
               Freeman D. et al. (2017), Diemer J. et al. (2015).
             </p>
@@ -266,9 +266,9 @@ export default function HomePage() {
               data-testid="immersive-vr-stage"
             >
               {/* Soft gold halo behind the mascot */}
-              <div className="absolute w-[420px] h-[420px] rounded-full bg-[#D4A017]/15 blur-3xl" />
-              <div className="absolute w-[260px] h-[260px] rounded-full bg-[#D4A017]/20 blur-2xl" />
-              <Mascotte name="vr" theme="gold" size={360} animation="breathe" />
+              <div className="absolute w-[420px] h-[420px] rounded-full bg-white/22 blur-3xl" />
+              <div className="absolute w-[260px] h-[260px] rounded-full bg-[#0A0A0A]/10 blur-2xl" />
+              <Mascotte name="vr" theme="light" size={360} animation="breathe" />
             </motion.div>
           </div>
         </div>
@@ -278,11 +278,11 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="aree-intervento">
         <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
           <div className="max-w-2xl">
-            <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Aree di intervento</span>
-            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+            <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Aree di intervento</span>
+            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
               Temi che qui<br />si possono dire.
             </h2>
-            <p className="mt-6 text-[rgba(28,28,28,0.55)] text-lg">
+            <p className="mt-6 text-[#0A0A0A]/65 text-lg">
               Nessun argomento è fuori posto. Qualunque sia la tua storia, c'è uno specialista preparato ad ascoltarla.
             </p>
           </div>
@@ -302,7 +302,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 6) * 0.05 }}
                 data-testid={`area-${a.slug}`}
-                className="group p-6 bg-white border border-[rgba(28,28,28,0.08)] hover:border-[#D4A017]/40 rounded-2xl transition-all cursor-default"
+                className="group p-6 bg-white border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/40 rounded-2xl transition-all cursor-default"
               >
                 <div className="flex items-start justify-between mb-3">
                   <span
@@ -312,8 +312,8 @@ export default function HomePage() {
                     {cat.label}
                   </span>
                 </div>
-                <h3 className="font-serif text-xl text-[#1C1C1C] leading-tight mb-2 group-hover:text-[#D4A017] transition-colors">{a.titolo}</h3>
-                <p className="text-xs text-[rgba(28,28,28,0.55)] leading-relaxed line-clamp-3">{a.descrizione}</p>
+                <h3 className="font-serif text-xl text-[#0A0A0A] leading-tight mb-2 group-hover:text-[#0A0A0A] transition-colors">{a.titolo}</h3>
+                <p className="text-xs text-[#0A0A0A]/65 leading-relaxed line-clamp-3">{a.descrizione}</p>
               </motion.div>
             );
           })}
@@ -322,7 +322,7 @@ export default function HomePage() {
         <div className="mt-10 text-center">
           <Link
             to="/aree-intervento"
-            className="inline-flex items-center gap-2 px-6 py-3 border border-[rgba(28,28,28,0.12)] text-[#E6E2D8] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 border border-[rgba(28,28,28,0.12)] text-[#0A0A0A] hover:bg-[rgba(28,28,28,0.04)] rounded-full text-sm tracking-wide transition-all"
           >
             Esplora tutte le {AREE_INTERVENTO.length} aree <ArrowRight className="w-3.5 h-3.5" />
           </Link>
@@ -333,8 +333,8 @@ export default function HomePage() {
       <section className="relative" data-testid="perche-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
           <div className="max-w-2xl mb-16">
-            <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Perché FunzionaBene</span>
-            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+            <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Perché FunzionaBene</span>
+            <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
               Non per tutti.<br />Per chi vuole davvero uno specialista.
             </h2>
           </div>
@@ -352,15 +352,15 @@ export default function HomePage() {
                   data-testid={`benefit-${i}`}
                   className={`p-7 rounded-3xl border transition-all ${
                     b.highlight
-                      ? "bg-gradient-to-br from-[#D4A017]/15 via-[#1C2A33]/40 to-transparent border-[#D4A017]/40"
-                      : "bg-white border-[rgba(28,28,28,0.08)] hover:border-[#6B8FA3]/40"
+                      ? "bg-gradient-to-br from-white via-white to-white/80 border-[#0A0A0A]/30"
+                      : "bg-white border-[#0A0A0A]/10 hover:border-[#6B8FA3]/40"
                   }`}
                 >
-                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${b.highlight ? "bg-[#D4A017]/20" : "bg-[#6B8FA3]/10"}`}>
-                    <Icon className={`w-5 h-5 ${b.highlight ? "text-[#D4A017]" : "text-[#6B8FA3]"}`} />
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${b.highlight ? "bg-[#0A0A0A]/10" : "bg-white"}`}>
+                    <Icon className={`w-5 h-5 ${b.highlight ? "text-[#0A0A0A]" : "text-[#6B8FA3]"}`} />
                   </div>
-                  <h3 className="font-serif text-2xl text-[#1C1C1C] mb-3 leading-tight">{b.titolo}</h3>
-                  <p className="text-sm text-[rgba(28,28,28,0.55)] leading-relaxed">{b.descrizione}</p>
+                  <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3 leading-tight">{b.titolo}</h3>
+                  <p className="text-sm text-[#0A0A0A]/65 leading-relaxed">{b.descrizione}</p>
                 </motion.div>
               );
             })}
@@ -371,8 +371,8 @@ export default function HomePage() {
       {/* ────────── TESTIMONIANZE ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="testimonianze-section">
         <div className="mb-16 max-w-2xl">
-          <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">Storie dei nostri pazienti</span>
-          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Storie dei nostri pazienti</span>
+          <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
             Qualcuno l'ha già fatto<br />prima di te.
           </h2>
         </div>
@@ -386,22 +386,22 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
               data-testid={`testimonial-${i}`}
-              className="p-7 bg-white border border-[rgba(28,28,28,0.08)] rounded-2xl flex flex-col"
+              className="p-7 bg-white border border-[#0A0A0A]/10 rounded-2xl flex flex-col"
             >
-              <Quote className="w-6 h-6 text-[#D4A017]/60 mb-4" />
-              <p className="text-[#E6E2D8]/85 leading-relaxed font-serif text-lg flex-1">
+              <Quote className="w-6 h-6 text-[#0A0A0A]/60 mb-4" />
+              <p className="text-[#0A0A0A]/85 leading-relaxed font-serif text-lg flex-1">
                 "{t.testo}"
               </p>
-              <div className="mt-6 pt-5 border-t border-[rgba(28,28,28,0.08)]">
-                <div className="text-sm text-[#1C1C1C]">{t.nome}</div>
+              <div className="mt-6 pt-5 border-t border-[#0A0A0A]/10">
+                <div className="text-sm text-[#0A0A0A]">{t.nome}</div>
                 <div className="text-xs tracking-[0.15em] uppercase text-[#6B8FA3] mt-1">{t.area}</div>
-                <div className="text-xs text-[rgba(28,28,28,0.4)] mt-1">{t.durata}</div>
+                <div className="text-xs text-[#0A0A0A]/50 mt-1">{t.durata}</div>
               </div>
             </motion.blockquote>
           ))}
         </div>
 
-        <p className="mt-12 text-xs text-[rgba(28,28,28,0.35)] text-center max-w-2xl mx-auto leading-relaxed">
+        <p className="mt-12 text-xs text-[#0A0A0A]/65 text-center max-w-2xl mx-auto leading-relaxed">
           Testimonianze rappresentative. Nomi, età e dettagli sono stati modificati per tutelare la riservatezza dei pazienti, come previsto dal codice deontologico degli psicologi e dal GDPR.
         </p>
       </section>
@@ -409,36 +409,36 @@ export default function HomePage() {
       {/* ────────── A COSA SERVE / NON SERVE ────────── */}
       <section className="relative" data-testid="serve-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32 grid lg:grid-cols-2 gap-10">
-          <div className="p-10 bg-white border border-[#D4A017]/20 rounded-3xl">
-            <div className="inline-flex items-center gap-2 text-[#D4A017] text-xs tracking-[0.2em] uppercase mb-5">
+          <div className="p-10 bg-white border border-[#0A0A0A]/20 rounded-3xl">
+            <div className="inline-flex items-center gap-2 text-[#0A0A0A] text-xs tracking-[0.2em] uppercase mb-5">
               <Check className="w-4 h-4" /> Ecco per cosa siamo qui
             </div>
-            <h3 className="font-serif text-3xl text-[#1C1C1C] mb-8">A cosa serve FunzionaBene</h3>
+            <h3 className="font-serif text-3xl text-[#0A0A0A] mb-8">A cosa serve FunzionaBene</h3>
             <ul className="space-y-4">
               {SERVE_LIST.map((s, i) => (
-                <li key={i} className="flex items-start gap-3 text-[#E6E2D8]/80 text-sm leading-relaxed">
-                  <Check className="w-4 h-4 text-[#D4A017] flex-shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-3 text-[#0A0A0A]/80 text-sm leading-relaxed">
+                  <Check className="w-4 h-4 text-[#0A0A0A] flex-shrink-0 mt-0.5" />
                   <span>{s}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="p-10 bg-white/70 border border-[rgba(28,28,28,0.08)] rounded-3xl">
-            <div className="inline-flex items-center gap-2 text-[rgba(28,28,28,0.55)] text-xs tracking-[0.2em] uppercase mb-5">
+          <div className="p-10 bg-white/70 border border-[#0A0A0A]/10 rounded-3xl">
+            <div className="inline-flex items-center gap-2 text-[#0A0A0A]/65 text-xs tracking-[0.2em] uppercase mb-5">
               <AlertCircle className="w-4 h-4" /> Onestà prima di tutto
             </div>
-            <h3 className="font-serif text-3xl text-[#1C1C1C] mb-8">A cosa non serve</h3>
+            <h3 className="font-serif text-3xl text-[#0A0A0A] mb-8">A cosa non serve</h3>
             <ul className="space-y-4">
               {NON_SERVE_LIST.map((s, i) => (
-                <li key={i} className="flex items-start gap-3 text-[rgba(28,28,28,0.65)] text-sm leading-relaxed">
+                <li key={i} className="flex items-start gap-3 text-[#0A0A0A]/65 text-sm leading-relaxed">
                   <X className="w-4 h-4 text-[#C77474] flex-shrink-0 mt-0.5" />
                   <span>{s}</span>
                 </li>
               ))}
             </ul>
-            <div className="mt-8 pt-6 border-t border-[rgba(28,28,28,0.08)]">
-              <Link to="/emergenze" className="text-sm text-[#D4A017] hover:text-[#E5B942] inline-flex items-center gap-2">
+            <div className="mt-8 pt-6 border-t border-[#0A0A0A]/10">
+              <Link to="/emergenze" className="text-sm text-[#0A0A0A] hover:text-[#0A0A0A]/70 inline-flex items-center gap-2">
                 Se stai vivendo un'emergenza → consulta i numeri di aiuto
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
@@ -452,8 +452,8 @@ export default function HomePage() {
         <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="therapists-preview">
           <div className="flex items-end justify-between mb-12 flex-wrap gap-4">
             <div>
-              <span className="text-[#D4A017] text-xs tracking-[0.25em] uppercase">I nostri specialisti</span>
-              <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#1C1C1C]">Professionisti, umani.</h2>
+              <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">I nostri specialisti</span>
+              <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A]">Professionisti, umani.</h2>
             </div>
             <Link to="/questionario" className="text-sm text-[#6B8FA3] hover:text-[#94B2C2] tracking-wide">
               Trova il tuo sessuologo →
@@ -469,25 +469,25 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 data-testid={`therapist-preview-${i}`}
-                className="p-8 bg-white border border-[rgba(28,28,28,0.08)] rounded-3xl"
+                className="p-8 bg-white border border-[#0A0A0A]/10 rounded-3xl"
               >
                 {t.foto_url ? (
-                  <img src={t.foto_url} alt={`${t.nome} ${t.cognome}`} className="w-20 h-20 rounded-full object-cover border border-[rgba(28,28,28,0.08)] mb-6" />
+                  <img src={t.foto_url} alt={`${t.nome} ${t.cognome}`} className="w-20 h-20 rounded-full object-cover border border-[#0A0A0A]/10 mb-6" />
                 ) : (
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#D4A017]/20 to-[#6B8FA3]/20 border border-[rgba(28,28,28,0.08)] flex items-center justify-center mb-6">
-                    <span className="font-serif text-3xl text-[#D4A017]">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#0A0A0A]/10 to-[#6B8FA3]/15 border border-[#0A0A0A]/10 flex items-center justify-center mb-6">
+                    <span className="font-serif text-3xl text-[#0A0A0A]">
                       {(t.nome || "?")[0]}{(t.cognome || "?")[0]}
                     </span>
                   </div>
                 )}
-                <h3 className="font-serif text-2xl text-[#1C1C1C]">Dr. {t.nome} {t.cognome}</h3>
+                <h3 className="font-serif text-2xl text-[#0A0A0A]">Dr. {t.nome} {t.cognome}</h3>
                 <p className="text-xs tracking-[0.15em] uppercase text-[#6B8FA3] mt-1">
                   {t.anni_esperienza ? `${t.anni_esperienza} anni di esperienza` : "Specialista"}
                 </p>
                 {Array.isArray(t.specializzazioni) && t.specializzazioni.length > 0 && (
                   <div className="mt-5 flex flex-wrap gap-2">
                     {t.specializzazioni.slice(0, 2).map((s) => (
-                      <span key={s} className="text-xs px-3 py-1 rounded-full bg-[#D4A017]/10 text-[#D4A017] border border-[#D4A017]/20">
+                      <span key={s} className="text-xs px-3 py-1 rounded-full bg-white text-[#0A0A0A] border border-[#0A0A0A]/15">
                         {s}
                       </span>
                     ))}
@@ -501,22 +501,22 @@ export default function HomePage() {
 
       {/* ────────── CTA BAND ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32" data-testid="cta-band">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-[#F4EFE5] to-[#D9CBB3] border border-[rgba(28,28,28,0.1)] p-12 lg:p-20">
-          <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-[#D4A017]/10 blur-3xl" />
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white via-white to-[#E9D628]/30 border border-[#0A0A0A]/15 p-12 lg:p-20">
+          <div className="absolute -top-20 -right-20 w-[400px] h-[400px] rounded-full bg-white/20 blur-3xl" />
           <div className="hidden md:block absolute right-12 bottom-12 lg:right-20 lg:bottom-20 opacity-80">
-            <Mascotte name="abbraccio" theme="gold" size={160} animation="breathe" />
+            <Mascotte name="abbraccio" theme="light" size={160} animation="breathe" />
           </div>
           <div className="relative max-w-2xl">
-            <h2 className="font-serif text-4xl lg:text-5xl text-[#1C1C1C] leading-tight">
+            <h2 className="font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
               Un primo passo.<br />Il più difficile, il più importante.
             </h2>
-            <p className="mt-6 text-[rgba(28,28,28,0.55)] text-lg leading-relaxed">
+            <p className="mt-6 text-[#0A0A0A]/65 text-lg leading-relaxed">
               Il questionario richiede 2 minuti. Puoi interromperlo in qualsiasi momento. Nessuna carta richiesta per iniziare.
             </p>
             <Link
               to="/questionario"
               data-testid="cta-start-btn"
-              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-[#D4A017] hover:bg-[#E5B942] text-[#111111] font-medium rounded-full tracking-wide transition-all"
+              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md tracking-wide transition-all"
             >
               Inizia ora <ArrowRight className="w-4 h-4" />
             </Link>
