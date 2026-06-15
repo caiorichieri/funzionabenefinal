@@ -52,7 +52,13 @@ export default function Mascotte({
   else if (theme === "gold") variant = "gold";
   else if (theme === "blue") variant = "blue";
   else variant = "dark";
-  const src = `/mascotte/${name}-${variant}.png`;
+
+  // Brand-coloured mascots: filled body with black outlines.
+  // These overrides apply regardless of theme prop.
+  let src;
+  if (name === "abbraccio") src = "/mascotte/abbraccio-orange.png";
+  else if (name === "sereno") src = "/mascotte/sereno-white.png";
+  else src = `/mascotte/${name}-${variant}.png`;
   const motionProps = ANIMATIONS[animation] || ANIMATIONS.none;
 
   return (

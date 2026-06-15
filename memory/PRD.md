@@ -16,9 +16,9 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - **Email (placeholder):** Resend (transazionale) + Brevo (marketing)
 - **Pagamenti (Fase 2):** Nexi XPay
 - **Video (Fase 2):** Daily.co
-- **Design (Feb 2026):** Sfondo mustarda **#E9D628** (corpo), **#D4C123** (header & footer, leggermente più scuro per differenziazione), cards bianche pure, testo nero **#0A0A0A**, accento blu acciaio #6B8FA3. Bottoni "Architetto" (rettangoli neri, testo bianco, rounded-md). Mascotte line-art con linee nere. Sidebar gestionale rimasta scura (`#0A0A0A`) con accenti mustarda per contrasto.
+- **Design (Feb 2026):** Sfondo mustarda **#E9D628** (corpo), **#D4C123** (header & footer leggermente più scuri). Cards bianche pure. Testo nero **#0A0A0A**. **Bottoni primari**: gradiente arancione→giallo (`from-[#F58A1F] to-[#F5D419]`), testo nero bold, `rounded-2xl`, soft shadow. Bottoni secondari: outline nero 1.5px. **Mascotte filled**: `abbraccio` arancione sólido (#F58A1F), `sereno` bianco sólido — entrambi con contorni neri. Altri mascotte rimangono line-art. Sidebar gestionale rimasta scura con accenti mustarda.
 - **Font:** Outfit (titoli) + Figtree (body)
-- **CHANGELOG Feb 2026:** Pivot completo del tema da crema/oro per mustarda/nero/Architetto su TUTTO il sito (pubblico + autenticato): HomePage, ChiSiamo, SeduteImmersive, FAQ, Aree, Emergenze, Questionario, Blog, NotFound, Privacy/Cookie/Termini, BookingSheet, MatchingResults, TerapistaPublic, PublicLayout/LegalLayout, **Login, Register, OTP, VideoCall, Admin Dashboard, Appuntamenti, Terapisti, Pazienti, Blog admin, Therapist Dashboard/Profile/Blog, Patient Dashboard, Layout (header darker), Sidebar (yellow accents), ChatPanel, OnboardingSection**. Header/Footer leggermente più scuri (#D4C123) per differenziazione visiva.
+- **CHANGELOG Feb 2026:** Pivot estetico completo: mustarda/gradiente arancione/mascotte colorati su tutto il sito (pubblico + autenticato).
 
 ---
 

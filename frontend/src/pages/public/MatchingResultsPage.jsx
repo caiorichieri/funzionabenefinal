@@ -69,7 +69,7 @@ export default function MatchingResultsPage() {
               className="relative p-7 bg-white border border-[#0A0A0A]/15 rounded-3xl hover:border-[#0A0A0A]/40 transition-all flex flex-col"
             >
               {/* Compatibility badge */}
-              <div className="absolute -top-3 -right-3 bg-[#0A0A0A] text-white px-4 py-1.5 rounded-full text-sm font-medium flex items-center gap-1.5 shadow-lg">
+              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg px-4 py-1.5 text-sm font-medium flex items-center gap-1.5 shadow-lg">
                 <Star className="w-3.5 h-3.5 fill-current" />
                 {t.compatibilita || 75}%
               </div>
@@ -124,7 +124,7 @@ export default function MatchingResultsPage() {
               <Link
                 to={`/terapeuti/${t._id}`}
                 data-testid={`view-profile-${i}`}
-                className="mt-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md text-sm tracking-wide transition-all"
+                className="mt-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm tracking-wide transition-all"
               >
                 Visualizza profilo
                 <ArrowRight className="w-3.5 h-3.5" />

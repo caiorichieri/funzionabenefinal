@@ -17,7 +17,7 @@ export default function NotFoundPage() {
           <Link
             to="/"
             data-testid="404-home-btn"
-            className="px-6 py-3 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md text-sm font-medium tracking-wide transition-all"
+            className="px-6 py-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm font-medium tracking-wide transition-all"
           >
             Torna alla home
           </Link>

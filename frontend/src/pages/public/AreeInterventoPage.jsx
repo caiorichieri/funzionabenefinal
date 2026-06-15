@@ -77,7 +77,7 @@ export default function AreeInterventoPage() {
           <Link
             to="/questionario"
             data-testid="aree-cta-btn"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white font-medium rounded-md tracking-wide transition-all"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
           >
             Inizia il Questionario <ArrowRight className="w-4 h-4" />
           </Link>
