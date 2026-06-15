@@ -55,10 +55,18 @@ export default function Mascotte({
 
   // Brand-coloured mascots: filled body with black outlines.
   // These overrides apply regardless of theme prop.
-  let src;
-  if (name === "abbraccio") src = "/mascotte/abbraccio-orange.png";
-  else if (name === "sereno") src = "/mascotte/sereno-white.png";
-  else src = `/mascotte/${name}-${variant}.png`;
+  const BRAND_FILLS = {
+    abbraccio:   "/mascotte/abbraccio-orange.png",
+    sereno:      "/mascotte/sereno-white.png",
+    embrulhado:  "/mascotte/embrulhado-peach.png",
+    peludo:      "/mascotte/peludo-sage.png",
+    ovo:         "/mascotte/ovo-blue.png",
+    coppia:      "/mascotte/coppia-coral.png",
+    saltitante:  "/mascotte/saltitante-terracotta.png",
+    pensativo:   "/mascotte/pensativo-lavender.png",
+    curioso:     "/mascotte/curioso-sky.png",
+  };
+  const src = BRAND_FILLS[name] || `/mascotte/${name}-${variant}.png`;
   const motionProps = ANIMATIONS[animation] || ANIMATIONS.none;
 
   return (

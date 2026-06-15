@@ -16,7 +16,7 @@ Piattaforma integrata per clinica di sessuologia: gestionale admin + sito pubbli
 - **Email (placeholder):** Resend (transazionale) + Brevo (marketing)
 - **Pagamenti (Fase 2):** Nexi XPay
 - **Video (Fase 2):** Daily.co
-- **Design (Feb 2026):** Sfondo mustarda **#E9D628** (corpo), **#D4C123** (header & footer leggermente più scuri). Cards bianche pure. Testo nero **#0A0A0A**. **Bottoni primari**: gradiente arancione→giallo (`from-[#F58A1F] to-[#F5D419]`), testo nero bold, `rounded-2xl`, soft shadow. Bottoni secondari: outline nero 1.5px. **Mascotte filled**: `abbraccio` arancione sólido (#F58A1F), `sereno` bianco sólido — entrambi con contorni neri. Altri mascotte rimangono line-art. Sidebar gestionale rimasta scura con accenti mustarda.
+- **Design (Feb 2026):** Sfondo mustarda **#E9D628** (corpo), **#D4C123** (header & footer leggermente più scuri). Cards bianche pure. Testo nero **#0A0A0A**. **Bottoni primari**: gradiente arancione→giallo (`from-[#F58A1F] to-[#F5D419]`), testo nero bold, `rounded-2xl`, soft shadow. Bottoni secondari: outline nero 1.5px. **Mascotte filled**: paleta harmonica completa — `abbraccio` arancione #F58A1F, `sereno` bianco, `embrulhado` pesca #F5C0A8, `peludo` sage verde #C8E0A8, `ovo` azzurro polvere #B8D5E0, `coppia` corallo #E89B9F, `saltitante` terracotta #D4906E, `pensativo` lavanda #C8B5E0, `curioso` azzurro cielo #8FC8D8. Tutti con contorni neri eleganti. Sidebar gestionale rimasta scura con accenti mustarda.
 - **Font:** Outfit (titoli) + Figtree (body)
 - **CHANGELOG Feb 2026:** Pivot estetico completo: mustarda/gradiente arancione/mascotte colorati su tutto il sito (pubblico + autenticato).
 
