@@ -202,7 +202,7 @@ code {
 
 /* Blog post prose — renders HTML seeded from sessuologia-html-v1 (trusted internal source) */
 .blog-prose {
-  color: rgba(230, 226, 216, 0.82);
+  color: rgba(10, 10, 10, 0.82);
   font-family: ui-serif, Georgia, 'Cormorant Garamond', serif;
   font-size: 1.125rem;
   line-height: 1.8;
@@ -212,8 +212,8 @@ code {
 }
 .blog-prose p.intro {
   font-size: 1.25rem;
-  color: #F4F1ED;
-  border-left: 2px solid #D4A017;
+  color: #0A0A0A;
+  border-left: 2px solid #F58A1F;
   padding-left: 1.25rem;
   margin-bottom: 2rem;
   font-style: italic;
@@ -221,11 +221,42 @@ code {
 .blog-prose p.intro strong { font-weight: 400; }
 .blog-prose em {
   font-style: italic;
-  color: #D4A017;
+  color: #F58A1F;
 }
 .blog-prose strong {
-  color: #F4F1ED;
-  font-weight: 500;
+  color: #0A0A0A;
+  font-weight: 600;
+}
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  color: #0A0A0A;
+  font-family: 'Outfit', sans-serif;
+  margin-top: 2.2rem;
+  margin-bottom: 0.9rem;
+  line-height: 1.25;
+}
+.blog-prose h2 { font-size: 1.6rem; }
+.blog-prose h3 { font-size: 1.3rem; }
+.blog-prose a {
+  color: #F58A1F;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.blog-prose a:hover { color: #0A0A0A; }
+.blog-prose ul,
+.blog-prose ol {
+  margin: 0 0 1.6rem 1.4rem;
+  padding-left: 0.6rem;
+}
+.blog-prose li { margin-bottom: 0.5rem; }
+.blog-prose blockquote {
+  border-left: 3px solid #F58A1F;
+  padding-left: 1.2rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: rgba(10, 10, 10, 0.75);
 }
 
 /* ──────── LIGHT THEME — public-facing pages ──────── */
