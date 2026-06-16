@@ -17,7 +17,7 @@ export default function Layout() {
   const initials = `${user?.nome?.[0] || ""}${user?.cognome?.[0] || ""}`.toUpperCase();
 
   return (
-    <div className="min-h-screen bg-[#E9D628] flex">
+    <div className="min-h-screen bg-transparent flex">
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/40 z-20 lg:hidden" onClick={() => setSidebarOpen(false)} />

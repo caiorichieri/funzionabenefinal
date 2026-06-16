@@ -84,8 +84,8 @@ export default function TerapistaBlogPage() {
       <div className="bg-[#6B8FA3]/10 border border-[#6B8FA3]/20 rounded-2xl p-4 flex items-start gap-3">
         <Clock className="w-5 h-5 text-[#6B8FA3] flex-shrink-0 mt-0.5" />
         <div className="text-sm text-[#0A0A0A]">
-          Gli articoli che pubblichi vengono prima revisionati dall'amministratore.
-          Dopo l'approvazione saranno visibili sul sito pubblico di FunzionaBene.
+          Gli articoli che pubblichi vengono prima revisionati dall&apos;amministratore.
+          Dopo l&apos;approvazione saranno visibili sul sito pubblico di FunzionaBene.
         </div>
       </div>
 

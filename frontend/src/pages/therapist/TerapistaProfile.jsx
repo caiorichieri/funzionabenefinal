@@ -209,7 +209,7 @@ export default function TerapistaProfile() {
             </button>
           </div>
           {form.disponibilita.length === 0 && (
-            <p className="text-sm text-[#0A0A0A]/55 text-center py-4">Nessuna disponibilità impostata. Clicca "Aggiungi" per iniziare.</p>
+            <p className="text-sm text-[#0A0A0A]/55 text-center py-4">Nessuna disponibilità impostata. Clicca &quot;Aggiungi&quot; per iniziare.</p>
           )}
           <div className="space-y-3">
             {form.disponibilita.map((d, i) => (

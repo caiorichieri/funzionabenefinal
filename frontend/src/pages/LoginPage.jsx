@@ -30,7 +30,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E9D628] flex">
+    <div className="min-h-screen bg-transparent flex">
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 bg-[#0A0A0A] flex-col justify-between p-12">
         <div>

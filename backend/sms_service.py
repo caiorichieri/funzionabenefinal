@@ -97,7 +97,7 @@ async def send_sms_otp(phone: str, otp_code: str, context: str = "verifica") -> 
         # Session might be expired → retry once with fresh login
         if r.status_code in (401, 403):
             _session["ttl"] = 0
-            logger.info(f"[SKEBBY] session expired, retrying")
+            logger.info("[SKEBBY] session expired, retrying")
             return await send_sms_otp(phone, otp_code, context) if _session["ttl"] == 0 else False
         logger.error(f"[SKEBBY] send failed {r.status_code}: {r.text}")
         return False

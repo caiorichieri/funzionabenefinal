@@ -48,12 +48,12 @@ export default function TerapistaPublicPage() {
   };
 
   if (loading) {
-    return <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] flex items-center justify-center text-[#0A0A0A]/40">Caricamento profilo...</main>;
+    return <main className="min-h-[calc(100vh-80px)] bg-transparent flex items-center justify-center text-[#0A0A0A]/40">Caricamento profilo...</main>;
   }
 
   if (!terapista) {
     return (
-      <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] flex items-center justify-center px-6">
+      <main className="min-h-[calc(100vh-80px)] bg-transparent flex items-center justify-center px-6">
         <div className="text-center">
           <h1 className="font-serif text-3xl text-[#0A0A0A] mb-4">Terapeuta non trovato</h1>
           <Link to="/questionario" className="text-[#0A0A0A] hover:text-[#0A0A0A]/70">← Trova un terapeuta</Link>
@@ -66,7 +66,7 @@ export default function TerapistaPublicPage() {
   const genderLabel = terapista.genere === "F" ? "Psicologa" : "Psicologo";
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628]" data-testid="therapist-public">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent" data-testid="therapist-public">
       {/* Hero */}
       <section className="relative border-b border-white/5">
         <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/10 via-[#111111] to-[#111111]" />
@@ -87,7 +87,7 @@ export default function TerapistaPublicPage() {
                 )}
               </motion.div>
 
-              <div className="mt-6 space-y-3 p-6 bg-white border border-[#0A0A0A]/15 rounded-3xl">
+              <div className="mt-6 space-y-3 p-6 brand-card">
                 {terapista.albo_numero && (
                   <div className="flex items-center gap-3 text-sm">
                     <Award className="w-4 h-4 text-[#6B8FA3] flex-shrink-0" />
@@ -192,7 +192,7 @@ export default function TerapistaPublicPage() {
               <div
                 key={d.date}
                 data-testid={`slot-day-${d.date}`}
-                className="p-5 bg-white border border-[#0A0A0A]/15 rounded-2xl"
+                className="p-5 brand-card"
               >
                 <div className="text-xs tracking-[0.2em] uppercase text-[#0A0A0A] mb-4">
                   {formatDayHeader(d.date)}

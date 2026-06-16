@@ -172,7 +172,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
               onChange={(e) => set("nato_all_estero", e.target.checked)}
               className="accent-[#0A0A0A] w-4 h-4"
             />
-            <span>Sono nato/a all'estero</span>
+            <span>Sono nato/a all&apos;estero</span>
           </label>
 
           {form.nato_all_estero ? (

@@ -55,7 +55,7 @@ const FAQ = [
 
 export default function SeduteImmersive() {
   return (
-    <main className="min-h-[calc(100vh-80px)] relative bg-[#E9D628] overflow-hidden" data-testid="immersive-page">
+    <main className="min-h-[calc(100vh-80px)] relative bg-transparent overflow-hidden" data-testid="immersive-page">
       {/* Continuous atmospheric backdrop — gold ↔ blue blooms only */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute -top-32 -left-32 w-[900px] h-[900px] rounded-full bg-[#0A0A0A]/8 blur-3xl" />

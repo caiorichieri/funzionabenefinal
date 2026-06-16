@@ -37,6 +37,7 @@ import SeduteImmersive from "@/pages/public/SeduteImmersive";
 import AreeInterventoPage from "@/pages/public/AreeInterventoPage";
 import EmergenzePage from "@/pages/public/EmergenzePage";
 import ChiSiamoPage from "@/pages/public/ChiSiamoPage";
+import IlNostroMondoPage from "@/pages/public/IlNostroMondoPage";
 import NotFoundPage from "@/pages/public/NotFoundPage";
 
 import "@/App.css";
@@ -71,6 +72,7 @@ export default function App() {
             <Route path="/aree-intervento" element={<AreeInterventoPage />} />
             <Route path="/emergenze" element={<EmergenzePage />} />
             <Route path="/chi-siamo" element={<ChiSiamoPage />} />
+            <Route path="/il-nostro-mondo" element={<IlNostroMondoPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />

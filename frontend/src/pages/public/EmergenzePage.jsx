@@ -61,7 +61,7 @@ const NUMBERS = [
 
 export default function EmergenzePage() {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] relative overflow-hidden" data-testid="emergenze-page">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent relative overflow-hidden" data-testid="emergenze-page">
       {/* Continuous atmospheric backdrop */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true"><div className="absolute -top-32 -left-32 w-[700px] h-[700px] rounded-full bg-[#0A0A0A]/6 blur-3xl" />
         <div className="absolute -bottom-32 -right-32 w-[800px] h-[800px] rounded-full bg-[#6B8FA3]/22 blur-3xl" />

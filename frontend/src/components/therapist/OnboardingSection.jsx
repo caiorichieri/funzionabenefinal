@@ -134,7 +134,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
             </p>
             {profilo?.documenti_verificati && (
               <div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-medium">
-                <Check className="w-3.5 h-3.5" /> Documenti verificati dall'amministratore · Profilo pubblico attivo
+                <Check className="w-3.5 h-3.5" /> Documenti verificati dall&apos;amministratore · Profilo pubblico attivo
               </div>
             )}
           </div>
@@ -277,7 +277,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
 
         {alreadySigned ? (
           <div className="text-sm text-[#0A0A0A]/75">
-            Hai firmato l'autocertificazione il{" "}
+            Hai firmato l&apos;autocertificazione il{" "}
             <strong className="text-[#0A0A0A]">
               {profilo?.autocertificazione_data ? new Date(profilo.autocertificazione_data).toLocaleDateString("it-IT") : "—"}
             </strong>.
@@ -293,7 +293,7 @@ export default function OnboardingSection({ profilo, currentUser, onRefresh }) {
                 className="mt-0.5 accent-[#0A0A0A]"
               />
               <span>
-                Il sottoscritto, consapevole delle sanzioni penali previste dall'<strong>art. 76 del DPR 28 dicembre 2000, n. 445</strong>,
+                Il sottoscritto, consapevole delle sanzioni penali previste dall&apos;<strong>art. 76 del DPR 28 dicembre 2000, n. 445</strong>,
                 per le ipotesi di falsità in atti e dichiarazioni mendaci, dichiara sotto la propria responsabilità che
                 i dati e i documenti caricati (CV, assicurazione professionale, laurea/abilitazione) sono <strong>veritieri, completi e corrispondenti al vero</strong>.
                 Autorizzo FunzionaBene alla verifica dei dati ai sensi della normativa vigente.

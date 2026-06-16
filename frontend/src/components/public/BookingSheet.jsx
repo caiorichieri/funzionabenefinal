@@ -246,7 +246,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
             {step === "review" && (
               <div data-testid="step-review">
                 <h2 className="font-serif text-3xl text-[#0A0A0A] leading-tight">Riepilogo</h2>
-                <div className="mt-6 p-5 bg-white border border-[#0A0A0A]/15 rounded-2xl space-y-3 text-sm">
+                <div className="mt-6 p-5 brand-card space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-[#0A0A0A]/60">Terapeuta</span>
                     <span className="text-[#0A0A0A]">Dr. {terapista.nome} {terapista.cognome}</span>
@@ -390,7 +390,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                 <div className="w-14 h-14 rounded-full bg-white/30 flex items-center justify-center mb-6">
                   <ShieldCheck className="w-6 h-6 text-[#0A0A0A]" />
                 </div>
-                <h2 className="font-serif text-3xl text-[#0A0A0A] leading-tight">Verifica l'email</h2>
+                <h2 className="font-serif text-3xl text-[#0A0A0A] leading-tight">Verifica l&apos;email</h2>
                 <p className="mt-3 text-sm text-[#0A0A0A]/70">
                   Abbiamo inviato un codice a 6 cifre a <strong className="text-[#0A0A0A]">{form.email}</strong>.
                 </p>
@@ -438,7 +438,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                 <h2 className="font-serif text-3xl text-[#0A0A0A] leading-tight">Pagamento</h2>
                 <p className="mt-2 text-sm text-[#0A0A0A]/70">Saldo sicuro con cifratura SSL. (Mock — integreremo Nexi XPay)</p>
 
-                <div className="mt-6 p-5 bg-white border border-[#0A0A0A]/15 rounded-2xl space-y-3 text-sm">
+                <div className="mt-6 p-5 brand-card space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-[#0A0A0A]/60">Seduta con</span>
                     <span className="text-[#0A0A0A]">Dr. {terapista.nome} {terapista.cognome}</span>
@@ -570,7 +570,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                 </motion.div>
                 <h2 className="font-serif text-4xl text-[#0A0A0A]">Prenotazione confermata</h2>
                 <p className="mt-4 text-[#0A0A0A]/70 max-w-sm mx-auto leading-relaxed">
-                  Ti abbiamo inviato un'email di conferma con tutti i dettagli.
+                  Ti abbiamo inviato un&apos;email di conferma con tutti i dettagli.
                   Il Dr. {terapista.cognome} ti aspetta il <strong className="text-[#0A0A0A]">{formatSlot(slot.data_ora)}</strong>.
                 </p>
                 <p className="mt-3 text-xs text-[#0A0A0A]/40">

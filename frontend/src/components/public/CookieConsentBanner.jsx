@@ -6,6 +6,28 @@ import {
   hasGivenConsent, acceptAll, acceptEssentialOnly, setCookiePreferences, getCookiePreferences,
 } from "@/utils/cookieConsent";
 
+function Toggle({ name, label, desc, disabled, prefs, setPrefs }) {
+  return (
+    <div className="flex items-start justify-between gap-4 py-3 border-b border-white/5 last:border-0">
+      <div className="flex-1">
+        <div className="text-[#0A0A0A] text-sm font-medium mb-0.5">{label}</div>
+        <div className="text-xs text-[#0A0A0A]/55 leading-relaxed">{desc}</div>
+      </div>
+      <label className="relative inline-block w-10 h-5 flex-shrink-0 mt-1 cursor-pointer">
+        <input
+          type="checkbox" disabled={disabled}
+          data-testid={`banner-cookie-${name}`}
+          checked={prefs[name]}
+          onChange={(e) => setPrefs({ ...prefs, [name]: e.target.checked })}
+          className="sr-only peer"
+        />
+        <span className={`block w-10 h-5 rounded-full transition-colors ${prefs[name] ? "bg-[#0A0A0A]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
+        <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${prefs[name] ? "translate-x-5" : ""}`}></span>
+      </label>
+    </div>
+  );
+}
+
 export default function CookieConsentBanner() {
   const [visible, setVisible] = useState(false);
   const [customize, setCustomize] = useState(false);
@@ -32,26 +54,6 @@ export default function CookieConsentBanner() {
   const handleAcceptAll = () => { acceptAll(); setVisible(false); };
   const handleEssentialOnly = () => { acceptEssentialOnly(); setVisible(false); };
   const handleSaveCustom = () => { setCookiePreferences(prefs); setVisible(false); };
-
-  const Toggle = ({ name, label, desc, disabled }) => (
-    <div className="flex items-start justify-between gap-4 py-3 border-b border-white/5 last:border-0">
-      <div className="flex-1">
-        <div className="text-[#0A0A0A] text-sm font-medium mb-0.5">{label}</div>
-        <div className="text-xs text-[#0A0A0A]/55 leading-relaxed">{desc}</div>
-      </div>
-      <label className="relative inline-block w-10 h-5 flex-shrink-0 mt-1 cursor-pointer">
-        <input
-          type="checkbox" disabled={disabled}
-          data-testid={`banner-cookie-${name}`}
-          checked={prefs[name]}
-          onChange={(e) => setPrefs({ ...prefs, [name]: e.target.checked })}
-          className="sr-only peer"
-        />
-        <span className={`block w-10 h-5 rounded-full transition-colors ${prefs[name] ? "bg-[#0A0A0A]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
-        <span className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full transition-transform ${prefs[name] ? "translate-x-5" : ""}`}></span>
-      </label>
-    </div>
-  );
 
   return (
     <AnimatePresence>
@@ -114,9 +116,9 @@ export default function CookieConsentBanner() {
                 </div>
 
                 <div className="bg-[#0A0A0A]/50 border border-white/5 rounded-2xl px-5">
-                  <Toggle name="essential" label="Cookie essenziali" desc="Login, sessione, preferenze. Sempre attivi." disabled={true} />
-                  <Toggle name="analytics" label="Cookie di analisi" desc="Statistiche di utilizzo anonime e aggregate." />
-                  <Toggle name="marketing" label="Cookie di marketing" desc="Pubblicità personalizzata (attualmente non utilizzati)." />
+                  <Toggle name="essential" label="Cookie essenziali" desc="Login, sessione, preferenze. Sempre attivi." disabled={true} prefs={prefs} setPrefs={setPrefs} />
+                  <Toggle name="analytics" label="Cookie di analisi" desc="Statistiche di utilizzo anonime e aggregate." prefs={prefs} setPrefs={setPrefs} />
+                  <Toggle name="marketing" label="Cookie di marketing" desc="Pubblicità personalizzata (attualmente non utilizzati)." prefs={prefs} setPrefs={setPrefs} />
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-3 mt-5 justify-end">

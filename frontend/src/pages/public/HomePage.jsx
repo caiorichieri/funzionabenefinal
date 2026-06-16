@@ -72,7 +72,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main data-testid="homepage" className="relative bg-[#E9D628] overflow-hidden">
+    <main data-testid="homepage" className="relative bg-transparent overflow-hidden">
       {/* ────────── ATMOSPHERIC BACKDROP — gold ↔ steel-blue blooms only ────────── */}
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         {/* Vibrant gold bloom top-left */}
@@ -175,7 +175,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 data-testid={`step-${s.n}`}
-                className="relative p-8 lg:p-10 bg-white border border-[#0A0A0A]/10 rounded-3xl hover:border-[#0A0A0A]/40 transition-all group overflow-hidden"
+                className="relative p-8 lg:p-10 brand-card"
               >
                 {/* Glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/0 to-[#0A0A0A]/0 group-hover:from-[#0A0A0A]/4 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
@@ -302,7 +302,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: (i % 6) * 0.05 }}
                 data-testid={`area-${a.slug}`}
-                className="group p-6 bg-white border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/40 rounded-2xl transition-all cursor-default"
+                className="group p-6 brand-card"
               >
                 <div className="flex items-start justify-between mb-3">
                   <span
@@ -386,7 +386,7 @@ export default function HomePage() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: (i % 3) * 0.1 }}
               data-testid={`testimonial-${i}`}
-              className="p-7 bg-white border border-[#0A0A0A]/10 rounded-2xl flex flex-col"
+              className="p-7 brand-card flex flex-col"
             >
               <Quote className="w-6 h-6 text-[#0A0A0A]/60 mb-4" />
               <p className="text-[#0A0A0A]/85 leading-relaxed font-serif text-lg flex-1">
@@ -409,7 +409,7 @@ export default function HomePage() {
       {/* ────────── A COSA SERVE / NON SERVE ────────── */}
       <section className="relative" data-testid="serve-section">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32 grid lg:grid-cols-2 gap-10">
-          <div className="p-10 bg-white border border-[#0A0A0A]/20 rounded-3xl">
+          <div className="p-10 brand-card">
             <div className="inline-flex items-center gap-2 text-[#0A0A0A] text-xs tracking-[0.2em] uppercase mb-5">
               <Check className="w-4 h-4" /> Ecco per cosa siamo qui
             </div>
@@ -469,7 +469,7 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 data-testid={`therapist-preview-${i}`}
-                className="p-8 bg-white border border-[#0A0A0A]/10 rounded-3xl"
+                className="p-8 brand-card"
               >
                 {t.foto_url ? (
                   <img src={t.foto_url} alt={`${t.nome} ${t.cognome}`} className="w-20 h-20 rounded-full object-cover border border-[#0A0A0A]/10 mb-6" />

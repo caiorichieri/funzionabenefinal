@@ -8,6 +8,7 @@ const NAV = [
   { to: "/", label: "Home" },
   { to: "/sedute-immersive", label: "Immersive" },
   { to: "/aree-intervento", label: "Aree" },
+  { to: "/il-nostro-mondo", label: "Il nostro mondo" },
   { to: "/chi-siamo", label: "Chi siamo" },
   { to: "/blog", label: "Blog" },
   { to: "/faq", label: "FAQ" },
@@ -31,15 +32,15 @@ function Header() {
           <span className="font-serif text-3xl sm:text-4xl text-[#0A0A0A] tracking-tight leading-none">funzionabene</span>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-7">
           {NAV.map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
               end={n.to === "/"}
-              data-testid={`nav-${n.label.toLowerCase()}`}
+              data-testid={`nav-${n.label.toLowerCase().replace(/\s+/g,'-')}`}
               className={({ isActive }) =>
-                `text-sm tracking-wide transition-colors ${isActive ? "text-[#0A0A0A]" : "text-[#0A0A0A]/75 hover:text-[#0A0A0A]"}`
+                `text-sm tracking-wide whitespace-nowrap transition-colors ${isActive ? "text-[#0A0A0A]" : "text-[#0A0A0A]/75 hover:text-[#0A0A0A]"}`
               }
             >
               {n.label}
@@ -149,7 +150,7 @@ function Footer() {
           </div>
           <p className="text-[#0A0A0A]/65 text-sm max-w-md leading-relaxed">
             Uno spazio discreto, professionale e caloroso per la tua salute psicologica e sessuologica.
-            Specialisti iscritti all'Albo, percorsi individuali e di coppia.
+            Specialisti iscritti all&apos;Albo, percorsi individuali e di coppia.
           </p>
         </div>
         <div>
@@ -161,7 +162,7 @@ function Footer() {
             <li><Link to="/chi-siamo" className="hover:text-[#0A0A0A]">Chi siamo</Link></li>
             <li><Link to="/blog" className="hover:text-[#0A0A0A]">Blog</Link></li>
             <li><Link to="/faq" className="hover:text-[#0A0A0A]">FAQ</Link></li>
-            <li><Link to="/emergenze" className="hover:text-[#C77474]">Numeri d'emergenza</Link></li>
+            <li><Link to="/emergenze" className="hover:text-[#C77474]">Numeri d&apos;emergenza</Link></li>
           </ul>
         </div>
         <div>
@@ -176,7 +177,7 @@ function Footer() {
       <div className="border-t border-[#0A0A0A]/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#0A0A0A]/50">
           <span>© {new Date().getFullYear()} funzionabene.it — Tutti i diritti riservati</span>
-          <span>P.IVA 00000000000 · Iscritta all'Ordine degli Psicologi</span>
+          <span>P.IVA 00000000000 · Iscritta all&apos;Ordine degli Psicologi</span>
         </div>
       </div>
     </footer>
@@ -185,7 +186,7 @@ function Footer() {
 
 export default function PublicLayout() {
   return (
-    <div className="min-h-screen bg-[#E9D628] text-[#0A0A0A] font-sans antialiased">
+    <div className="min-h-screen bg-transparent text-[#0A0A0A] font-sans antialiased">
       <Header />
       <Outlet />
       <Footer />

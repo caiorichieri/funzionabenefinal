@@ -23,7 +23,7 @@ export default function MatchingResultsPage() {
 
   if (results.length === 0) {
     return (
-      <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] flex items-center justify-center">
+      <main className="min-h-[calc(100vh-80px)] bg-transparent flex items-center justify-center">
         <div className="text-center px-6" data-testid="no-results">
           <h1 className="font-serif text-3xl text-[#0A0A0A] mb-4">Nessun abbinamento trovato</h1>
           <p className="text-[#0A0A0A]/70 mb-8">
@@ -41,7 +41,7 @@ export default function MatchingResultsPage() {
   }
 
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] py-16 lg:py-24" data-testid="matching-results">
+    <main className="min-h-[calc(100vh-80px)] bg-transparent py-16 lg:py-24" data-testid="matching-results">
       <div className="max-w-6xl mx-auto px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,7 +66,7 @@ export default function MatchingResultsPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.15 }}
               data-testid={`result-card-${i}`}
-              className="relative p-7 bg-white border border-[#0A0A0A]/15 rounded-3xl hover:border-[#0A0A0A]/40 transition-all flex flex-col"
+              className="relative p-7 brand-card flex flex-col"
             >
               {/* Compatibility badge */}
               <div className="absolute -top-3 -right-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg px-4 py-1.5 text-sm font-medium flex items-center gap-1.5 shadow-lg">

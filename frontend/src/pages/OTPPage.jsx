@@ -58,7 +58,7 @@ export default function OTPPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#E9D628] flex items-center justify-center p-6">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-6">
       <div className="w-full max-w-md text-center">
         <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center mx-auto mb-6">
           <ShieldCheck className="w-8 h-8 text-[#0A0A0A]" />

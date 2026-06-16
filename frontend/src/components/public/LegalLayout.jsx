@@ -3,7 +3,7 @@ import { ArrowLeft, FileText } from "lucide-react";
 
 export default function LegalLayout({ title, lastUpdate, children, testId }) {
   return (
-    <main className="min-h-[calc(100vh-80px)] bg-[#E9D628] py-16 lg:py-24" data-testid={testId}>
+    <main className="min-h-[calc(100vh-80px)] bg-transparent py-16 lg:py-24" data-testid={testId}>
       <article className="max-w-3xl mx-auto px-6 lg:px-10">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-[#0A0A0A]/60 hover:text-[#0A0A0A] mb-10 transition-colors">
           <ArrowLeft className="w-4 h-4" /> Torna alla home

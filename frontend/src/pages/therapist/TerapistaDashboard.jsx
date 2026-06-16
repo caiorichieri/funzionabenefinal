@@ -63,7 +63,7 @@ export default function TerapistaDashboard() {
           <div>
             <div className="font-semibold text-amber-800">Autocertificazione non firmata</div>
             <div className="text-sm text-amber-600 mt-1">
-              Completa il tuo profilo e firma l'autocertificazione per essere visibile ai pazienti.
+              Completa il tuo profilo e firma l&apos;autocertificazione per essere visibile ai pazienti.
             </div>
             <a href="/terapeuta/profilo"
               className="mt-2 inline-block text-sm font-medium text-amber-700 hover:text-amber-800">
