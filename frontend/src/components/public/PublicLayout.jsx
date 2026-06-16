@@ -74,7 +74,7 @@ function Header() {
               <Link
                 to="/questionario"
                 data-testid="nav-cta"
-                className="px-5 py-2.5 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm tracking-wide transition-all"
+                className="px-5 py-2.5 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm tracking-wide transition-all"
               >
                 Inizia il Questionario
               </Link>
@@ -125,7 +125,7 @@ function Header() {
                   <Link
                     to="/questionario"
                     onClick={() => setOpen(false)}
-                    className="inline-block w-full text-center px-5 py-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
+                    className="inline-block w-full text-center px-5 py-3 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
                   >
                     Inizia il Questionario
                   </Link>

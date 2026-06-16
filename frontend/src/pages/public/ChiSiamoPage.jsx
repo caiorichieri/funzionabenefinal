@@ -225,7 +225,7 @@ export default function ChiSiamoPage() {
           <Link
             to="/questionario"
             data-testid="chi-siamo-cta"
-            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
           >
             Inizia il Questionario <ArrowRight className="w-4 h-4" />
           </Link>

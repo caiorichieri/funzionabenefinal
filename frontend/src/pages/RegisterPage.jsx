@@ -176,7 +176,7 @@ export default function RegisterPage() {
               <button
                 data-testid="register-submit"
                 type="submit" disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-colors disabled:opacity-50 font-[Outfit]"
+                className="w-full py-3 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-colors disabled:opacity-50 font-[Outfit]"
               >
                 {loading ? "Registrazione in corso..." : "Crea Account"}
               </button>

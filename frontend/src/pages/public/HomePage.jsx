@@ -124,7 +124,7 @@ export default function HomePage() {
               <Link
                 to="/questionario"
                 data-testid="hero-start-btn"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
               >
                 Inizia il Questionario
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -237,7 +237,7 @@ export default function HomePage() {
               <Link
                 to="/sedute-immersive"
                 data-testid="immersive-deep-link"
-                className="inline-flex items-center gap-3 px-7 py-3.5 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm tracking-wide transition-all"
+                className="inline-flex items-center gap-3 px-7 py-3.5 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm tracking-wide transition-all"
               >
                 Scopri come funziona <ArrowRight className="w-4 h-4" />
               </Link>
@@ -516,7 +516,7 @@ export default function HomePage() {
             <Link
               to="/questionario"
               data-testid="cta-start-btn"
-              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+              className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
             >
               Inizia ora <ArrowRight className="w-4 h-4" />
             </Link>

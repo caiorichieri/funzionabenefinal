@@ -272,7 +272,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                 <button
                   data-testid="booking-continue"
                   onClick={() => setStep("auth")}
-                  className="mt-8 w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-all"
+                  className="mt-8 w-full inline-flex items-center justify-center gap-3 px-6 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-all"
                 >
                   Continua <ArrowRight className="w-4 h-4" />
                 </button>
@@ -376,7 +376,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                   <button
                     data-testid="booking-auth-submit"
                     type="submit" disabled={loading}
-                    className="w-full mt-4 inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-all"
+                    className="w-full mt-4 inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg transition-all"
                   >
                     {loading ? "Attendere..." : mode === "register" ? "Crea account e continua" : "Accedi e continua"}
                   </button>
@@ -413,7 +413,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                   <button
                     data-testid="booking-otp-submit"
                     type="submit" disabled={loading || form.otp.length !== 6}
-                    className="w-full mt-6 inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
+                    className="w-full mt-6 inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
                   >
                     {loading ? "Verifica..." : "Verifica e continua"}
                   </button>
@@ -483,7 +483,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                   <button
                     data-testid="booking-pay-submit"
                     type="submit" disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
+                    className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
                   >
                     {loading ? "Elaborazione..." : `Paga €${terapista.prezzo_sessione || 90} e verifica SMS`}
                   </button>
@@ -539,7 +539,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
                   <button
                     data-testid="sms-verify-submit"
                     type="submit" disabled={loading}
-                    className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
+                    className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 disabled:opacity-40 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg"
                   >
                     {loading ? "Verifica in corso..." : "Verifica e conferma prenotazione"}
                   </button>

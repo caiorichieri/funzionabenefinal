@@ -97,7 +97,7 @@ export default function CookieConsentBanner() {
                   <button
                     data-testid="banner-accept-all-btn"
                     onClick={handleAcceptAll}
-                    className="px-5 py-3 text-sm bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+                    className="px-5 py-3 text-sm bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
                   >
                     Accetta tutti
                   </button>

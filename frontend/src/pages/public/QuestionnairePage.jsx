@@ -190,7 +190,7 @@ export default function QuestionnairePage() {
                 data-testid="questionnaire-next"
                 onClick={() => goNext()}
                 disabled={!canProceed() || loading}
-                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 disabled:opacity-40 disabled:cursor-not-allowed bg-gradient-to-r from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+                className="mt-10 w-full inline-flex items-center justify-center gap-3 px-8 py-4 disabled:opacity-40 disabled:cursor-not-allowed bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
               >
                 {loading ? "Analisi in corso..." : step === STEPS.length - 1 ? "Trova i miei match" : "Continua"}
                 {!loading && <ArrowRight className="w-4 h-4" />}
