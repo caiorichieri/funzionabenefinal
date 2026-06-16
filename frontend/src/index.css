@@ -9,7 +9,10 @@ body {
     font-family: 'Figtree', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #E9D628;
+    /* Softened mustard — less neon, more sophisticated champagne tone.
+       Old: #E9D628 (HSL 54, 80%, 54% — very saturated, almost neon)
+       New: #ECDC74 (HSL 50, 76%, 69% — same hue family, much softer, more refined) */
+    background-color: #ECDC74;
     position: relative;
 }
 

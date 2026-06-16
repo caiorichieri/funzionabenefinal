@@ -35,7 +35,7 @@ export default function Layout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="sticky top-0 z-10 bg-[#D4C123] border-b border-[#0A0A0A]/12 px-6 py-4 flex items-center justify-between">
+        <header className="sticky top-0 z-10 bg-[#DECB5A] border-b border-[#0A0A0A]/12 px-6 py-4 flex items-center justify-between">
           <button
             data-testid="sidebar-toggle"
             onClick={() => setSidebarOpen(true)}
