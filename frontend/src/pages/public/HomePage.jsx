@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight, ShieldCheck, Heart, Award, Lock, Sparkles, Check, X,
-  Quote, AlertCircle, MessageCircle
+  Quote, AlertCircle, MessageCircle, Calendar
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API } from "@/contexts/AuthContext";
+import { API, useAuth } from "@/contexts/AuthContext";
 import { AREE_INTERVENTO, AREE_CATEGORIE, TESTIMONIANZE } from "@/data/areeIntervento";
 import Mascotte from "@/components/shared/Mascotte";
+import PrenotaSubitoModal from "@/components/public/PrenotaSubitoModal";
+import BookingSheet from "@/components/public/BookingSheet";
 
 const HERO_BG = "/home-daily.jpg";
 
@@ -66,10 +68,22 @@ const NON_SERVE_LIST = [
 
 export default function HomePage() {
   const [terapisti, setTerapisti] = useState([]);
+  const { user } = useAuth();
+  const [prenotaOpen, setPrenotaOpen] = useState(false);
+  const [bookingOpen, setBookingOpen] = useState(false);
+  const [bookingTerapista, setBookingTerapista] = useState(null);
+  const [bookingSlot, setBookingSlot] = useState(null);
 
   useEffect(() => {
     axios.get(`${API}/public/terapisti`).then(r => setTerapisti(r.data.slice(0, 3))).catch(() => {});
   }, []);
+
+  const handlePrenotaConfirm = ({ terapista, slot }) => {
+    setBookingTerapista(terapista);
+    setBookingSlot(slot);
+    setPrenotaOpen(false);
+    setBookingOpen(true);
+  };
 
   return (
     <main data-testid="homepage" className="relative bg-transparent overflow-hidden">
@@ -129,13 +143,14 @@ export default function HomePage() {
                 Inizia il Questionario
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <Link
-                to="/sedute-immersive"
-                data-testid="hero-immersive-btn"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-md tracking-wide transition-all"
+              <button
+                type="button"
+                onClick={() => setPrenotaOpen(true)}
+                data-testid="hero-prenota-btn"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-2xl tracking-wide transition-all"
               >
-                <Sparkles className="w-4 h-4 text-[#0A0A0A]" /> Scopri le sedute immersive
-              </Link>
+                <Calendar className="w-4 h-4" /> Prenota subito
+              </button>
             </div>
 
             <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 text-xs text-[#0A0A0A]/65">
@@ -145,7 +160,7 @@ export default function HomePage() {
               </span>
               <span className="flex items-center gap-3">
                 <Mascotte name="pensativo" theme="light" size={36} animation="float" />
-                Specialisti iscritti all'Albo
+                Specialisti iscritti all&apos;Albo
               </span>
               <span className="flex items-center gap-3">
                 <Mascotte name="peludo" theme="light" size={36} animation="wiggle" />
@@ -222,7 +237,7 @@ export default function HomePage() {
               <div>
                 <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">72%</div>
                 <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
-                  dei pazienti riporta maggiore comfort rispetto all'esposizione tradizionale<sup>*</sup>
+                  dei pazienti riporta maggiore comfort rispetto all&apos;esposizione tradizionale<sup>*</sup>
                 </div>
               </div>
               <div>
@@ -283,7 +298,7 @@ export default function HomePage() {
               Temi che qui<br />si possono dire.
             </h2>
             <p className="mt-6 text-[#0A0A0A]/65 text-lg">
-              Nessun argomento è fuori posto. Qualunque sia la tua storia, c'è uno specialista preparato ad ascoltarla.
+              Nessun argomento è fuori posto. Qualunque sia la tua storia, c&apos;è uno specialista preparato ad ascoltarla.
             </p>
           </div>
           <Link to="/aree-intervento" className="text-sm text-[#6B8FA3] hover:text-[#94B2C2] tracking-wide">
@@ -373,7 +388,7 @@ export default function HomePage() {
         <div className="mb-16 max-w-2xl">
           <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Storie dei nostri pazienti</span>
           <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
-            Qualcuno l'ha già fatto<br />prima di te.
+            Qualcuno l&apos;ha già fatto<br />prima di te.
           </h2>
         </div>
 
@@ -390,7 +405,7 @@ export default function HomePage() {
             >
               <Quote className="w-6 h-6 text-[#0A0A0A]/60 mb-4" />
               <p className="text-[#0A0A0A]/85 leading-relaxed font-serif text-lg flex-1">
-                "{t.testo}"
+                &quot;{t.testo}&quot;
               </p>
               <div className="mt-6 pt-5 border-t border-[#0A0A0A]/10">
                 <div className="text-sm text-[#0A0A0A]">{t.nome}</div>
@@ -439,7 +454,7 @@ export default function HomePage() {
             </ul>
             <div className="mt-8 pt-6 border-t border-[#0A0A0A]/10">
               <Link to="/emergenze" className="text-sm text-[#0A0A0A] hover:text-[#0A0A0A]/70 inline-flex items-center gap-2">
-                Se stai vivendo un'emergenza → consulta i numeri di aiuto
+                Se stai vivendo un&apos;emergenza → consulta i numeri di aiuto
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
@@ -523,6 +538,22 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <PrenotaSubitoModal
+        open={prenotaOpen}
+        onClose={() => setPrenotaOpen(false)}
+        onConfirm={handlePrenotaConfirm}
+      />
+
+      {bookingTerapista && bookingSlot && (
+        <BookingSheet
+          open={bookingOpen}
+          onClose={() => setBookingOpen(false)}
+          terapista={bookingTerapista}
+          slot={bookingSlot}
+          currentUser={user}
+        />
+      )}
     </main>
   );
 }
