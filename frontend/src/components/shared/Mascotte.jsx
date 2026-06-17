@@ -66,6 +66,7 @@ export default function Mascotte({
     saltitante:  "/mascotte/saltitante-terracotta.png",
     pensativo:   "/mascotte/pensativo-lavender.png",
     curioso:     "/mascotte/curioso-sky.png",
+    vr:          "/mascotte/vr-brand.png",
   };
   const src = BRAND_FILLS[name] || `/mascotte/${name}-${variant}.png`;
   const motionProps = ANIMATIONS[animation] || ANIMATIONS.none;
