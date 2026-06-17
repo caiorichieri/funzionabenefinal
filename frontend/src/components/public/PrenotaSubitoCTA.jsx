@@ -112,6 +112,23 @@ export default function PrenotaSubitoCTA({
     );
   }
 
+  // ── Variant: Link (inline underlined link with orange decoration) ──
+  if (variant === "link") {
+    return (
+      <>
+        <button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          data-testid={`${testid}-btn`}
+          className={`text-sm text-[#0A0A0A] font-medium underline underline-offset-4 decoration-[#F58A1F] decoration-2 hover:decoration-4 transition-all ${className}`}
+        >
+          {label}
+        </button>
+        {Modal}
+      </>
+    );
+  }
+
   // ── Variant: Button (default — standalone prominent button) ──
   return (
     <>

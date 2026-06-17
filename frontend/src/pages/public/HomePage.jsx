@@ -192,6 +192,23 @@ export default function HomePage() {
             );
           })}
         </div>
+
+        {/* Discreet bypass — for users who don't want to follow the questionnaire flow */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-10 text-center"
+        >
+          <span className="text-sm text-[#0A0A0A]/60">Hai bisogno di parlare subito?{" "}</span>
+          <PrenotaSubitoCTA
+            variant="compact"
+            testid="come-funziona-bypass"
+            label="Prenota uno specialista disponibile ora →"
+            className="!bg-transparent !text-[#0A0A0A] !shadow-none hover:!shadow-none !px-2 !py-1 !font-medium underline underline-offset-4 decoration-[#F58A1F] decoration-2 hover:decoration-4"
+          />
+        </motion.div>
       </section>
 
       {/* ────────── SEDUTE IMMERSIVE (DIFFERENZIATORE) ────────── */}
