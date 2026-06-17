@@ -6,7 +6,7 @@ import CookieConsentBanner from "@/components/public/CookieConsentBanner";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/sessioni-immersive", label: "Immersive" },
+  { to: "/sedute-immersive", label: "Immersive" },
   { to: "/aree-intervento", label: "Aree" },
   { to: "/il-nostro-mondo", label: "Il nostro mondo" },
   { to: "/chi-siamo", label: "Chi siamo" },
