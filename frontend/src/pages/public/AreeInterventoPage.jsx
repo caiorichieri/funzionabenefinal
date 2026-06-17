@@ -59,7 +59,7 @@ export default function AreeInterventoPage() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.35, delay: (i % 3) * 0.07 }}
                     data-testid={`area-detail-${a.slug}`}
-                    className="p-6 bg-white/30 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/40 rounded-2xl transition-all"
+                    className="brand-card p-6"
                   >
                     <h3 className="font-serif text-xl text-[#0A0A0A] mb-3 leading-tight">{a.titolo}</h3>
                     <p className="text-sm text-[#0A0A0A]/65 leading-relaxed">{a.descrizione}</p>

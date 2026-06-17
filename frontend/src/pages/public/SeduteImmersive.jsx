@@ -86,14 +86,21 @@ export default function SeduteImmersive() {
             </div>
 
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0A0A0A] tracking-tight max-w-3xl">
-              La terapia<br /><em className="text-[#0A0A0A] not-italic">come non l&apos;hai mai vissuta.</em>
+              Sessioni immersive.<br /><em className="text-[#0A0A0A] not-italic">La terapia, reimmaginata.</em>
             </h1>
 
             <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/75 leading-relaxed max-w-3xl">
-              FunzionaBene è la <strong className="text-[#0A0A0A]">prima piattaforma italiana di sessuologia</strong> a integrare
-              ambienti immersivi guidati direttamente nei percorsi terapeutici. Non è uno strumento, non è un gioco:
-              è <strong className="text-[#0A0A0A]">terapia clinica evidence-based</strong>, amplificata da un&apos;esperienza
-              sensoriale che i libri di ricerca confermano da anni.
+              La sessualità è un affare così intimo che richiede un ambiente altrettanto intimo:
+              <strong className="text-[#0A0A0A]"> riservato, solo tuo</strong>. Parlare di sessualità è già difficile —
+              farlo sostenendo lo sguardo di chi ti ascolta, a volte, lo è ancora di più.
+            </p>
+            <p className="mt-4 text-base lg:text-lg text-[#0A0A0A]/70 leading-relaxed max-w-3xl">
+              Nell&apos;ambiente immersivo il tuo terapeuta è sempre con te, ti guida in tempo reale come in una sessione
+              normale, ma la relazione passa attraverso un avatar, non attraverso il suo sguardo diretto.
+              <strong className="text-[#0A0A0A]"> Uno spazio che, per la prima volta, è davvero soltanto tuo.</strong>
+            </p>
+            <p className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-[#0A0A0A]/12 text-xs text-[#0A0A0A]/75">
+              <Check className="w-3.5 h-3.5" /> Incluse nel tuo percorso, nessun servizio extra da attivare
             </p>
           </motion.div>
         </div>
@@ -102,25 +109,28 @@ export default function SeduteImmersive() {
       {/* Stats */}
       <section className="max-w-6xl mx-auto px-6 lg:px-10 py-20" data-testid="immersive-stats">
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
-            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">−35%</div>
+          <div className="brand-card !p-8">
+            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">76%</div>
             <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
-              di tempo medio di trattamento per fobie e disfunzioni ansiose (fonte: Riva et al. 2016).
+              dei pazienti, in studi su terapia espositiva per ansia e fobie, preferisce la realtà virtuale all&apos;esposizione tradizionale.
             </p>
           </div>
-          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
-            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">72%</div>
+          <div className="brand-card !p-8">
+            <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">9×</div>
             <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
-              dei pazienti riporta comfort maggiore rispetto all&apos;esposizione tradizionale.
+              tasso di rifiuto del trattamento più basso in VR rispetto all&apos;esposizione tradizionale.
             </p>
           </div>
-          <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
+          <div className="brand-card !p-8">
             <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">1ª</div>
             <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
               piattaforma italiana di sessuologia ad adottare questo approccio in modo strutturale.
             </p>
           </div>
         </div>
+        <p className="mt-8 text-xs text-[#0A0A0A]/60 leading-relaxed text-center max-w-3xl mx-auto">
+          Fonti: Garcia-Palacios A. et al. — <em>studio sull&apos;accettabilità dell&apos;esposizione in VR vs in vivo per fobie specifiche</em>. Meta-analisi JMIR 2022 sull&apos;efficacia della VR-CBT per disturbi d&apos;ansia.
+        </p>
       </section>
 
       {/* How it works */}
@@ -166,7 +176,7 @@ export default function SeduteImmersive() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="group overflow-hidden bg-white/30 border border-[#0A0A0A]/10 hover:border-[#0A0A0A]/30 rounded-2xl transition-colors"
+                className="brand-card group overflow-hidden !p-0"
               >
                 {b.img && (
                   <div className="relative aspect-[16/9] overflow-hidden">

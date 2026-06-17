@@ -149,7 +149,7 @@ export default function ChiSiamoPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 data-testid={`value-${i}`}
-                className="p-7 bg-white/30 border border-[#0A0A0A]/10 rounded-3xl"
+                className="brand-card !p-7"
               >
                 <div className="w-12 h-12 rounded-2xl bg-white/30 flex items-center justify-center mb-5">
                   <Icon className="w-5 h-5 text-[#0A0A0A]" />

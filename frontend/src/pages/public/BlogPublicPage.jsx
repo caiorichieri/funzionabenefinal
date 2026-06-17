@@ -113,7 +113,7 @@ export default function BlogPublicPage() {
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: Math.min(i * 0.05, 0.3) }}
                 data-testid={`blog-card-${i}`}
-                className="group bg-white/40 border border-[#0A0A0A]/10 rounded-3xl hover:border-[#0A0A0A]/40 transition-all flex flex-col overflow-hidden"
+                className="brand-card group flex flex-col overflow-hidden !p-0"
               >
                 {a.immagine_url && (
                   <Link to={`/blog/${a._id}`} className="relative aspect-[16/10] overflow-hidden block">

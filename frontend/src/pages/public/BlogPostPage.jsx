@@ -102,7 +102,7 @@ export default function BlogPostPage() {
           mascotName="abbraccio"
         />
 
-        <div className="mt-8 p-8 bg-white/40 border border-[#0A0A0A]/10 rounded-3xl text-center">
+        <div className="mt-8 brand-card !p-8 text-center">
           <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3">Preferisci un percorso guidato?</h3>
           <p className="text-[#0A0A0A]/65 mb-6">Prova il nostro questionario e trova lo specialista giusto per te.</p>
           <Link

@@ -112,7 +112,7 @@ export default function EmergenzePage() {
               className={`block p-6 rounded-2xl border transition-all ${
                 num.urgent
                   ? "bg-[#C77474]/10 border-[#C77474]/30 hover:border-[#C77474]/60"
-                  : "bg-white/30 border-[#0A0A0A]/10 hover:border-[#0A0A0A]/40"
+                  : "brand-card !p-6"
               }`}
             >
               <div className="flex items-start gap-5">
@@ -131,7 +131,7 @@ export default function EmergenzePage() {
           ))}
         </div>
 
-        <div className="mt-16 p-8 bg-white/30 border border-[#0A0A0A]/10 rounded-3xl">
+        <div className="brand-card !p-8 mt-16">
           <div className="flex items-start gap-4 mb-5">
             <Shield className="w-6 h-6 text-[#6B8FA3] flex-shrink-0 mt-1" />
             <div>
