@@ -11,7 +11,7 @@ export default function NotFoundPage() {
           Questa pagina si è nascosta.
         </h1>
         <p className="mt-6 text-[#0A0A0A]/65 leading-relaxed">
-          Forse l'URL non esiste più, o forse stiamo ancora costruendo questa parte del sito. In ogni caso, possiamo aiutarti a tornare sulla strada giusta.
+          Forse l&apos;URL non esiste più, o forse stiamo ancora costruendo questa parte del sito. In ogni caso, possiamo aiutarti a tornare sulla strada giusta.
         </p>
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link

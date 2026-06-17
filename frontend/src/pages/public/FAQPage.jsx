@@ -4,6 +4,7 @@ import { API } from "@/contexts/AuthContext";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Mascotte from "@/components/shared/Mascotte";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 const FALLBACK_FAQ = [
   {
@@ -60,7 +61,7 @@ export default function FAQPage() {
           </div>
           <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Domande frequenti</span>
           <h1 className="mt-4 font-serif text-5xl lg:text-6xl text-[#0A0A0A] leading-tight">
-            Cosa c'è da sapere.
+            Cosa c&apos;è da sapere.
           </h1>
           <p className="mt-6 text-[#0A0A0A]/65">
             Risposte chiare alle domande più comuni. Se non trovi quella che cerchi, scrivici.
@@ -100,6 +101,14 @@ export default function FAQPage() {
             );
           })}
         </div>
+
+        <PrenotaSubitoCTA
+          variant="banner"
+          testid="faq-prenota"
+          bannerTitle="Hai altre domande?"
+          bannerCopy="Il modo più veloce per averne risposta è parlare con uno dei nostri specialisti. Scegli un orario e inizia."
+          mascotName="curioso"
+        />
       </div>
     </main>
   );

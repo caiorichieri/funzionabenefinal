@@ -2,15 +2,14 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight, ShieldCheck, Heart, Award, Lock, Sparkles, Check, X,
-  Quote, AlertCircle, MessageCircle, Calendar
+  Quote, AlertCircle, MessageCircle
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { API, useAuth } from "@/contexts/AuthContext";
+import { API } from "@/contexts/AuthContext";
 import { AREE_INTERVENTO, AREE_CATEGORIE, TESTIMONIANZE } from "@/data/areeIntervento";
 import Mascotte from "@/components/shared/Mascotte";
-import PrenotaSubitoModal from "@/components/public/PrenotaSubitoModal";
-import BookingSheet from "@/components/public/BookingSheet";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 const HERO_BG = "/home-daily.jpg";
 
@@ -68,22 +67,10 @@ const NON_SERVE_LIST = [
 
 export default function HomePage() {
   const [terapisti, setTerapisti] = useState([]);
-  const { user } = useAuth();
-  const [prenotaOpen, setPrenotaOpen] = useState(false);
-  const [bookingOpen, setBookingOpen] = useState(false);
-  const [bookingTerapista, setBookingTerapista] = useState(null);
-  const [bookingSlot, setBookingSlot] = useState(null);
 
   useEffect(() => {
     axios.get(`${API}/public/terapisti`).then(r => setTerapisti(r.data.slice(0, 3))).catch(() => {});
   }, []);
-
-  const handlePrenotaConfirm = ({ terapista, slot }) => {
-    setBookingTerapista(terapista);
-    setBookingSlot(slot);
-    setPrenotaOpen(false);
-    setBookingOpen(true);
-  };
 
   return (
     <main data-testid="homepage" className="relative bg-transparent overflow-hidden">
@@ -135,22 +122,19 @@ export default function HomePage() {
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
+              <PrenotaSubitoCTA
+                testid="hero-prenota-cta"
+                label="Prenota subito"
+                className="!px-9 !py-4 !text-base shadow-lg hover:shadow-2xl ring-1 ring-[#F58A1F]/30"
+              />
               <Link
                 to="/questionario"
                 data-testid="hero-start-btn"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-2xl tracking-wide transition-all"
               >
                 Inizia il Questionario
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
-              <button
-                type="button"
-                onClick={() => setPrenotaOpen(true)}
-                data-testid="hero-prenota-btn"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-2xl tracking-wide transition-all"
-              >
-                <Calendar className="w-4 h-4" /> Prenota subito
-              </button>
             </div>
 
             <div className="mt-16 flex flex-wrap items-center gap-x-10 gap-y-6 text-xs text-[#0A0A0A]/65">
@@ -538,22 +522,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <PrenotaSubitoModal
-        open={prenotaOpen}
-        onClose={() => setPrenotaOpen(false)}
-        onConfirm={handlePrenotaConfirm}
-      />
-
-      {bookingTerapista && bookingSlot && (
-        <BookingSheet
-          open={bookingOpen}
-          onClose={() => setBookingOpen(false)}
-          terapista={bookingTerapista}
-          slot={bookingSlot}
-          currentUser={user}
-        />
-      )}
     </main>
   );
 }

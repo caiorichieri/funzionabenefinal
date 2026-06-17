@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Sparkles, Heart, ShieldCheck, Award, Users, Target } from "lucide-react";
 import Mascotte from "@/components/shared/Mascotte";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 const VALUES = [
   {
@@ -76,7 +77,7 @@ export default function ChiSiamoPage() {
               Una piattaforma curata,<br /><em className="text-[#0A0A0A] not-italic">non un marketplace.</em>
             </h1>
             <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/75 leading-relaxed max-w-3xl">
-              FunzionaBene nasce nel 2026 da un'idea semplice: portare la sessuologia italiana al livello
+              FunzionaBene nasce nel 2026 da un&apos;idea semplice: portare la sessuologia italiana al livello
               che merita. Con professionisti scelti uno a uno, tecnologia al servizio della cura e un linguaggio
               che non ha paura di chiamare le cose con il loro nome.
             </p>
@@ -97,11 +98,11 @@ export default function ChiSiamoPage() {
             <p>
               La sessualità è ancora, nel 2026, uno dei temi più <strong className="text-[#0A0A0A]">non detti</strong> della
               salute mentale italiana. Si parla di ansia. Si parla di depressione. Ma quando si tratta di disfunzioni sessuali,
-              di blocchi emotivi legati all'intimità, di differenze di desiderio in coppia — spesso il silenzio vince.
+              di blocchi emotivi legati all&apos;intimità, di differenze di desiderio in coppia — spesso il silenzio vince.
             </p>
             <p>
               FunzionaBene esiste per rompere quel silenzio. In modo <strong className="text-[#0A0A0A]">professionale,
-              discreto e umano</strong>. Non siamo un'app di auto-aiuto. Non siamo un marketplace dove un algoritmo
+              discreto e umano</strong>. Non siamo un&apos;app di auto-aiuto. Non siamo un marketplace dove un algoritmo
               ti accoppia al primo disponibile. Siamo una piattaforma curata dove ogni professionista è scelto personalmente,
               ogni percorso è costruito su misura, e la tua esperienza conta quanto la tua diagnosi.
             </p>
@@ -178,7 +179,7 @@ export default function ChiSiamoPage() {
                 non solo un corso fatto una volta, ma anni di pratica specifica.
               </p>
               <p>
-                Verifichiamo <strong className="text-[#0A0A0A]">ogni trimestre</strong> l'iscrizione all'Albo, la validità
+                Verifichiamo <strong className="text-[#0A0A0A]">ogni trimestre</strong> l&apos;iscrizione all&apos;Albo, la validità
                 della polizza assicurativa professionale e la partecipazione a percorsi di supervisione continua.
                 Se qualcosa scade, sospendiamo immediatamente il terapeuta dalla piattaforma.
               </p>
@@ -208,7 +209,7 @@ export default function ChiSiamoPage() {
             esclusivamente di disfunzioni erettili — quello fa la differenza.
           </p>
           <p className="text-[#0A0A0A] font-serif text-2xl italic">
-            "La specializzazione non è limitazione. È rispetto per chi ci sceglie."
+            &quot;La specializzazione non è limitazione. È rispetto per chi ci sceglie.&quot;
           </p>
         </div>
       </section>
@@ -222,13 +223,16 @@ export default function ChiSiamoPage() {
           <p className="mt-5 text-[#0A0A0A]/65 max-w-xl mx-auto">
             Il questionario in 2 minuti individua le aree più rilevanti per te e ti propone i 3 specialisti più affini.
           </p>
-          <Link
-            to="/questionario"
-            data-testid="chi-siamo-cta"
-            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
-          >
-            Inizia il Questionario <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <PrenotaSubitoCTA testid="chi-siamo-prenota" />
+            <Link
+              to="/questionario"
+              data-testid="chi-siamo-cta"
+              className="inline-flex items-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white text-[#0A0A0A] rounded-2xl tracking-wide transition-all"
+            >
+              Inizia il Questionario <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
     </main>

@@ -134,7 +134,7 @@ export default function TerapistaPublicPage() {
 
               {terapista.bio && (
                 <blockquote className="mt-10 font-serif text-2xl lg:text-3xl text-[#0A0A0A] leading-relaxed italic border-l-2 border-[#0A0A0A] pl-6">
-                  "{terapista.bio}"
+                  &quot;{terapista.bio}&quot;
                 </blockquote>
               )}
 

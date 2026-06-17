@@ -2,6 +2,28 @@ import LegalLayout from "@/components/public/LegalLayout";
 import { useState, useEffect } from "react";
 import { getCookiePreferences, setCookiePreferences, clearCookieConsent } from "@/utils/cookieConsent";
 
+function Toggle({ name, label, desc, disabled, prefs, setPrefs }) {
+  return (
+    <div className="flex items-start justify-between gap-6 py-5 border-b border-[#0A0A0A]/10">
+      <div>
+        <div className="text-[#0A0A0A] font-medium mb-1">{label}</div>
+        <div className="text-sm text-[#0A0A0A]/65 leading-relaxed">{desc}</div>
+      </div>
+      <label className="relative inline-block w-11 h-6 flex-shrink-0 mt-1 cursor-pointer">
+        <input
+          type="checkbox" disabled={disabled}
+          data-testid={`cookie-toggle-${name}`}
+          checked={prefs[name]}
+          onChange={(e) => setPrefs({ ...prefs, [name]: e.target.checked })}
+          className="sr-only peer"
+        />
+        <span className={`block w-11 h-6 rounded-full transition-colors ${prefs[name] ? "bg-[#0A0A0A]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
+        <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${prefs[name] ? "translate-x-5" : ""}`}></span>
+      </label>
+    </div>
+  );
+}
+
 export default function CookiePage() {
   const [prefs, setPrefs] = useState({ essential: true, analytics: false, marketing: false });
 
@@ -21,31 +43,11 @@ export default function CookiePage() {
     alert("Consenso revocato. Ricarica la pagina per rimostrare il banner.");
   };
 
-  const Toggle = ({ name, label, desc, disabled }) => (
-    <div className="flex items-start justify-between gap-6 py-5 border-b border-[#0A0A0A]/10">
-      <div>
-        <div className="text-[#0A0A0A] font-medium mb-1">{label}</div>
-        <div className="text-sm text-[#0A0A0A]/65 leading-relaxed">{desc}</div>
-      </div>
-      <label className="relative inline-block w-11 h-6 flex-shrink-0 mt-1 cursor-pointer">
-        <input
-          type="checkbox" disabled={disabled}
-          data-testid={`cookie-toggle-${name}`}
-          checked={prefs[name]}
-          onChange={(e) => setPrefs({ ...prefs, [name]: e.target.checked })}
-          className="sr-only peer"
-        />
-        <span className={`block w-11 h-6 rounded-full transition-colors ${prefs[name] ? "bg-[#0A0A0A]" : "bg-white/15"} ${disabled ? "opacity-60" : ""}`}></span>
-        <span className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full transition-transform ${prefs[name] ? "translate-x-5" : ""}`}></span>
-      </label>
-    </div>
-  );
-
   return (
     <LegalLayout title="Cookie Policy" lastUpdate="19 aprile 2026" testId="cookie-page">
       <p>
         Il sito <strong>funzionabene.it</strong> utilizza cookie e tecnologie simili per garantire il funzionamento
-        del sito, migliorare l'esperienza utente e (solo con il tuo consenso) analizzare il traffico.
+        del sito, migliorare l&apos;esperienza utente e (solo con il tuo consenso) analizzare il traffico.
       </p>
 
       <h2>Tipologie di cookie</h2>
@@ -53,7 +55,7 @@ export default function CookiePage() {
       <h3>Cookie essenziali (sempre attivi)</h3>
       <p>
         Necessari per il funzionamento del sito: login, sessione utente, prenotazioni, carrello, preferenze cookie.
-        Non richiedono consenso ai sensi dell'art. 122 del Codice Privacy.
+        Non richiedono consenso ai sensi dell&apos;art. 122 del Codice Privacy.
       </p>
       <ul>
         <li><strong>access_token</strong>, <strong>refresh_token</strong>: autenticazione (durata: 7 giorni).</li>
@@ -68,7 +70,7 @@ export default function CookiePage() {
 
       <h3>Cookie di marketing (opzionali)</h3>
       <p>
-        Utilizzati per mostrare annunci pertinenti e misurare l'efficacia delle campagne.
+        Utilizzati per mostrare annunci pertinenti e misurare l&apos;efficacia delle campagne.
         <strong> Attualmente non utilizziamo cookie di marketing.</strong>
       </p>
 
@@ -80,16 +82,22 @@ export default function CookiePage() {
           label="Cookie essenziali"
           desc="Necessari per il funzionamento del sito. Sempre attivi."
           disabled={true}
+          prefs={prefs}
+          setPrefs={setPrefs}
         />
         <Toggle
           name="analytics"
           label="Cookie di analisi"
           desc="Ci permettono di misurare l'utilizzo del sito in forma anonima."
+          prefs={prefs}
+          setPrefs={setPrefs}
         />
         <Toggle
           name="marketing"
           label="Cookie di marketing"
           desc="Per campagne pubblicitarie personalizzate (attualmente non utilizzati)."
+          prefs={prefs}
+          setPrefs={setPrefs}
         />
       </div>
 
@@ -124,7 +132,7 @@ export default function CookiePage() {
 
       <h2>Base giuridica</h2>
       <p>
-        I cookie essenziali si basano sul legittimo interesse (art. 6.1.f GDPR) e sull'art. 122 Codice Privacy.
+        I cookie essenziali si basano sul legittimo interesse (art. 6.1.f GDPR) e sull&apos;art. 122 Codice Privacy.
         I cookie non essenziali richiedono consenso (art. 7 GDPR), revocabile in qualsiasi momento tramite questa pagina.
       </p>
     </LegalLayout>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Sparkles, ArrowRight, Check, Home, Shield, Award, Headphones } from "lucide-react";
 import Mascotte from "@/components/shared/Mascotte";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 const BENEFITS = [
   {
@@ -85,13 +86,13 @@ export default function SeduteImmersive() {
             </div>
 
             <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0A0A0A] tracking-tight max-w-3xl">
-              La terapia<br /><em className="text-[#0A0A0A] not-italic">come non l'hai mai vissuta.</em>
+              La terapia<br /><em className="text-[#0A0A0A] not-italic">come non l&apos;hai mai vissuta.</em>
             </h1>
 
             <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/75 leading-relaxed max-w-3xl">
               FunzionaBene è la <strong className="text-[#0A0A0A]">prima piattaforma italiana di sessuologia</strong> a integrare
               ambienti immersivi guidati direttamente nei percorsi terapeutici. Non è uno strumento, non è un gioco:
-              è <strong className="text-[#0A0A0A]">terapia clinica evidence-based</strong>, amplificata da un'esperienza
+              è <strong className="text-[#0A0A0A]">terapia clinica evidence-based</strong>, amplificata da un&apos;esperienza
               sensoriale che i libri di ricerca confermano da anni.
             </p>
           </motion.div>
@@ -110,7 +111,7 @@ export default function SeduteImmersive() {
           <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
             <div className="font-serif text-5xl lg:text-6xl text-[#0A0A0A]">72%</div>
             <p className="mt-4 text-sm text-[#0A0A0A]/75 leading-relaxed">
-              dei pazienti riporta comfort maggiore rispetto all'esposizione tradizionale.
+              dei pazienti riporta comfort maggiore rispetto all&apos;esposizione tradizionale.
             </p>
           </div>
           <div className="p-8 bg-white/40 border border-[#0A0A0A]/20 rounded-3xl">
@@ -126,7 +127,7 @@ export default function SeduteImmersive() {
       <section className="max-w-5xl mx-auto px-6 lg:px-10 py-20" data-testid="immersive-how">
         <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Come funziona</span>
         <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight mb-14">
-          Il terapeuta decide.<br />Tu vivi l'esperienza.
+          Il terapeuta decide.<br />Tu vivi l&apos;esperienza.
         </h2>
 
         <ol className="space-y-10 border-l border-[#0A0A0A]/10 pl-10">
@@ -153,7 +154,7 @@ export default function SeduteImmersive() {
           <div className="max-w-2xl mb-14">
             <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Applicazioni cliniche</span>
             <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
-              Quando l'immersivo fa la differenza.
+              Quando l&apos;immersivo fa la differenza.
             </h2>
           </div>
 
@@ -252,13 +253,19 @@ export default function SeduteImmersive() {
           <p className="mt-5 text-[#0A0A0A]/65 max-w-xl mx-auto">
             Il tuo percorso inizia da un questionario di 2 minuti. Il terapeuta giusto deciderà con te se integrare sedute immersive.
           </p>
-          <Link
-            to="/questionario"
-            data-testid="immersive-cta-btn"
-            className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
-          >
-            Inizia il Questionario <ArrowRight className="w-4 h-4" />
-          </Link>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+            <PrenotaSubitoCTA
+              testid="immersive-prenota"
+              label="Prenota subito"
+            />
+            <Link
+              to="/questionario"
+              data-testid="immersive-cta-btn"
+              className="inline-flex items-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white text-[#0A0A0A] rounded-2xl tracking-wide transition-all"
+            >
+              Inizia il Questionario <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </section>
     </main>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, User } from "lucide-react";
 import Mascotte from "@/components/shared/Mascotte";
@@ -95,7 +96,7 @@ export default function BlogPublicPage() {
                   data-testid="blog-hero-link"
                   className="mt-8 inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm font-medium tracking-wide transition-all"
                 >
-                  Leggi l'articolo <ArrowRight className="w-3.5 h-3.5" />
+                  Leggi l&apos;articolo <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
             </div>
@@ -150,6 +151,14 @@ export default function BlogPublicPage() {
             ))}
           </div>
         )}
+
+        <PrenotaSubitoCTA
+          variant="banner"
+          testid="blog-list-prenota"
+          bannerTitle="Hai un dubbio specifico?"
+          bannerCopy="A volte un articolo dà la direzione, ma serve qualcuno che ascolti la tua storia. Prenota una prima sessione."
+          mascotName="pensativo"
+        />
       </div>
     </main>
   );

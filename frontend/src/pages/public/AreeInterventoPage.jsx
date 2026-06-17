@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { AREE_INTERVENTO, AREE_CATEGORIE } from "@/data/areeIntervento";
 import Mascotte from "@/components/shared/Mascotte";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 export default function AreeInterventoPage() {
   // Group by category
@@ -33,7 +34,7 @@ export default function AreeInterventoPage() {
             Tutto quello di cui ci occupiamo.
           </h1>
           <p className="mt-6 text-[#0A0A0A]/65 text-lg leading-relaxed">
-            {AREE_INTERVENTO.length} aree cliniche, tutte nell'ambito della sessuologia.
+            {AREE_INTERVENTO.length} aree cliniche, tutte nell&apos;ambito della sessuologia.
             Se non sei sicuro in quale rientri, <Link to="/questionario" className="text-[#0A0A0A] hover:text-[#0A0A0A]/70 underline">il questionario ti aiuta a capirlo in 2 minuti</Link>.
           </p>
         </div>
@@ -69,7 +70,15 @@ export default function AreeInterventoPage() {
           );
         })}
 
-        <div className="mt-20 text-center p-10 bg-gradient-to-br from-[#0A0A0A]/10 via-[#0A0A0A]/8 to-transparent border border-[#0A0A0A]/20 rounded-3xl">
+        <PrenotaSubitoCTA
+          variant="banner"
+          testid="aree-prenota"
+          bannerTitle="Hai già un&apos;idea chiara?"
+          bannerCopy="Scegli direttamente un orario disponibile e prenota la prima sessione. Veloce, riservato, in italiano."
+          mascotName="saltitante"
+        />
+
+        <div className="mt-12 text-center p-10 bg-gradient-to-br from-[#0A0A0A]/10 via-[#0A0A0A]/8 to-transparent border border-[#0A0A0A]/20 rounded-3xl">
           <h2 className="font-serif text-3xl lg:text-4xl text-[#0A0A0A] mb-4">Non sai da dove iniziare?</h2>
           <p className="text-[#0A0A0A]/65 max-w-xl mx-auto mb-8">
             Il nostro questionario in 2 minuti individua le aree più rilevanti per te e ti propone i 3 specialisti più affini.
@@ -77,7 +86,7 @@ export default function AreeInterventoPage() {
           <Link
             to="/questionario"
             data-testid="aree-cta-btn"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg tracking-wide transition-all"
+            className="inline-flex items-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white text-[#0A0A0A] rounded-2xl tracking-wide transition-all"
           >
             Inizia il Questionario <ArrowRight className="w-4 h-4" />
           </Link>

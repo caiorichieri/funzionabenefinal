@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { API } from "@/contexts/AuthContext";
 import { ArrowLeft, Calendar, User } from "lucide-react";
+import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
 
 function formatDate(d) {
   if (!d) return "";
@@ -93,13 +94,21 @@ export default function BlogPostPage() {
           </div>
         )}
 
-        <div className="mt-16 p-8 bg-white/40 border border-[#0A0A0A]/10 rounded-3xl text-center">
-          <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3">Hai bisogno di parlarne?</h3>
+        <PrenotaSubitoCTA
+          variant="banner"
+          testid="blog-post-prenota"
+          bannerTitle="Hai letto. Ora, se vuoi, possiamo parlarne."
+          bannerCopy="Il primo passo è scegliere un orario. Online, riservato, senza giudizio. La prima sessione è in meno di 48 ore."
+          mascotName="abbraccio"
+        />
+
+        <div className="mt-8 p-8 bg-white/40 border border-[#0A0A0A]/10 rounded-3xl text-center">
+          <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3">Preferisci un percorso guidato?</h3>
           <p className="text-[#0A0A0A]/65 mb-6">Prova il nostro questionario e trova lo specialista giusto per te.</p>
           <Link
             to="/questionario"
             data-testid="blog-post-cta"
-            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-br from-[#F58A1F] to-[#F5D419] hover:from-[#E07A0F] hover:to-[#E5C419] text-[#0A0A0A] font-bold rounded-2xl shadow-md hover:shadow-lg text-sm font-medium tracking-wide"
+            className="inline-flex items-center gap-3 px-6 py-3 border-[1.5px] border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white text-[#0A0A0A] rounded-2xl text-sm font-medium tracking-wide transition-all"
           >
             Inizia il questionario
           </Link>

@@ -82,7 +82,7 @@ export default function EmergenzePage() {
           <div>
             <h2 className="font-serif text-2xl text-[#0A0A0A] mb-2">Se sei in pericolo, chiama subito il 112.</h2>
             <p className="text-[#0A0A0A]/75 text-sm leading-relaxed">
-              FunzionaBene <strong>non è un servizio d'emergenza</strong>. Se tu o qualcuno che conosci state vivendo una crisi acuta,
+              FunzionaBene <strong>non è un servizio d&apos;emergenza</strong>. Se tu o qualcuno che conosci state vivendo una crisi acuta,
               pensieri di autolesionismo o suicidio, contatta immediatamente uno dei numeri qui sotto.
             </p>
           </div>
@@ -138,7 +138,7 @@ export default function EmergenzePage() {
               <h3 className="font-serif text-2xl text-[#0A0A0A] mb-2">Se sei un professionista</h3>
               <p className="text-[#0A0A0A]/65 leading-relaxed text-sm">
                 Se lavori in ambito sanitario, sociale o educativo e stai gestendo una situazione di emergenza, oltre al 112 puoi contattare
-                il tuo DSM di riferimento o lo SPDC (Servizio Psichiatrico di Diagnosi e Cura) dell'ospedale più vicino.
+                il tuo DSM di riferimento o lo SPDC (Servizio Psichiatrico di Diagnosi e Cura) dell&apos;ospedale più vicino.
               </p>
             </div>
           </div>
@@ -147,7 +147,7 @@ export default function EmergenzePage() {
             <div>
               <h3 className="font-serif text-2xl text-[#0A0A0A] mb-2">Risorse internazionali</h3>
               <p className="text-[#0A0A0A]/65 leading-relaxed text-sm mb-3">
-                Se ti trovi fuori dall'Italia:
+                Se ti trovi fuori dall&apos;Italia:
               </p>
               <ul className="space-y-2 text-sm text-[#0A0A0A]/60">
                 <li>• <a href="https://findahelpline.com/" target="_blank" rel="noreferrer" className="text-[#0A0A0A] hover:text-[#0A0A0A]/70 inline-flex items-center gap-1">Find a Helpline (globale) <ExternalLink className="w-3 h-3" /></a></li>

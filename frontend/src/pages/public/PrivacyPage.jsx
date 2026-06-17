@@ -66,14 +66,14 @@ export default function PrivacyPage() {
         <li><strong>Resend</strong> (servizi email transazionali) — USA, con clausole contrattuali standard UE.</li>
         <li><strong>Daily.co</strong> (videochiamate sicure) — USA, con clausole contrattuali standard UE.</li>
         <li><strong>Nexi XPay</strong> (gestione pagamenti) — Italia.</li>
-        <li><strong>Hosting:</strong> server nell'Unione Europea.</li>
+        <li><strong>Hosting:</strong> server nell&apos;Unione Europea.</li>
       </ul>
 
-      <h2>8. Diritti dell'interessato (artt. 15-22 GDPR)</h2>
+      <h2>8. Diritti dell&apos;interessato (artt. 15-22 GDPR)</h2>
       <ul>
         <li>Accesso ai dati personali.</li>
         <li>Rettifica dati inesatti.</li>
-        <li>Cancellazione (diritto all'oblio), compatibilmente con obblighi di legge.</li>
+        <li>Cancellazione (diritto all&apos;oblio), compatibilmente con obblighi di legge.</li>
         <li>Limitazione del trattamento.</li>
         <li>Portabilità dei dati.</li>
         <li>Opposizione al trattamento.</li>

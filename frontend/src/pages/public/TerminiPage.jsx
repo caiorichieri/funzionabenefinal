@@ -4,14 +4,14 @@ export default function TerminiPage() {
   return (
     <LegalLayout title="Termini e Condizioni" lastUpdate="19 aprile 2026" testId="termini-page">
       <p>
-        I presenti Termini regolano l'utilizzo dei servizi offerti da <strong>FunzionaBene.it</strong> — piattaforma
+        I presenti Termini regolano l&apos;utilizzo dei servizi offerti da <strong>FunzionaBene.it</strong> — piattaforma
         di psicologia e sessuologia clinica online. Effettuando una prenotazione accetti integralmente queste condizioni.
       </p>
 
       <h2>1. Oggetto del servizio</h2>
       <p>
-        FunzionaBene mette a disposizione dell'utente (paziente) una piattaforma per prenotare sedute individuali o di coppia
-        con psicologi iscritti all'Albo italiano e con polizza assicurativa professionale attiva. Le sedute si svolgono online
+        FunzionaBene mette a disposizione dell&apos;utente (paziente) una piattaforma per prenotare sedute individuali o di coppia
+        con psicologi iscritti all&apos;Albo italiano e con polizza assicurativa professionale attiva. Le sedute si svolgono online
         tramite videochiamata sicura (Daily.co) oppure, dove indicato dal terapeuta, in studio.
       </p>
 
@@ -19,20 +19,20 @@ export default function TerminiPage() {
       <ul>
         <li>Il servizio è riservato a maggiorenni (18+).</li>
         <li>Per prenotare è necessario registrarsi fornendo dati veritieri e completi, verificati via OTP email.</li>
-        <li>L'utente è responsabile della riservatezza delle proprie credenziali di accesso.</li>
+        <li>L&apos;utente è responsabile della riservatezza delle proprie credenziali di accesso.</li>
         <li>È vietato cedere il proprio account a terzi.</li>
       </ul>
 
       <h2>2.bis Dati fiscali obbligatori</h2>
       <p>
         Prima di confermare il pagamento è necessario fornire: Codice Fiscale, dati di residenza e luogo di nascita.
-        Questi dati sono indispensabili per l'emissione della fattura sanitaria, detraibile fiscalmente in Italia (art. 15 TUIR).
+        Questi dati sono indispensabili per l&apos;emissione della fattura sanitaria, detraibile fiscalmente in Italia (art. 15 TUIR).
       </p>
 
       <h2>3. Prenotazione e disdetta</h2>
       <ul>
         <li>La prenotazione è confermata al momento del pagamento.</li>
-        <li>Puoi <strong>annullare o riprogrammare gratuitamente fino a 24 ore prima</strong> dell'orario della seduta.</li>
+        <li>Puoi <strong>annullare o riprogrammare gratuitamente fino a 24 ore prima</strong> dell&apos;orario della seduta.</li>
         <li>Per disdette entro 24 ore la seduta è considerata effettuata e non è rimborsabile.</li>
         <li>In caso di impedimento del terapeuta la seduta sarà riprogrammata o rimborsata integralmente.</li>
       </ul>
@@ -48,15 +48,15 @@ export default function TerminiPage() {
       <h2>5. Svolgimento della seduta</h2>
       <ul>
         <li>Il link per accedere alla stanza video è disponibile nella tua area personale 15 minuti prima.</li>
-        <li>La seduta dura 50 minuti. Eventuali ritardi del paziente non prolungano l'orario.</li>
+        <li>La seduta dura 50 minuti. Eventuali ritardi del paziente non prolungano l&apos;orario.</li>
         <li>È vietata la registrazione audio/video della seduta senza consenso esplicito del terapeuta.</li>
         <li>Il terapeuta è tenuto al <strong>segreto professionale</strong> (art. 11 Codice Deontologico Psicologi).</li>
       </ul>
 
       <h2>6. Diritto di recesso</h2>
       <p>
-        Ai sensi dell'art. 59 lett. a) del Codice del Consumo, il diritto di recesso è escluso per servizi con data determinata
-        una volta iniziata l'erogazione. Per sedute non ancora erogate vale la policy di disdetta (punto 3).
+        Ai sensi dell&apos;art. 59 lett. a) del Codice del Consumo, il diritto di recesso è escluso per servizi con data determinata
+        una volta iniziata l&apos;erogazione. Per sedute non ancora erogate vale la policy di disdetta (punto 3).
       </p>
 
       <h2>7. Limitazione di responsabilità</h2>
@@ -68,7 +68,7 @@ export default function TerminiPage() {
       <h2>8. Proprietà intellettuale</h2>
       <p>
         Tutti i contenuti del sito (testi, logo, immagini, articoli del blog) sono di proprietà di FunzionaBene
-        o dei rispettivi autori, protetti da diritto d'autore.
+        o dei rispettivi autori, protetti da diritto d&apos;autore.
       </p>
 
       <h2>9. Legge applicabile e foro competente</h2>
@@ -80,7 +80,7 @@ export default function TerminiPage() {
       <h2>10. Modifiche</h2>
       <p>
         FunzionaBene si riserva il diritto di modificare i presenti Termini. Gli utenti registrati riceveranno una notifica
-        via email almeno 15 giorni prima dell'entrata in vigore di modifiche sostanziali.
+        via email almeno 15 giorni prima dell&apos;entrata in vigore di modifiche sostanziali.
       </p>
     </LegalLayout>
   );
