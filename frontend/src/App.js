@@ -39,6 +39,8 @@ import AreeInterventoPage from "@/pages/public/AreeInterventoPage";
 import EmergenzePage from "@/pages/public/EmergenzePage";
 import ChiSiamoPage from "@/pages/public/ChiSiamoPage";
 import IlNostroMondoPage from "@/pages/public/IlNostroMondoPage";
+import LavoraConNoiPage from "@/pages/public/LavoraConNoiPage";
+import ContattiPage from "@/pages/public/ContattiPage";
 import NotFoundPage from "@/pages/public/NotFoundPage";
 
 import "@/App.css";
@@ -75,6 +77,8 @@ export default function App() {
             <Route path="/emergenze" element={<EmergenzePage />} />
             <Route path="/chi-siamo" element={<ChiSiamoPage />} />
             <Route path="/il-nostro-mondo" element={<IlNostroMondoPage />} />
+            <Route path="/lavora-con-noi" element={<LavoraConNoiPage />} />
+            <Route path="/contatti" element={<ContattiPage />} />
           </Route>
 
           <Route path="/login" element={<LoginPage />} />

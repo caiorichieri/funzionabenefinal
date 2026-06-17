@@ -10,6 +10,7 @@ import { API } from "@/contexts/AuthContext";
 import { AREE_INTERVENTO, AREE_CATEGORIE, TESTIMONIANZE } from "@/data/areeIntervento";
 import Mascotte from "@/components/shared/Mascotte";
 import PrenotaSubitoCTA from "@/components/public/PrenotaSubitoCTA";
+import AppSection from "@/components/public/AppSection";
 
 const HERO_BG = "/home-daily.jpg";
 
@@ -413,6 +414,9 @@ export default function HomePage() {
           Testimonianze rappresentative. Nomi, età e dettagli sono stati modificati per tutelare la riservatezza dei pazienti, come previsto dal codice deontologico degli psicologi e dal GDPR.
         </p>
       </section>
+
+      {/* ────────── LA TUA APP (Presto disponibile) ────────── */}
+      <AppSection />
 
       {/* ────────── A COSA SERVE / NON SERVE ────────── */}
       <section className="relative" data-testid="serve-section">
