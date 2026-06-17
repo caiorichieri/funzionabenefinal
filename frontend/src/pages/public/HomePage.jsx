@@ -159,6 +159,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ────────── LA TUA APP (Presto disponibile) — subito dopo l'hero ────────── */}
+      <AppSection />
+
       {/* ────────── HOW IT WORKS ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="how-it-works">
         <div className="max-w-2xl mb-16">
@@ -431,9 +434,6 @@ export default function HomePage() {
           Testimonianze rappresentative. Nomi, età e dettagli sono stati modificati per tutelare la riservatezza dei pazienti, come previsto dal codice deontologico degli psicologi e dal GDPR.
         </p>
       </section>
-
-      {/* ────────── LA TUA APP (Presto disponibile) ────────── */}
-      <AppSection />
 
       {/* ────────── A COSA SERVE / NON SERVE ────────── */}
       <section className="relative" data-testid="serve-section">
