@@ -184,7 +184,7 @@ export default function HomePage() {
                 <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A]/0 to-[#0A0A0A]/0 group-hover:from-[#0A0A0A]/4 group-hover:to-transparent transition-all duration-700 pointer-events-none" />
                 <div className="relative flex items-start justify-between mb-6">
                   <span className="font-serif text-5xl text-[#0A0A0A]/30 group-hover:text-[#0A0A0A]/70 transition-colors">{s.n}</span>
-                  <Mascotte name={s.mascot} theme="light" size={70} animation={s.anim} />
+                  <Mascotte name={s.mascot} theme="light" size={80} maxHeight={80} animation={s.anim} />
                 </div>
                 <h3 className="font-serif text-2xl text-[#0A0A0A] mb-3 relative">{s.title}</h3>
                 <p className="text-[#0A0A0A]/65 text-sm leading-relaxed relative">{s.desc}</p>

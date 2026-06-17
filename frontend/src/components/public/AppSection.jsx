@@ -93,36 +93,36 @@ export default function AppSection() {
           <motion.div
             animate={{ y: [0, -10, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -left-2 lg:-left-8 top-12 z-20 brand-card !p-3 !pr-4 flex items-center gap-2.5"
+            className="absolute -left-2 lg:-left-8 top-12 z-20 inline-flex items-center gap-2.5 bg-white rounded-2xl shadow-lg border border-[#0A0A0A]/10 px-3 py-2.5 max-w-[200px]"
           >
-            <span className="w-7 h-7 rounded-full bg-[#C8B5E0] flex items-center justify-center text-xs">📔</span>
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55">oggi</div>
-              <div className="text-xs text-[#0A0A0A] font-medium">Diario aggiornato</div>
+            <span className="w-7 h-7 rounded-full bg-[#C8B5E0] flex items-center justify-center text-xs flex-shrink-0">📔</span>
+            <div className="whitespace-nowrap">
+              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55 leading-none">oggi</div>
+              <div className="text-xs text-[#0A0A0A] font-medium leading-tight mt-0.5">Diario aggiornato</div>
             </div>
           </motion.div>
 
           <motion.div
             animate={{ y: [0, -8, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            className="absolute right-2 lg:right-0 top-32 z-20 brand-card !p-3 !pr-4 flex items-center gap-2.5"
+            className="absolute right-2 lg:right-0 top-32 z-20 inline-flex items-center gap-2.5 bg-white rounded-2xl shadow-lg border border-[#0A0A0A]/10 px-3 py-2.5 max-w-[230px]"
           >
-            <span className="w-7 h-7 rounded-full bg-[#8FC8D8] flex items-center justify-center text-xs">🎧</span>
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55">consigliato</div>
-              <div className="text-xs text-[#0A0A0A] font-medium">Esercizio respirazione · 5&apos;</div>
+            <span className="w-7 h-7 rounded-full bg-[#8FC8D8] flex items-center justify-center text-xs flex-shrink-0">🎧</span>
+            <div className="whitespace-nowrap">
+              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55 leading-none">consigliato</div>
+              <div className="text-xs text-[#0A0A0A] font-medium leading-tight mt-0.5">Esercizio respirazione · 5&apos;</div>
             </div>
           </motion.div>
 
           <motion.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="absolute -right-2 lg:-right-6 bottom-20 z-20 brand-card !p-3 !pr-4 flex items-center gap-2.5"
+            className="absolute -right-2 lg:-right-6 bottom-20 z-20 inline-flex items-center gap-2.5 bg-white rounded-2xl shadow-lg border border-[#0A0A0A]/10 px-3 py-2.5 max-w-[210px]"
           >
-            <span className="w-7 h-7 rounded-full bg-[#F58A1F] flex items-center justify-center text-xs">✨</span>
-            <div>
-              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55">domani 10:00</div>
-              <div className="text-xs text-[#0A0A0A] font-medium">Dr. Rossi · Sessione</div>
+            <span className="w-7 h-7 rounded-full bg-[#F58A1F] flex items-center justify-center text-xs flex-shrink-0">✨</span>
+            <div className="whitespace-nowrap">
+              <div className="text-[10px] uppercase tracking-widest text-[#0A0A0A]/55 leading-none">domani 10:00</div>
+              <div className="text-xs text-[#0A0A0A] font-medium leading-tight mt-0.5">Dr. Rossi · Sessione</div>
             </div>
           </motion.div>
 

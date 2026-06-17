@@ -42,6 +42,7 @@ export default function Mascotte({
   name = "ovo",
   theme = "light",
   size = 140,
+  maxHeight,
   animation = "float",
   className = "",
   alt = "",
@@ -73,7 +74,11 @@ export default function Mascotte({
     <motion.div
       {...motionProps}
       className={`inline-block select-none pointer-events-none ${className}`}
-      style={{ width: size, height: "auto" }}
+      style={{
+        width: size,
+        height: maxHeight ? maxHeight : "auto",
+        maxHeight: maxHeight || undefined,
+      }}
       data-testid={`mascot-${name}`}
     >
       <img
@@ -81,7 +86,13 @@ export default function Mascotte({
         alt={alt || name}
         loading="lazy"
         draggable={false}
-        style={{ width: "100%", height: "auto", display: "block" }}
+        style={{
+          width: "100%",
+          height: maxHeight ? "100%" : "auto",
+          maxHeight: maxHeight || undefined,
+          objectFit: maxHeight ? "contain" : undefined,
+          display: "block",
+        }}
       />
     </motion.div>
   );

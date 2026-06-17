@@ -297,3 +297,11 @@ Vedi: /app/memory/test_credentials.md
 - Consenso esplicito al momento della registrazione
 - Diritto all'oblio implementabile
 - Server idealmente in Europa (Hetzner/DigitalOcean Frankfurt)
+
+---
+
+## 🆕 CHANGELOG — Feb 17, 2026
+- [x] Mascotte component: aggiunta prop `maxHeight` (constrain altezza + object-contain) per evitare distorsioni con mascotte di proporzioni verticali (es. `embrulhado`).
+- [x] HomePage "Come funziona" → Step 01 ora usa `size=80 maxHeight=80` uniforme con gli altri 2 step. Layout dei 3 card finalmente allineato.
+- [x] AppSection ("La tua app") → fix chips fluttuanti: rimosso `brand-card` (che li rendeva alti 415px), sostituito con pill bianche compatte (162-195 × 50px) con `whitespace-nowrap` e `inline-flex`. Ora si vedono come piccoli toast galleggianti intorno al telefono.
+- [x] Confermato in preview: testi Step 01/02/03 + link discreto "Hai bisogno di parlare subito? → Prenota uno specialista disponibile ora" — già implementati dalla sessione precedente.
