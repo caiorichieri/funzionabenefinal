@@ -12,12 +12,12 @@ const BENEFITS = [
   },
   {
     titolo: "Desensibilizzazione",
-    descrizione: "Trattamento evidence-based per traumi sessuali. L'ambiente controllato rende il percorso più sicuro e meno invasivo rispetto ai metodi tradizionali.",
+    descrizione: "Riduzione progressiva di paure, ansie e blocchi legati alla sessualità. L'ambiente controllato rende il percorso più sicuro e meno invasivo rispetto ai metodi tradizionali.",
     img: "/benefit-desensibilizzazione.jpg",
   },
   {
     titolo: "Consapevolezza corporea",
-    descrizione: "Mindfulness sessuale guidata da esperienze sensoriali immersive. Particolarmente efficace per anorgasmia, vaginismo e disconnessione dal piacere.",
+    descrizione: "Mindfulness sessuale guidata da esperienze sensoriali immersive — un supporto utile per anorgasmia, vaginismo e disconnessione dal piacere.",
     img: "/benefit-consapevolezza.jpg",
   },
   {
@@ -30,19 +30,19 @@ const BENEFITS = [
 const FAQ = [
   {
     q: "Serve comprare un visore?",
-    a: "No. Le sedute immersive funzionano anche direttamente dal tuo smartphone o tablet, in modalità guidata. Il visore è un'opzione aggiuntiva che alcuni pazienti preferiscono per un'esperienza più profonda. È il tuo terapeuta a consigliarti la modalità più adatta.",
+    a: "No. Le sessioni immersive funzionano anche direttamente dal tuo smartphone o tablet, in modalità guidata. Il visore è un'opzione aggiuntiva che alcuni pazienti preferiscono per un'esperienza più profonda. È il tuo terapeuta a consigliarti la modalità più adatta.",
   },
   {
     q: "È sempre guidata da un professionista?",
-    a: "Assolutamente sì. La seduta immersiva non è un'app di auto-aiuto: è un intervento clinico condotto in tempo reale dal tuo terapeuta. Non esistono percorsi automatizzati né 'fai-da-te'.",
+    a: "Assolutamente sì. La sessione immersiva non è un'app di auto-aiuto: è un intervento clinico condotto in tempo reale dal tuo terapeuta. Non esistono percorsi automatizzati né 'fai-da-te'.",
   },
   {
     q: "È adatta a tutti?",
-    a: "No, e questa è un'informazione importante. L'immersività non è indicata per tutti i casi o tutte le persone: il terapeuta valuta con te se può essere parte del tuo percorso. Quando non è adatta, si procede con sedute tradizionali (altrettanto efficaci).",
+    a: "No, e questa è un'informazione importante. L'immersività non è indicata per tutti i casi o tutte le persone: il terapeuta valuta con te se può essere parte del tuo percorso. Quando non è adatta, si procede con sessioni tradizionali (altrettanto efficaci).",
   },
   {
     q: "Ha costi aggiuntivi?",
-    a: "No. Quando il terapeuta decide di integrare una seduta immersiva nel tuo percorso, il costo è lo stesso di una seduta tradizionale. Nessun upcharge, nessuna sorpresa.",
+    a: "No. Quando il terapeuta decide di integrare una sessione immersiva nel tuo percorso, il costo è lo stesso di una sessione tradizionale. Nessun upcharge, nessuna sorpresa.",
   },
   {
     q: "Quali sono le evidenze scientifiche?",
@@ -50,7 +50,7 @@ const FAQ = [
   },
   {
     q: "E la privacy?",
-    a: "Le sessioni immersive sono parte della videochiamata con il tuo terapeuta, quindi protette dallo stesso livello di cifratura e dallo stesso segreto professionale di una seduta tradizionale. Nessun dato sensoriale viene registrato o conservato.",
+    a: "Le sessioni immersive sono parte della videochiamata con il tuo terapeuta, quindi protette dallo stesso livello di cifratura e dallo stesso segreto professionale di una sessione tradizionale. Nessun dato sensoriale viene registrato o conservato.",
   },
 ];
 
@@ -134,7 +134,7 @@ export default function SeduteImmersive() {
           {[
             { t: "Il terapeuta valuta se è adatta al tuo percorso", d: "Non tutte le persone o tutti i casi beneficiano della modalità immersiva. La valutazione clinica è sempre il primo passo." },
             { t: "Scegli la modalità che preferisci", d: "Dal tuo schermo (smartphone, tablet, computer) con effetto immersivo guidato, oppure con un visore se preferisci un coinvolgimento più profondo." },
-            { t: "Il terapeuta guida la seduta in tempo reale", d: "Durante la videochiamata, il terapeuta attiva l'ambiente immersivo sincronizzato. Puoi interrompere in ogni momento: hai sempre il controllo." },
+            { t: "Il terapeuta guida la sessione in tempo reale", d: "Durante la videochiamata, il terapeuta attiva l'ambiente immersivo sincronizzato. Puoi interrompere in ogni momento: hai sempre il controllo." },
             { t: "Rielaborazione terapeutica", d: "Dopo l'esperienza, si torna al dialogo con il terapeuta per dare senso a quanto hai vissuto. È qui che avviene il cambiamento." },
           ].map((s, i) => (
             <li key={i} className="relative" data-testid={`immersive-step-${i}`}>
@@ -196,9 +196,9 @@ export default function SeduteImmersive() {
         <div className="grid md:grid-cols-3 gap-6">
           {[
             { icon: Home, titolo: "Dal tuo salotto", desc: "Nessuno spostamento, nessuna sala d'attesa. Il tuo spazio sicuro." },
-            { icon: Shield, titolo: "Dati mai registrati", desc: "Nessun tracciamento sensoriale. Cifratura end-to-end, sempre." },
+            { icon: Shield, titolo: "Riservato per costruzione", desc: "Le sessioni non vengono registrate. Comunicazione cifrata end-to-end." },
             { icon: Award, titolo: "Solo evidence-based", desc: "Tecniche supportate da ricerca peer-reviewed. Zero marketing vuoto." },
-            { icon: Check, titolo: "Costo incluso", desc: "Le sedute immersive costano esattamente come le tradizionali." },
+            { icon: Check, titolo: "Sempre incluse", desc: "Le sessioni immersive sono comprese nel tuo percorso, senza costi aggiuntivi." },
             { icon: Headphones, titolo: "Interrompibile sempre", desc: "Hai il controllo totale. Esci quando vuoi, senza spiegazioni." },
             { icon: Sparkles, titolo: "Opzionale", desc: "Se non fa per te, il percorso tradizionale è altrettanto efficace." },
           ].map((p, i) => {
@@ -251,7 +251,7 @@ export default function SeduteImmersive() {
             Pronto a provare una terapia diversa?
           </h2>
           <p className="mt-5 text-[#0A0A0A]/65 max-w-xl mx-auto">
-            Il tuo percorso inizia da un questionario di 2 minuti. Il terapeuta giusto deciderà con te se integrare sedute immersive.
+            Il tuo percorso inizia da un questionario di 2 minuti. Il terapeuta giusto deciderà con te se integrare sessioni immersive.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <PrenotaSubitoCTA

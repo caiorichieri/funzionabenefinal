@@ -256,7 +256,7 @@ export default function DatiFiscaliStep({ onComplete, existingData = {} }) {
 
         <div className="pt-3 text-xs text-[#0A0A0A]/40 leading-relaxed">
           I tuoi dati saranno trattati ai sensi del GDPR (Reg. UE 2016/679) e utilizzati esclusivamente
-          per la fatturazione e la gestione della seduta.
+          per la fatturazione e la gestione della sessione.
         </div>
 
         <button

@@ -6,7 +6,7 @@ import CookieConsentBanner from "@/components/public/CookieConsentBanner";
 
 const NAV = [
   { to: "/", label: "Home" },
-  { to: "/sedute-immersive", label: "Immersive" },
+  { to: "/sessioni-immersive", label: "Immersive" },
   { to: "/aree-intervento", label: "Aree" },
   { to: "/il-nostro-mondo", label: "Il nostro mondo" },
   { to: "/chi-siamo", label: "Chi siamo" },
@@ -157,7 +157,7 @@ function Footer() {
           <h4 className="text-[#0A0A0A] text-sm tracking-[0.15em] uppercase mb-4">Esplora</h4>
           <ul className="space-y-2 text-sm text-[#0A0A0A]/65">
             <li><Link to="/questionario" className="hover:text-[#0A0A0A]">Questionario</Link></li>
-            <li><Link to="/sedute-immersive" className="hover:text-[#0A0A0A]">Sedute immersive</Link></li>
+            <li><Link to="/sedute-immersive" className="hover:text-[#0A0A0A]">Sessioni immersive</Link></li>
             <li><Link to="/aree-intervento" className="hover:text-[#0A0A0A]">Aree di intervento</Link></li>
             <li><Link to="/chi-siamo" className="hover:text-[#0A0A0A]">Chi siamo</Link></li>
             <li><Link to="/blog" className="hover:text-[#0A0A0A]">Blog</Link></li>

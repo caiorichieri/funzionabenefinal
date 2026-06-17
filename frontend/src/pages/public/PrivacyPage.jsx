@@ -22,7 +22,7 @@ export default function PrivacyPage() {
         <li><strong>Dati di contatto:</strong> email, numero di telefono, indirizzo di residenza.</li>
         <li><strong>Dati fiscali:</strong> Codice Fiscale (necessario per fatturazione sanitaria).</li>
         <li><strong>Dati sanitari</strong> (categoria speciale ex art. 9 GDPR): informazioni fornite al terapeuta durante
-          la seduta, questionario di matching, note cliniche.</li>
+          la sessione, questionario di matching, note cliniche.</li>
         <li><strong>Dati di navigazione:</strong> indirizzo IP, log di accesso, cookie tecnici.</li>
         <li><strong>Dati di pagamento:</strong> trattati esclusivamente dal provider Nexi XPay; FunzionaBene non conserva
           i dati della carta.</li>
@@ -32,7 +32,7 @@ export default function PrivacyPage() {
       <ul>
         <li>Erogazione del servizio clinico di psicoterapia e sessuologia.</li>
         <li>Fatturazione e adempimenti fiscali.</li>
-        <li>Gestione prenotazioni, reminder e comunicazioni relative alle sedute.</li>
+        <li>Gestione prenotazioni, reminder e comunicazioni relative alle sessioni.</li>
         <li>Marketing e newsletter (solo con consenso separato e revocabile).</li>
         <li>Sicurezza informatica e prevenzione frodi.</li>
       </ul>

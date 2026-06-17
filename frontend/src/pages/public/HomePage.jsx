@@ -15,8 +15,8 @@ const HERO_BG = "/home-daily.jpg";
 
 const STEPS = [
   { n: "01", title: "Compila il questionario", desc: "5 domande riservate, in 2 minuti. Nessun giudizio, nessun imbarazzo.", mascot: "embrulhado", anim: "float" },
-  { n: "02", title: "Ricevi 3 abbinamenti", desc: "Ti presentiamo i 3 sessuologi più affini al tuo profilo e ai tuoi obiettivi.", mascot: "pensativo", anim: "breathe" },
-  { n: "03", title: "Inizia il percorso", desc: "Online, nello spazio che ti fa sentire più al sicuro. Oppure immersivo, se il terapeuta lo propone.", mascot: "saltitante", anim: "wiggle" },
+  { n: "02", title: "Ricevi 3 abbinamenti", desc: "Ti presentiamo i 3 sessuologi più affini al tuo profilo e ai tuoi obiettivi. Scegli tu con chi iniziare.", mascot: "pensativo", anim: "breathe" },
+  { n: "03", title: "Inizia il percorso", desc: "Online, nel tuo spazio sicuro — in modalità classica o immersiva, scegli tu insieme al tuo terapeuta.", mascot: "saltitante", anim: "wiggle" },
 ];
 
 const BENEFITS = [
@@ -26,8 +26,8 @@ const BENEFITS = [
     icon: Award,
   },
   {
-    titolo: "Sedute immersive",
-    descrizione: "Prima piattaforma italiana a offrire sedute terapeutiche immersive per disfunzioni, fobie e blocchi. Sempre guidate dal tuo terapeuta.",
+    titolo: "Sessioni immersive",
+    descrizione: "Prima piattaforma italiana a offrire sessioni terapeutiche immersive per disfunzioni, fobie e blocchi. Sempre guidate dal tuo terapeuta.",
     icon: Sparkles,
     highlight: true,
   },
@@ -122,15 +122,18 @@ export default function HomePage() {
             </p>
 
             <div className="mt-12 flex flex-col sm:flex-row gap-4">
-              <PrenotaSubitoCTA
-                testid="hero-prenota-cta"
-                label="Prenota subito"
-                className="!px-9 !py-4 !text-base shadow-lg hover:shadow-2xl ring-1 ring-[#F58A1F]/30"
-              />
+              <div className="flex flex-col items-start">
+                <PrenotaSubitoCTA
+                  testid="hero-prenota-cta"
+                  label="Prenota subito"
+                  className="!px-9 !py-4 !text-base shadow-lg hover:shadow-2xl ring-1 ring-[#F58A1F]/30"
+                />
+                <span className="mt-2 text-xs text-[#0A0A0A]/55 pl-1">Parla con uno specialista nelle prossime ore</span>
+              </div>
               <Link
                 to="/questionario"
                 data-testid="hero-start-btn"
-                className="group inline-flex items-center justify-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-2xl tracking-wide transition-all"
+                className="group inline-flex items-center justify-center gap-3 px-8 py-4 border-[1.5px] border-[#0A0A0A] text-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-white rounded-2xl tracking-wide transition-all self-start"
               >
                 Inizia il Questionario
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -158,7 +161,7 @@ export default function HomePage() {
       {/* ────────── HOW IT WORKS ────────── */}
       <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32" data-testid="how-it-works">
         <div className="max-w-2xl mb-16">
-          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Come funziona</span>
+          <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Come funziona il questionario</span>
           <h2 className="mt-4 font-serif text-4xl lg:text-5xl text-[#0A0A0A] leading-tight">
             Tre passi.<br />Nessuna attesa infinita.
           </h2>
@@ -202,34 +205,41 @@ export default function HomePage() {
               <Sparkles className="w-3.5 h-3.5" /> Il nostro differenziale
             </div>
             <h2 className="font-serif text-4xl lg:text-6xl text-[#0A0A0A] leading-[1.05]">
-              Sedute immersive.<br /><em className="text-[#0A0A0A] not-italic">La terapia, reimmaginata.</em>
+              Sessioni immersive.<br /><em className="text-[#0A0A0A] not-italic">La terapia, reimmaginata.</em>
             </h2>
             <p className="mt-8 text-lg text-[#0A0A0A]/65 leading-relaxed max-w-2xl">
-              La prima piattaforma italiana a integrare <strong className="text-[#0A0A0A]">ambienti immersivi terapeutici</strong>
-              nei percorsi di sessuologia. Il tuo terapeuta può guidarti attraverso esperienze di esposizione
-              graduale, desensibilizzazione e consapevolezza corporea, <strong className="text-[#0A0A0A]">sempre nello
-              spazio sicuro della tua casa</strong>.
+              La sessualità è un affare così intimo che richiede un ambiente altrettanto intimo:
+              <strong className="text-[#0A0A0A]"> riservato, solo tuo</strong>. Parlare di sessualità è già difficile —
+              farlo sostenendo lo sguardo di chi ti ascolta, a volte, lo è ancora di più.
+            </p>
+            <p className="mt-4 text-base text-[#0A0A0A]/65 leading-relaxed max-w-2xl">
+              Nell&apos;ambiente immersivo il tuo terapeuta è sempre con te, ti guida in tempo reale come in una sessione
+              normale, ma la relazione passa attraverso un avatar, non attraverso il suo sguardo diretto. E l&apos;ambiente
+              stesso ti porta fuori dal contesto reale che ti circonda: resti al sicuro a casa tua, ma per la durata
+              della sessione non sei più ancorato/a al tuo salotto, alle tue abitudini, a tutto ciò che quel luogo
+              ti ricorda. <strong className="text-[#0A0A0A]">Uno spazio che, per la prima volta, è davvero soltanto tuo.</strong>
+            </p>
+            <p className="mt-5 text-sm text-[#0A0A0A]/55 italic">
+              FunzionaBene è la prima piattaforma italiana a integrare sessioni immersive nei percorsi di sessuologia.
             </p>
 
-            <div className="mt-10 grid sm:grid-cols-3 gap-6">
+            <div className="mt-10 grid sm:grid-cols-2 gap-6">
               <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">−35%</div>
+                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">76%</div>
                 <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
-                  tempo di trattamento medio per fobie e disfunzioni ansiose<sup>*</sup>
+                  dei pazienti, in studi su terapia espositiva per ansia e fobie, preferisce la realtà virtuale all&apos;esposizione tradizionale<sup>*</sup>
                 </div>
               </div>
               <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">72%</div>
+                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">9×</div>
                 <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
-                  dei pazienti riporta maggiore comfort rispetto all&apos;esposizione tradizionale<sup>*</sup>
+                  tasso di rifiuto del trattamento più basso in VR rispetto all&apos;esposizione tradizionale<sup>*</sup>
                 </div>
               </div>
-              <div>
-                <div className="font-serif text-4xl lg:text-5xl text-[#0A0A0A]">0€</div>
-                <div className="text-xs tracking-[0.15em] uppercase text-[#0A0A0A]/65 mt-2">
-                  costo extra: le sedute immersive sono incluse nel percorso
-                </div>
-              </div>
+            </div>
+
+            <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/60 border border-[#0A0A0A]/10 text-xs text-[#0A0A0A]/75">
+              <Check className="w-3.5 h-3.5" /> Incluse nel tuo percorso, nessun servizio extra da attivare
             </div>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -249,8 +259,7 @@ export default function HomePage() {
             </div>
 
             <p className="mt-6 text-xs text-[#0A0A0A]/65 leading-relaxed">
-              <sup>*</sup> Riva G. et al. (2016) — <em>Transforming experience: the potential of augmented and virtual reality for enhancing personal and clinical change</em>, Frontiers in Psychology.
-              Freeman D. et al. (2017), Diemer J. et al. (2015).
+              <sup>*</sup> Garcia-Palacios A. et al. — <em>studio sull&apos;accettabilità dell&apos;esposizione in VR vs in vivo per fobie specifiche</em>. Meta-analisi JMIR 2022 sull&apos;efficacia della VR-CBT per disturbi d&apos;ansia.
             </p>
           </div>
 

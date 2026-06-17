@@ -440,7 +440,7 @@ export default function BookingSheet({ open, onClose, terapista, slot, currentUs
 
                 <div className="mt-6 p-5 brand-card space-y-3 text-sm">
                   <div className="flex justify-between">
-                    <span className="text-[#0A0A0A]/60">Seduta con</span>
+                    <span className="text-[#0A0A0A]/60">Sessione con</span>
                     <span className="text-[#0A0A0A]">Dr. {terapista.nome} {terapista.cognome}</span>
                   </div>
                   <div className="flex justify-between">

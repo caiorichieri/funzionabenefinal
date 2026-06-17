@@ -12,12 +12,12 @@ const FALLBACK_FAQ = [
     risposta: "Compilando un breve questionario di 5 domande, il nostro algoritmo confronta le tue esigenze (area di interesse, disponibilità, preferenze) con il profilo dei nostri specialisti e ti propone i 3 professionisti più affini.",
   },
   {
-    domanda: "Le sedute sono online o in presenza?",
-    risposta: "La maggior parte delle sedute avviene online tramite videochiamata sicura (Daily.co), ma alcuni terapeuti offrono anche sedute in studio. Potrai scegliere in fase di prenotazione.",
+    domanda: "Le sessioni sono online o in presenza?",
+    risposta: "La maggior parte delle sessioni avviene online tramite videochiamata sicura (Daily.co), ma alcuni terapeuti offrono anche sessioni in studio. Potrai scegliere in fase di prenotazione.",
   },
   {
-    domanda: "Quanto costa una seduta?",
-    risposta: "Le tariffe variano dai 49€ ai 90€ per seduta da 50 minuti, a seconda dello specialista. Il prezzo è sempre indicato chiaramente sul profilo del terapeuta prima di confermare la prenotazione.",
+    domanda: "Quanto costa una sessione?",
+    risposta: "Le tariffe variano dai 49€ ai 90€ per sessione da 50 minuti, a seconda dello specialista. Il prezzo è sempre indicato chiaramente sul profilo del terapeuta prima di confermare la prenotazione.",
   },
   {
     domanda: "I miei dati sono protetti?",
@@ -32,8 +32,8 @@ const FALLBACK_FAQ = [
     risposta: "Tutti i nostri specialisti sono psicologi iscritti all'Albo italiano con polizza assicurativa professionale attiva. Verifichiamo periodicamente le loro credenziali.",
   },
   {
-    domanda: "Posso annullare una seduta?",
-    risposta: "Sì, puoi annullare o riprogrammare fino a 24 ore prima della seduta senza alcun costo.",
+    domanda: "Posso annullare una sessione?",
+    risposta: "Sì, puoi annullare o riprogrammare fino a 24 ore prima della sessione senza alcun costo.",
   },
 ];
 

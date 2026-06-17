@@ -42,7 +42,7 @@ const STEPS = [
   },
   {
     key: "orari",
-    label: "Quando preferisci le sedute?",
+    label: "Quando preferisci le sessioni?",
     helper: "Seleziona tutte le fasce compatibili con i tuoi impegni.",
     type: "multi",
     options: ["Mattina (8-12)", "Pomeriggio (12-18)", "Sera (18-21)", "Weekend"],

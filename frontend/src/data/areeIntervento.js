@@ -8,9 +8,9 @@ export const AREE_INTERVENTO = [
   { slug: "vaginismo", titolo: "Vaginismo", categoria: "Disfunzioni", descrizione: "Contrazione involontaria dei muscoli che rende difficili o impossibili i rapporti. Trattabile con un percorso graduale e rispettoso." },
   { slug: "calo-desiderio", titolo: "Calo del desiderio", categoria: "Coppia", descrizione: "Quando il desiderio sessuale si affievolisce e diventa fonte di sofferenza personale o di coppia." },
   { slug: "differenze-desiderio", titolo: "Differenze di desiderio", categoria: "Coppia", descrizione: "Quando nella coppia uno dei due desidera di più o di meno: non è un difetto, è un tema da affrontare." },
-  { slug: "infedelta", titolo: "Infedeltà e tradimento", categoria: "Coppia", descrizione: "Ricostruire dopo un tradimento, capire cosa è successo, o decidere consapevolmente il futuro della relazione." },
+  { slug: "infedelta", titolo: "Infedeltà e tradimento", categoria: "Coppia", descrizione: "Quando un tradimento mette in crisi la coppia. Capire cosa è successo e decidere consapevolmente il futuro della relazione." },
   { slug: "dipendenza-pornografia", titolo: "Dipendenza da pornografia", categoria: "Comportamento", descrizione: "Quando il consumo di materiale esplicito diventa compulsivo e interferisce con la vita di tutti i giorni o con la sessualità reale." },
-  { slug: "identita-genere", titolo: "Identità di genere", categoria: "Identità", descrizione: "Uno spazio sicuro per esplorare il tuo sentire. Con professionisti formati su percorsi di affermazione e transizione." },
+  { slug: "identita-genere", titolo: "Identità di genere", categoria: "Identità", descrizione: "Uno spazio sicuro per esplorare il tuo sentire e capire i tuoi prossimi passi. Supporto psicologico e orientamento, con indicazioni verso i percorsi medici quando servono." },
   { slug: "orientamento", titolo: "Orientamento e coming out", categoria: "Identità", descrizione: "Accompagnamento nel percorso di consapevolezza, accettazione e coming out, senza pregiudizi." },
   { slug: "lgbtqia", titolo: "Sessualità LGBTQIA+", categoria: "Identità", descrizione: "Temi specifici per la comunità LGBTQIA+: relazioni, coppia, genitorialità, minority stress, sessualità post-transizione." },
   { slug: "traumi-sessuali", titolo: "Traumi e abusi sessuali", categoria: "Trauma", descrizione: "Percorsi di cura per elaborare esperienze di abuso, violenza o traumi sessuali, con approcci evidence-based." },
@@ -38,7 +38,7 @@ export const AREE_CATEGORIE = {
 export const TESTIMONIANZE = [
   {
     nome: "M., 34 anni",
-    area: "Ansia da prestazione",
+    area: "Disfunzione erettile",
     testo: "Pensavo di essere l'unico. Il percorso con il mio sessuologo mi ha fatto capire quanto fosse un tema comune — e quanto si potesse davvero risolvere.",
     durata: "3 mesi di percorso",
   },
@@ -56,13 +56,13 @@ export const TESTIMONIANZE = [
   },
   {
     nome: "A., 52 anni",
-    area: "Menopausa e intimità",
+    area: "Menopausa e andropausa",
     testo: "Credevo che per la mia età non valesse più la pena. Oggi so che non è così — e vivo la mia sessualità meglio di dieci anni fa.",
     durata: "2 mesi di percorso",
   },
   {
     nome: "D., 23 anni",
-    area: "Identità e orientamento",
+    area: "Orientamento e coming out",
     testo: "Uno spazio senza etichette, senza fretta. Il mio terapeuta mi ha accompagnato nei miei tempi. Mi ha cambiato la vita.",
     durata: "8 mesi di percorso",
   },

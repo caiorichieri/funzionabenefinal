@@ -126,7 +126,7 @@ export default function CookiePage() {
 
       <h2>Cookie di terze parti</h2>
       <p>
-        Alcune pagine potrebbero integrare contenuti di terze parti (ad esempio video delle sedute via Daily.co).
+        Alcune pagine potrebbero integrare contenuti di terze parti (ad esempio video delle sessioni via Daily.co).
         Queste piattaforme possono installare propri cookie. Per maggiori informazioni consulta le loro privacy policy.
       </p>
 

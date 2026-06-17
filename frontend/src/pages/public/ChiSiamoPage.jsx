@@ -13,7 +13,7 @@ const VALUES = [
   {
     icon: Sparkles,
     titolo: "Innovazione clinica",
-    desc: "Siamo la prima piattaforma italiana a integrare <strong>sedute immersive</strong> nei percorsi di sessuologia. Non per moda tecnologica, ma perché la ricerca lo dimostra: funziona.",
+    desc: "Siamo la prima piattaforma italiana a integrare <strong>sessioni immersive</strong> nei percorsi di sessuologia. Non per moda tecnologica, ma perché la ricerca lo dimostra: funziona.",
   },
   {
     icon: Heart,
@@ -23,7 +23,7 @@ const VALUES = [
   {
     icon: ShieldCheck,
     titolo: "Riservatezza assoluta",
-    desc: "I tuoi dati sono cifrati end-to-end, custoditi su server europei. Le sedute sono coperte dal segreto professionale. La tua intimità è intima davvero.",
+    desc: "I tuoi dati sono cifrati end-to-end, custoditi su server europei. Le sessioni sono coperte dal segreto professionale. La tua intimità è intima davvero.",
   },
   {
     icon: Award,
@@ -39,9 +39,9 @@ const VALUES = [
 
 const STATS = [
   { n: "100%", desc: "Specialisti in sessuologia" },
-  { n: "10+", desc: "Terapeuti selezionati con cura" },
-  { n: "50 min", desc: "Durata di ogni seduta" },
-  { n: "1ª", desc: "Piattaforma italiana con sedute immersive" },
+  { n: "Una squadra", desc: "di terapeuti selezionati con cura" },
+  { n: "50 min", desc: "Durata di ogni sessione" },
+  { n: "1ª", desc: "Piattaforma italiana con sessioni immersive" },
 ];
 
 export default function ChiSiamoPage() {
@@ -74,12 +74,12 @@ export default function ChiSiamoPage() {
             </div>
             <span className="text-[#0A0A0A] text-xs tracking-[0.25em] uppercase">Chi siamo</span>
             <h1 className="mt-4 font-serif text-5xl sm:text-6xl lg:text-7xl leading-[1.05] text-[#0A0A0A] tracking-tight max-w-3xl">
-              Una piattaforma curata,<br /><em className="text-[#0A0A0A] not-italic">non un marketplace.</em>
+              Cura nella scelta.<br /><em className="text-[#0A0A0A] not-italic">Cura nel percorso.</em>
             </h1>
             <p className="mt-8 text-lg lg:text-xl text-[#0A0A0A]/75 leading-relaxed max-w-3xl">
-              FunzionaBene nasce nel 2026 da un&apos;idea semplice: portare la sessuologia italiana al livello
+              FunzionaBene nasce da un&apos;idea semplice: portare la sessuologia italiana al livello
               che merita. Con professionisti scelti uno a uno, tecnologia al servizio della cura e un linguaggio
-              che non ha paura di chiamare le cose con il loro nome.
+              che chiama le cose con il loro nome.
             </p>
           </motion.div>
         </div>

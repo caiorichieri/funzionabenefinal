@@ -111,7 +111,7 @@ export default function TerapistaPublicPage() {
                 )}
                 <div className="flex items-center gap-3 text-sm pt-3 border-t border-[#0A0A0A]/15">
                   <span className="font-serif text-3xl text-[#0A0A0A]">€{terapista.prezzo_sessione || 90}</span>
-                  <span className="text-xs text-[#0A0A0A]/50">per seduta di 50 min</span>
+                  <span className="text-xs text-[#0A0A0A]/50">per sessione di 50 min</span>
                 </div>
               </div>
             </div>
@@ -176,7 +176,7 @@ export default function TerapistaPublicPage() {
             Scegli il tuo primo incontro.
           </h2>
           <p className="mt-4 text-[#0A0A0A]/60">
-            Sedute da 50 minuti online. Puoi annullare fino a 24h prima.
+            Sessioni da 50 minuti online. Puoi annullare fino a 24h prima.
           </p>
         </div>
 

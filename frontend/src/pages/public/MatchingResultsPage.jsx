@@ -117,7 +117,7 @@ export default function MatchingResultsPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-3.5 h-3.5 text-[#6B8FA3]" />
-                  €{t.prezzo_sessione || 90}/seduta
+                  €{t.prezzo_sessione || 90}/sessione
                 </div>
               </div>
 

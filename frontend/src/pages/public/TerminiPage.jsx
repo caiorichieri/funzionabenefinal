@@ -10,8 +10,8 @@ export default function TerminiPage() {
 
       <h2>1. Oggetto del servizio</h2>
       <p>
-        FunzionaBene mette a disposizione dell&apos;utente (paziente) una piattaforma per prenotare sedute individuali o di coppia
-        con psicologi iscritti all&apos;Albo italiano e con polizza assicurativa professionale attiva. Le sedute si svolgono online
+        FunzionaBene mette a disposizione dell&apos;utente (paziente) una piattaforma per prenotare sessioni individuali o di coppia
+        con psicologi iscritti all&apos;Albo italiano e con polizza assicurativa professionale attiva. Le sessioni si svolgono online
         tramite videochiamata sicura (Daily.co) oppure, dove indicato dal terapeuta, in studio.
       </p>
 
@@ -32,36 +32,36 @@ export default function TerminiPage() {
       <h2>3. Prenotazione e disdetta</h2>
       <ul>
         <li>La prenotazione è confermata al momento del pagamento.</li>
-        <li>Puoi <strong>annullare o riprogrammare gratuitamente fino a 24 ore prima</strong> dell&apos;orario della seduta.</li>
-        <li>Per disdette entro 24 ore la seduta è considerata effettuata e non è rimborsabile.</li>
-        <li>In caso di impedimento del terapeuta la seduta sarà riprogrammata o rimborsata integralmente.</li>
+        <li>Puoi <strong>annullare o riprogrammare gratuitamente fino a 24 ore prima</strong> dell&apos;orario della sessione.</li>
+        <li>Per disdette entro 24 ore la sessione è considerata effettuata e non è rimborsabile.</li>
+        <li>In caso di impedimento del terapeuta la sessione sarà riprogrammata o rimborsata integralmente.</li>
       </ul>
 
       <h2>4. Tariffe e pagamento</h2>
       <ul>
-        <li>Le tariffe (da €49 a €90 per seduta da 50 minuti) sono indicate sul profilo di ciascun terapeuta.</li>
+        <li>Le tariffe (da €49 a €90 per sessione da 50 minuti) sono indicate sul profilo di ciascun terapeuta.</li>
         <li>Il pagamento avviene online tramite <strong>Nexi XPay</strong> con cifratura SSL.</li>
         <li>FunzionaBene non conserva i dati della carta di pagamento.</li>
-        <li>Le fatture sanitarie sono emesse e inviate via email entro 7 giorni dalla seduta.</li>
+        <li>Le fatture sanitarie sono emesse e inviate via email entro 7 giorni dalla sessione.</li>
       </ul>
 
-      <h2>5. Svolgimento della seduta</h2>
+      <h2>5. Svolgimento della sessione</h2>
       <ul>
         <li>Il link per accedere alla stanza video è disponibile nella tua area personale 15 minuti prima.</li>
-        <li>La seduta dura 50 minuti. Eventuali ritardi del paziente non prolungano l&apos;orario.</li>
-        <li>È vietata la registrazione audio/video della seduta senza consenso esplicito del terapeuta.</li>
+        <li>La sessione dura 50 minuti. Eventuali ritardi del paziente non prolungano l&apos;orario.</li>
+        <li>È vietata la registrazione audio/video della sessione senza consenso esplicito del terapeuta.</li>
         <li>Il terapeuta è tenuto al <strong>segreto professionale</strong> (art. 11 Codice Deontologico Psicologi).</li>
       </ul>
 
       <h2>6. Diritto di recesso</h2>
       <p>
         Ai sensi dell&apos;art. 59 lett. a) del Codice del Consumo, il diritto di recesso è escluso per servizi con data determinata
-        una volta iniziata l&apos;erogazione. Per sedute non ancora erogate vale la policy di disdetta (punto 3).
+        una volta iniziata l&apos;erogazione. Per sessioni non ancora erogate vale la policy di disdetta (punto 3).
       </p>
 
       <h2>7. Limitazione di responsabilità</h2>
       <p>
-        FunzionaBene è un intermediario tecnologico. La responsabilità clinica della seduta è del terapeuta assegnato.
+        FunzionaBene è un intermediario tecnologico. La responsabilità clinica della sessione è del terapeuta assegnato.
         <strong> In caso di emergenza psichiatrica o ideazione suicidaria contatta immediatamente il 112 o il Telefono Amico (02 2327 2327).</strong>
       </p>
 
