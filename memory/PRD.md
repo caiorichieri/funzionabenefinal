@@ -328,3 +328,12 @@ Vedi: /app/memory/test_credentials.md
 - [x] **Imutabilidade**: nenhum endpoint de PATCH/DELETE exposto.
 - [x] **Frontend**: `setCookiePreferences()` dispara fire-and-forget POST com `keepalive: true` após persistir cookie. Não bloqueia UX. Falha silenciosa para não afetar o consentimento.
 - [x] **Verificado**: smoke test admin lista entry com IP anonimizado (`203.0.113.42` → `203.0.113.0`) + e2e do banner real fez POST automaticamente.
+
+---
+
+## 📋 Dati legali aziendali (Feb 18, 2026)
+- [x] Creato `/app/frontend/src/data/legalInfo.js` come fonte centralizzata (TITOLARE, DPO, WHATSAPP, emails).
+- [x] **Titolare**: BIDOC SRL — Via Mazzini, 62 · Spilimbergo (PN) · P.IVA 01985930930. "Funzionabene" è marchio registrato di BIDOC SRL.
+- [x] **DPO**: Caio Silvestre Richieri — Via Circonvallazione Sud, 80 · Codroipo (UD) · C.F. SLVCAI76D16Z602F · P.IVA 03157410303 · privacy@funzionabene.it.
+- [x] **Phone = WhatsApp**: +39 345 112 4503 (già correctly set, ora centralizzato).
+- [x] Aggiornati: `ContattiPage.jsx` (Sede + nuova sezione DPO), `PublicLayout.jsx` (Footer), `PrivacyPage.jsx` (Sezione 1 Titolare + nuova Sezione 2 DPO, sezioni 3-10 rinumerate).

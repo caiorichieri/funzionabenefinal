@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Mail, MessageCircle, Briefcase, HeartHandshake, FileText, MapPin } from "lucide-react";
 import Mascotte from "@/components/shared/Mascotte";
+import { TITOLARE, DPO, WHATSAPP_NUMBER, PHONE_DISPLAY } from "@/data/legalInfo";
 
 const CONTATTI = [
   {
@@ -29,8 +30,6 @@ const CONTATTI = [
     mascotName: "curioso",
   },
 ];
-
-const WHATSAPP_NUMBER = "393451124503";
 
 export default function ContattiPage() {
   return (
@@ -70,7 +69,7 @@ export default function ContattiPage() {
           </div>
           <div className="flex-1 text-center sm:text-left">
             <div className="text-[10px] uppercase tracking-[0.2em] text-[#0A0A0A]/55 mb-1">WhatsApp · Risposta veloce</div>
-            <div className="font-serif text-xl lg:text-2xl text-[#0A0A0A]">+39 345 112 4503</div>
+            <div className="font-serif text-xl lg:text-2xl text-[#0A0A0A]">{PHONE_DISPLAY}</div>
             <div className="text-sm text-[#0A0A0A]/65 mt-1">Lun–Ven 9:00–19:00 · Sab 9:00–13:00</div>
           </div>
           <span className="text-sm text-[#0A0A0A] font-medium tracking-wide group-hover:translate-x-1 transition-transform">
@@ -122,10 +121,22 @@ export default function ContattiPage() {
           <MapPin className="w-4 h-4" /> Sede legale
         </div>
         <p className="text-[#0A0A0A]/75 leading-relaxed">
-          FunzionaBene S.r.l.<br />
-          Via [Indirizzo] · [CAP] [Città] · Italia<br />
-          <span className="text-xs text-[#0A0A0A]/50">P.IVA 00000000000 · Codice Destinatario: 0000000</span>
+          <strong>{TITOLARE.nome}</strong> — <em>{TITOLARE.brand}</em> è un marchio registrato.<br />
+          {TITOLARE.via} · {TITOLARE.citta} · {TITOLARE.paese}<br />
+          <span className="text-xs text-[#0A0A0A]/50">P.IVA {TITOLARE.pIva}</span>
         </p>
+
+        <div className="mt-10 pt-8 border-t border-[#0A0A0A]/10 text-[#0A0A0A]/70 text-sm">
+          <div className="text-xs uppercase tracking-[0.25em] text-[#0A0A0A]/55 mb-2">Responsabile della protezione dei dati (DPO)</div>
+          <p className="leading-relaxed">
+            <strong>{DPO.nome}</strong><br />
+            {DPO.via} · {DPO.citta} · {DPO.paese}<br />
+            <span className="text-xs text-[#0A0A0A]/50">
+              C.F. {DPO.codiceFiscale} · P.IVA {DPO.pIva}
+            </span><br />
+            <a href={`mailto:${DPO.email}`} className="text-[#F58A1F] hover:underline text-sm">{DPO.email}</a>
+          </p>
+        </div>
       </section>
     </main>
   );

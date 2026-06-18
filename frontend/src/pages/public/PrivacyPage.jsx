@@ -1,8 +1,9 @@
 import LegalLayout from "@/components/public/LegalLayout";
+import { TITOLARE, DPO, PRIVACY_EMAIL } from "@/data/legalInfo";
 
 export default function PrivacyPage() {
   return (
-    <LegalLayout title="Privacy Policy" lastUpdate="19 aprile 2026" testId="privacy-page">
+    <LegalLayout title="Privacy Policy" lastUpdate="18 febbraio 2026" testId="privacy-page">
       <p>
         La presente informativa descrive le modalità di trattamento dei dati personali degli utenti del sito
         <strong> funzionabene.it</strong>, ai sensi del Regolamento (UE) 2016/679 (<strong>GDPR</strong>) e del D.Lgs. 196/2003
@@ -11,11 +12,22 @@ export default function PrivacyPage() {
 
       <h2>1. Titolare del trattamento</h2>
       <p>
-        <strong>FunzionaBene S.r.l.</strong> — P.IVA 00000000000, con sede legale in Italia.
-        Contatto: <a href="mailto:privacy@funzionabene.it">privacy@funzionabene.it</a>
+        <strong>{TITOLARE.nome}</strong> — <em>{TITOLARE.brand}</em> è un marchio registrato di {TITOLARE.nome}.<br />
+        Sede legale: {TITOLARE.via}, {TITOLARE.citta}, {TITOLARE.paese}.<br />
+        P.IVA {TITOLARE.pIva}.<br />
+        Contatto privacy: <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a>
       </p>
 
-      <h2>2. Dati raccolti</h2>
+      <h2>2. Responsabile della protezione dei dati (DPO)</h2>
+      <p>
+        Il Titolare ha nominato un Responsabile della protezione dei dati ai sensi degli artt. 37-39 GDPR:<br />
+        <strong>{DPO.nome}</strong><br />
+        Sede: {DPO.via}, {DPO.citta}, {DPO.paese}<br />
+        C.F. {DPO.codiceFiscale} · P.IVA {DPO.pIva}<br />
+        Contatto: <a href={`mailto:${DPO.email}`}>{DPO.email}</a>
+      </p>
+
+      <h2>3. Dati raccolti</h2>
       <h3>Categorie</h3>
       <ul>
         <li><strong>Dati anagrafici:</strong> nome, cognome, data di nascita, genere, luogo di nascita.</li>
@@ -28,7 +40,7 @@ export default function PrivacyPage() {
           i dati della carta.</li>
       </ul>
 
-      <h2>3. Finalità del trattamento</h2>
+      <h2>4. Finalità del trattamento</h2>
       <ul>
         <li>Erogazione del servizio clinico di psicoterapia e sessuologia.</li>
         <li>Fatturazione e adempimenti fiscali.</li>
@@ -37,7 +49,7 @@ export default function PrivacyPage() {
         <li>Sicurezza informatica e prevenzione frodi.</li>
       </ul>
 
-      <h2>4. Base giuridica</h2>
+      <h2>5. Base giuridica</h2>
       <ul>
         <li><strong>Consenso esplicito</strong> (art. 6.1.a e art. 9.2.a) per dati sanitari.</li>
         <li><strong>Esecuzione del contratto</strong> (art. 6.1.b) per erogazione del servizio.</li>
@@ -45,14 +57,14 @@ export default function PrivacyPage() {
         <li><strong>Legittimo interesse</strong> (art. 6.1.f) per sicurezza e prevenzione frodi.</li>
       </ul>
 
-      <h2>5. Modalità di trattamento</h2>
+      <h2>6. Modalità di trattamento</h2>
       <p>
         I dati sono trattati con strumenti elettronici e cifratura SSL in transito e at-rest.
         I dati sanitari sono accessibili esclusivamente al terapeuta assegnato e al paziente.
         Il personale tecnico ha accesso solo a dati operativi (log, email) e mai alle note cliniche.
       </p>
 
-      <h2>6. Conservazione</h2>
+      <h2>7. Conservazione</h2>
       <ul>
         <li>Dati anagrafici e fiscali: <strong>10 anni</strong> dalla chiusura del rapporto (obbligo fiscale).</li>
         <li>Note cliniche: <strong>10 anni</strong> ex codice deontologico psicologi.</li>
@@ -60,7 +72,7 @@ export default function PrivacyPage() {
         <li>Dati marketing: fino a revoca del consenso.</li>
       </ul>
 
-      <h2>7. Destinatari dei dati</h2>
+      <h2>8. Destinatari dei dati</h2>
       <p>I dati possono essere comunicati ai seguenti responsabili esterni del trattamento:</p>
       <ul>
         <li><strong>Resend</strong> (servizi email transazionali) — USA, con clausole contrattuali standard UE.</li>
@@ -69,7 +81,7 @@ export default function PrivacyPage() {
         <li><strong>Hosting:</strong> server nell&apos;Unione Europea.</li>
       </ul>
 
-      <h2>8. Diritti dell&apos;interessato (artt. 15-22 GDPR)</h2>
+      <h2>9. Diritti dell&apos;interessato (artt. 15-22 GDPR)</h2>
       <ul>
         <li>Accesso ai dati personali.</li>
         <li>Rettifica dati inesatti.</li>
@@ -81,9 +93,10 @@ export default function PrivacyPage() {
         <li>Reclamo al Garante Privacy (<a href="https://www.garanteprivacy.it" target="_blank" rel="noreferrer">garanteprivacy.it</a>).</li>
       </ul>
 
-      <h2>9. Come esercitare i diritti</h2>
+      <h2>10. Come esercitare i diritti</h2>
       <p>
-        Invia una richiesta a <a href="mailto:privacy@funzionabene.it">privacy@funzionabene.it</a> allegando un documento di identità.
+        Invia una richiesta a <a href={`mailto:${PRIVACY_EMAIL}`}>{PRIVACY_EMAIL}</a> oppure direttamente al DPO a {" "}
+        <a href={`mailto:${DPO.email}`}>{DPO.email}</a>, allegando un documento di identità.
         Risponderemo entro 30 giorni.
       </p>
     </LegalLayout>

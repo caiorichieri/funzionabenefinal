@@ -3,6 +3,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import CookieConsentBanner from "@/components/public/CookieConsentBanner";
+import { TITOLARE } from "@/data/legalInfo";
 
 const NAV = [
   { to: "/", label: "Home" },
@@ -178,8 +179,8 @@ function Footer() {
       </div>
       <div className="border-t border-[#0A0A0A]/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-[#0A0A0A]/50">
-          <span>© {new Date().getFullYear()} funzionabene.it — Tutti i diritti riservati</span>
-          <span>P.IVA 00000000000 · Iscritta all&apos;Ordine degli Psicologi</span>
+          <span>© {new Date().getFullYear()} funzionabene.it — Marchio di {TITOLARE.nome}</span>
+          <span>P.IVA {TITOLARE.pIva} · {TITOLARE.citta}</span>
         </div>
       </div>
     </footer>
