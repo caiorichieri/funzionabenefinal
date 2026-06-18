@@ -10,6 +10,22 @@ const EMPTY_FORM = {
   prezzo_sessione: "", approccio_terapeutico: "", specializzazioni: "", lingue: ""
 };
 
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+
+function getInsuranceExpiryColor(scadenzaIso) {
+  const scad = new Date(scadenzaIso);
+  const now = new Date();
+  if (scad < now) return "text-red-600";
+  if (scad < new Date(now.getTime() + THIRTY_DAYS_MS)) return "text-orange-600";
+  return "text-green-600";
+}
+
+function getSaveButtonLabel(saving, editing, createLabel) {
+  if (saving) return "Salvataggio...";
+  if (editing) return "Aggiorna";
+  return createLabel;
+}
+
 export default function TerapistiPage() {
   const [terapisti, setTerapisti] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -212,11 +228,7 @@ export default function TerapistiPage() {
                       <div>
                         <span className="text-[#0A0A0A]/55">Scadenza:</span>{" "}
                         {t.assicurazione_scadenza ? (
-                          <span className={`font-medium ${
-                            new Date(t.assicurazione_scadenza) < new Date() ? "text-red-600" :
-                            new Date(t.assicurazione_scadenza) < new Date(Date.now() + 30*24*60*60*1000) ? "text-orange-600" :
-                            "text-green-600"
-                          }`}>
+                          <span className={`font-medium ${getInsuranceExpiryColor(t.assicurazione_scadenza)}`}>
                             {new Date(t.assicurazione_scadenza).toLocaleDateString("it-IT")}
                           </span>
                         ) : "—"}
@@ -450,7 +462,7 @@ export default function TerapistiPage() {
                 </button>
                 <button data-testid="save-terapista-btn" type="submit" disabled={saving}
                   className="px-5 py-2.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white rounded-full font-medium transition-colors disabled:opacity-50">
-                  {saving ? "Salvataggio..." : editing ? "Aggiorna" : "Crea Terapeuta"}
+                  {getSaveButtonLabel(saving, editing, "Crea Terapeuta")}
                 </button>
               </div>
             </form>

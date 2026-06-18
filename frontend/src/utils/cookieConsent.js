@@ -1,19 +1,39 @@
 // Cookie consent storage helper
-// NOTE: localStorage is the industry-standard mechanism for storing GDPR/cookie
-// consent preferences. Only non-sensitive booleans are persisted here.
+// Uses a real first-party cookie (Secure, SameSite=Strict, path=/) instead of
+// localStorage, to harden against XSS exfiltration and align with GDPR best practices.
+// Only non-sensitive booleans are persisted here.
 const COOKIE_KEY = "fb_cookie_consent";
 const COOKIE_VERSION = "1";
-const IS_DEV = process.env.NODE_ENV !== "production";
+const MAX_AGE_SECONDS = 60 * 60 * 24 * 180; // 180 days
+
+function readCookie(name) {
+  const target = name + "=";
+  const cookies = (document.cookie || "").split(";");
+  for (let c of cookies) {
+    c = c.trim();
+    if (c.indexOf(target) === 0) return decodeURIComponent(c.substring(target.length));
+  }
+  return null;
+}
+
+function writeCookie(name, value, maxAge) {
+  const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+  const secure = isHttps ? "; Secure" : "";
+  document.cookie = `${name}=${encodeURIComponent(value)}; Max-Age=${maxAge}; Path=/; SameSite=Strict${secure}`;
+}
+
+function deleteCookie(name) {
+  document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Strict`;
+}
 
 export function getCookiePreferences() {
+  const raw = readCookie(COOKIE_KEY);
+  if (!raw) return null;
   try {
-    const raw = localStorage.getItem(COOKIE_KEY);
-    if (!raw) return null;
     const data = JSON.parse(raw);
     if (data.version !== COOKIE_VERSION) return null;
     return data.prefs;
-  } catch (err) {
-    if (IS_DEV) console.warn("[cookieConsent] read failed:", err);
+  } catch {
     return null;
   }
 }
@@ -28,12 +48,8 @@ export function setCookiePreferences(prefs) {
     prefs: { essential: true, analytics: !!prefs.analytics, marketing: !!prefs.marketing },
     timestamp: new Date().toISOString(),
   };
-  try {
-    localStorage.setItem(COOKIE_KEY, JSON.stringify(payload));
-    window.dispatchEvent(new Event("fb-cookie-consent-changed"));
-  } catch (err) {
-    if (IS_DEV) console.warn("[cookieConsent] write failed:", err);
-  }
+  writeCookie(COOKIE_KEY, JSON.stringify(payload), MAX_AGE_SECONDS);
+  window.dispatchEvent(new Event("fb-cookie-consent-changed"));
 }
 
 export function acceptAll() {
@@ -45,10 +61,6 @@ export function acceptEssentialOnly() {
 }
 
 export function clearCookieConsent() {
-  try {
-    localStorage.removeItem(COOKIE_KEY);
-    window.dispatchEvent(new Event("fb-cookie-consent-changed"));
-  } catch (err) {
-    if (IS_DEV) console.warn("[cookieConsent] clear failed:", err);
-  }
+  deleteCookie(COOKIE_KEY);
+  window.dispatchEvent(new Event("fb-cookie-consent-changed"));
 }

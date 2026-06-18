@@ -306,3 +306,16 @@ Vedi: /app/memory/test_credentials.md
 - [x] AppSection ("La tua app") → fix chips fluttuanti: rimosso `brand-card` (che li rendeva alti 415px), sostituito con pill bianche compatte (162-195 × 50px) con `whitespace-nowrap` e `inline-flex`. Ora si vedono come piccoli toast galleggianti intorno al telefono.
 - [x] Confermato in preview: testi Step 01/02/03 + link discreto "Hai bisogno di parlare subito? → Prenota uno specialista disponibile ora" — già implementati dalla sessione precedente.
 - [x] **Mascote VR colorida** (Feb 17, 2026): gerada via Nano Banana (Gemini image editing) variante `vr-brand.png`. Corpo `#C79C50` (laranja-dourado do logo), óculos VR `#78949E` (cinza-azul do logo). Cleanup pós-geração com PIL para remover checkerboard fake e ter transparência real. Aplicada à seção "Il nostro differenziale" da HomePage.
+
+---
+
+## 🛡️ FASE A — Code Quality (Feb 18, 2026)
+- [x] **Cookie consent security**: migrado `cookieConsent.js` de `localStorage` para cookie real com `Secure`, `SameSite=Strict`, `Path=/`, `Max-Age=180d`. Removidos `console.warn` (3 ocorrências).
+- [x] **Nested ternaries refactor** (Code Smell):
+  - `BlogPage.jsx`: extraído `STATO_LABEL` map + `getSaveButtonLabel()` helper
+  - `TerapistiPage.jsx`: extraído `getInsuranceExpiryColor()` + `getSaveButtonLabel()` helpers + `THIRTY_DAYS_MS` const
+- [x] Validado via screenshot + cookie inspection (secure=true, sameSite=Strict, localStorage vazio).
+
+### Falsos positivos do code review (não aplicados)
+- **`is None` em Python**: as 15 ocorrências sinalizadas são uso CORRETO conforme PEP 8 (`is`/`is not` deve ser usado com singletons como `None`). Não alteradas.
+- **Hooks "missing deps"** em `AuthContext.jsx` e `ChatPanel.jsx`: as deps sinalizadas (`API`, `axios`, `data`, `setUser`, `res`) são module-level imports/constants ou setters do `useState` (estáveis). Não precisam estar no array.

@@ -11,6 +11,18 @@ const STATO_BADGE = {
   rifiutato:  "bg-red-100 text-red-700",
 };
 
+const STATO_LABEL = {
+  bozza:      "In Revisione",
+  pubblicato: "Pubblicato",
+  rifiutato:  "Rifiutato",
+};
+
+function getSaveButtonLabel(saving, editing, publishLabel = "Pubblica") {
+  if (saving) return "Salvataggio...";
+  if (editing) return "Aggiorna";
+  return publishLabel;
+}
+
 const EMPTY = { titolo: "", contenuto: "", categoria: "", tags: "" };
 
 export default function AdminBlogPage() {
@@ -131,7 +143,7 @@ export default function AdminBlogPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 flex-wrap mb-2">
                     <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${STATO_BADGE[a.stato] || "bg-gray-100 text-gray-600"}`}>
-                      {a.stato === "bozza" ? "In Revisione" : a.stato === "pubblicato" ? "Pubblicato" : "Rifiutato"}
+                      {STATO_LABEL[a.stato] || a.stato}
                     </span>
                     {a.categoria && (
                       <span className="text-xs bg-[#6B8FA3]/10 text-[#6B8FA3] px-2.5 py-1 rounded-full">{a.categoria}</span>
@@ -237,7 +249,7 @@ export default function AdminBlogPage() {
                 </button>
                 <button data-testid="save-article-btn" type="submit" disabled={saving}
                   className="px-5 py-2.5 bg-[#0A0A0A] hover:bg-[#1C1C1C] text-white rounded-full font-medium disabled:opacity-50">
-                  {saving ? "Salvataggio..." : editing ? "Aggiorna" : "Pubblica"}
+                  {getSaveButtonLabel(saving, editing, "Pubblica")}
                 </button>
               </div>
             </form>
