@@ -319,3 +319,12 @@ Vedi: /app/memory/test_credentials.md
 ### Falsos positivos do code review (não aplicados)
 - **`is None` em Python**: as 15 ocorrências sinalizadas são uso CORRETO conforme PEP 8 (`is`/`is not` deve ser usado com singletons como `None`). Não alteradas.
 - **Hooks "missing deps"** em `AuthContext.jsx` e `ChatPanel.jsx`: as deps sinalizadas (`API`, `axios`, `data`, `setUser`, `res`) são module-level imports/constants ou setters do `useState` (estáveis). Não precisam estar no array.
+
+---
+
+## 🔐 GDPR — Audit Consent Log (Feb 18, 2026)
+- [x] **Backend**: collection `audit_consents` + endpoint `POST /api/audit/consent` (público, write-once) e `GET /api/admin/audit/consents` (admin, paginado, max 200).
+- [x] **Dados gravados**: `policy_version`, `policy_hash` (SHA-256 de version+prefs), `prefs` (essential/analytics/marketing), `ip_anonymized` (último octeto IPv4 zerado / IPv6 truncado em /48), `user_agent` (300 chars), `language`, `page_url`, `created_at` (UTC).
+- [x] **Imutabilidade**: nenhum endpoint de PATCH/DELETE exposto.
+- [x] **Frontend**: `setCookiePreferences()` dispara fire-and-forget POST com `keepalive: true` após persistir cookie. Não bloqueia UX. Falha silenciosa para não afetar o consentimento.
+- [x] **Verificado**: smoke test admin lista entry com IP anonimizado (`203.0.113.42` → `203.0.113.0`) + e2e do banner real fez POST automaticamente.

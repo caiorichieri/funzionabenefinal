@@ -5,6 +5,7 @@
 const COOKIE_KEY = "fb_cookie_consent";
 const COOKIE_VERSION = "1";
 const MAX_AGE_SECONDS = 60 * 60 * 24 * 180; // 180 days
+const API_BASE = process.env.REACT_APP_BACKEND_URL || "";
 
 function readCookie(name) {
   const target = name + "=";
@@ -43,13 +44,32 @@ export function hasGivenConsent() {
 }
 
 export function setCookiePreferences(prefs) {
+  const fullPrefs = { essential: true, analytics: !!prefs.analytics, marketing: !!prefs.marketing };
   const payload = {
     version: COOKIE_VERSION,
-    prefs: { essential: true, analytics: !!prefs.analytics, marketing: !!prefs.marketing },
+    prefs: fullPrefs,
     timestamp: new Date().toISOString(),
   };
   writeCookie(COOKIE_KEY, JSON.stringify(payload), MAX_AGE_SECONDS);
   window.dispatchEvent(new Event("fb-cookie-consent-changed"));
+  // Fire-and-forget GDPR audit log to the backend (immutable proof of consent).
+  // We deliberately do not await/await the response: the user's choice is already
+  // persisted client-side via the cookie, and the audit call must not block the UI.
+  try {
+    fetch(`${API_BASE}/api/audit/consent`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        prefs: fullPrefs,
+        policy_version: COOKIE_VERSION,
+        language: typeof navigator !== "undefined" ? navigator.language : null,
+        page_url: typeof window !== "undefined" ? window.location.pathname : null,
+      }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    // never throw from consent handler
+  }
 }
 
 export function acceptAll() {

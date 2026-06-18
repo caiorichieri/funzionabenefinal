@@ -198,6 +198,17 @@ class ArticoloInput(BaseModel):
     tags: Optional[List[str]] = []
     immagine_url: Optional[str] = None
 
+class ConsentPrefs(BaseModel):
+    essential: bool = True
+    analytics: bool = False
+    marketing: bool = False
+
+class ConsentLogInput(BaseModel):
+    prefs: ConsentPrefs
+    policy_version: str
+    language: Optional[str] = None
+    page_url: Optional[str] = None
+
 # ─── FastAPI setup ────────────────────────────────────────────────────────────
 app = FastAPI(title="FunzionaBene API")
 api_router = APIRouter(prefix="/api")
@@ -1335,6 +1346,99 @@ async def compute_cf(data: dict, user: dict = Depends(require_auth)):
         return {"cf": cf}
     except Exception as e:
         return {"error": str(e)}
+
+# ─── GDPR — Audit Consent Log ─────────────────────────────────────────────────
+# Stores an immutable record (write-once) of cookie consent decisions.
+# Captures: anonymized IP, server timestamp, policy hash, prefs, user-agent.
+# This provides legal evidence of compliance with EU GDPR + Italian Garante.
+import hashlib as _hashlib
+import ipaddress as _ipaddress
+
+
+def _anonymize_ip(raw_ip: str) -> str:
+    """Mask the last octet (IPv4) or last 80 bits (IPv6) to comply with GDPR data-minimization."""
+    if not raw_ip:
+        return ""
+    try:
+        ip = _ipaddress.ip_address(raw_ip)
+        if isinstance(ip, _ipaddress.IPv4Address):
+            parts = str(ip).split(".")
+            parts[-1] = "0"
+            return ".".join(parts)
+        # IPv6: keep first 48 bits, zero the rest
+        net = _ipaddress.IPv6Network(f"{ip}/48", strict=False)
+        return str(net.network_address)
+    except ValueError:
+        return ""
+
+
+def _policy_hash(policy_version: str, prefs: dict) -> str:
+    blob = f"{policy_version}|{prefs.get('essential', True)}|{prefs.get('analytics', False)}|{prefs.get('marketing', False)}"
+    return _hashlib.sha256(blob.encode()).hexdigest()
+
+
+def _client_ip(request: Request) -> str:
+    """Extract the client IP, honoring X-Forwarded-For from the K8s ingress."""
+    xff = request.headers.get("x-forwarded-for")
+    if xff:
+        return xff.split(",")[0].strip()
+    real_ip = request.headers.get("x-real-ip")
+    if real_ip:
+        return real_ip.strip()
+    return request.client.host if request.client else ""
+
+
+@api_router.post("/audit/consent")
+async def audit_consent(data: ConsentLogInput, request: Request):
+    """Public endpoint called by the cookie banner after the user accepts/declines.
+    Writes a write-once log entry. No update/delete endpoints are exposed."""
+    raw_ip = _client_ip(request)
+    prefs_dict = data.prefs.model_dump()
+    doc = {
+        "policy_version": data.policy_version,
+        "policy_hash": _policy_hash(data.policy_version, prefs_dict),
+        "prefs": prefs_dict,
+        "ip_anonymized": _anonymize_ip(raw_ip),
+        "user_agent": (request.headers.get("user-agent") or "")[:300],
+        "language": (data.language or request.headers.get("accept-language") or "")[:50],
+        "page_url": (data.page_url or "")[:300],
+        "created_at": datetime.now(timezone.utc),
+    }
+    result = await db.audit_consents.insert_one(doc)
+    return {
+        "audit_id": str(result.inserted_id),
+        "policy_hash": doc["policy_hash"],
+        "logged_at": doc["created_at"].isoformat(),
+    }
+
+
+@api_router.get("/admin/audit/consents")
+async def list_audit_consents(
+    limit: int = 50,
+    skip: int = 0,
+    user: dict = Depends(require_admin),
+):
+    """Admin-only paginated listing of consent audit log entries."""
+    limit = max(1, min(limit, 200))
+    skip = max(0, skip)
+    total = await db.audit_consents.count_documents({})
+    cursor = db.audit_consents.find({}).sort("created_at", -1).skip(skip).limit(limit)
+    items = []
+    async for doc in cursor:
+        items.append({
+            "id": str(doc["_id"]),
+            "policy_version": doc.get("policy_version"),
+            "policy_hash": doc.get("policy_hash"),
+            "prefs": doc.get("prefs"),
+            "ip_anonymized": doc.get("ip_anonymized"),
+            "user_agent": doc.get("user_agent"),
+            "language": doc.get("language"),
+            "page_url": doc.get("page_url"),
+            "created_at": doc.get("created_at").isoformat() if doc.get("created_at") else None,
+        })
+    return {"total": total, "skip": skip, "limit": limit, "items": items}
+
+
 app.include_router(api_router)
 
 # CORS — supports multiple frontend origins (preview, production, custom domains) via ALLOWED_ORIGINS env var
